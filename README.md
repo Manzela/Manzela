@@ -32,36 +32,36 @@ I design and operate **end-to-end autonomous AI systems** — from 0→1 archite
 
 ```mermaid
 graph LR
-    subgraph Inference["Inference Layer"]
-        MoE["Gemma 4 26B MoE<br/>vLLM · PagedAttention"]
-        L1["LoRA α"]
-        L2["LoRA β"]
-        L3["LoRA γ"]
-        MoE --> L1 & L2 & L3
-    end
+  subgraph Inference["Inference Layer"]
+    MoE["Gemma 4 26B MoE<br/>vLLM · PagedAttention"]
+    L1["LoRA α"]
+    L2["LoRA β"]
+    L3["LoRA γ"]
+    MoE --> L1 & L2 & L3
+  end
 
-    subgraph DAG["7-Node Autonomous Pipeline"]
-        N1["City DNA<br/><sub>Context</sub>"] --> N2["Normalizer<br/><sub>4 sub-agents</sub>"]
-        N2 --> N3["Synonyms<br/><sub>Expand</sub>"]
-        N3 --> N4["SV Gate<br/><sub>Filter</sub>"]
-        N4 --> N5["Writer<br/><sub>Generate</sub>"]
-        N5 --> N6["Validator<br/><sub>O-R-A-V</sub>"]
-        N6 --> N7["Features<br/><sub>Vectorize</sub>"]
-    end
+  subgraph DAG["7-Node Autonomous Pipeline"]
+    N1["City DNA<br/><sub>Context</sub>"] --> N2["Normalizer<br/><sub>4 sub-agents</sub>"]
+    N2 --> N3["Synonyms<br/><sub>Expand</sub>"]
+    N3 --> N4["SV Gate<br/><sub>Filter</sub>"]
+    N4 --> N5["Writer<br/><sub>Generate</sub>"]
+    N5 --> N6["Validator<br/><sub>O-R-A-V</sub>"]
+    N6 --> N7["Features<br/><sub>Vectorize</sub>"]
+  end
 
-    subgraph Eval["Evaluation & Safety"]
-        ORAV["O-R-A-V Judge<br/><sub>Multi-Model Scoring</sub>"]
-        DEMAS["DEMAS Audit<br/><sub>JIT · Fail-Closed</sub>"]
-    end
+  subgraph Eval["Evaluation & Safety"]
+    ORAV["O-R-A-V Judge<br/><sub>Multi-Model Scoring</sub>"]
+    DEMAS["DEMAS Audit<br/><sub>JIT · Fail-Closed</sub>"]
+  end
 
-    L1 & L2 & L3 --> N1
-    N6 --> ORAV
-    DEMAS -.->|"intercept at<br/>every boundary"| N1 & N2 & N3 & N4 & N5 & N6 & N7
-    ORAV -.->|"RL feedback<br/>prompt mutation"| N5
+  L1 & L2 & L3 --> N1
+  N6 --> ORAV
+  DEMAS -.->|"intercept at<br/>every boundary"| N1 & N2 & N3 & N4 & N5 & N6 & N7
+  ORAV -.->|"RL feedback<br/>prompt mutation"| N5
 
-    style MoE fill:#1a1a2e,stroke:#0A84FF,color:#fff
-    style ORAV fill:#1a1a2e,stroke:#30D158,color:#fff
-    style DEMAS fill:#1a1a2e,stroke:#FFD60A,color:#fff
+  style MoE fill:#1a1a2e,stroke:#0A84FF,color:#fff
+  style ORAV fill:#1a1a2e,stroke:#30D158,color:#fff
+  style DEMAS fill:#1a1a2e,stroke:#FFD60A,color:#fff
 ```
 
 <details>
