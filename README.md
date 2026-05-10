@@ -23,7 +23,7 @@ I design and operate **end-to-end autonomous AI systems** — from 0→1 archite
 **Current system in production:**
 - **11 enterprise clients** across 4 countries, **~7.9M product data points** processed per cycle
 - **7-node multi-agent DAG** with ~116M sub-agent executions per cycle
-- **Gemma 4 MoE** on vLLM with tenant-isolated Multi-LoRA serving (<50ms adapter swap)
+- **Gemma 4 MoE** on vLLM with PagedAttention inference (Multi-LoRA R&D documented in [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment))
 - **O-R-A-V** multi-model evaluation with fail-closed policy (68.9% pass rate by design)
 
 ---
@@ -106,7 +106,7 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 **Evaluation & Safety**
 
 ![Multi-Agent](https://img.shields.io/badge/Multi--Agent_DAGs-000?style=flat-square)
-![LoRA](https://img.shields.io/badge/Multi--LoRA_Serving-000?style=flat-square)
+![vLLM](https://img.shields.io/badge/vLLM_PagedAttention-000?style=flat-square)
 ![Fail-Closed](https://img.shields.io/badge/Fail--Closed_Safety-000?style=flat-square)
 ![RLHF](https://img.shields.io/badge/Closed--Loop_RL-000?style=flat-square)
 
@@ -125,6 +125,6 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 ---
 
 <div align="center">
-<sub>Israel (Relocating) · <a href="mailto:manzela@gmail.com">manzela@gmail.com</a></sub>
+<sub>Israel (Relocating) · <a href="mailto:danielq1603@gmail.com">danielq1603@gmail.com</a></sub>
 </div>
 
