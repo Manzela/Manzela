@@ -5,20 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Daniel Manzela — AI Product Engineer</title>
 <meta name="description" content="AI Product Engineer building autonomous, eval-driven systems at enterprise scale. 8 years shipping AI from 0→1. Open-source contributor, Google Cloud certified.">
+<meta property="og:title" content="Daniel Manzela — AI Product Engineer">
+<meta property="og:description" content="Building autonomous AI systems that actually work in production. Multi-agent orchestration, eval-driven development, fail-closed safety.">
+<meta property="og:url" content="https://manzela.github.io/manzela/profile.html">
+<meta property="og:type" content="profile">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Daniel Manzela — AI Product Engineer">
+<link rel="canonical" href="https://manzela.github.io/manzela/profile.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="profile.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Daniel Manzela","jobTitle":"AI Product Engineer","url":"https://manzela.github.io/manzela/profile.html","sameAs":["https://github.com/Manzela","https://linkedin.com/in/manzela","https://medium.com/@manzela","https://huggingface.co/Manzela-D"],"knowsAbout":["Multi-Agent Systems","LLM Evaluation","MLOps","Google Cloud","Production AI"]}
+</script>
 </head>
 <body>
 
 <!-- Nav -->
 <nav class="nav"><div class="nav-inner">
   <div class="nav-brand"><strong>Daniel</strong> Manzela</div>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-links">
+    <a href="#about">About</a>
     <a href="#work">Work</a>
     <a href="#engineering">Engineering</a>
     <a href="#credentials">Credentials</a>
-    <a href="https://manzela.github.io/pipeline-observatory/">Telemetry</a>
     <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">Evidence</a>
   </div>
 </div></nav>
@@ -40,6 +53,25 @@
     <a href="#work" class="btn btn-fill">View Projects</a>
     <a href="https://github.com/Manzela" class="btn btn-ghost" target="_blank">GitHub</a>
     <a href="https://linkedin.com/in/manzela" class="btn btn-ghost" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+<!-- ════ ABOUT ════ -->
+<section id="about">
+  <div class="section-header"><div class="section-label">About</div></div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <h2>Autodidact. Builder. Systems thinker.</h2>
+      <p>I believe autonomous AI will enable humanity's transition from repetitive labor to creative freedom. My work accelerates that by taking complex technical capabilities and turning them into products that change how people build wealth, scale businesses, and connect across borders.</p>
+      <p>I never followed a conventional path. No formal CS degree, no corporate ladder. Instead, I learned by shipping — taking ideas from zero to production across multiple continents, time zones, and over a million end users. I've held every title from Web Developer to CEO, often simultaneously: running sales calls in the morning, writing pipeline code in the afternoon, and reviewing PRs at night.</p>
+      <p>At peak, I directly managed a cross-functional team of 12 spanning engineering, product, design, QA, marketing, and customer success — while remaining hands-on in the codebase. That breadth is why I think in systems, not silos: every technical decision is a product decision, and every product decision has an engineering cost.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="about-stat"><span class="about-val">8+</span><span class="about-lbl">Years Building AI Products</span></div>
+      <div class="about-stat"><span class="about-val">1M+</span><span class="about-lbl">End Users Impacted</span></div>
+      <div class="about-stat"><span class="about-val">3</span><span class="about-lbl">Continents Shipped To</span></div>
+      <div class="about-stat"><span class="about-val">12</span><span class="about-lbl">Peak Team Size (Direct)</span></div>
+    </div>
   </div>
 </section>
 
@@ -70,6 +102,15 @@
         <h4>Product Twist — Eval-First</h4>
         <p>O-R-A-V multi-model judge scores every output on Originality, Relevance, Accuracy, Value. 68.9% pass rate <em>by design</em> — fail-closed policy rejects and feeds failures into the RL data flywheel for prompt mutation.</p>
       </div>
+    </div>
+
+    <div class="arch-diagram reveal">
+      <div class="section-label" style="margin-bottom:16px">Pipeline Architecture</div>
+      <pre class="arch-ascii">Input → [N1 Scraper] → [N2 Enrichment] → [N3 Dedup] → [N4 Schema] → [N5 Content Gen] → [N6 Eval Judge] → [N7 Publisher]
+           │               │                │              │               │                  │                 │
+        Pydantic        BigQuery          Redis          AST Parse      Gemini API        O-R-A-V Score     Firestore
+        Gate            Gate              Gate           Gate           Gate Agent        Multi-Model       Sink
+                                                                       (80/20 split)     (68.9% pass)</pre>
     </div>
 
     <div class="metrics">
@@ -315,13 +356,27 @@
   </div>
 </section>
 
+<!-- ════ CONTACT CTA ════ -->
+<section id="contact" class="contact-section">
+  <div class="reveal" style="text-align:center">
+    <div class="section-label">Get in Touch</div>
+    <h2 style="font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-1px;margin:16px 0 12px">Interested in working together?</h2>
+    <p style="color:var(--t2);max-width:520px;margin:0 auto 32px;font-size:14px;line-height:1.8">I'm exploring senior AI engineering and product roles at companies solving hard problems with autonomous systems.</p>
+    <div class="hero-cta">
+      <a href="mailto:danielq1603@gmail.com" class="btn btn-fill">Email</a>
+      <a href="https://linkedin.com/in/manzela" class="btn btn-ghost" target="_blank" rel="me">LinkedIn</a>
+      <a href="https://github.com/Manzela" class="btn btn-ghost" target="_blank" rel="me">GitHub</a>
+    </div>
+  </div>
+</section>
+
 <!-- ════ FOOTER ════ -->
 <footer class="ftr">
   <div class="ftr-links">
-    <a href="https://github.com/Manzela" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/manzela" target="_blank">LinkedIn</a>
-    <a href="https://medium.com/@manzela" target="_blank">Medium</a>
-    <a href="https://huggingface.co/Manzela-D" target="_blank">HuggingFace</a>
+    <a href="https://github.com/Manzela" target="_blank" rel="me">GitHub</a>
+    <a href="https://linkedin.com/in/manzela" target="_blank" rel="me">LinkedIn</a>
+    <a href="https://medium.com/@manzela" target="_blank" rel="me">Medium</a>
+    <a href="https://huggingface.co/Manzela-D" target="_blank" rel="me">HuggingFace</a>
     <a href="mailto:danielq1603@gmail.com">Email</a>
   </div>
   <p class="ftr-note">Every claim on this page is backed by public source code, third-party certifications, or video demonstrations.</p>
