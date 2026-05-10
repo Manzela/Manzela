@@ -182,11 +182,11 @@
                 <div class="card p-6 md:p-10 mb-8 overflow-x-auto bg-appleDarker border-appleBorder text-center">
                     <div class="text-[10px] uppercase tracking-widest text-appleGray mb-6">Pipeline Architecture</div>
                     <pre class="font-mono text-[10px] md:text-xs text-appleGray leading-relaxed inline-block text-left">
-Input &rarr; [N1 Scraper] &rarr; [N2 Enrichment] &rarr; [N3 Dedup] &rarr; [N4 Schema] &rarr; [N5 Content Gen] &rarr; [N6 Eval Judge] &rarr; [N7 Publisher]
+Input &rarr; [N1 City DNA] &rarr; [N2 Normalizer] &rarr; [N3 Synonyms] &rarr; [N4 SV Gate] &rarr; [N5 Writer] &rarr; [N6 Scorer] &rarr; [N7 Judge]
              &darr;                &darr;                 &darr;               &darr;                &darr;                   &darr;                  &darr;
-          Pydantic         BigQuery           Redis           AST Parse       Gemini API         O-R-A-V Score      Firestore
-          Gate             Gate               Gate            Gate            Gate Agent         Multi-Model        Sink
-                                                                             (80/20 split)      (68.9% pass)</pre>
+          Gemini           Pydantic           SimHash         Google Ads      Gemma 4 MoE        Python/Math        Multi-Model
+          Web Search       Vision+AST         Levenshtein     NumPy           LoRA Agent         Deterministic      LLM-as-Judge
+                                                                              (80/20 split)      (68.9% pass)</pre>
                 </div>
 
                 <div class="flex flex-wrap gap-2 mb-8">
