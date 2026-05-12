@@ -861,6 +861,14 @@
                         the model could phrase a reply any way it wanted, but the <em>content</em> had to come
                         from a procedure on file.
                     </p>
+
+                    <div class="layer-callout">
+                        <strong>Before &ldquo;RAG&rdquo; was a label.</strong> Retrieve grounding text, inject it
+                        into the prompt at request time, let the model phrase but not invent &mdash; that pattern
+                        was the working solution for keeping a fine-tuned Hebrew model honest in 2021&ndash;2022.
+                        It only acquired the name &ldquo;Retrieval-Augmented Generation&rdquo; later; here, the
+                        architectural decision came from solving a real grounding problem, not from following a label.
+                    </div>
                 </article>
 
                 <!-- LAYER 3: EXECUTION -->
@@ -912,10 +920,10 @@
 
                     <div class="layer-callout">
                         <strong>Model evolution.</strong> Fine-tuning ran across two platforms over 12+ months:
-                        OpenAI (Babbage &rarr; GPT-3 &rarr; GPT-3.5) and Hugging Face AutoTrain.
-                        Hundreds of training cycles tightened Hebrew generation fidelity, PII redaction
-                        at training and inference boundaries, conversational state management, and adherence
-                        to retrieved procedures &mdash; not parameter counts. The bottleneck was always data quality.
+                        OpenAI&rsquo;s fine-tuning API (Babbage &rarr; Davinci &rarr; GPT-3.5 as each became
+                        available) and Hugging Face AutoTrain. Hundreds of training cycles tightened Hebrew
+                        generation fidelity, PII redaction at training and inference boundaries, conversational
+                        state management, and adherence to retrieved procedures &mdash; not parameter counts.
                     </div>
                 </article>
 
@@ -963,11 +971,11 @@
                     </div>
 
                     <div class="layer-callout">
-                        <strong>Deterministic-gate-first, in production.</strong> Years before
-                        &ldquo;human-in-the-loop&rdquo; became standard terminology for production LLM systems,
-                        this was the working pattern: every probabilistic decision sat behind a deterministic
-                        safety check, with a human-readable trace and an explicit fallback.
-                        The same pattern later scaled into the multi-agent DAGs documented at the Pipeline Observatory.
+                        <strong>Deterministic-gate-first, in production.</strong> In 2021, most production AI
+                        deployments shipped raw model output straight to the user. Putting every probabilistic
+                        decision behind a deterministic safety check &mdash; with a human-readable trace and an
+                        explicit fallback &mdash; was a deliberate architectural choice, not the default. The same
+                        pattern later scaled into the multi-agent DAGs documented at the Pipeline Observatory.
                     </div>
                 </article>
 
@@ -1198,20 +1206,20 @@
                 <div class="approach-card">
                     <span class="approach-tag">APPROACH 01</span>
                     <h3>Dante AI (no-code)</h3>
-                    <p>Drag-and-drop chatbot platform with a native Twilio WhatsApp connection. Fastest path to a working pilot.</p>
-                    <div class="approach-result"><strong>Ruled out:</strong> couldn&rsquo;t support the Hebrew-domain retrieval pattern or the SQuAD-style training corpus already accumulated.</div>
+                    <p>Drag-and-drop chatbot builder with a native Twilio WhatsApp connection. The fastest path to a working pilot in week one.</p>
+                    <div class="approach-result"><strong>Ruled out:</strong> a black-box platform with no way to fine-tune on domain-specific Hebrew, no path to encode the company&rsquo;s 145 procedures, no surface to inject the operational dispatcher logic. Generalized at the cost of every specialization that mattered.</div>
                 </div>
                 <div class="approach-card">
                     <span class="approach-tag">APPROACH 02</span>
                     <h3>AutoTrain + ChatGPT</h3>
-                    <p>Hugging Face AutoTrain for training, ChatGPT for inference. Iterated through several dataset versions in this branch.</p>
-                    <div class="approach-result"><strong>Ruled out:</strong> data quality was the real bottleneck, not the model. This realization drove the SQuAD pipeline.</div>
+                    <p>Hugging Face AutoTrain for fine-tuning, ChatGPT for inference. Iterated through several dataset versions and model snapshots in this branch.</p>
+                    <div class="approach-result"><strong>Ruled out:</strong> the loop was manual end-to-end &mdash; evaluate, fix, retrain, re-test, repeat &mdash; with no way to automate quality checks. Splitting training (HF) from inference (ChatGPT) added friction at every cycle. The accumulated learnings from this branch fed directly into the production stack.</div>
                 </div>
                 <div class="approach-card is-production">
                     <span class="approach-tag">APPROACH 03 · PRODUCTION</span>
                     <h3>AWS Lambda + OpenAI</h3>
                     <p>Custom serverless function bridging Twilio webhooks to a fine-tuned OpenAI model with retrieval against the operational corpus.</p>
-                    <div class="approach-result"><strong>Shipped:</strong> the production stack from Oct 2020 through Dec 2023.</div>
+                    <div class="approach-result"><strong>Shipped:</strong> OpenAI&rsquo;s fine-tuning API outperformed AutoTrain at that point in time, and unifying training and inference on one platform eliminated the cycle friction. Lambda gave a clean separation between the model and the messaging surface. The only configuration that produced a stable, reliable Hebrew agent &mdash; in production Oct 2020 through Dec 2023.</div>
                 </div>
             </div>
 
@@ -1238,7 +1246,8 @@
                     <div class="lesson-text">
                         <strong>The safety gate is the architecture.</strong> A 5-minute override isn&rsquo;t a feature
                         you bolt on &mdash; it&rsquo;s the gate that lets a probabilistic system run in production
-                        without a brand-trust failure. The deterministic fallback message is what actually shipped.
+                        without a brand-trust failure. The deterministic fallback was what made the model safe to ship,
+                        not the model itself.
                     </div>
                 </div>
             </div>
@@ -1246,7 +1255,8 @@
             <!-- Outcome statement + bridge -->
             <div class="outcome">
                 <p class="outcome-line">
-                    The agent handled live client requests via WhatsApp through December 2023.
+                    The agent handled live client requests via WhatsApp through December 2023 &mdash;
+                    over three years in production, replacing the full-time human dispatcher loop.
                 </p>
                 <p class="bridge">
                     This four-layer pattern &mdash; classify, retrieve, execute, verify &mdash;
