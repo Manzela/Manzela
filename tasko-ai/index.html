@@ -445,7 +445,7 @@
             <a href="#knowledge">Knowledge</a>
             <a href="#training">Training</a>
             <a href="#architecture">Architecture</a>
-            <a href="#evidence">Evidence</a>
+            <a href="#evidence">Overview</a>
             <a href="#approaches">Approaches</a>
         </div>
         <div class="nav-right">
@@ -677,10 +677,10 @@
                     </div>
                     <p class="version-desc">
                         Custom VBA macros and Excel formulas extracted Question&ndash;Answer
-                        pairs in SQuAD-compatible format from role-tagged threads. Iterative
-                        refinement across versions <span class="mono">testing_3</span> through
-                        <span class="mono">testing_6</span> used GPT-assisted curation to
-                        clean, normalize, and re-anchor the dataset before each training run.
+                        pairs in SQuAD-compatible format from role-tagged threads. Hundreds of
+                        refinement iterations over 12+ months &mdash; each cycle addressing Hebrew
+                        text generation fidelity, PII leak prevention, bias mitigation, and
+                        answer grounding before re-entering training.
                     </p>
 
                     <pre class="schema-block" aria-label="SQuAD-format record schema"><span class="c">// per-record schema (SQuAD-compatible)</span>
@@ -698,7 +698,7 @@
                         </div>
                         <div class="version-feature">
                             <span class="material-symbols-outlined" aria-hidden="true">sync_alt</span>
-                            <div><strong>Iterations:</strong> testing_3 &rarr; testing_6 (GPT-assisted curation)</div>
+                            <div><strong>Iterations:</strong> Hundreds of cycles over 12+ months</div>
                         </div>
                         <div class="version-feature">
                             <span class="material-symbols-outlined" aria-hidden="true">description</span>
@@ -742,7 +742,7 @@
                     </ul>
                 </div>
                 <div class="card card-pad">
-                    <span class="label-tag" style="margin-bottom: 16px;">תהליכים ונהלים</span>
+                    <span class="label-tag" style="margin-bottom: 16px;">Processes &amp; Procedures</span>
                     <h3 class="h-card" style="margin-bottom: 12px;">Hebrew operational documentation</h3>
                     <p class="text-body">
                         Internal standard operating procedures, originally authored in Hebrew,
@@ -774,9 +774,10 @@
                 <span class="label-tag">Fine-Tuning</span>
                 <h2 class="h-section">Two Training Platforms</h2>
                 <p class="text-lead">
-                    Iterative fine-tuning across Hugging Face AutoTrain and OpenAI&rsquo;s
-                    fine-tuning API, refining the SQuAD-format dataset across multiple
-                    GPT-assisted versions before each run.
+                    Over 12 months of iterative fine-tuning across Hugging Face AutoTrain
+                    and OpenAI&rsquo;s fine-tuning API &mdash; hundreds of dataset and model
+                    iterations addressing Hebrew generation fidelity, PII prevention,
+                    bias mitigation, state management, and memory optimization.
                 </p>
             </div>
 
@@ -788,7 +789,7 @@
                         <li><strong style="color:var(--appleLight)">Organization:</strong> Chatbot Hasherut on Hugging Face Hub (2 members)</li>
                         <li><strong style="color:var(--appleLight)">Pipeline:</strong> AutoTrain Text Regression</li>
                         <li><strong style="color:var(--appleLight)">Dataset:</strong> <span class="mono">Hasherutchatbot/autotrain-data-testing-6</span> (private)</li>
-                        <li><strong style="color:var(--appleLight)">Iterations:</strong> testing_3 &rarr; testing_4 &rarr; testing_5 &rarr; testing_6</li>
+                        <li><strong style="color:var(--appleLight)">Iterations:</strong> Hundreds of dataset &amp; model cycles over 12+ months</li>
                     </ul>
                 </div>
                 <div class="card card-pad">
@@ -809,17 +810,28 @@
                     <div class="kpi-label">Training Platforms</div>
                 </div>
                 <div class="kpi-cell">
-                    <div class="kpi-value">4</div>
-                    <div class="kpi-label">Dataset Iterations (3–6)</div>
+                    <div class="kpi-value">100s</div>
+                    <div class="kpi-label">Dataset &amp; Model Iterations</div>
                 </div>
                 <div class="kpi-cell">
-                    <div class="kpi-value">3</div>
-                    <div class="kpi-label">OpenAI Model Generations</div>
+                    <div class="kpi-value">12+</div>
+                    <div class="kpi-label">Months of R&amp;D</div>
                 </div>
                 <div class="kpi-cell">
                     <div class="kpi-value">SQuAD</div>
                     <div class="kpi-label">Training Data Format</div>
                 </div>
+            </div>
+
+            <div class="info-note" style="margin-top: 24px;">
+                <span class="material-symbols-outlined" aria-hidden="true">science</span>
+                <p>
+                    <strong>R&amp;D depth.</strong> Each iteration cycle addressed a distinct engineering
+                    challenge: Hebrew text generation without bias leakage, PII redaction at training
+                    and inference boundaries, conversational state and memory management (short-term
+                    context vs. long-term client history), optimization triggers for retrieval precision,
+                    and MLOps best practices for reproducible fine-tuning runs.
+                </p>
             </div>
         </div>
     </section>
@@ -884,8 +896,8 @@
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">menu_book</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">RAG Layer</h3>
                     <p class="text-body">
-                        Retrieval against the workflows / processes corpus
-                        (<span class="mono">תהליכים ונהלים</span>) at request time &mdash;
+                        Retrieval against the workflows and processes corpus
+                        at request time &mdash;
                         constraining replies to the company&rsquo;s authored operational rules.
                     </p>
                 </div>
@@ -926,52 +938,129 @@
     <section id="evidence" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">Artifacts</span>
-                <h2 class="h-section">Engineering Artifacts</h2>
+                <span class="label-tag">System Overview</span>
+                <h2 class="h-section">End-to-End Architecture</h2>
                 <p class="text-lead">
-                    Authentic snapshots from the build &mdash; the Hugging Face organization
-                    and the AutoTrain Text Regression data preparation interface used to
-                    iterate on the SQuAD-format dataset.
+                    The complete system &mdash; from raw WhatsApp data through the fine-tuning
+                    pipeline to the production conversational layer, with the engineering
+                    safeguards that required 12+ months of iterative R&amp;D.
                 </p>
             </div>
 
-            <div class="media-grid">
+            <!-- Inline SVG Architecture Diagram -->
+            <div class="card" style="padding: 48px 32px; overflow-x: auto;">
+                <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:960px;margin:0 auto;display:block;" role="img" aria-label="Tasko.ai end-to-end system architecture diagram">
+                    <defs>
+                        <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="rgba(41,151,255,0)" />
+                            <stop offset="50%" stop-color="rgba(41,151,255,0.4)" />
+                            <stop offset="100%" stop-color="rgba(41,151,255,0)" />
+                        </linearGradient>
+                        <filter id="nodeGlow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2997ff" flood-opacity="0.25"/></filter>
+                    </defs>
 
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="assets/media/huggingface-org.png"
-                             alt="Chatbot Hasherut organization page on Hugging Face Hub, listing one private dataset Hasherutchatbot/autotrain-data-testing-6 and two team members"
-                             loading="lazy" width="1902" height="958">
-                    </div>
-                    <div class="media-caption">
-                        <span class="label-tag">Hugging Face Hub</span>
-                        <h3>Chatbot Hasherut &mdash; organization</h3>
-                        <p>
-                            Two team members, one private AutoTrain dataset
-                            (<span class="mono">Hasherutchatbot/autotrain-data-testing-6</span>) &mdash;
-                            the workspace used for text-regression fine-tuning experiments.
-                        </p>
-                    </div>
-                </div>
+                    <!-- Section Labels -->
+                    <text x="160" y="28" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.12em" text-anchor="middle" text-transform="uppercase">DATA PIPELINE</text>
+                    <text x="560" y="28" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.12em" text-anchor="middle">TRAINING &amp; SAFEGUARDS</text>
+                    <text x="860" y="28" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.12em" text-anchor="middle">PRODUCTION</text>
 
-                <div class="media-card">
-                    <div class="media-frame">
-                        <img src="assets/media/autotrain-data-prep.png"
-                             alt="Hugging Face AutoTrain Text Regression interface showing the testing_3 workspace and the data preparation step with example dataset columns"
-                             loading="lazy" width="1899" height="1000">
-                    </div>
-                    <div class="media-caption">
-                        <span class="label-tag">AutoTrain · Text Regression</span>
-                        <h3>Data preparation interface</h3>
-                        <p>
-                            AutoTrain&rsquo;s Text Regression pipeline at the
-                            <span class="mono">testing_3</span> stage &mdash; the upload surface
-                            where each iteration of the curated SQuAD dataset entered training.
-                        </p>
-                    </div>
-                </div>
+                    <!-- Vertical separators -->
+                    <line x1="340" y1="40" x2="340" y2="500" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 4" />
+                    <line x1="720" y1="40" x2="720" y2="500" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 4" />
 
+                    <!-- DATA PIPELINE NODES -->
+                    <!-- WhatsApp Export -->
+                    <rect x="60" y="60" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="84" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">01</text>
+                    <text x="160" y="102" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp Extraction</text>
+
+                    <!-- Speaker Classification -->
+                    <rect x="60" y="140" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="164" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">02</text>
+                    <text x="160" y="182" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Speaker Classification</text>
+
+                    <!-- Task Taxonomy -->
+                    <rect x="60" y="220" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="244" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">03</text>
+                    <text x="160" y="262" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">180+ Task Taxonomy</text>
+
+                    <!-- Q&A Extraction -->
+                    <rect x="60" y="300" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="324" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">04</text>
+                    <text x="160" y="342" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Q&amp;A Extraction (SQuAD)</text>
+
+                    <!-- Arrows between pipeline stages -->
+                    <line x1="160" y1="116" x2="160" y2="140" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="160" y1="196" x2="160" y2="220" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="160" y1="276" x2="160" y2="300" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+
+                    <!-- TRAINING & SAFEGUARDS -->
+                    <!-- HF AutoTrain -->
+                    <rect x="380" y="80" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(41,151,255,0.25)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="480" y="104" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">HF AutoTrain</text>
+                    <text x="480" y="122" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Text Regression</text>
+
+                    <!-- OpenAI Fine-Tuning -->
+                    <rect x="380" y="160" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(41,151,255,0.25)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="480" y="184" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">OpenAI Fine-Tuning</text>
+                    <text x="480" y="202" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Babbage → GPT-3 → GPT-3.5</text>
+
+                    <!-- Arrow from pipeline to training -->
+                    <line x1="260" y1="328" x2="380" y2="188" stroke="#2997ff" stroke-width="1" opacity="0.4" stroke-dasharray="6 3" />
+                    <line x1="260" y1="328" x2="380" y2="108" stroke="#2997ff" stroke-width="1" opacity="0.4" stroke-dasharray="6 3" />
+
+                    <!-- Iteration Loop -->
+                    <rect x="400" y="248" width="160" height="36" rx="18" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.2)" stroke-width="1" />
+                    <text x="480" y="271" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">100s of iterations</text>
+                    <path d="M 520 284 C 530 310 530 310 480 320 C 430 310 430 310 440 284" fill="none" stroke="rgba(41,151,255,0.3)" stroke-width="1" marker-end="none" />
+
+                    <!-- Safeguard nodes -->
+                    <rect x="380" y="340" width="200" height="140" rx="12" fill="rgba(29,29,31,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                    <text x="480" y="364" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle">Engineering Safeguards</text>
+                    <text x="400" y="388" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· PII Redaction</text>
+                    <text x="400" y="406" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· Bias Mitigation</text>
+                    <text x="400" y="424" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· State &amp; Memory Mgmt</text>
+                    <text x="400" y="442" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· MLOps Reproducibility</text>
+                    <text x="400" y="460" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· Hebrew Gen. Fidelity</text>
+
+                    <!-- PRODUCTION -->
+                    <!-- RAG Corpus -->
+                    <rect x="760" y="80" width="160" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <text x="840" y="104" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">RAG Corpus</text>
+                    <text x="840" y="122" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Operational Rules</text>
+
+                    <!-- Twilio -->
+                    <rect x="760" y="170" width="160" height="50" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <text x="840" y="200" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Twilio WhatsApp</text>
+
+                    <!-- Lambda -->
+                    <rect x="760" y="250" width="160" height="50" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <text x="840" y="280" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">AWS Lambda</text>
+
+                    <!-- Fine-tuned Model -->
+                    <rect x="760" y="330" width="160" height="50" rx="12" fill="#1d1d1f" stroke="rgba(41,151,255,0.3)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="840" y="360" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Fine-tuned Model</text>
+
+                    <!-- WhatsApp Client -->
+                    <rect x="760" y="420" width="160" height="50" rx="12" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.25)" stroke-width="1" />
+                    <text x="840" y="450" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Client (WhatsApp)</text>
+
+                    <!-- Production arrows -->
+                    <line x1="840" y1="220" x2="840" y2="250" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="840" y1="300" x2="840" y2="330" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="840" y1="380" x2="840" y2="420" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="840" y1="136" x2="840" y2="170" stroke="#86868b" stroke-width="1" opacity="0.3" stroke-dasharray="4 3" />
+                    <line x1="760" y1="355" x2="720" y2="355" stroke="#86868b" stroke-width="1" opacity="0.3" />
+
+                    <!-- Arrow from training to production -->
+                    <line x1="580" y1="188" x2="760" y2="355" stroke="#2997ff" stroke-width="1" opacity="0.3" stroke-dasharray="6 3" />
+
+                    <!-- Data flow label -->
+                    <text x="160" y="390" fill="#86868b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" letter-spacing="0.1em">200+ CLIENT THREADS</text>
+                    <text x="160" y="404" fill="#86868b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" letter-spacing="0.1em">2011–2020</text>
+                </svg>
             </div>
+
         </div>
     </section>
 
