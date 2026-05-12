@@ -216,31 +216,31 @@
         .section-head h2 { margin-bottom: 16px; margin-top: 12px; }
         .section-head p { max-width: 660px; margin: 0 auto; }
 
-        /* ============ LAYER CARDS ============ */
-        .layer-stack { display: grid; gap: 20px; }
+        /* ============ LAYER CARDS — aligned with global .card tokens (32px pad, 18px radius) ============ */
+        .layer-stack { display: grid; gap: 24px; }
         .layer-card {
             background: var(--appleDarker);
-            border-radius: 20px;
+            border-radius: 18px;
             border: 1px solid var(--appleBorderSoft);
-            padding: 40px;
+            padding: 32px;
             transition: border-color 0.4s ease;
         }
         .layer-card:hover { border-color: var(--appleBorderHover); }
-        @media (max-width: 767px) { .layer-card { padding: 28px 24px; } }
+        @media (max-width: 767px) { .layer-card { padding: 24px 20px; } }
 
         .layer-head {
-            display: flex; align-items: flex-start; gap: 20px;
-            margin-bottom: 20px; flex-wrap: wrap;
+            display: flex; align-items: flex-start; gap: 16px;
+            margin-bottom: 18px; flex-wrap: wrap;
         }
         .layer-badge {
-            width: 56px; height: 56px; border-radius: 14px;
+            width: 44px; height: 44px; border-radius: 11px;
             background: rgba(41, 151, 255, 0.1);
             border: 1px solid rgba(41, 151, 255, 0.25);
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
         .layer-badge .material-symbols-outlined {
-            color: var(--appleBlue); font-size: 26px;
+            color: var(--appleBlue); font-size: 20px;
         }
         .layer-head-text { flex: 1; min-width: 200px; }
         .layer-num {
@@ -250,8 +250,8 @@
             margin-bottom: 6px;
         }
         .layer-title {
-            font-size: clamp(1.4rem, 2.4vw, 1.75rem); font-weight: 600;
-            color: var(--appleLight); letter-spacing: -0.02em; margin: 0;
+            font-size: clamp(1.15rem, 1.7vw, 1.35rem); font-weight: 600;
+            color: var(--appleLight); letter-spacing: -0.018em; margin: 0;
         }
         .layer-subtitle { color: var(--appleGray); font-weight: 400; }
 
@@ -323,24 +323,24 @@
         .cat-name { font-size: 0.78rem; color: var(--appleLight); font-weight: 500; letter-spacing: -0.005em; }
         .cat-count { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--appleBlue); letter-spacing: 0.04em; }
 
-        /* PULLQUOTE — for Layer 2 */
+        /* PULLQUOTE — for Layer 2 / Layer 4 */
         .pullquote {
-            margin: 28px 0 8px;
-            padding: 28px 32px;
+            margin: 24px 0 8px;
+            padding: 22px 26px;
             border-left: 3px solid var(--appleBlue);
             background: linear-gradient(90deg, rgba(41, 151, 255, 0.06), rgba(41, 151, 255, 0));
-            border-radius: 0 14px 14px 0;
+            border-radius: 0 12px 12px 0;
         }
         .pullquote p {
-            font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+            font-size: clamp(0.98rem, 1.5vw, 1.15rem);
             color: var(--appleLight); line-height: 1.45;
-            font-weight: 500; letter-spacing: -0.015em;
+            font-weight: 500; letter-spacing: -0.012em;
         }
         .pullquote em {
             font-style: normal; color: var(--appleBlue); font-weight: 600;
         }
         @media (max-width: 767px) {
-            .pullquote { padding: 22px 22px 22px 24px; }
+            .pullquote { padding: 18px 20px; }
         }
 
         /* PROCEDURE GRID — for Layer 3 */
@@ -392,20 +392,20 @@
 
         /* CALLOUT — restyled as editorial marginalia (not a content block competing with the spine) */
         .layer-callout {
-            margin-top: 30px;
-            padding: 0 0 0 22px;
+            margin-top: 26px;
+            padding: 0 0 0 18px;
             background: none;
             border: none;
             border-left: 2px solid var(--appleBlue);
             border-radius: 0;
-            font-size: 0.82rem; color: var(--appleGray); line-height: 1.7;
+            font-size: 0.78rem; color: var(--appleGray); line-height: 1.7;
             max-width: 720px;
         }
         .layer-callout strong {
             display: block;
             color: var(--appleLight);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+            font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
             font-weight: 500;
             margin-bottom: 8px;
         }
@@ -695,18 +695,18 @@
 
         /* ============ LAYER-CAPTION — the Apple-style "tagline" under each killer visual ============ */
         .layer-caption {
-            font-size: clamp(1.05rem, 1.55vw, 1.2rem);
+            font-size: clamp(0.92rem, 1.15vw, 1rem);
             color: var(--appleLight);
-            line-height: 1.45;
+            line-height: 1.5;
             font-weight: 400;
-            letter-spacing: -0.012em;
-            margin: 32px 0 0;
-            max-width: 600px;
+            letter-spacing: -0.008em;
+            margin: 24px 0 0;
+            max-width: 560px;
         }
 
         /* ============ LAYER DEEP-DIVE — Apple progressive-disclosure pattern ============ */
         details.layer-dive {
-            margin-top: 40px;
+            margin-top: 28px;
         }
         details.layer-dive > summary {
             list-style: none;
@@ -743,12 +743,12 @@
         details.layer-dive[open] > summary .dive-label { color: var(--appleLight); }
         details.layer-dive .dive-icon {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 22px; height: 22px;
+            width: 20px; height: 20px;
             border-radius: 50%;
             border: 1px solid var(--appleBorderHover);
             color: var(--appleLight);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 14px; font-weight: 400; line-height: 1;
+            font-size: 13px; font-weight: 400; line-height: 1;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                         background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
             background: rgba(0,0,0,0.2);
@@ -760,10 +760,10 @@
             color: var(--appleBlue);
         }
         details.layer-dive > .layer-dive-body {
-            padding: 36px 0 4px;
+            padding: 28px 0 4px;
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 22px;
         }
         details.layer-dive > .layer-dive-body > *:first-child { margin-top: 0; }
         /* Soft fade-in when deep-dive opens (no JS, just CSS animation on open) */
@@ -798,9 +798,9 @@
         .now-called {
             display: inline-flex; align-items: center; gap: 8px;
             margin-top: 10px;
-            padding: 6px 12px;
+            padding: 5px 11px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+            font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
             color: var(--appleLight);
             background: rgba(41, 151, 255, 0.08);
             border: 1px solid rgba(41, 151, 255, 0.22);
@@ -819,23 +819,23 @@
             grid-template-columns: 1fr;
             background: var(--appleBorderSoft);
             border: 1px solid var(--appleBorderSoft);
-            border-radius: 14px; overflow: hidden;
-            margin: 26px 0 4px;
+            border-radius: 12px; overflow: hidden;
+            margin: 22px 0 4px;
         }
         @media (min-width: 640px) { .layer-stats { grid-template-columns: repeat(4, 1fr); } }
         .layer-stat {
             background: rgba(0, 0, 0, 0.35);
-            padding: 18px 14px;
+            padding: 16px 12px;
             text-align: center;
         }
         .layer-stat-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
             font-weight: 600; color: var(--appleLight); margin-bottom: 4px;
             letter-spacing: -0.015em;
         }
         .layer-stat-label {
-            font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.14em;
+            font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em;
             color: var(--appleGray);
         }
 
