@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Seller App">
+    <title>Seller App — Automating Retail Digitization | Daniel Manzela</title>
+    <meta name="description" content="Computer Vision-powered eCom automation: barcode scanning, image recognition, and video-based product upload. Bootstrapped to $10K MRR. Jan 2020 – Apr 2024.">
+    <meta name="author" content="Daniel Manzela">
+    <link rel="canonical" href="https://manzela.github.io/Manzela/seller-app/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Daniel Manzela — Portfolio">
+    <meta property="og:title" content="Seller App — Automating Retail Digitization">
+    <meta property="og:description" content="Computer Vision for eCom: barcode → image → video recognition for automated WooCommerce catalog generation. $10K MRR, bootstrapped. Jan 2020 – Apr 2024.">
+    <meta property="og:url" content="https://manzela.github.io/Manzela/seller-app/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://manzela.github.io/Manzela/seller-app/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Seller App — Computer Vision for eCom. A 0→1 product case study by Daniel Manzela.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Seller App — Automating Retail Digitization">
+    <meta name="twitter:description" content="Computer Vision for eCom: barcode → image → video recognition. Bootstrapped to $10K MRR over four years before pivoting to enterprise.">
+    <meta name="twitter:image" content="https://manzela.github.io/Manzela/seller-app/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Seller App — Computer Vision for eCom. A 0→1 product case study by Daniel Manzela.">
+    <meta name="twitter:creator" content="@danielmanzela">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============ DESIGN TOKENS — match Elysium canonical reference ============ */
+        :root {
+            --appleDark: #000000;
+            --appleDarker: #1d1d1f;
+            --appleGray: #86868b;
+            --appleLight: #f5f5f7;
+            --appleBlue: #2997ff;
+            --appleBorder: rgba(255, 255, 255, 0.1);
+            --appleBorderSoft: rgba(255, 255, 255, 0.06);
+            --appleBorderHover: rgba(255, 255, 255, 0.12);
+            --appleSurface: #1d1d1f;
+        }
+
+        /* ============ RESET ============ */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        /* ============ A11Y ============ */
+        .skip-link {
+            position: absolute; left: -9999px; top: 0; z-index: 100;
+            background: var(--appleBlue); color: #000; font-weight: 500;
+            padding: 10px 16px; border-radius: 0 0 8px 0; font-size: 13px;
+        }
+        .skip-link:focus { left: 0; outline: 2px solid var(--appleLight); outline-offset: 2px; }
+        :focus-visible {
+            outline: 2px solid var(--appleBlue); outline-offset: 3px; border-radius: 4px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+            .fade-in { opacity: 1 !important; transform: none !important; }
+        }
+        body {
+            margin: 0;
+            background-color: var(--appleDark);
+            color: var(--appleLight);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3, h4 { letter-spacing: -0.025em; font-weight: 600; margin: 0; }
+        p { margin: 0; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        ::selection { background: rgba(41, 151, 255, 0.3); color: var(--appleLight); }
+        button { font-family: inherit; }
+
+        /* ============ LAYOUT ============ */
+        .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .section-padding { padding: 120px 0; }
+        @media (max-width: 767px) { .section-padding { padding: 80px 0; } }
+
+        /* ============ NAV ============ */
+        .glass-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-inner {
+            max-width: 1024px; margin: 0 auto; padding: 0 24px;
+            height: 48px; display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; font-weight: 500;
+        }
+        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; }
+        .nav-brand .nav-brand-sub { color: var(--appleGray); font-weight: 400; margin-left: 6px; }
+        .desktop-nav { display: flex; gap: 28px; color: var(--appleGray); }
+        .desktop-nav a { transition: color 0.2s ease; font-size: 11px; }
+        .desktop-nav a:hover { color: var(--appleLight); }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
+        .nav-right a.profile-link:hover { opacity: 0.75; }
+        .mobile-toggle {
+            display: none; background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .mobile-toggle span {
+            display: block; width: 18px; height: 1.5px; background: var(--appleLight);
+            margin: 4px 0; transition: all 0.3s ease; border-radius: 1px;
+        }
+        @media (max-width: 767px) {
+            .mobile-toggle { display: block; }
+            .desktop-nav { display: none; }
+            .desktop-nav.open {
+                display: flex !important;
+                position: fixed; top: 48px; left: 0; right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column; padding: 24px; gap: 18px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                z-index: 49;
+            }
+        }
+
+        /* ============ TYPOGRAPHY ============ */
+        .h-display { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.05; }
+        .h-section { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; }
+        .h-card { font-size: 1.125rem; font-weight: 500; }
+        .text-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--appleGray); line-height: 1.55; font-weight: 300; }
+        .text-body { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
+        .text-meta { font-size: 0.75rem; color: var(--appleGray); }
+        .text-light { color: var(--appleLight); }
+        .text-gray { color: var(--appleGray); }
+        .text-blue { color: var(--appleBlue); }
+        .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+        /* ============ LABEL TAG ============ */
+        .label-tag {
+            display: inline-block; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px;
+            border: 1px solid var(--appleBorder); color: var(--appleGray);
+        }
+
+        /* ============ GLOW LINE ============ */
+        .glow-line {
+            height: 1px; max-width: 1024px; margin: 0 auto;
+            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
+        }
+
+        /* ============ CARDS ============ */
+        .card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .card:hover {
+            border-color: var(--appleBorderHover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .card-pad { padding: 32px; }
+        .card-pad-lg { padding: 40px; }
+        .card-soft { background: rgba(29, 29, 31, 0.5); }
+
+        /* ============ ICONS ============ */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .icon-blue { color: var(--appleBlue); }
+        .icon-gray { color: var(--appleGray); }
+        .icon-lg { font-size: 28px; }
+        .icon-md { font-size: 22px; }
+
+        /* ============ METRIC GRADIENT ============ */
+        .metric-value {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============ GRIDS ============ */
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        @media (max-width: 767px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* Bento (Elysium pattern) */
+        .bento { display: grid; gap: 12px; grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .bento { grid-template-columns: repeat(3, 1fr); }
+            .bento-wide { grid-column: span 2; }
+        }
+
+        /* ============ HERO ============ */
+        .hero { padding: 140px 24px 100px; text-align: center; }
+        @media (max-width: 767px) { .hero { padding: 100px 24px 60px; } }
+        .hero-line2 { color: var(--appleGray); }
+        .hero-sub { max-width: 640px; margin: 24px auto 0; }
+        .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
+        .hero-metrics {
+            display: flex; justify-content: center; gap: 56px; margin-top: 44px; flex-wrap: wrap;
+        }
+        .hero-metric { text-align: center; }
+        .hero-metric-value { font-size: 2rem; font-weight: 600; color: var(--appleLight); margin-bottom: 4px; }
+        .hero-metric-label { font-size: 12px; color: var(--appleGray); }
+        @media (max-width: 480px) { .hero-metrics { gap: 32px; } }
+
+        /* ============ SECTION HEAD ============ */
+        .section-head { text-align: center; margin-bottom: 64px; }
+        .section-head .label-tag { margin-bottom: 16px; }
+        .section-head h2 { margin-bottom: 16px; margin-top: 12px; }
+        .section-head p { max-width: 640px; margin: 0 auto; }
+
+        /* ============ TIMELINE (product versions) ============ */
+        .timeline { position: relative; padding-left: 0; }
+        .version-card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            padding: 36px;
+            position: relative;
+            transition: border-color 0.4s ease, transform 0.4s ease;
+        }
+        .version-card + .version-card { margin-top: 20px; }
+        .version-card:hover { border-color: var(--appleBorderHover); }
+        .version-head {
+            display: flex; align-items: baseline; justify-content: space-between;
+            margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
+        }
+        .version-tag {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--appleBlue); letter-spacing: 0.05em;
+        }
+        .version-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--appleBlue); box-shadow: 0 0 12px rgba(41, 151, 255, 0.5);
+        }
+        .version-title { font-size: 1.5rem; font-weight: 600; color: var(--appleLight); margin: 0; letter-spacing: -0.02em; }
+        .version-period { font-size: 11px; color: var(--appleGray); text-transform: uppercase; letter-spacing: 0.12em; }
+        .version-desc { font-size: 0.95rem; color: var(--appleGray); line-height: 1.65; margin-bottom: 24px; }
+        .version-features {
+            display: grid; gap: 12px; grid-template-columns: 1fr;
+            border-top: 1px solid var(--appleBorderSoft); padding-top: 24px;
+        }
+        @media (min-width: 768px) { .version-features { grid-template-columns: repeat(2, 1fr); gap: 12px 32px; } }
+        .version-feature {
+            display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--appleGray);
+        }
+        .version-feature .material-symbols-outlined {
+            font-size: 18px; color: var(--appleBlue); margin-top: 2px; flex-shrink: 0;
+        }
+        .version-feature strong { color: var(--appleLight); font-weight: 500; }
+
+        /* ============ ARCHITECTURE FLOW ============ */
+        .flow-diagram {
+            background: rgba(29, 29, 31, 0.6);
+            border: 1px solid var(--appleBorder);
+            border-radius: 16px;
+            padding: 32px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--appleGray);
+            line-height: 2;
+            text-align: center;
+        }
+        .flow-step {
+            display: inline-block; padding: 6px 14px; border-radius: 100px;
+            background: rgba(41, 151, 255, 0.08); border: 1px solid rgba(41, 151, 255, 0.2);
+            color: var(--appleLight); margin: 4px 2px;
+        }
+        .flow-arrow { color: var(--appleGray); margin: 0 6px; }
+
+        /* ============ MEDIA GALLERY ============ */
+        .media-grid {
+            display: grid; gap: 24px;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+        .media-card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            overflow: hidden;
+            transition: border-color 0.4s ease;
+        }
+        .media-card:hover { border-color: var(--appleBorderHover); }
+        .media-frame {
+            position: relative; width: 100%; aspect-ratio: 4 / 3; background: #000;
+            overflow: hidden;
+        }
+        .media-frame video, .media-frame img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .media-caption { padding: 20px 24px 24px; }
+        .media-caption .label-tag { margin-bottom: 10px; }
+        .media-caption h3 { font-size: 1rem; font-weight: 500; color: var(--appleLight); margin-bottom: 6px; }
+        .media-caption p { font-size: 0.85rem; color: var(--appleGray); line-height: 1.55; }
+
+        /* ============ PIVOT (decision grid) ============ */
+        .decision-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+        @media (min-width: 768px) { .decision-grid { grid-template-columns: repeat(2, 1fr); } }
+        .decision-card { background: var(--appleDarker); border: 1px solid var(--appleBorderSoft); border-radius: 18px; padding: 32px; }
+        .decision-card:hover { border-color: var(--appleBorderHover); }
+        .decision-card h3 { font-size: 1.125rem; font-weight: 500; color: var(--appleLight); margin-bottom: 12px; }
+        .decision-card p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
+        .decision-callout {
+            margin-top: 24px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 18px;
+            padding: 24px 28px;
+        }
+        .decision-callout p { font-size: 0.85rem; color: var(--appleGray); line-height: 1.65; }
+        .decision-callout a { color: var(--appleBlue); }
+        .decision-callout a:hover { text-decoration: underline; }
+
+        /* ============ KPI BAR ============ */
+        .kpi-bar {
+            display: grid; gap: 1px;
+            grid-template-columns: 1fr;
+            background: var(--appleBorderSoft);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px; overflow: hidden;
+        }
+        @media (min-width: 768px) { .kpi-bar { grid-template-columns: repeat(3, 1fr); } }
+        .kpi-cell { background: var(--appleDarker); padding: 28px 16px; text-align: center; }
+        .kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--appleLight); margin-bottom: 6px; }
+        .kpi-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--appleGray); }
+
+        /* ============ FADE-IN ============ */
+        .fade-in {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ FOOTER ============ */
+        footer {
+            border-top: 1px solid var(--appleBorderSoft);
+            padding: 48px 24px;
+            margin-top: 32px;
+        }
+        .footer-inner {
+            max-width: 1024px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 24px; flex-wrap: wrap;
+        }
+        .footer-copy { font-size: 12px; color: var(--appleGray); }
+        .footer-links {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--appleGray);
+        }
+        .footer-links a { transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--appleLight); }
+
+        /* ============ INLINE LINK ============ */
+        .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
+        .inline-link:hover { opacity: 0.8; text-decoration: underline; }
+
+        /* ============ COFOUNDER NOTE ============ */
+        .cofounder-note {
+            margin-top: 32px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex; gap: 18px; align-items: flex-start;
+        }
+        .cofounder-note .material-symbols-outlined { color: var(--appleBlue); font-size: 24px; flex-shrink: 0; }
+        .cofounder-note p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
+        .cofounder-note strong { color: var(--appleLight); font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<nav class="glass-nav" aria-label="Primary">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-brand">Seller App<span class="nav-brand-sub">2020–2024</span></a>
+        <div class="desktop-nav" id="mainNav">
+            <a href="#problem">Problem</a>
+            <a href="#product">Product</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#evidence">Evidence</a>
+            <a href="#metrics">Metrics</a>
+            <a href="#pivot">Decision</a>
+        </div>
+        <div class="nav-right">
+            <a href="https://manzela.github.io/Manzela/" class="profile-link">Profile</a>
+            <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
+                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main id="main-content">
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero fade-in">
+        <h1 class="h-display">
+            Automating Retail Digitization.<br>
+            <span class="hero-line2">Computer Vision for eCom.</span>
+        </h1>
+        <p class="text-lead hero-sub">
+            A physical-product scanning application that automated WooCommerce store setups —
+            from barcode to image recognition to video-based product upload.
+        </p>
+        <div class="hero-meta">Daniel Manzela · Jan 2020 — Apr 2024</div>
+        <div class="hero-metrics">
+            <div class="hero-metric">
+                <div class="hero-metric-value">$10K</div>
+                <div class="hero-metric-label">MRR achieved</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">3</div>
+                <div class="hero-metric-label">Computer Vision versions shipped</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">4 yrs</div>
+                <div class="hero-metric-label">Bootstrapped</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ PROBLEM ============ -->
+    <section id="problem" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Market Context</span>
+                <h2 class="h-section">The Onboarding Bottleneck</h2>
+                <p class="text-lead">Physical retailers need an online presence but lack the technical skills.
+                    Manual product upload is the single largest barrier to eCommerce adoption.</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">storefront</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Skill Gap</h3>
+                    <p class="text-body">Brick-and-mortar retailers operate without in-house digital teams.
+                        Photographing, captioning, categorizing, and listing products is a workflow they have neither
+                        time nor expertise to perform.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">inventory_2</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Manual Upload Cost</h3>
+                    <p class="text-body">A 50-product catalog takes hours of manual data entry per store —
+                        the rate-limiting step between a physical retailer and a working online storefront.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">block</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">No Frictionless Path</h3>
+                    <p class="text-body">No existing solution generated a complete product catalog from the camera alone.
+                        Every alternative still required typing, tagging, and image curation by hand.</p>
+                </div>
+            </div>
+
+            <div class="cofounder-note">
+                <span class="material-symbols-outlined" aria-hidden="true">groups</span>
+                <p>
+                    <strong>Co-founded</strong> with <strong>Dr. Eli Osherovich</strong> &mdash;
+                    Senior Applied Scientist at <strong style="color:var(--appleLight)">Amazon</strong> (Alexa Shopping / Amazon Go),
+                    now leading AI &amp; infrastructure at Google.
+                    The technical bar was set by someone who had shipped production retail-AI at hyperscale.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ PRODUCT EVOLUTION ============ -->
+    <section id="product" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Product Versions</span>
+                <h2 class="h-section">Three Generations of Vision</h2>
+                <p class="text-lead">The product evolved through three distinct computer-vision generations,
+                    each removing a layer of friction from the seller&rsquo;s upload workflow.</p>
+            </div>
+
+            <div class="timeline">
+
+                <!-- V1 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>VERSION 1.0</div>
+                            <h3 class="version-title" style="margin-top: 8px;">Barcode Scan → Auto-Upload</h3>
+                        </div>
+                        <span class="version-period">Barcode + Database</span>
+                    </div>
+                    <p class="version-desc">
+                        A PWA-side barcode scanner powered by <strong style="color:var(--appleLight)">Google ML Kit</strong>
+                        (with <strong style="color:var(--appleLight)">zxing-cpp-emscripten</strong> as fallback).
+                        Each scan is enriched against the Global Product Database and pushed to a vendor&rsquo;s WooCommerce store
+                        via the WC Marketplace REST API — the target was onboarding plus 50 products in under one hour.
+                    </p>
+                    <div class="version-features">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">qr_code_scanner</span>
+                            <div><strong>Scanner:</strong> Google ML Kit · zxing-cpp-emscripten fallback</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">database</span>
+                            <div><strong>Auto-fill:</strong> Global Product Database lookup per UPC/EAN</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">storefront</span>
+                            <div><strong>Sign-up:</strong> Google Maps auto-fill, logo, branding</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">inventory</span>
+                            <div><strong>Inventory:</strong> bulk upload + per-product overrides</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">receipt_long</span>
+                            <div><strong>Orders:</strong> order management dashboard</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">campaign</span>
+                            <div><strong>Marketing:</strong> ads, loyalty, coupons, sales</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">settings</span>
+                            <div><strong>Settings:</strong> policies, delivery, WhatsApp chat, payments</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">api</span>
+                            <div><strong>Integration:</strong> WC Marketplace REST API (WooCommerce)</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- V2 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>VERSION 2.0</div>
+                            <h3 class="version-title" style="margin-top: 8px;">Image Recognition</h3>
+                        </div>
+                        <span class="version-period">Image + OCR</span>
+                    </div>
+                    <p class="version-desc">
+                        For products without scannable barcodes, a single photo became the input.
+                        Vision-AI OCR extracted on-package text, generated descriptions, tags, categories, and attributes,
+                        and a Computer Vision foundation-model API cleaned up product photography by removing backgrounds.
+                    </p>
+                    <div class="version-features">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">photo_camera</span>
+                            <div><strong>Input:</strong> single product photo from the camera</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">document_scanner</span>
+                            <div><strong>OCR:</strong> Vision AI text extraction from packaging</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+                            <div><strong>Generation:</strong> description, tags, categories, attributes</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">imagesearch_roller</span>
+                            <div><strong>Cleanup:</strong> Computer Vision foundation-model background removal</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- V3 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>VERSION 3.0</div>
+                            <h3 class="version-title" style="margin-top: 8px;">Video + RAG on the GPD</h3>
+                        </div>
+                        <span class="version-period">Video + Retrieval</span>
+                    </div>
+                    <p class="version-desc">
+                        The seller pans the camera across a shelf; frame-by-frame recognition retrieves matching SKUs
+                        from a dedicated <strong style="color:var(--appleLight)">RAG model over the Global Product Database</strong>.
+                        Attribute extraction expanded with synonym support, with the dataset mass-scraped per country, region, and language.
+                    </p>
+                    <div class="version-features">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">videocam</span>
+                            <div><strong>Input:</strong> video stream — frame-by-frame product recognition</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">hub</span>
+                            <div><strong>Retrieval:</strong> dedicated RAG over Global Product Database</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">manage_search</span>
+                            <div><strong>Attributes:</strong> enhanced extractor with synonym support</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">language</span>
+                            <div><strong>Coverage:</strong> per country / region / language scraping</div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ GLOBAL PRODUCT DATABASE ============ -->
+    <section id="gpd" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Data Infrastructure</span>
+                <h2 class="h-section">The Global Product Database</h2>
+                <p class="text-lead">A shared, multi-tenant catalog that turned every barcode, image, and video frame
+                    into a structured product record — the retrieval layer behind every Computer Vision generation.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">Vision &amp; Mission</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">One catalog, every retailer</h3>
+                    <p class="text-body">
+                        A single canonical product record per SKU, enriched once and reused across every vendor on the platform.
+                        Built so a small bodega and a regional chain receive the same structured data the moment they scan a product.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">Roadmap</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">From scrapers to multilingual RAG</h3>
+                    <ul class="text-body" style="display:flex; flex-direction:column; gap:8px;">
+                        <li>· <strong style="color:var(--appleLight)">WebScraping</strong> — UPC, BarcodeLookup, image cropping</li>
+                        <li>· <strong style="color:var(--appleLight)">Bright Data</strong> — managed proxy &amp; structured ingestion</li>
+                        <li>· <strong style="color:var(--appleLight)">Multilingual</strong> — per-region language coverage (planned)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cofounder-note" style="margin-top: 24px;">
+                <span class="material-symbols-outlined" aria-hidden="true">memory</span>
+                <p>
+                    The GPD served as a <strong>retrieval layer</strong> queried by barcode, image, and video.
+                    Every Computer Vision generation was constrained by a record already in the database — the model was conditioned
+                    on real product data instead of hallucinating attributes from raw pixels.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ ARCHITECTURE ============ -->
+    <section id="architecture" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">System Design</span>
+                <h2 class="h-section">Technical Architecture</h2>
+                <p class="text-lead">A Progressive Web App on top of a WooCommerce-vendor backend,
+                    instrumented end-to-end for product analytics.</p>
+            </div>
+
+            <!-- Flow diagram -->
+            <div class="flow-diagram" style="margin-bottom: 32px;">
+                <div>
+                    <span class="flow-step">Camera</span><span class="flow-arrow">→</span>
+                    <span class="flow-step">ML Kit Barcode</span><span class="flow-arrow">→</span>
+                    <span class="flow-step">GPD Lookup</span><span class="flow-arrow">→</span>
+                    <span class="flow-step">Auto-fill</span><span class="flow-arrow">→</span>
+                    <span class="flow-step">WooCommerce</span>
+                </div>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">devices</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">PWA on React</h3>
+                    <p class="text-body">Progressive Web App built on React. Single install across iOS, Android, and desktop;
+                        camera, push, and offline capabilities without an app-store dependency.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">api</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Integration Layer</h3>
+                    <p class="text-body">WooCommerce via the <strong style="color:var(--appleLight)">WC Marketplace REST API</strong>.
+                        Vendor authentication through the <strong style="color:var(--appleLight)">WCMp Vendors API</strong>.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">database</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Two Databases</h3>
+                    <p class="text-body"><strong style="color:var(--appleLight)">Global Product Database</strong> — shared catalog.
+                        <strong style="color:var(--appleLight)">Store Product Database</strong> — vendor-scoped inventory, pricing, overrides.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">translate</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Localization</h3>
+                    <p class="text-body">RTL layout support and Google Auto-Translate integration for Hebrew —
+                        the primary launch market.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">notifications_active</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Notifications</h3>
+                    <p class="text-body">Browser push via <strong style="color:var(--appleLight)">react-web-notification</strong> —
+                        order alerts, inventory warnings, marketing nudges.</p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">monitoring</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Analytics</h3>
+                    <p class="text-body"><strong style="color:var(--appleLight)">Mixpanel</strong> for events
+                        and the HEART funnel; <strong style="color:var(--appleLight)">GA4</strong> for pageviews and acquisition.</p>
+                </div>
+            </div>
+
+            <div class="cofounder-note" style="margin-top: 24px;">
+                <span class="material-symbols-outlined" aria-hidden="true">cloud</span>
+                <p><strong>Infrastructure:</strong> AWS for compute, MongoDB for store and product data, CI/CD for every release.
+                    The PWA topology meant updates rolled out the moment a seller refreshed the page — no app-store review cycles.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ FIELD EVIDENCE ============ -->
+    <section id="evidence" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">In the Field</span>
+                <h2 class="h-section">Evidence from the Floor</h2>
+                <p class="text-lead">Raw field documentation from physical-store testing —
+                    the seller, the camera, the product, and the upload happening in real time.</p>
+            </div>
+
+            <div class="media-grid">
+
+                <div class="media-card">
+                    <div class="media-frame">
+                        <video controls preload="metadata" playsinline>
+                            <source src="assets/media/1000067651.mp4" type="video/mp4">
+                            Your browser does not support embedded video.
+                        </video>
+                    </div>
+                    <div class="media-caption">
+                        <span class="label-tag">Demo · App in-action</span>
+                        <h3>Seller App in operation</h3>
+                        <p>End-to-end capture: scan, retrieve, auto-fill, publish to the storefront.</p>
+                    </div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-frame">
+                        <video controls preload="metadata" playsinline>
+                            <source src="assets/media/1000070557.mp4" type="video/mp4">
+                            Your browser does not support embedded video.
+                        </video>
+                    </div>
+                    <div class="media-caption">
+                        <span class="label-tag">Demo · In-store with client</span>
+                        <h3>Client-site walkthrough</h3>
+                        <p>The result of a live upload session inside a partner&rsquo;s physical store.</p>
+                    </div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-frame">
+                        <img src="assets/media/IMG-20220522-WA0025.jpg"
+                             alt="Field testing the Seller App with end-users inside a retail location"
+                             loading="lazy" width="1600" height="1200">
+                    </div>
+                    <div class="media-caption">
+                        <span class="label-tag">Field testing · May 2022</span>
+                        <h3>End-user usability session</h3>
+                        <p>Watching a real seller perform their first scan on the floor of their own store.</p>
+                    </div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-frame">
+                        <img src="assets/media/IMG-20220522-WA0027.jpg"
+                             alt="Daniel Manzela working with a retailer during in-store Seller App field testing"
+                             loading="lazy" width="1600" height="1200">
+                    </div>
+                    <div class="media-caption">
+                        <span class="label-tag">Field testing · May 2022</span>
+                        <h3>On-floor co-discovery</h3>
+                        <p>Co-discovery work alongside the retailer — observing where the camera workflow broke.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ TRACTION & KPIs ============ -->
+    <section id="metrics" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Metrics</span>
+                <h2 class="h-section">Traction &amp; KPIs</h2>
+                <p class="text-lead">Bootstrapped to <strong style="color:var(--appleLight)">$10K MRR</strong>,
+                    instrumented from day one against the HEART framework.</p>
+            </div>
+
+            <div class="kpi-bar" style="margin-bottom: 32px;">
+                <div class="kpi-cell">
+                    <div class="kpi-value">$10K</div>
+                    <div class="kpi-label">MRR Achieved</div>
+                </div>
+                <div class="kpi-cell">
+                    <div class="kpi-value">~50</div>
+                    <div class="kpi-label">Products / Hour Target</div>
+                </div>
+                <div class="kpi-cell">
+                    <div class="kpi-value">3</div>
+                    <div class="kpi-label">Computer Vision Versions Shipped</div>
+                </div>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">HEART Framework</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">Five axes of product health</h3>
+                    <ul class="text-body" style="display:flex; flex-direction:column; gap:10px;">
+                        <li><strong style="color:var(--appleLight)">Happiness</strong> — in-app survey + NPS after onboarding</li>
+                        <li><strong style="color:var(--appleLight)">Engagement</strong> — scans / session, products / week</li>
+                        <li><strong style="color:var(--appleLight)">Adoption</strong> — first scan, first published product, first sale</li>
+                        <li><strong style="color:var(--appleLight)">Retention</strong> — week-2 / week-4 / month-3 cohorts</li>
+                        <li><strong style="color:var(--appleLight)">Task Success</strong> — completed-upload rate per session</li>
+                    </ul>
+                </div>
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">Iteration Drivers</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">Customer pain → roadmap</h3>
+                    <ul class="text-body" style="display:flex; flex-direction:column; gap:10px;">
+                        <li>· Online payment integration</li>
+                        <li>· Last-mile delivery integration</li>
+                        <li>· Point-of-sale (POS) sync</li>
+                        <li>· Weight-based products (deli, produce, bulk)</li>
+                    </ul>
+                    <p class="text-body" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--appleBorderSoft);">
+                        Each pain item entered the backlog with the user interview attached.
+                        Roadmap priority was a function of frequency × revenue impact, not vendor preference.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ PIVOT ============ -->
+    <section id="pivot" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Strategic Decision</span>
+                <h2 class="h-section">Why We Pivoted</h2>
+                <p class="text-lead">Field data revealed an incentive problem the product could not engineer around —
+                    so we changed the customer.</p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="decision-card">
+                    <h3>The Friction We Couldn&rsquo;t Code Away</h3>
+                    <p>Retailers and their on-ground employees were not incentivized to perform the setup themselves.
+                        Onboarding stalled. Production roll-out kept slipping past the moment the product was ready.</p>
+                </div>
+                <div class="decision-card">
+                    <h3>The Discovery</h3>
+                    <p>Big-box retailers — operating eCom sites without local visibility — turned out to be the right buyer
+                        for a frictionless, automated, large-scale eCom-per-location setup. The need was upstream of the seller.</p>
+                </div>
+                <div class="decision-card">
+                    <h3>The Covid-19 Window</h3>
+                    <p>The pandemic was the right macro window for digital transformation in retail —
+                        and it was precisely the window that exposed the human-on-the-ground friction at scale.</p>
+                </div>
+                <div class="decision-card">
+                    <h3>The Outcome</h3>
+                    <p>Pivoted from SMB self-service to enterprise frictionless solutions. That move directly seeded the
+                        <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Autonomous Content Pipeline</a> —
+                        same insight, different blast radius.</p>
+                </div>
+            </div>
+
+            <div class="decision-callout">
+                <p><strong style="color:var(--appleLight)">Seller App deprecation — January 2025.</strong>
+                    The platform migrated to a WordPress multisite architecture; Seller App functionality was absorbed into the WordPress admin layer.
+                    The Computer Vision stack and the Global Product Database lived on as feedstock for the next product generation.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-copy">© 2020–2026 Daniel Manzela · Seller App was an active product Jan 2020 – Apr 2024.</div>
+        <div class="footer-links">
+            <a href="https://manzela.github.io/Manzela/">Profile</a>
+            <a href="https://manzela.github.io/Elysium/">Elysium</a>
+            <a href="https://manzela.github.io/pipeline-observatory/">Autonomous Pipeline</a>
+            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/danielmanzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (function () {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll reveal — skipped entirely for users who prefer reduced motion
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        }
+
+        // Mobile nav toggle — aria-expanded kept in sync
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const setNavOpen = (open) => {
+            mainNav.classList.toggle('open', open);
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        navToggle?.addEventListener('click', () => {
+            setNavOpen(!mainNav.classList.contains('open'));
+        });
+
+        // Smooth scroll + auto-close mobile nav on in-page navigation
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const href = a.getAttribute('href');
+                if (href.length < 2) return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
+                    if (mainNav?.classList.contains('open')) setNavOpen(false);
+                }
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>
