@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Data Mining">
     <title>Data Mining &amp; Lead Intelligence — A Custom Pipeline · Daniel Manzela</title>
-    <meta name="description" content="A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for Eitam Finance, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.">
+    <meta name="description" content="A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for an Israeli financial services firm, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.">
     <meta name="author" content="Daniel Manzela">
     <link rel="canonical" href="https://manzela.github.io/Manzela/data-mining/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
@@ -47,7 +47,7 @@
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": "Data Mining & Lead Intelligence — A Custom Pipeline",
-        "description": "A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for Eitam Finance, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.",
+        "description": "A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for an Israeli financial services firm, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.",
         "url": "https://manzela.github.io/Manzela/data-mining/",
         "image": "https://manzela.github.io/Manzela/data-mining/assets/og-image.png",
         "datePublished": "2020-07-01",
@@ -542,25 +542,25 @@
             A bespoke five-stage scraping, structuring, and classification pipeline &mdash;
             built from scratch for a market existing data platforms didn&rsquo;t serve.
         </p>
-        <div class="hero-meta">Daniel Manzela · Eitam Finance · Feb 2019 — Jul 2020</div>
+        <div class="hero-meta">Daniel Manzela · Israeli Financial Services Firm · Feb 2019 — Jul 2020</div>
 
         <!-- Verifiable hero metrics -->
         <div class="hero-stats">
             <div class="hero-stat">
-                <div class="hero-stat-value">5</div>
-                <div class="hero-stat-label">Pipeline Stages</div>
+                <div class="hero-stat-value">17 mo</div>
+                <div class="hero-stat-label">In Production</div>
             </div>
             <div class="hero-stat">
-                <div class="hero-stat-value">17 mo</div>
-                <div class="hero-stat-label">Build &amp; Operation</div>
+                <div class="hero-stat-value">₪50M+</div>
+                <div class="hero-stat-label">New AUM Generated</div>
             </div>
             <div class="hero-stat">
                 <div class="hero-stat-value">Solo</div>
                 <div class="hero-stat-label">Engineer</div>
             </div>
             <div class="hero-stat">
-                <div class="hero-stat-value">$0</div>
-                <div class="hero-stat-label">Vendor Stack</div>
+                <div class="hero-stat-value">5</div>
+                <div class="hero-stat-label">Pipeline Stages</div>
             </div>
         </div>
     </section>
@@ -621,11 +621,11 @@
         <div class="container">
             <div class="section-head">
                 <span class="label-tag">The Build</span>
-                <h2 class="h-section">Five Stages, One Hand-Off Each.</h2>
+                <h2 class="h-section">Five Stages, Manually Orchestrated.</h2>
                 <p class="text-lead">
-                    Each stage was a discrete unit with a single job &mdash; and a single hand-off
-                    to the next. The pipeline ran on a workstation; outputs landed on the sales
-                    team&rsquo;s shared drive in Excel.
+                    Each stage was a standalone tool with a single job. Nothing was end-to-end
+                    automated &mdash; I ran, validated, and handed off each component myself.
+                    Outputs landed on the sales team&rsquo;s shared drive in Excel.
                 </p>
             </div>
 
@@ -659,10 +659,10 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Extraction</h3>
                         <p class="pipe-desc">
-                            Source-tuned Python scrapers &mdash; <strong>BeautifulSoup</strong> for
-                            static pages, <strong>Selenium</strong> for JavaScript-rendered ones &mdash;
-                            pulled records from registries, directories, listings, and municipal sites.
-                            Raw HTML was cached locally so a parser change never required a re-fetch.
+                            <strong>WebScraper</strong> (open-source) handled local extraction from
+                            registries, directories, listings, and municipal sites.
+                            <strong>BrightData&rsquo;s Residential Proxy</strong> provided rotating
+                            IPs and anti-bot bypass for rate-limited and geo-restricted sources.
                         </p>
                     </div>
                 </article>
@@ -677,10 +677,11 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Structuring</h3>
                         <p class="pipe-desc">
-                            A <strong>Pandas</strong> pipeline normalized records into a single schema,
-                            fuzzy-deduped on name + location + profession, and persisted the cleaned
-                            dataset to a local <strong>SQLite</strong> store. Every record had a known
-                            shape and a unique identity before any score touched it.
+                            Custom <strong>VBA Macro scripts</strong> in Excel handled normalization,
+                            enrichment, formatting, classification, and dedup &mdash; turning raw messy
+                            data into a structured, highly filterable index with multi-search and
+                            sort capabilities. Every record had a known shape and a unique identity
+                            before any score touched it.
                         </p>
                     </div>
                 </article>
@@ -727,12 +728,9 @@
                 <span class="insight-label">Engineering principle</span>
                 <p>
                     <strong>A pipeline is a series of filters, not a series of steps.</strong>
-                    Each stage&rsquo;s job was to shrink the input for the next: geo collapsed scope
-                    before any page was fetched, dedupe collapsed records before any score was
-                    computed, classification ranked before delivery selected. The discipline of
-                    filtering at every boundary &mdash; not just at the end &mdash; is what kept
-                    the system tractable on a single workstation, and what most off-the-shelf tools
-                    never enforced for this market.
+                    Each stage shrinks the input for the next &mdash; geo collapses scope before
+                    a page is fetched, dedupe collapses records before a score is computed.
+                    That discipline is what kept a manually-orchestrated system tractable.
                 </p>
             </div>
 
@@ -760,48 +758,48 @@
             <!-- Tech-stack chip strip -->
             <div class="tech-strip">
                 <div class="tech-strip-label">Stack</div>
-                <span class="tech-chip">Python 3.x<span class="tech-purpose">language</span></span>
-                <span class="tech-chip">BeautifulSoup<span class="tech-purpose">static html</span></span>
-                <span class="tech-chip">Selenium<span class="tech-purpose">dynamic pages</span></span>
-                <span class="tech-chip">Pandas<span class="tech-purpose">data ops</span></span>
-                <span class="tech-chip">SQLite<span class="tech-purpose">local store</span></span>
-                <span class="tech-chip">Excel · CSV<span class="tech-purpose">output</span></span>
-                <span class="tech-chip">Cron<span class="tech-purpose">scheduling</span></span>
+                <span class="tech-chip">WebScraper<span class="tech-purpose">extraction</span></span>
+                <span class="tech-chip">BrightData<span class="tech-purpose">proxy · anti-bot</span></span>
+                <span class="tech-chip">Excel + VBA<span class="tech-purpose">normalization</span></span>
+                <span class="tech-chip">VBA Macros<span class="tech-purpose">classification</span></span>
+                <span class="tech-chip">Excel<span class="tech-purpose">output · delivery</span></span>
                 <span class="tech-chip">Workstation<span class="tech-purpose">infrastructure</span></span>
             </div>
 
-            <!-- Three lessons -->
+            <!-- Four lessons -->
             <div class="lessons">
                 <div class="lesson-item">
                     <div class="lesson-num">01</div>
                     <div class="lesson-text">
-                        <strong>Data quality eats data volume.</strong> Early batches pulled large
-                        volumes and converted at near-zero. Tighter geo-filtering and stricter
-                        classification thresholds reduced volume and lifted conversion. The same
-                        lesson recurred years later at twenty-thousand-record scale at
-                        <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>:
-                        the bottleneck was never the model, it was the pipeline that produced its inputs.
+                        <strong>Quality over volume.</strong> Early batches converted at near-zero.
+                        Tighter geo-filtering and stricter scoring thresholds reduced volume and
+                        lifted conversion &mdash; the same lesson that recurred at
+                        <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>.
                     </div>
                 </div>
                 <div class="lesson-item">
                     <div class="lesson-num">02</div>
                     <div class="lesson-text">
-                        <strong>A custom pipeline beats a generic platform when the domain is narrow.</strong>
-                        Enterprise data tools generalize at the cost of the specializations that
-                        actually mattered for this market: language, geography, regulatory context,
-                        target profile. A scoped pipeline ran cheaper, ranked better, and changed
-                        faster. The same trade-off resurfaces every time the choice is between
-                        buying a horizontal platform and building a vertical one.
+                        <strong>Narrow domain, custom pipeline.</strong> Enterprise tools generalize
+                        at the cost of the specializations that mattered here: language, geography,
+                        target profile. A scoped pipeline ran cheaper and ranked better.
                     </div>
                 </div>
                 <div class="lesson-item">
                     <div class="lesson-num">03</div>
                     <div class="lesson-text">
-                        <strong>The classifier is the product.</strong> Anyone can scrape. The layer
-                        that decides whether a pipeline ships value is the one between raw data and
-                        the customer&rsquo;s decision &mdash; and that layer is bought with iteration
-                        on real feedback, not engineering elegance. The first thing the team felt
-                        was the classifier, not the scrapers.
+                        <strong>The classifier is the product.</strong> Anyone can scrape. The value
+                        lived in the layer between raw data and a sales team&rsquo;s decision &mdash;
+                        and that layer was bought with iteration on real feedback.
+                    </div>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-num">04</div>
+                    <div class="lesson-text">
+                        <strong>A human in the loop doesn&rsquo;t scale.</strong> I was the orchestrator
+                        for every handoff between stages. The pipeline worked &mdash; but I was the
+                        bottleneck. That realization drove the shift toward end-to-end automation
+                        in everything that followed.
                     </div>
                 </div>
             </div>
@@ -809,17 +807,15 @@
             <!-- Outcome statement + bridge -->
             <div class="outcome">
                 <p class="outcome-line">
-                    For seventeen months the sales team at Eitam Finance worked from leads generated
-                    by this pipeline instead of purchased generic lists. Cost: a workstation and an
-                    engineer. Replaced: an enterprise data subscription that wasn&rsquo;t available
-                    for this market anyway.
+                    For seventeen months the sales team worked from leads generated by this pipeline.
+                    The converted prospects represented over ₪50M in new asset-management client
+                    portfolio. Cost: a workstation and one engineer.
                 </p>
                 <p class="bridge">
-                    The same pattern &mdash; extract from a noisy source, classify into something
-                    useful, deliver in the format the consumer already uses &mdash; recurred at
-                    much larger scale: a 21,000-record service taxonomy at
-                    <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>,
-                    and millions of product pages through a deterministic-gate-first DAG at the
+                    The same pattern &mdash; extract, classify, deliver in the format the consumer
+                    already uses &mdash; recurred at larger scale:
+                    <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>
+                    and the
                     <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Pipeline Observatory</a>.
                     The earliest version of that thinking lived here.
                 </p>
