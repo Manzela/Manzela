@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Five projects, one pattern. 2019 → 2026.">
   <meta name="twitter:image" content="https://manzela.github.io/Manzela/assets/og-preview.png">
 
-  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23000'/><polygon points='32,8 56,32 32,56 8,32' fill='%232997ff'/></svg>" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23000'/><text x='32' y='44' font-family='-apple-system,BlinkMacSystemFont,Helvetica,sans-serif' font-weight='700' font-size='30' fill='%232997ff' text-anchor='middle'>DM</text></svg>" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,23 +225,14 @@
       gap: 1.5rem;
     }
     .nav-brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      font-family: var(--fontMono);
-      font-size: var(--type-eyebrow);
-      letter-spacing: var(--tracking-eyebrow);
-      text-transform: uppercase;
+      font-family: var(--fontUI);
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
       color: var(--appleLight);
       background-image: none;
-      font-weight: 500;
-    }
-    .nav-brand-glyph {
-      width: 14px;
-      height: 14px;
-      transform: rotate(45deg);
-      border: 1px solid var(--appleBlue);
-      flex-shrink: 0;
+      font-weight: 600;
     }
     .nav-list {
       display: flex;
@@ -907,18 +898,15 @@
 
   <nav class="glass-nav" aria-label="Primary">
     <div class="glass-nav-inner">
-      <a href="#hero" class="nav-brand">
-        <span class="nav-brand-glyph" aria-hidden="true"></span>
-        <span>DM</span>
-      </a>
+      <a href="#hero" class="nav-brand">Daniel Manzela</a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList" aria-label="Open menu">
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
       <ul class="nav-list" id="navList">
-        <li><a href="#now">Now</a></li>
-        <li><a href="#arc">Arc</a></li>
-        <li><a href="#proved">Proved</a></li>
-        <li><a href="#stack">Stack</a></li>
+        <li><a href="#now">In production</a></li>
+        <li><a href="#arc">The arc</a></li>
+        <li><a href="#proved">What it proved</a></li>
+        <li><a href="#stack">Stack &amp; credentials</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -942,10 +930,6 @@
         <span class="hero-meta-sep" aria-hidden="true"></span>
         <span>4 prior shipped systems</span>
       </div>
-      <p class="hero-live reveal" style="transition-delay: 440ms;">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Pipeline last execution:&nbsp;<time datetime="2026-05-07T11:45:24Z" id="liveTimestamp">2026-05-07 11:45 UTC</time></span>
-      </p>
     </header>
 
     <hr class="section-divider" role="presentation">
@@ -967,13 +951,13 @@
       </ul>
 
       <p class="now-prose reveal">
-        I lead the autonomous content pipeline at <strong>TNG Shopper</strong> — a seven-node directed acyclic graph with deterministic gates and a fail-closed Deterministic Evaluation and Monitoring Audit System, serving 11 enterprise clients. Self-hosted Gemma 4 26B-A4B MoE on vLLM. ~73.5M sub-agent operations per full run. Outputs evaluated across four axes — Originality, Relevance, Accuracy, Value — at a 68.9% pass rate.
+        I lead the autonomous content pipeline at <strong>TNG Shopper</strong> — a seven-node directed acyclic graph with deterministic gates and a fail-closed Deterministic Evaluation and Monitoring Audit System, serving 11 enterprise clients. Self-hosted Gemma 4 — a 26-billion-parameter Mixture-of-Experts model with 4 billion active per forward pass — on vLLM. ~73.5M sub-agent operations per full run. Outputs evaluated across four axes — Originality, Relevance, Accuracy, Value — at a 68.9% pass rate.
       </p>
 
       <nav class="now-handoffs reveal" aria-label="Pipeline observatory">
         <a href="https://manzela.github.io/pipeline-observatory/">→&nbsp;Live observatory</a>
         <a href="https://manzela.github.io/pipeline-observatory/architecture.html">→&nbsp;Architecture deep-dive</a>
-        <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">→&nbsp;Per-client GSC evidence</a>
+        <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">→&nbsp;Per-client Google Search Console evidence</a>
       </nav>
     </section>
 
@@ -1037,7 +1021,7 @@
             </blockquote>
             <ul class="spine-card-numerics" aria-label="Production scale">
               <li>17 mo in production</li>
-              <li>₪50M+ new AUM</li>
+              <li>₪50M+ in new Assets Under Management</li>
               <li>5-stage manually orchestrated pipeline</li>
             </ul>
             <p class="spine-card-lesson">
@@ -1098,15 +1082,15 @@
               </p>
             </header>
             <blockquote class="spine-card-quote">
-              Three computer-vision generations — barcode, then image, then video — against a 60-million-SKU canonical catalog. Bootstrapped four years.
+              Three computer-vision generations — barcode, then image, then video — against a canonical catalog of 60 million Stock-Keeping Units. Bootstrapped four years.
             </blockquote>
             <ul class="spine-card-numerics" aria-label="Product scale">
-              <li>3 CV generations (Barcode → Image → Video + RAG)</li>
-              <li>60M+ canonical SKUs</li>
-              <li>$10K MRR plateau</li>
+              <li>3 computer-vision generations: Barcode → Image → Video + Retrieval-Augmented Generation</li>
+              <li>60M+ canonical Stock-Keeping Units</li>
+              <li>$10K Monthly Recurring Revenue plateau</li>
             </ul>
             <p class="spine-card-lesson">
-              <span class="label">Lesson</span>Vision-language pivot is when I learned that PMF without unit-economics is a research project, not a company.
+              <span class="label">Lesson</span>Vision-language pivot is when I learned that Product-Market Fit without unit economics is a research project, not a company.
             </p>
             <p class="spine-card-bridge">
               <span class="label">Bridge</span>After the wind-down, the next retail-AI investment moved to physical-context intelligence: <a href="#elysium">Elysium</a>.
@@ -1166,11 +1150,11 @@
               The synthesis. A seven-node directed acyclic graph, deterministic gates first, fail-closed by default.
             </blockquote>
             <ul class="spine-card-numerics" aria-label="Production scale">
-              <li>~10.5M PDPs / cycle</li>
+              <li>~10.5M product detail pages / cycle</li>
               <li>~73.5M agent operations / run</li>
               <li>68.9% pass rate · Originality, Relevance, Accuracy, Value</li>
-              <li>$0.0006 / PDP</li>
-              <li>Gemma 4 26B-A4B MoE on self-hosted vLLM</li>
+              <li>$0.0006 / product detail page</li>
+              <li>Gemma 4 26B-A4B Mixture-of-Experts on self-hosted vLLM</li>
             </ul>
             <p class="spine-card-lesson">
               <span class="label">Lesson</span>The five-stage filter, the four-layer agent, the fail-closed governance — same architecture, finally fused.
@@ -1223,20 +1207,20 @@
 
       <dl class="stack-list" style="margin-top: 2.5rem;">
         <dt>Inference & serving</dt>
-        <dd>Vertex AI · self-hosted Gemma 4 26B-A4B MoE on vLLM 0.17.2rc1 · PagedAttention · GCSFUSE · A100 80GB</dd>
+        <dd>Vertex AI · self-hosted Gemma 4 26B-A4B Mixture-of-Experts on vLLM 0.17.2rc1 · PagedAttention · Google Cloud Storage FUSE · NVIDIA A100 80GB</dd>
         <dt>Orchestration & data</dt>
-        <dd>Google ADK · Python · FastAPI · Pydantic · Jinja2 · BigQuery · GCS · Firestore · Redis · Cloud Functions</dd>
+        <dd>Google Agent Development Kit · Python · FastAPI · Pydantic · Jinja2 · BigQuery · Google Cloud Storage · Firestore · Redis · Cloud Functions</dd>
         <dt>Observability & governance</dt>
-        <dd>Langfuse · OpenTelemetry · MCP · Deterministic Evaluation and Monitoring Audit System for fail-closed safety · Four-axis evaluation across Originality, Relevance, Accuracy, Value · DPO via RLAIF</dd>
+        <dd>Langfuse · OpenTelemetry · Model Context Protocol · Deterministic Evaluation and Monitoring Audit System for fail-closed safety · Four-axis evaluation across Originality, Relevance, Accuracy, Value · Direct Preference Optimization via Reinforcement Learning from AI Feedback</dd>
       </dl>
 
       <section class="social-proof" aria-labelledby="social-proof-heading">
         <p class="social-proof-eyebrow" id="social-proof-heading">Social proof · Verifiable credentials</p>
         <ul class="social-proof-grid">
           <li class="social-proof-item">
-            <img src="assets/top100-retailtech.png" alt="Top 100 Active Builders 2025 — RetailTech" loading="lazy" decoding="async">
-            <span class="sp-label">Top 100 Active Builders</span>
-            <span class="sp-source">RetailTech · 2025</span>
+            <img src="assets/top100-retailtech.png" alt="Top 100 2025 Retail Startup — RetailTech" loading="lazy" decoding="async">
+            <span class="sp-label">Top 100 2025 Retail Startup</span>
+            <span class="sp-source">RetailTech</span>
           </li>
           <li class="social-proof-item">
             <img src="assets/cert-genai-leader.png" alt="Generative AI Leader certification" loading="lazy" decoding="async">
@@ -1255,9 +1239,9 @@
           </li>
         </ul>
         <ul class="social-proof-links">
-          <li><a href="https://partner.skills.google/public_profiles/69fa3af8-3032-4a04-a818-f7277009c3a9">→&nbsp;32 Google Cloud credentials (verified profile)</a></li>
-          <li><a href="assets/retailtech-2025-report.pdf">→&nbsp;RetailTech 2025 report (PDF)</a></li>
-          <li><a href="assets/cert-product-experts.pdf">→&nbsp;Product Experts cert (PDF)</a></li>
+          <li><a href="https://partner.skills.google/public_profiles/69fa3af8-3032-4a04-a818-f7277009c3a9">→&nbsp;32 Google Cloud credentials</a></li>
+          <li><a href="assets/retailtech-2025-report.pdf">→&nbsp;RetailTech 2025 report</a></li>
+          <li><a href="assets/cert-product-experts.pdf">→&nbsp;Product Experts certificate</a></li>
         </ul>
       </section>
     </section>
@@ -1270,18 +1254,18 @@
       <ul class="parallel-list" style="margin-top: 2.5rem;">
         <li>
           <h3><a href="https://github.com/Manzela/agent-dag-pipeline">agent-dag-pipeline</a></h3>
-          <p>Open-source distillation of the seven-node directed acyclic graph. Google ADK + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + DPO data flywheel.</p>
+          <p>Open-source distillation of the seven-node directed acyclic graph. Google Agent Development Kit + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + Direct Preference Optimization data flywheel.</p>
         </li>
         <li>
           <h3>
             <a href="https://github.com/Manzela/Antigravity-OS">Antigravity-OS</a>
             <span class="badge mono">pip install ag-os</span>
           </h3>
-          <p>Governance kernel for AI agents. OPA-style policy-as-code, MCP server, cost guard, "Dreaming Module" self-improvement loop.</p>
+          <p>Governance kernel for AI agents. Open Policy Agent-style policy-as-code, Model Context Protocol server, cost guard, "Dreaming Module" self-improvement loop.</p>
         </li>
         <li>
           <h3><a href="https://github.com/Manzela/gemma4-vllm-deployment">gemma4-vllm-deployment</a></h3>
-          <p>Forensic runbook of 20 deployment failure modes for Gemma 4 26B-A4B MoE on Vertex AI + vLLM.</p>
+          <p>Forensic runbook of 20 deployment failure modes for Gemma 4 26B-A4B Mixture-of-Experts on Vertex AI + vLLM.</p>
         </li>
       </ul>
     </section>
