@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysium — Physical-Context AI</title>
+    <meta name="description" content="Physical-context AI platform: 11-agent dispatch system validated with 13 enterprise retail buyers. 15 patent-pending claims. Built on Vertex AI Agent Builder.">
+    <link rel="canonical" href="https://manzela.github.io/Manzela/elysium/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Elysium — Physical-Context AI">
+    <meta property="og:description" content="Physical-context AI for retail demand intelligence. 11-agent system, 15 patent claims, validated with enterprise buyers.">
+    <meta property="og:url" content="https://manzela.github.io/Manzela/elysium/">
+    <meta property="og:image" content="https://manzela.github.io/Manzela/elysium/assets/img/og-card.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        appleDark: '#000000',
+                        appleDarker: '#1d1d1f',
+                        appleGray: '#86868b',
+                        appleLight: '#f5f5f7',
+                        appleBlue: '#2997ff',
+                        appleBorder: 'rgba(255,255,255,0.1)',
+                        appleSurface: '#1d1d1f'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; color: #f5f5f7; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .glass-nav { background: rgba(0,0,0,0.72); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .section-padding { padding: 120px 0; }
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .card { background: #1d1d1f; border-radius: 18px; border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; }
+        .card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in.visible .stagger-1 { transition-delay: 0.1s; }
+        .fade-in.visible .stagger-2 { transition-delay: 0.2s; }
+        .fade-in.visible .stagger-3 { transition-delay: 0.3s; }
+
+        /* Bento Grid */
+        .bento { display: grid; gap: 12px; }
+        .bento-wide { grid-column: span 2; }
+        @media (min-width: 768px) { .bento { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 767px) { .bento { grid-template-columns: 1fr; } .bento-wide { grid-column: span 1; } }
+
+        /* Metric pulse */
+        .metric-value { display: inline-block; background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* Label tag */
+        .label-tag { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1); color: #86868b; }
+
+        /* Mobile nav */
+        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+        .mobile-toggle span { display: block; width: 18px; height: 1.5px; background: #f5f5f7; margin: 4px 0; transition: all 0.3s ease; border-radius: 1px; }
+        @media (max-width: 767px) {
+            .mobile-toggle { display: block; }
+            .desktop-nav { display: none !important; }
+            .desktop-nav.open { display: flex !important; position: fixed; top: 48px; left: 0; right: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 24px; gap: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 49; }
+            .section-padding { padding: 80px 0; }
+        }
+
+        /* Glowing accent line */
+        .glow-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(41,151,255,0.3), transparent); }
+    </style>
+</head>
+<body class="selection:bg-appleBlue selection:text-white">
+
+    <nav class="glass-nav fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between text-xs font-medium">
+            <a href="#" class="text-appleLight hover:text-white transition-colors font-semibold tracking-tight">Elysium</a>
+            <div class="desktop-nav flex space-x-8 text-appleGray" id="mainNav">
+                <a href="#discovery" class="hover:text-appleLight transition-colors">Discovery</a>
+                <a href="#architecture" class="hover:text-appleLight transition-colors">Architecture</a>
+                <a href="#privacy" class="hover:text-appleLight transition-colors">Privacy</a>
+                <a href="#patent" class="hover:text-appleLight transition-colors">Patent</a>
+                <a href="#demo" class="hover:text-appleLight transition-colors">Demo</a>
+                <a href="#validation" class="hover:text-appleLight transition-colors">Validation</a>
+                <a href="#decision" class="hover:text-appleLight transition-colors">Decision</a>
+                <a href="#research" class="hover:text-appleLight transition-colors">Research</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://manzela.github.io/Manzela/" class="text-appleLight hover:text-white transition-colors">Profile</a>
+                <button class="mobile-toggle" onclick="document.getElementById('mainNav').classList.toggle('open')" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24">
+        <section id="hero" class="section-padding text-center px-6 fade-in">
+            <h1 class="text-5xl md:text-7xl font-semibold mb-6 max-w-4xl mx-auto leading-tight">
+                Physical-Context AI.<br><span class="text-appleGray">Intelligence for Retail.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-appleGray max-w-2xl mx-auto mb-12 font-light">
+                A physical-context AI platform fusing search intent, geo-coordinates, and foot traffic data into store-level retail intelligence. Built and validated with enterprise buyers across multi-national multi-location retail markets.
+            </p>
+            <div class="flex justify-center gap-12 text-center text-sm">
+                <div>
+                    <div class="text-2xl font-semibold text-appleLight mb-1">13</div>
+                    <div class="text-appleGray">Validated Brands</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-semibold text-appleLight mb-1">15</div>
+                    <div class="text-appleGray">Patent Claims</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-semibold text-appleLight mb-1">11</div>
+                    <div class="text-appleGray">AI Agents</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="discovery" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">Product Discovery</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">The Enterprise Problem</h2>
+                <p class="text-xl text-appleGray max-w-2xl mx-auto">Validated through discovery sessions with enterprise retail stakeholders at multi-location retailers operating 15,600+ combined store locations.</p>
+            </div>
+
+            <div class="bento mb-8">
+                <div class="card p-8 bento-wide">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-2xl text-appleBlue mt-1">verified</span>
+                        <div>
+                            <h3 class="text-lg font-medium mb-2">Enterprise Discovery Reach</h3>
+                            <p class="text-appleGray text-sm leading-relaxed mb-4">Direct product discovery sessions conducted with retail leadership and decision-makers at Fortune-500 multi-location retailers across grocery, wholesale, pharmacy, and general merchandise.</p>
+                            <div class="flex flex-wrap gap-6 mt-2">
+                                <div><span class="metric-value text-xl font-semibold">5,000+</span><div class="text-xs text-appleGray mt-1">Grocery & General Merchandise Locations</div></div>
+                                <div><span class="metric-value text-xl font-semibold">600+</span><div class="text-xs text-appleGray mt-1">Wholesale Club Locations</div></div>
+                                <div><span class="metric-value text-xl font-semibold">10,000+</span><div class="text-xs text-appleGray mt-1">Pharmacy & Health Retail Locations</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-8">
+                    <span class="label-tag mb-3">Enterprise Retail</span>
+                    <h3 class="text-lg font-medium mb-2 mt-2">13 Buyer Interviews</h3>
+                    <p class="text-appleGray text-sm leading-relaxed">Validated across Fashion, Sporting Goods, Home &amp; Living, and Jewelry verticals with enterprise retail buyers.</p>
+                    <div class="flex flex-wrap gap-4 mt-4">
+                        <span class="material-symbols-outlined text-lg text-appleGray">checkroom</span>
+                        <span class="material-symbols-outlined text-lg text-appleGray">sprint</span>
+                        <span class="material-symbols-outlined text-lg text-appleGray">chair</span>
+                        <span class="material-symbols-outlined text-lg text-appleGray">diamond</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card p-8">
+                    <span class="material-symbols-outlined text-3xl mb-4 text-appleGray">psychology</span>
+                    <h3 class="text-xl font-medium mb-2">Gut-Driven Allocation</h3>
+                    <p class="text-appleGray text-sm leading-relaxed">Enterprise buyers confirmed that &lt;50% of purchasing decisions are data-driven. The remainder relies on intuition, informal signals, and &ldquo;gut feeling.&rdquo;</p>
+                </div>
+                <div class="card p-8">
+                    <span class="material-symbols-outlined text-3xl mb-4 text-appleGray">visibility_off</span>
+                    <h3 class="text-xl font-medium mb-2">Blind to Geography</h3>
+                    <p class="text-appleGray text-sm leading-relaxed">Buyers need demand signals by size, color, and gender&mdash;segmented by store location. Current BI systems cannot provide geo-specific SKU-level intelligence.</p>
+                </div>
+                <div class="card p-8">
+                    <span class="material-symbols-outlined text-3xl mb-4 text-appleGray">block</span>
+                    <h3 class="text-xl font-medium mb-2">No Unified Signal Layer</h3>
+                    <p class="text-appleGray text-sm leading-relaxed">Search intent, visitor geo-coordinates, and product catalog data exist in separate silos. No system connects these signals into a unified, store-level demand view&mdash;leaving buyers without spatial evidence.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="architecture" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">System Design</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">How It Works</h2>
+                <p class="text-xl text-appleGray max-w-2xl mx-auto">A conversational multi-agent system. Ask a question in natural language&mdash;11 specialized agents collaborate to deliver store-level intelligence.</p>
+            </div>
+
+            <div class="card p-10 mb-8">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-medium mb-6">Conversational Interface</h3>
+                        <p class="text-appleGray text-sm leading-relaxed mb-6">A single orchestrator receives natural language queries in Hebrew or English, classifies intent, and dispatches work to the right combination of expert agents&mdash;no manual configuration required.</p>
+                        <ul class="space-y-5 text-sm text-appleGray">
+                            <li class="flex items-start">
+                                <span class="material-symbols-outlined mr-4 mt-0.5 text-appleBlue">route</span>
+                                <div><strong class="text-appleLight block mb-1">Orchestrator</strong>Intent classification and dispatch. Routes each query to the optimal agent chain based on context.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="material-symbols-outlined mr-4 mt-0.5 text-appleBlue">smart_toy</span>
+                                <div><strong class="text-appleLight block mb-1">5 Data Agents</strong>Geo-matching, visitor-search fusion, behavior aggregation, spatial visualization, and trend analysis.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="material-symbols-outlined mr-4 mt-0.5 text-appleBlue">task</span>
+                                <div><strong class="text-appleLight block mb-1">5 Business Agents</strong>Offline advertising, store audiences, upselling opportunities, top searched categories, and emerging trends.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="bg-appleDarker border border-appleBorder rounded-2xl p-8 text-xs text-appleGray space-y-4">
+                            <div class="text-appleLight text-center text-sm font-medium mb-3">Query &rarr; Intelligence &rarr; Action</div>
+                            <div class="text-center"><span class="inline-block bg-blue-500/10 text-blue-400 px-4 py-1.5 rounded-full text-xs">&ldquo;Which sneakers are trending near Haifa?&rdquo;</span></div>
+                            <div class="text-center text-appleGray/50">&darr;</div>
+                            <div class="text-center text-appleLight text-xs">Orchestrator &mdash; Intent &rarr; Geo + Trend agents</div>
+                            <div class="text-center text-appleGray/50">&darr;</div>
+                            <div class="flex justify-center gap-3">
+                                <span class="bg-appleSurface border border-appleBorder px-3 py-1 rounded-lg text-blue-400 text-xs">GeoMatcher</span>
+                                <span class="bg-appleSurface border border-appleBorder px-3 py-1 rounded-lg text-blue-400 text-xs">TrendAnalyzer</span>
+                                <span class="bg-appleSurface border border-appleBorder px-3 py-1 rounded-lg text-blue-400 text-xs">SearchCombiner</span>
+                            </div>
+                            <div class="text-center text-appleGray/50">&darr;</div>
+                            <div class="text-center"><span class="inline-block bg-green-500/10 text-green-400 px-4 py-1.5 rounded-full text-xs">Structured demand report &rarr; Looker Studio</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card p-8">
+                    <span class="material-symbols-outlined text-2xl mb-4 text-appleBlue">database</span>
+                    <h3 class="text-lg font-medium mb-3">Three Signal Sources</h3>
+                    <ul class="space-y-3 text-sm text-appleGray">
+                        <li><span class="text-appleLight">Product Catalog</span><br>SKU attributes + store geo-coordinates</li>
+                        <li><span class="text-appleLight">Visitor Location</span><br>Pseudonymous foot traffic &middot; Hourly</li>
+                        <li><span class="text-appleLight">Search Intent</span><br>GSC queries, impressions, CTR &middot; Daily</li>
+                    </ul>
+                </div>
+                <div class="card p-8">
+                    <span class="material-symbols-outlined text-2xl mb-4 text-appleBlue">verified</span>
+                    <h3 class="text-lg font-medium mb-3">Reliability Guardrails</h3>
+                    <ul class="space-y-3 text-sm text-appleGray">
+                        <li><span class="text-appleLight">&ge;50 searches/month</span><br>Minimum signal threshold per product</li>
+                        <li><span class="text-appleLight">&ge;3 months stable data</span><br>Temporal consistency before inference</li>
+                        <li><span class="text-appleLight">&ge;80% label completeness</span><br>Data quality gate before any output</li>
+                    </ul>
+                </div>
+                <div class="card p-8">
+                    <span class="material-symbols-outlined text-2xl mb-4 text-appleBlue">science</span>
+                    <h3 class="text-lg font-medium mb-3">Model Selection</h3>
+                    <ul class="space-y-3 text-sm text-appleGray">
+                        <li class="flex justify-between items-center"><span class="text-appleLight">PaLM 2 Bison-002</span><span class="text-green-400 text-xs">Production</span></li>
+                        <li class="flex justify-between items-center"><span class="text-appleLight">PaLM 2 Bison-001</span><span class="text-appleGray text-xs">Stable baseline</span></li>
+                        <li class="flex justify-between items-center"><span class="text-appleLight">Gemini 1.0 Pro</span><span class="text-red-400 text-xs">Evaluated &middot; Not selected</span></li>
+                    </ul>
+                    <p class="text-xs text-appleGray mt-4 border-t border-appleBorder pt-3">Bison-002 selected for consistent Hebrew geo-query handling and structured output reliability.</p>
+                </div>
+            </div>
+
+            <div class="card p-8" style="background: rgba(29,29,31,0.5);">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-2xl text-appleBlue mt-1">memory</span>
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Built on Vertex AI</h3>
+                        <p class="text-sm text-appleGray leading-relaxed">Vertex AI Agent Builder for orchestration. Vertex AI RAG and Vector Search for retrieval-augmented generation. Multiple tool executions per query chain. All agents operate within Google Cloud&rsquo;s enterprise security boundary.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="privacy" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">Compliance</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">Privacy &amp; Security</h2>
+                <p class="text-xl text-appleGray">Enterprise-grade compliance by design.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div class="card p-8">
+                    <h3 class="text-lg font-medium mb-2">Anonymization</h3>
+                    <p class="text-sm text-appleGray">Mathematical anonymity. Strict k-anonymity (&ge;10) protocols ensure zero PII ever enters the reasoning layer.</p>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-lg font-medium mb-2">Data Classification</h3>
+                    <p class="text-sm text-appleGray">Vertical-specific ontologies. Tailored classification boundaries for Electronics, Fashion, Beauty, Food, Home, and Pet sectors.</p>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-lg font-medium mb-2">Access Control</h3>
+                    <p class="text-sm text-appleGray">3-tier isolation (Public / Licensed / Enterprise) backed by strict cloud IAM boundaries and zero-trust network policies.</p>
+                </div>
+            </div>
+            <div class="mt-8 card p-8 bg-appleDarker/30">
+                <h3 class="text-lg font-medium mb-3">&ldquo;Crowd Memory&rdquo; Architecture</h3>
+                <p class="text-sm text-appleGray">No persistent user profiles. Visitor identifiers are ephemeral and cryptographically hashed. All predictions are derived from aggregate cohort behavior within H3 micro-regions, not individual user histories. The system explicitly avoids persistent user profiling&mdash;using &ldquo;Crowd Memory&rdquo; instead of &ldquo;User Memory.&rdquo;</p>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="patent" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">Intellectual Property</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">Innovation</h2>
+                <p class="text-xl text-appleGray mb-6">3 independent + 12 dependent patent-pending claims.</p>
+                <div class="inline-flex items-center gap-4 bg-appleDarker border border-appleBorder rounded-lg px-6 py-4 mb-2 text-sm">
+                    <span class="text-appleLight font-mono">CCR = </span>
+                    <span class="text-appleGray font-mono">Purchases / (Temporally Relevant + Geographically Proximate Impressions)</span>
+                </div>
+                <p class="text-xs text-appleGray max-w-xl mx-auto">Unlike standard conversion rate, CCR measures only impressions that are both temporally relevant and geographically proximate&mdash;the efficiency of physical-context matching.</p>
+            </div>
+
+            <h3 class="text-lg font-medium mb-4 text-appleGray">Independent Claims (Patent Scope)</h3>
+            <div class="card overflow-hidden mb-8">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-appleDarker/50 border-b border-appleBorder text-appleGray">
+                        <tr>
+                            <th class="px-6 py-4 font-medium">Claim</th>
+                            <th class="px-6 py-4 font-medium">Scope</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-appleBorder">
+                        <tr>
+                            <td class="px-6 py-4 font-medium">1. Method Claim</td>
+                            <td class="px-6 py-4 text-appleGray">End-to-end process: ingest physical-context signals &rarr; transform via sub-agents &rarr; compute Demand Index &rarr; trigger actions &rarr; generate structured output &rarr; publish &rarr; feedback loop.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">2. System Claim</td>
+                            <td class="px-6 py-4 text-appleGray">Physical architecture comprising 7 subsystems (ingestion, transformation, computation, trigger, generation, publication, feedback) with closed-loop learning.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">3. Medium Claim</td>
+                            <td class="px-6 py-4 text-appleGray">Computer-readable medium storing instructions that, when executed, perform the method of Claim 1.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-lg font-medium mb-4 text-appleGray">Key Innovations (Dependent Claims)</h3>
+            <div class="card overflow-hidden">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-appleDarker/50 border-b border-appleBorder text-appleGray">
+                        <tr>
+                            <th class="px-6 py-4 font-medium">Innovation</th>
+                            <th class="px-6 py-4 font-medium">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-appleBorder">
+                        <tr>
+                            <td class="px-6 py-4 font-medium">H3 Geospatial Indexing</td>
+                            <td class="px-6 py-4 text-appleGray">O(1) spatial lookups mapping consumer intent to precise retail coordinates via Uber&rsquo;s H3 hexagonal grid.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Grammar-Constrained Decoding</td>
+                            <td class="px-6 py-4 text-appleGray">Enforcing strict structural compliance on LLM outputs via context-free grammars to prevent supply chain execution errors.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Z-Score Trigger Gating</td>
+                            <td class="px-6 py-4 text-appleGray">Statistical thresholding that halts redundant inference when signals fall within normal deviation, reducing compute overhead.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Variant-Level Intent (VSIS)</td>
+                            <td class="px-6 py-4 text-appleGray">Isolating demand signals down to the specific product variant (size, color, gender) within a geographic radius.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Zero-Result Signal Analysis (ZRFAS)</td>
+                            <td class="px-6 py-4 text-appleGray">Inverting failed retail searches into predictive signals for unmet local demand.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Demand Index (DI)</td>
+                            <td class="px-6 py-4 text-appleGray">Composite score combining search velocity, geo-concentration, and temporal signals into a single actionable metric per SKU per location.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="demo" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-semibold mb-4">Implementation</h2>
+                <p class="text-xl text-appleGray">Vertex AI Agent Builder in action.</p>
+            </div>
+            
+            <div class="card aspect-video relative overflow-hidden">
+                <iframe src="https://www.loom.com/embed/be8a97a64f80414eae11176843c559bb" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="validation" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">Enterprise Validation</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">What Buyers Told Us</h2>
+                <p class="text-xl text-appleGray max-w-2xl mx-auto">13 enterprise interviews validated both the market gap and the barriers to adoption.</p>
+            </div>
+
+            <div class="bento mb-8">
+                <div class="card p-8 text-center">
+                    <span class="metric-value text-4xl font-semibold">4</span>
+                    <p class="text-sm text-appleGray mt-3">retail verticals confirmed the gap: Fashion, Sporting Goods, Home &amp; Living, and Jewelry.</p>
+                </div>
+                <div class="card p-8 text-center">
+                    <span class="metric-value text-4xl font-semibold">3&ndash;5</span>
+                    <p class="text-sm text-appleGray mt-3">stakeholders per approval chain&mdash;from buyer to CEO to VP Commerce. Enterprise adoption friction is structural, not product-related.</p>
+                </div>
+                <div class="card p-8 text-center">
+                    <span class="metric-value text-4xl font-semibold">Pilot-Ready</span>
+                    <p class="text-sm text-appleGray mt-3">Multiple respondents shared contact details for follow-up pilots&mdash;a direct product-market fit signal from enterprise buyers.</p>
+                </div>
+            </div>
+            <div class="card p-8" style="background: rgba(29,29,31,0.5);">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-2xl text-appleBlue mt-1">lightbulb</span>
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Validation Outcome</h3>
+                        <p class="text-sm text-appleGray leading-relaxed">Enterprise buyers across all four verticals confirmed strong demand for store-level, variant-specific intelligence&mdash;a capability none of their existing BI systems provide. However, the 3&ndash;5 stakeholder approval chain per retailer extends sales cycles well beyond early-stage runway constraints. This structural friction&mdash;not product skepticism&mdash;directly informed the strategic pivot to <a href="https://manzela.github.io/pipeline-observatory/" class="text-appleBlue hover:underline">Autonomous Pipeline</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="decision" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-semibold mb-4">The Decision</h2>
+                <p class="text-xl text-appleGray">Strategic pause driven by data.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card p-8">
+                    <h3 class="text-xl font-medium mb-3">Product-Market Fit</h3>
+                    <p class="text-appleGray text-sm">Validated. High demand confirmed through 13 enterprise buyer interviews across multi-national multi-location retail markets. Buyers confirmed &lt;50% of decisions are data-driven&mdash;a clear market gap.</p>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-medium mb-3">Big Data Dependency</h3>
+                    <p class="text-appleGray text-sm">Reliable spatial intelligence requires large-scale, longitudinal datasets aggregated across multiple regions and retail sectors. Without sufficient client adoption&mdash;and the data breadth it generates&mdash;outputs risk distribution bias, concept drift, knowledge cutoffs, and regional skew. Elysium&rsquo;s value scales with adoption, not in isolation.</p>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-medium mb-3">Stakeholder Friction</h3>
+                    <p class="text-appleGray text-sm">High. Enterprise validation confirmed 3&ndash;5 stakeholder approval chains (Buyer, CEO, VP Commerce)&mdash;extending sales cycles beyond runway constraints.</p>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-medium mb-3">Outcome</h3>
+                    <p class="text-appleGray text-sm">Doubled down on autonomous content generation (<a href="https://manzela.github.io/pipeline-observatory/" class="text-appleBlue hover:underline">Autonomous Pipeline</a>)&mdash;a frictionless adoption layer that scales the client base and the data surface simultaneously. Once adoption reaches critical mass, Elysium activates as the next-phase intelligence product: an upsell that transforms the Pipeline&rsquo;s aggregated data into store-level demand decisions.</p>
+                </div>
+            </div>
+            <div class="mt-8 card p-6 bg-appleDarker/30">
+                <p class="text-xs text-appleGray text-center">Addressable Market: Retail Location Intelligence ($2.8B &rarr; $10.9B by 2033) &middot; AdTech ($217B) &middot; MarTech ($6B, 30%+ CAGR) &middot; Loyalty Systems ($12.95B, 18% CAGR)</p>
+            </div>
+            <div class="mt-12 text-center text-sm text-appleGray italic">
+                The entire lifecycle (discovery &rarr; research &rarr; development &rarr; testing &rarr; evaluation &rarr; decision) was led end-to-end by Daniel Manzela.
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="research" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-semibold mb-4">Published Research</h2>
+                <p class="text-xl text-appleGray">Thought leadership in physical-context AI.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://medium.com/kairi-ai/the-physical-context-flywheel-4964b6e45115" target="_blank" rel="noopener noreferrer" class="card p-8 hover:bg-appleDarker transition-colors block">
+                    <div class="text-xs text-appleBlue mb-3 font-medium uppercase tracking-wider">Author&rsquo;s Publication &middot; Nov 2025</div>
+                    <h3 class="text-lg font-medium mb-3 text-appleLight">The Physical-Context Flywheel</h3>
+                    <p class="text-sm text-appleGray leading-relaxed">Why local-intent search is becoming the new GDP layer of retail.</p>
+                </a>
+                <a href="https://medium.com/@manzela/epiphany-7d7c9f4dd857" target="_blank" rel="noopener noreferrer" class="card p-8 hover:bg-appleDarker transition-colors block">
+                    <div class="text-xs text-appleBlue mb-3 font-medium uppercase tracking-wider">Medium &middot; Nov 2025</div>
+                    <h3 class="text-lg font-medium mb-3 text-appleLight">Epiphany</h3>
+                    <p class="text-sm text-appleGray leading-relaxed">The AI Personalization Paradox&mdash;the invisible crisis killing multi-location retail.</p>
+                </a>
+                <a href="https://medium.com/@manzela/the-marco-economy-of-hybrid-retail-ad51a977cba0" target="_blank" rel="noopener noreferrer" class="card p-8 hover:bg-appleDarker transition-colors block">
+                    <div class="text-xs text-appleBlue mb-3 font-medium uppercase tracking-wider">Medium &middot; Nov 2022</div>
+                    <h3 class="text-lg font-medium mb-3 text-appleLight">The Marco Economy of Hybrid Retail</h3>
+                    <p class="text-sm text-appleGray leading-relaxed">How physical and digital retail convergence impacts local economies.</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+    <footer class="border-t border-appleBorder/50 py-12 px-6">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-appleGray gap-4">
+            <div>
+                &copy; 2024-2026 Daniel Manzela. All rights reserved.
+            </div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://manzela.github.io/Manzela/" class="hover:text-appleLight transition-colors">Profile</a>
+                <a href="https://manzela.github.io/pipeline-observatory/" class="hover:text-appleLight transition-colors">Autonomous Pipeline</a>
+                <a href="https://github.com/manzela" class="hover:text-appleLight transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/danielmanzela" class="hover:text-appleLight transition-colors">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile nav if open
+                    document.getElementById('mainNav')?.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
