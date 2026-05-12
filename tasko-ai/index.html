@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tasko.ai">
+    <title>Tasko.ai — Automating Task Dispatch with NLP | Daniel Manzela</title>
+    <meta name="description" content="Built an AI chatbot from 9 years of WhatsApp data — 180+ task classifications, fine-tuned language models, serverless deployment via AWS Lambda + Twilio. Oct 2020 – Dec 2023.">
+    <meta name="author" content="Daniel Manzela">
+    <link rel="canonical" href="https://manzela.github.io/Manzela/tasko-ai/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Daniel Manzela — Portfolio">
+    <meta property="og:title" content="Tasko.ai — Automating Task Dispatch with NLP">
+    <meta property="og:description" content="AI chatbot built from raw WhatsApp conversations: NLP classification, model fine-tuning, and RAG-based knowledge retrieval to automate human task dispatch.">
+    <meta property="og:url" content="https://manzela.github.io/Manzela/tasko-ai/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://manzela.github.io/Manzela/tasko-ai/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Tasko.ai — Automating Task Dispatch with NLP. A case study by Daniel Manzela.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tasko.ai — Automating Task Dispatch with NLP">
+    <meta name="twitter:description" content="An AI chatbot built from 9 years of WhatsApp conversations: NLP classification, fine-tuned language models, serverless deployment.">
+    <meta name="twitter:image" content="https://manzela.github.io/Manzela/tasko-ai/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Tasko.ai — Automating Task Dispatch with NLP. A case study by Daniel Manzela.">
+    <meta name="twitter:creator" content="@danielmanzela">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============ DESIGN TOKENS — match Elysium canonical reference ============ */
+        :root {
+            --appleDark: #000000;
+            --appleDarker: #1d1d1f;
+            --appleGray: #86868b;
+            --appleLight: #f5f5f7;
+            --appleBlue: #2997ff;
+            --appleBorder: rgba(255, 255, 255, 0.1);
+            --appleBorderSoft: rgba(255, 255, 255, 0.06);
+            --appleBorderHover: rgba(255, 255, 255, 0.12);
+            --appleSurface: #1d1d1f;
+        }
+
+        /* ============ RESET ============ */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        /* ============ A11Y ============ */
+        .skip-link {
+            position: absolute; left: -9999px; top: 0; z-index: 100;
+            background: var(--appleBlue); color: #000; font-weight: 500;
+            padding: 10px 16px; border-radius: 0 0 8px 0; font-size: 13px;
+        }
+        .skip-link:focus { left: 0; outline: 2px solid var(--appleLight); outline-offset: 2px; }
+        :focus-visible {
+            outline: 2px solid var(--appleBlue); outline-offset: 3px; border-radius: 4px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+            .fade-in { opacity: 1 !important; transform: none !important; }
+        }
+        body {
+            margin: 0;
+            background-color: var(--appleDark);
+            color: var(--appleLight);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3, h4 { letter-spacing: -0.025em; font-weight: 600; margin: 0; }
+        p { margin: 0; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        ::selection { background: rgba(41, 151, 255, 0.3); color: var(--appleLight); }
+        button { font-family: inherit; }
+
+        /* ============ LAYOUT ============ */
+        .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .section-padding { padding: 120px 0; }
+        @media (max-width: 767px) { .section-padding { padding: 80px 0; } }
+
+        /* ============ NAV ============ */
+        .glass-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-inner {
+            max-width: 1024px; margin: 0 auto; padding: 0 24px;
+            height: 48px; display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; font-weight: 500;
+        }
+        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; }
+        .nav-brand .nav-brand-sub { color: var(--appleGray); font-weight: 400; margin-left: 6px; }
+        .desktop-nav { display: flex; gap: 28px; color: var(--appleGray); }
+        .desktop-nav a { transition: color 0.2s ease; font-size: 11px; }
+        .desktop-nav a:hover { color: var(--appleLight); }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
+        .nav-right a.profile-link:hover { opacity: 0.75; }
+        .mobile-toggle {
+            display: none; background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .mobile-toggle span {
+            display: block; width: 18px; height: 1.5px; background: var(--appleLight);
+            margin: 4px 0; transition: all 0.3s ease; border-radius: 1px;
+        }
+        @media (max-width: 767px) {
+            .mobile-toggle { display: block; }
+            .desktop-nav { display: none; }
+            .desktop-nav.open {
+                display: flex !important;
+                position: fixed; top: 48px; left: 0; right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column; padding: 24px; gap: 18px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                z-index: 49;
+            }
+        }
+
+        /* ============ TYPOGRAPHY ============ */
+        .h-display { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.05; }
+        .h-section { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; }
+        .h-card { font-size: 1.125rem; font-weight: 500; }
+        .text-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--appleGray); line-height: 1.55; font-weight: 300; }
+        .text-body { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
+        .text-meta { font-size: 0.75rem; color: var(--appleGray); }
+        .text-light { color: var(--appleLight); }
+        .text-gray { color: var(--appleGray); }
+        .text-blue { color: var(--appleBlue); }
+        .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+        /* ============ LABEL TAG ============ */
+        .label-tag {
+            display: inline-block; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px;
+            border: 1px solid var(--appleBorder); color: var(--appleGray);
+        }
+
+        /* ============ GLOW LINE ============ */
+        .glow-line {
+            height: 1px; max-width: 1024px; margin: 0 auto;
+            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
+        }
+
+        /* ============ CARDS ============ */
+        .card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .card:hover {
+            border-color: var(--appleBorderHover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .card-pad { padding: 32px; }
+        .card-pad-lg { padding: 40px; }
+        .card-soft { background: rgba(29, 29, 31, 0.5); }
+
+        /* ============ ICONS ============ */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .icon-blue { color: var(--appleBlue); }
+        .icon-gray { color: var(--appleGray); }
+        .icon-lg { font-size: 28px; }
+        .icon-md { font-size: 22px; }
+
+        /* ============ METRIC GRADIENT ============ */
+        .metric-value {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============ GRIDS ============ */
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        @media (max-width: 767px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* Bento (Elysium pattern) */
+        .bento { display: grid; gap: 12px; grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .bento { grid-template-columns: repeat(3, 1fr); }
+            .bento-wide { grid-column: span 2; }
+        }
+
+        /* ============ HERO ============ */
+        .hero { padding: 140px 24px 100px; text-align: center; }
+        @media (max-width: 767px) { .hero { padding: 100px 24px 60px; } }
+        .hero-line2 { color: var(--appleGray); }
+        .hero-sub { max-width: 640px; margin: 24px auto 0; }
+        .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
+        .hero-metrics {
+            display: flex; justify-content: center; gap: 56px; margin-top: 44px; flex-wrap: wrap;
+        }
+        .hero-metric { text-align: center; }
+        .hero-metric-value { font-size: 2rem; font-weight: 600; color: var(--appleLight); margin-bottom: 4px; }
+        .hero-metric-label { font-size: 12px; color: var(--appleGray); }
+        @media (max-width: 480px) { .hero-metrics { gap: 32px; } }
+
+        /* ============ SECTION HEAD ============ */
+        .section-head { text-align: center; margin-bottom: 64px; }
+        .section-head .label-tag { margin-bottom: 16px; }
+        .section-head h2 { margin-bottom: 16px; margin-top: 12px; }
+        .section-head p { max-width: 640px; margin: 0 auto; }
+
+        /* ============ STAGE / VERSION CARDS (data pipeline) ============ */
+        .timeline { position: relative; padding-left: 0; }
+        .version-card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            padding: 36px;
+            position: relative;
+            transition: border-color 0.4s ease, transform 0.4s ease;
+        }
+        .version-card + .version-card { margin-top: 20px; }
+        .version-card:hover { border-color: var(--appleBorderHover); }
+        .version-head {
+            display: flex; align-items: baseline; justify-content: space-between;
+            margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
+        }
+        .version-tag {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--appleBlue); letter-spacing: 0.05em;
+        }
+        .version-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--appleBlue); box-shadow: 0 0 12px rgba(41, 151, 255, 0.5);
+        }
+        .version-title { font-size: 1.5rem; font-weight: 600; color: var(--appleLight); margin: 0; letter-spacing: -0.02em; }
+        .version-period { font-size: 11px; color: var(--appleGray); text-transform: uppercase; letter-spacing: 0.12em; }
+        .version-desc { font-size: 0.95rem; color: var(--appleGray); line-height: 1.65; margin-bottom: 24px; }
+        .version-features {
+            display: grid; gap: 12px; grid-template-columns: 1fr;
+            border-top: 1px solid var(--appleBorderSoft); padding-top: 24px;
+        }
+        @media (min-width: 768px) { .version-features { grid-template-columns: repeat(2, 1fr); gap: 12px 32px; } }
+        .version-feature {
+            display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--appleGray);
+        }
+        .version-feature .material-symbols-outlined {
+            font-size: 18px; color: var(--appleBlue); margin-top: 2px; flex-shrink: 0;
+        }
+        .version-feature strong { color: var(--appleLight); font-weight: 500; }
+
+        /* ============ ARCHITECTURE FLOW ============ */
+        .flow-diagram {
+            background: rgba(29, 29, 31, 0.6);
+            border: 1px solid var(--appleBorder);
+            border-radius: 16px;
+            padding: 32px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--appleGray);
+            line-height: 2;
+            text-align: center;
+        }
+        .flow-step {
+            display: inline-block; padding: 6px 14px; border-radius: 100px;
+            background: rgba(41, 151, 255, 0.08); border: 1px solid rgba(41, 151, 255, 0.2);
+            color: var(--appleLight); margin: 4px 2px;
+        }
+        .flow-arrow { color: var(--appleGray); margin: 0 6px; }
+
+        /* ============ SCHEMA / CODE BLOCK ============ */
+        .schema-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--appleBorder);
+            border-radius: 12px;
+            padding: 20px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            color: var(--appleGray);
+            line-height: 1.85;
+            overflow-x: auto;
+            margin-top: 24px;
+            white-space: pre;
+            tab-size: 2;
+        }
+        .schema-block .k { color: var(--appleBlue); }
+        .schema-block .v { color: var(--appleLight); }
+        .schema-block .c { color: #5a5a60; }
+
+        /* ============ MEDIA GALLERY ============ */
+        .media-grid {
+            display: grid; gap: 24px;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+        .media-card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            overflow: hidden;
+            transition: border-color 0.4s ease;
+        }
+        .media-card:hover { border-color: var(--appleBorderHover); }
+        .media-frame {
+            position: relative; width: 100%; aspect-ratio: 19 / 10; background: #0a0a0a;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .media-frame img {
+            width: 100%; height: 100%; object-fit: contain; display: block;
+        }
+        .media-caption { padding: 20px 24px 24px; }
+        .media-caption .label-tag { margin-bottom: 10px; }
+        .media-caption h3 { font-size: 1rem; font-weight: 500; color: var(--appleLight); margin-bottom: 6px; }
+        .media-caption p { font-size: 0.85rem; color: var(--appleGray); line-height: 1.55; }
+
+        /* ============ DECISION GRID (approaches) ============ */
+        .decision-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+        @media (min-width: 768px) { .decision-grid { grid-template-columns: repeat(3, 1fr); } }
+        .decision-card { background: var(--appleDarker); border: 1px solid var(--appleBorderSoft); border-radius: 18px; padding: 32px; transition: border-color 0.4s ease, transform 0.4s ease; }
+        .decision-card:hover { border-color: var(--appleBorderHover); transform: translateY(-2px); }
+        .decision-card .approach-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            color: var(--appleBlue); letter-spacing: 0.06em; margin-bottom: 16px; display: block;
+        }
+        .decision-card h3 { font-size: 1.125rem; font-weight: 500; color: var(--appleLight); margin-bottom: 12px; }
+        .decision-card p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
+        .decision-card p + p { margin-top: 12px; }
+        .decision-card .outcome {
+            margin-top: 18px; padding-top: 16px;
+            border-top: 1px solid var(--appleBorderSoft);
+            font-size: 0.8rem; color: var(--appleLight);
+        }
+        .decision-card .outcome strong { color: var(--appleBlue); font-weight: 500; }
+        .decision-callout {
+            margin-top: 32px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 18px;
+            padding: 24px 28px;
+        }
+        .decision-callout p { font-size: 0.85rem; color: var(--appleGray); line-height: 1.65; }
+        .decision-callout a { color: var(--appleBlue); }
+        .decision-callout a:hover { text-decoration: underline; }
+
+        /* ============ KPI BAR ============ */
+        .kpi-bar {
+            display: grid; gap: 1px;
+            grid-template-columns: 1fr;
+            background: var(--appleBorderSoft);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px; overflow: hidden;
+        }
+        @media (min-width: 768px) { .kpi-bar { grid-template-columns: repeat(4, 1fr); } }
+        .kpi-cell { background: var(--appleDarker); padding: 28px 16px; text-align: center; }
+        .kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--appleLight); margin-bottom: 6px; }
+        .kpi-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--appleGray); }
+
+        /* ============ FADE-IN ============ */
+        .fade-in {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ FOOTER ============ */
+        footer {
+            border-top: 1px solid var(--appleBorderSoft);
+            padding: 48px 24px;
+            margin-top: 32px;
+        }
+        .footer-inner {
+            max-width: 1024px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 24px; flex-wrap: wrap;
+        }
+        .footer-copy { font-size: 12px; color: var(--appleGray); }
+        .footer-links {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--appleGray);
+        }
+        .footer-links a { transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--appleLight); }
+
+        /* ============ INLINE LINK ============ */
+        .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
+        .inline-link:hover { opacity: 0.8; text-decoration: underline; }
+
+        /* ============ INFO NOTE (was cofounder-note) ============ */
+        .info-note {
+            margin-top: 32px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex; gap: 18px; align-items: flex-start;
+        }
+        .info-note .material-symbols-outlined { color: var(--appleBlue); font-size: 24px; flex-shrink: 0; }
+        .info-note p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
+        .info-note strong { color: var(--appleLight); font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<nav class="glass-nav" aria-label="Primary">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-brand">Tasko.ai<span class="nav-brand-sub">2020–2023</span></a>
+        <div class="desktop-nav" id="mainNav">
+            <a href="#problem">Problem</a>
+            <a href="#data">Data</a>
+            <a href="#knowledge">Knowledge</a>
+            <a href="#training">Training</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#evidence">Overview</a>
+            <a href="#approaches">Approaches</a>
+        </div>
+        <div class="nav-right">
+            <a href="https://manzela.github.io/Manzela/" class="profile-link">Profile</a>
+            <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
+                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main id="main-content">
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero fade-in">
+        <h1 class="h-display">
+            Automating Task Dispatch.<br>
+            <span class="hero-line2">NLP from WhatsApp to AI Agent.</span>
+        </h1>
+        <p class="text-lead hero-sub">
+            An AI chatbot built from nine years of real WhatsApp conversation data —
+            classifying 180+ task types, fine-tuning language models, and deploying
+            via serverless architecture to automate a human task-dispatch service.
+        </p>
+        <div class="hero-meta">Daniel Manzela · Oct 2020 — Dec 2023</div>
+        <div class="hero-metrics">
+            <div class="hero-metric">
+                <div class="hero-metric-value">200+</div>
+                <div class="hero-metric-label">Client conversations processed</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">180+</div>
+                <div class="hero-metric-label">Task categories classified</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">3</div>
+                <div class="hero-metric-label">Model architectures explored</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ PROBLEM ============ -->
+    <section id="problem" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Operational Context</span>
+                <h2 class="h-section">The Dispatch Bottleneck</h2>
+                <p class="text-lead">
+                    Hasherut operated a Human-as-a-Service task platform via WhatsApp.
+                    Every client request required a human dispatcher to read, classify,
+                    price, and assign — and the institutional knowledge lived entirely in chat history.
+                </p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">forum</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">WhatsApp-Native Workflow</h3>
+                    <p class="text-body">
+                        Clients messaged the company directly on WhatsApp; taskers fulfilled.
+                        Every assignment passed through a human dispatcher reading messages in real time —
+                        no ticketing system, no structured intake form.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">groups</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Manual Classification at Scale</h3>
+                    <p class="text-body">
+                        200+ active client threads across 180+ distinct task types — driving,
+                        deliveries, errands, repairs, event staffing, pet care, personal shopping.
+                        Classification, pricing, and assignment all sat in one person&rsquo;s head.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">history_edu</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">No Structured Memory</h3>
+                    <p class="text-body">
+                        Nine years of operational knowledge — pricing logic, escalation paths,
+                        edge-case handling — was trapped in conversational chat exports.
+                        No database. No knowledge base. Just text.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-note">
+                <span class="material-symbols-outlined" aria-hidden="true">target</span>
+                <p>
+                    <strong>Engineering objective.</strong> Convert nine years of unstructured Hebrew/English
+                    WhatsApp conversation into a structured training corpus, fine-tune a language model on it,
+                    and put that model behind the same WhatsApp number — replacing the dispatcher loop
+                    with a model-in-the-loop conversational layer.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ DATA PIPELINE ============ -->
+    <section id="data" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Data Engineering</span>
+                <h2 class="h-section">From Chat Exports to Training Data</h2>
+                <p class="text-lead">
+                    A four-stage transformation pipeline: extracting structure from
+                    200+ unstructured WhatsApp conversation threads in mixed Hebrew and English,
+                    spanning 2011&ndash;2020.
+                </p>
+            </div>
+
+            <div class="timeline">
+
+                <!-- STAGE 01 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>STAGE 01</div>
+                            <h3 class="version-title" style="margin-top: 8px;">WhatsApp Extraction</h3>
+                        </div>
+                        <span class="version-period">Raw Source</span>
+                    </div>
+                    <p class="version-desc">
+                        Programmatic export and ingestion of 200+ client conversation threads.
+                        Mixed Hebrew (RTL) and English (LTR), informal speech, emojis, embedded
+                        media references, and timestamps in dialect-specific formats — all
+                        normalized into a consistent message-level schema before any further work.
+                    </p>
+                    <div class="version-features">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+                            <div><strong>Source:</strong> WhatsApp text exports per client thread</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">date_range</span>
+                            <div><strong>Coverage:</strong> 2011&ndash;2020 (~9 years)</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">translate</span>
+                            <div><strong>Languages:</strong> Hebrew + English, mixed RTL/LTR</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">data_object</span>
+                            <div><strong>Output:</strong> normalized timestamped message schema</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- STAGE 02 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>STAGE 02</div>
+                            <h3 class="version-title" style="margin-top: 8px;">Speaker Classification</h3>
+                        </div>
+                        <span class="version-period">Role Tagging</span>
+                    </div>
+                    <p class="version-desc">
+                        Per-message client-vs-tasker classification across every thread.
+                        Required because both parties spoke informally and threads frequently
+                        switched contexts mid-conversation; downstream Q&amp;A extraction
+                        depends on knowing which role asked and which role answered.
+                    </p>
+                    <div class="version-features">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">person_search</span>
+                            <div><strong>Task:</strong> per-message role tagging — client vs. tasker</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">account_tree</span>
+                            <div><strong>Method:</strong> multi-step classification + heuristic mapping</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+                            <div><strong>Why:</strong> needed before Q/A extraction can run</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">filter_alt</span>
+                            <div><strong>Output:</strong> role-tagged conversation graph</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- STAGE 03 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>STAGE 03</div>
+                            <h3 class="version-title" style="margin-top: 8px;">Task Taxonomy</h3>
+                        </div>
+                        <span class="version-period">Categorization</span>
+                    </div>
+                    <p class="version-desc">
+                        Constructed a 180+ category task taxonomy with per-category Hebrew
+                        keyword sets — the basis for both classification and downstream
+                        retrieval. Categories spanned driving services, deliveries, errands,
+                        household repairs, event staffing, pet care, and personal shopping.
+                    </p>
+                    <div class="version-features">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">category</span>
+                            <div><strong>Scope:</strong> 180+ task categories</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">key</span>
+                            <div><strong>Mapping:</strong> Hebrew keyword sets per category</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">grid_view</span>
+                            <div><strong>Domain:</strong> driving, deliveries, errands, repairs, events, pet care, shopping</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">model_training</span>
+                            <div><strong>Use:</strong> classification + retrieval target labels</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- STAGE 04 -->
+                <article class="version-card">
+                    <div class="version-head">
+                        <div>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>STAGE 04</div>
+                            <h3 class="version-title" style="margin-top: 8px;">Q&amp;A Extraction</h3>
+                        </div>
+                        <span class="version-period">SQuAD Format</span>
+                    </div>
+                    <p class="version-desc">
+                        Custom VBA macros and Excel formulas extracted Question&ndash;Answer
+                        pairs in SQuAD-compatible format from role-tagged threads. Hundreds of
+                        refinement iterations over 12+ months &mdash; each cycle addressing Hebrew
+                        text generation fidelity, PII leak prevention, bias mitigation, and
+                        answer grounding before re-entering training.
+                    </p>
+
+                    <pre class="schema-block" aria-label="SQuAD-format record schema"><span class="c">// per-record schema (SQuAD-compatible)</span>
+{
+  <span class="k">"context"</span>:               <span class="v">&lt;conversation excerpt&gt;</span>,
+  <span class="k">"question"</span>:              <span class="v">&lt;extracted question&gt;</span>,
+  <span class="k">"answer"</span>:                <span class="v">&lt;extracted answer&gt;</span>,
+  <span class="k">"answers.answer_start"</span>:  <span class="v">&lt;int — span offset&gt;</span>
+}</pre>
+
+                    <div class="version-features" style="margin-top: 24px;">
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">code</span>
+                            <div><strong>Tooling:</strong> VBA macros + Excel formulas</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">sync_alt</span>
+                            <div><strong>Iterations:</strong> Hundreds of cycles over 12+ months</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">description</span>
+                            <div><strong>Format:</strong> SQuAD-compatible Context / Question / Answer / answer_start</div>
+                        </div>
+                        <div class="version-feature">
+                            <span class="material-symbols-outlined" aria-hidden="true">cloud_upload</span>
+                            <div><strong>Destination:</strong> Hugging Face Hub + OpenAI fine-tune jobs</div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ KNOWLEDGE BASE ============ -->
+    <section id="knowledge" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Knowledge Engineering</span>
+                <h2 class="h-section">Operational Rules as a RAG Corpus</h2>
+                <p class="text-lead">
+                    Company workflows and Hebrew operational documentation were structured
+                    as the agent&rsquo;s strict rule set and retrieval corpus &mdash; the
+                    boundary between learned conversational behavior and policy.
+                </p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">Workflows &amp; Processes</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">Business rules as retrievable text</h3>
+                    <ul class="text-body" style="display:flex; flex-direction:column; gap:8px;">
+                        <li>&middot; <strong style="color:var(--appleLight)">Dispatch logic</strong> &mdash; how requests route to taskers</li>
+                        <li>&middot; <strong style="color:var(--appleLight)">Pricing</strong> &mdash; per-category rate cards and modifiers</li>
+                        <li>&middot; <strong style="color:var(--appleLight)">Escalation</strong> &mdash; when to involve a human dispatcher</li>
+                        <li>&middot; <strong style="color:var(--appleLight)">SLAs</strong> &mdash; response and fulfillment expectations</li>
+                    </ul>
+                </div>
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">Processes &amp; Procedures</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">Hebrew operational documentation</h3>
+                    <p class="text-body">
+                        Internal standard operating procedures, originally authored in Hebrew,
+                        converted into a retrievable knowledge layer. Preserved the source
+                        language so retrieval matched the language of the live conversation
+                        rather than introducing a translation step at inference.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-note">
+                <span class="material-symbols-outlined" aria-hidden="true">policy</span>
+                <p>
+                    <strong>Why retrieval, not just fine-tuning.</strong> The chatbot was constrained
+                    by retrieval against company-authored rules &mdash; preventing free-form generation
+                    that would violate operational policy. The fine-tuned weights handled
+                    <em>style and shape</em> of replies; the RAG corpus handled <em>truth</em>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ FINE-TUNING ============ -->
+    <section id="training" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Fine-Tuning</span>
+                <h2 class="h-section">Two Training Platforms</h2>
+                <p class="text-lead">
+                    Over 12 months of iterative fine-tuning across Hugging Face AutoTrain
+                    and OpenAI&rsquo;s fine-tuning API &mdash; hundreds of dataset and model
+                    iterations addressing Hebrew generation fidelity, PII prevention,
+                    bias mitigation, state management, and memory optimization.
+                </p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">Hugging Face AutoTrain</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">Chatbot Hasherut · text regression experiments</h3>
+                    <ul class="text-body" style="display:flex; flex-direction:column; gap:10px;">
+                        <li><strong style="color:var(--appleLight)">Organization:</strong> Chatbot Hasherut on Hugging Face Hub (2 members)</li>
+                        <li><strong style="color:var(--appleLight)">Pipeline:</strong> AutoTrain Text Regression</li>
+                        <li><strong style="color:var(--appleLight)">Dataset:</strong> <span class="mono">Hasherutchatbot/autotrain-data-testing-6</span> (private)</li>
+                        <li><strong style="color:var(--appleLight)">Iterations:</strong> Hundreds of dataset &amp; model cycles over 12+ months</li>
+                    </ul>
+                </div>
+                <div class="card card-pad">
+                    <span class="label-tag" style="margin-bottom: 16px;">OpenAI Fine-Tuning</span>
+                    <h3 class="h-card" style="margin-bottom: 12px;">From Babbage to GPT-3.5</h3>
+                    <ul class="text-body" style="display:flex; flex-direction:column; gap:10px;">
+                        <li><strong style="color:var(--appleLight)">Models:</strong> text-babbage-001 &rarr; GPT-3 &rarr; GPT-3.5</li>
+                        <li><strong style="color:var(--appleLight)">Method:</strong> OpenAI fine-tuning API on curated SQuAD-style pairs</li>
+                        <li><strong style="color:var(--appleLight)">Inputs:</strong> Stage-04 Q&amp;A extracts, dataset versions 3&ndash;6</li>
+                        <li><strong style="color:var(--appleLight)">Inference:</strong> served behind the production WhatsApp endpoint</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="kpi-bar" style="margin-top: 32px;">
+                <div class="kpi-cell">
+                    <div class="kpi-value">2</div>
+                    <div class="kpi-label">Training Platforms</div>
+                </div>
+                <div class="kpi-cell">
+                    <div class="kpi-value">100s</div>
+                    <div class="kpi-label">Dataset &amp; Model Iterations</div>
+                </div>
+                <div class="kpi-cell">
+                    <div class="kpi-value">12+</div>
+                    <div class="kpi-label">Months of R&amp;D</div>
+                </div>
+                <div class="kpi-cell">
+                    <div class="kpi-value">SQuAD</div>
+                    <div class="kpi-label">Training Data Format</div>
+                </div>
+            </div>
+
+            <div class="info-note" style="margin-top: 24px;">
+                <span class="material-symbols-outlined" aria-hidden="true">science</span>
+                <p>
+                    <strong>R&amp;D depth.</strong> Each iteration cycle addressed a distinct engineering
+                    challenge: Hebrew text generation without bias leakage, PII redaction at training
+                    and inference boundaries, conversational state and memory management (short-term
+                    context vs. long-term client history), optimization triggers for retrieval precision,
+                    and MLOps best practices for reproducible fine-tuning runs.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ ARCHITECTURE ============ -->
+    <section id="architecture" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">System Design</span>
+                <h2 class="h-section">Serverless Conversational Layer</h2>
+                <p class="text-lead">
+                    WhatsApp messages enter via Twilio, route to AWS Lambda, query the
+                    fine-tuned OpenAI model with retrieval against the operational corpus,
+                    and return synchronously inside the same WhatsApp thread.
+                </p>
+            </div>
+
+            <!-- Flow diagram -->
+            <div class="flow-diagram" style="margin-bottom: 32px;">
+                <div>
+                    <span class="flow-step">WhatsApp</span><span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step">Twilio Webhook</span><span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step">AWS Lambda</span><span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step">OpenAI (fine-tuned)</span><span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step">Lambda</span><span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step">Twilio</span><span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step">WhatsApp</span>
+                </div>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">phone_iphone</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">WhatsApp Gateway</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">Twilio WhatsApp Business API</strong>.
+                        Inbound messages arrive at a webhook endpoint; outbound replies post back
+                        through the same number, preserving the existing customer surface.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">bolt</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Compute</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">AWS Lambda</strong> (Node.js).
+                        Stateless functions handle Twilio webhook payloads, orchestrate retrieval,
+                        and call the model API. Pay-per-invocation matched the conversational workload.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">smart_toy</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">AI Backend</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">Fine-tuned OpenAI model</strong>
+                        for in-domain replies, with ChatGPT used for out-of-distribution
+                        fallbacks during evaluation cycles.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">menu_book</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">RAG Layer</h3>
+                    <p class="text-body">
+                        Retrieval against the workflows and processes corpus
+                        at request time &mdash;
+                        constraining replies to the company&rsquo;s authored operational rules.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">web</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">CRM Surface</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">Wix</strong>-based company website
+                        with embedded chat as a secondary surface alongside the WhatsApp channel.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">groups_3</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Operations</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">Connecteam</strong> for tasker
+                        management and shift coordination &mdash; the human side of the workflow
+                        that the chatbot was designed to interleave with, not replace.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-note">
+                <span class="material-symbols-outlined" aria-hidden="true">architecture</span>
+                <p>
+                    <strong>Why serverless.</strong> Lambda + Twilio kept the production surface
+                    a thin proxy &mdash; no servers to maintain, no idle cost between conversations,
+                    and a clean re-deploy path each time a new fine-tuned model checkpoint replaced
+                    its predecessor.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ EVIDENCE ============ -->
+    <section id="evidence" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">System Overview</span>
+                <h2 class="h-section">End-to-End Architecture</h2>
+                <p class="text-lead">
+                    The complete system &mdash; from raw WhatsApp data through the fine-tuning
+                    pipeline to the production conversational layer, with the engineering
+                    safeguards that required 12+ months of iterative R&amp;D.
+                </p>
+            </div>
+
+            <!-- Inline SVG Architecture Diagram -->
+            <div class="card" style="padding: 48px 32px; overflow-x: auto;">
+                <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:960px;margin:0 auto;display:block;" role="img" aria-label="Tasko.ai end-to-end system architecture diagram">
+                    <defs>
+                        <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="rgba(41,151,255,0)" />
+                            <stop offset="50%" stop-color="rgba(41,151,255,0.4)" />
+                            <stop offset="100%" stop-color="rgba(41,151,255,0)" />
+                        </linearGradient>
+                        <filter id="nodeGlow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2997ff" flood-opacity="0.25"/></filter>
+                    </defs>
+
+                    <!-- Section Labels -->
+                    <text x="160" y="28" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.12em" text-anchor="middle" text-transform="uppercase">DATA PIPELINE</text>
+                    <text x="560" y="28" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.12em" text-anchor="middle">TRAINING &amp; SAFEGUARDS</text>
+                    <text x="860" y="28" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.12em" text-anchor="middle">PRODUCTION</text>
+
+                    <!-- Vertical separators -->
+                    <line x1="340" y1="40" x2="340" y2="500" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 4" />
+                    <line x1="720" y1="40" x2="720" y2="500" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 4" />
+
+                    <!-- DATA PIPELINE NODES -->
+                    <!-- WhatsApp Export -->
+                    <rect x="60" y="60" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="84" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">01</text>
+                    <text x="160" y="102" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp Extraction</text>
+
+                    <!-- Speaker Classification -->
+                    <rect x="60" y="140" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="164" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">02</text>
+                    <text x="160" y="182" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Speaker Classification</text>
+
+                    <!-- Task Taxonomy -->
+                    <rect x="60" y="220" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="244" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">03</text>
+                    <text x="160" y="262" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">180+ Task Taxonomy</text>
+
+                    <!-- Q&A Extraction -->
+                    <rect x="60" y="300" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="160" y="324" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">04</text>
+                    <text x="160" y="342" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Q&amp;A Extraction (SQuAD)</text>
+
+                    <!-- Arrows between pipeline stages -->
+                    <line x1="160" y1="116" x2="160" y2="140" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="160" y1="196" x2="160" y2="220" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="160" y1="276" x2="160" y2="300" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+
+                    <!-- TRAINING & SAFEGUARDS -->
+                    <!-- HF AutoTrain -->
+                    <rect x="380" y="80" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(41,151,255,0.25)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="480" y="104" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">HF AutoTrain</text>
+                    <text x="480" y="122" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Text Regression</text>
+
+                    <!-- OpenAI Fine-Tuning -->
+                    <rect x="380" y="160" width="200" height="56" rx="12" fill="#1d1d1f" stroke="rgba(41,151,255,0.25)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="480" y="184" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">OpenAI Fine-Tuning</text>
+                    <text x="480" y="202" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Babbage → GPT-3 → GPT-3.5</text>
+
+                    <!-- Arrow from pipeline to training -->
+                    <line x1="260" y1="328" x2="380" y2="188" stroke="#2997ff" stroke-width="1" opacity="0.4" stroke-dasharray="6 3" />
+                    <line x1="260" y1="328" x2="380" y2="108" stroke="#2997ff" stroke-width="1" opacity="0.4" stroke-dasharray="6 3" />
+
+                    <!-- Iteration Loop -->
+                    <rect x="400" y="248" width="160" height="36" rx="18" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.2)" stroke-width="1" />
+                    <text x="480" y="271" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">100s of iterations</text>
+                    <path d="M 520 284 C 530 310 530 310 480 320 C 430 310 430 310 440 284" fill="none" stroke="rgba(41,151,255,0.3)" stroke-width="1" marker-end="none" />
+
+                    <!-- Safeguard nodes -->
+                    <rect x="380" y="340" width="200" height="140" rx="12" fill="rgba(29,29,31,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                    <text x="480" y="364" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="12" font-weight="500" text-anchor="middle">Engineering Safeguards</text>
+                    <text x="400" y="388" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· PII Redaction</text>
+                    <text x="400" y="406" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· Bias Mitigation</text>
+                    <text x="400" y="424" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· State &amp; Memory Mgmt</text>
+                    <text x="400" y="442" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· MLOps Reproducibility</text>
+                    <text x="400" y="460" fill="#86868b" font-family="Inter,sans-serif" font-size="11" text-anchor="start">· Hebrew Gen. Fidelity</text>
+
+                    <!-- PRODUCTION -->
+                    <!-- RAG Corpus -->
+                    <rect x="760" y="80" width="160" height="56" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <text x="840" y="104" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">RAG Corpus</text>
+                    <text x="840" y="122" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Operational Rules</text>
+
+                    <!-- Twilio -->
+                    <rect x="760" y="170" width="160" height="50" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <text x="840" y="200" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Twilio WhatsApp</text>
+
+                    <!-- Lambda -->
+                    <rect x="760" y="250" width="160" height="50" rx="12" fill="#1d1d1f" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <text x="840" y="280" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">AWS Lambda</text>
+
+                    <!-- Fine-tuned Model -->
+                    <rect x="760" y="330" width="160" height="50" rx="12" fill="#1d1d1f" stroke="rgba(41,151,255,0.3)" stroke-width="1" filter="url(#nodeGlow)" />
+                    <text x="840" y="360" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Fine-tuned Model</text>
+
+                    <!-- WhatsApp Client -->
+                    <rect x="760" y="420" width="160" height="50" rx="12" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.25)" stroke-width="1" />
+                    <text x="840" y="450" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Client (WhatsApp)</text>
+
+                    <!-- Production arrows -->
+                    <line x1="840" y1="220" x2="840" y2="250" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="840" y1="300" x2="840" y2="330" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="840" y1="380" x2="840" y2="420" stroke="#2997ff" stroke-width="1" opacity="0.5" />
+                    <line x1="840" y1="136" x2="840" y2="170" stroke="#86868b" stroke-width="1" opacity="0.3" stroke-dasharray="4 3" />
+                    <line x1="760" y1="355" x2="720" y2="355" stroke="#86868b" stroke-width="1" opacity="0.3" />
+
+                    <!-- Arrow from training to production -->
+                    <line x1="580" y1="188" x2="760" y2="355" stroke="#2997ff" stroke-width="1" opacity="0.3" stroke-dasharray="6 3" />
+
+                    <!-- Data flow label -->
+                    <text x="160" y="390" fill="#86868b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" letter-spacing="0.1em">200+ CLIENT THREADS</text>
+                    <text x="160" y="404" fill="#86868b" font-family="Inter,sans-serif" font-size="9" text-anchor="middle" letter-spacing="0.1em">2011–2020</text>
+                </svg>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ APPROACHES ============ -->
+    <section id="approaches" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Approaches Evaluated</span>
+                <h2 class="h-section">Three Architectures, One Production Path</h2>
+                <p class="text-lead">
+                    Three chatbot architectures were evaluated before committing to the
+                    Lambda + OpenAI serverless stack. Each ruled-out path produced a concrete
+                    constraint that shaped the next.
+                </p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="decision-card">
+                    <span class="approach-tag">APPROACH 01</span>
+                    <h3>Dante AI</h3>
+                    <p>
+                        No-code chatbot platform with a native Twilio WhatsApp connection.
+                        Evaluated for time-to-deploy and the strength of its drag-and-drop
+                        flow editor.
+                    </p>
+                    <p class="outcome">
+                        <strong>Outcome:</strong> Limited customization for the Hebrew-domain
+                        retrieval pattern and the SQuAD-style training data already accumulated.
+                    </p>
+                </div>
+
+                <div class="decision-card">
+                    <span class="approach-tag">APPROACH 02</span>
+                    <h3>AutoTrain + ChatGPT</h3>
+                    <p>
+                        Hugging Face AutoTrain for model training, ChatGPT for inference.
+                        Iterated through dataset versions <span class="mono">testing_3</span>
+                        &ndash; <span class="mono">testing_6</span>.
+                    </p>
+                    <p class="outcome">
+                        <strong>Outcome:</strong> Data quality, not the model, was the bottleneck.
+                        This is what drove the SQuAD-format Q&amp;A pipeline (Stage 04).
+                    </p>
+                </div>
+
+                <div class="decision-card">
+                    <span class="approach-tag">APPROACH 03</span>
+                    <h3>AWS Lambda + OpenAI</h3>
+                    <p>
+                        Custom serverless function bridging Twilio webhooks to a fine-tuned
+                        OpenAI model with retrieval against the operational corpus &mdash;
+                        the production stack.
+                    </p>
+                    <p class="outcome">
+                        <strong>Outcome:</strong> Selected as the production path; clean
+                        re-deploy cycle per new fine-tuned checkpoint.
+                    </p>
+                </div>
+            </div>
+
+            <div class="decision-callout">
+                <p>
+                    <strong style="color:var(--appleLight)">Active Oct 2020 &mdash; Dec 2023.</strong>
+                    The data pipeline, taxonomy, and Q&amp;A engineering work outlasted the chatbot itself
+                    &mdash; the methodology of <em>deterministic structure first, probabilistic generation second</em>
+                    is the precursor to the deterministic-gate-first architecture used in subsequent
+                    multi-agent systems documented at the
+                    <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Pipeline Observatory</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-copy">© 2020–2026 Daniel Manzela · Tasko.ai was active Oct 2020 – Dec 2023.</div>
+        <div class="footer-links">
+            <a href="https://manzela.github.io/Manzela/">Profile</a>
+            <a href="https://manzela.github.io/Manzela/seller-app/">Seller App</a>
+            <a href="https://manzela.github.io/Elysium/">Elysium</a>
+            <a href="https://manzela.github.io/pipeline-observatory/">Autonomous Pipeline</a>
+            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/danielmanzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (function () {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll reveal — skipped entirely for users who prefer reduced motion
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        }
+
+        // Mobile nav toggle — aria-expanded kept in sync
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const setNavOpen = (open) => {
+            mainNav.classList.toggle('open', open);
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        navToggle?.addEventListener('click', () => {
+            setNavOpen(!mainNav.classList.contains('open'));
+        });
+
+        // Smooth scroll + auto-close mobile nav on in-page navigation
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const href = a.getAttribute('href');
+                if (href.length < 2) return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
+                    if (mainNav?.classList.contains('open')) setNavOpen(false);
+                }
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>
