@@ -26,7 +26,7 @@ I design and operate **end-to-end autonomous AI systems** — from 0→1 archite
 - **Gemma 4 26B-A4B Mixture-of-Experts** on self-hosted vLLM with PagedAttention inference. Multi-Low-Rank-Adaptation research documented in the [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment).
 - **Originality, Relevance, Accuracy, Value** — four-axis multi-model evaluation with fail-closed policy at **68.9% pass rate by design** · Deterministic Evaluation and Monitoring Audit System enforcing every boundary
 
-**Eight years to get here.** Five projects, one pattern. See the [profile time-spine →](https://manzela.github.io/Manzela/#arc).
+**Eight years to get here.** Six projects, one pattern. The earliest taught the reps; the rest compounded. See the [profile time-spine →](https://manzela.github.io/Manzela/#arc).
 
 ---
 
@@ -118,11 +118,12 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 
 ### Featured Work
 
-#### The Arc — five case studies, chronological
+#### The Arc — six case studies, chronological
 
 | Year | Project | What it proved |
 |---|---|---|
-| 2019 | [**Data Mining**](https://manzela.github.io/Manzela/data-mining/) <sub>(Feb 2019 — Jul 2020)</sub> | Five-stage manually-orchestrated pipeline for an Israeli financial-services firm. ₪50M+ in new Assets Under Management. *A pipeline is a series of filters, not a series of steps.* |
+| 2016 | [**Asset**](https://manzela.github.io/Manzela/asset/) <sub>(Sept 2016 — 2019)</sub> | Three years of contractor work for new-stage startups: web setups, ERP→web ETL by hand, spreadsheet automation, business plans. *The data-transformation reps every later pipeline compounded on.* |
+| 2019 | [**Data Mining**](https://manzela.github.io/Manzela/data-mining/) <sub>(Feb 2019 — Jul 2020)</sub> | Five-stage manually-orchestrated pipeline for an Israeli FSF. ₪50M+ new AUM. *A pipeline is a series of filters, not a series of steps.* |
 | 2020 | [**Tasko AI**](https://manzela.github.io/Manzela/tasko-ai/) <sub>(Oct 2020 — Dec 2023)</sub> | Production agentic system before the term existed. 21,102 labeled tasks · 153 clients · 1,561 intent patterns · 4-layer Classify / Retrieve / Execute / Verify. |
 | 2020 | [**Seller App**](https://manzela.github.io/Manzela/seller-app/) <sub>(Jan 2020 — Apr 2024)</sub> | Computer vision for retail digitization. 3 computer-vision generations · 60M+ canonical Stock-Keeping Units · $10K Monthly Recurring Revenue plateau. The architectural origin of retrieval-grounded computer vision. |
 | 2024 | [**Elysium**](https://manzela.github.io/Elysium/) <sub>(2024 — 2025, paused-pending-Pipeline)</sub> | Physical-Context AI for Retail. 13 brands validated · 15,600+ store locations · 15 patent claims (3 independent + 12 dependent). |
