@@ -23,7 +23,7 @@ I design and operate **end-to-end autonomous AI systems** — from 0→1 archite
 **Current system in production (TNG Shopper, 2024 → present):**
 - **11 enterprise clients** across **5 countries** (ES · PT · IL · US · MX) — **~10.5M product pages per cycle** at **$0.0006 / page**
 - **7-node multi-agent directed acyclic graph** with **~73.5M sub-agent operations per run** · 234 managed websites
-- **Gemma 4 26B-A4B MoE** on self-hosted vLLM with PagedAttention inference (Multi-LoRA R&D documented in [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment))
+- **Gemma 4 26B-A4B Mixture-of-Experts** on self-hosted vLLM with PagedAttention inference. Multi-Low-Rank-Adaptation research documented in the [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment).
 - **Originality, Relevance, Accuracy, Value** — four-axis multi-model evaluation with fail-closed policy at **68.9% pass rate by design** · Deterministic Evaluation and Monitoring Audit System enforcing every boundary
 
 **Eight years to get here.** Five projects, one pattern. See the [profile time-spine →](https://manzela.github.io/Manzela/#arc).
@@ -122,9 +122,9 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 
 | Year | Project | What it proved |
 |---|---|---|
-| 2019 | [**Data Mining**](https://manzela.github.io/Manzela/data-mining/) <sub>(Feb 2019 — Jul 2020)</sub> | Five-stage manually-orchestrated pipeline for an Israeli FSF. ₪50M+ new AUM. *A pipeline is a series of filters, not a series of steps.* |
+| 2019 | [**Data Mining**](https://manzela.github.io/Manzela/data-mining/) <sub>(Feb 2019 — Jul 2020)</sub> | Five-stage manually-orchestrated pipeline for an Israeli financial-services firm. ₪50M+ in new Assets Under Management. *A pipeline is a series of filters, not a series of steps.* |
 | 2020 | [**Tasko AI**](https://manzela.github.io/Manzela/tasko-ai/) <sub>(Oct 2020 — Dec 2023)</sub> | Production agentic system before the term existed. 21,102 labeled tasks · 153 clients · 1,561 intent patterns · 4-layer Classify / Retrieve / Execute / Verify. |
-| 2020 | [**Seller App**](https://manzela.github.io/Manzela/seller-app/) <sub>(Jan 2020 — Apr 2024)</sub> | Computer vision for retail digitization. 3 CV generations · 60M+ canonical SKUs · $10K MRR plateau. The architectural origin of retrieval-grounded CV. |
+| 2020 | [**Seller App**](https://manzela.github.io/Manzela/seller-app/) <sub>(Jan 2020 — Apr 2024)</sub> | Computer vision for retail digitization. 3 computer-vision generations · 60M+ canonical Stock-Keeping Units · $10K Monthly Recurring Revenue plateau. The architectural origin of retrieval-grounded computer vision. |
 | 2024 | [**Elysium**](https://manzela.github.io/Elysium/) <sub>(2024 — 2025, paused-pending-Pipeline)</sub> | Physical-Context AI for Retail. 13 brands validated · 15,600+ store locations · 15 patent claims (3 independent + 12 dependent). |
 | 2024 | [**Pipeline Observatory**](https://manzela.github.io/pipeline-observatory/) <sub>(2024 — present)</sub> | The synthesis. Seven-node directed acyclic graph, deterministic gates first, fail-closed by default. 10.5M product detail pages / cycle · 73.5M ops / run · $0.0006 / page · 68.9% pass rate across Originality, Relevance, Accuracy, Value. |
 
@@ -132,9 +132,9 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 
 | Repository | Description |
 |---|---|
-| [**agent-dag-pipeline**](https://github.com/Manzela/agent-dag-pipeline) | Open-source distillation of the seven-node directed acyclic graph. Google ADK + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + DPO data flywheel. |
-| [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) <sub>· `pip install ag-os`</sub> | AI governance kernel — cost enforcement, policy-as-code (OPA), deterministic state tracking, MCP server, and self-healing CI for autonomous agent fleets. |
-| [**gemma4-vllm-deployment**](https://github.com/Manzela/gemma4-vllm-deployment) | Forensic runbook documenting 20 failure modes across 30+ deployment versions of Gemma 4 MoE on Vertex AI with vLLM. The community reference for production MoE serving. |
+| [**agent-dag-pipeline**](https://github.com/Manzela/agent-dag-pipeline) | Open-source distillation of the seven-node directed acyclic graph. Google Agent Development Kit + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + Direct Preference Optimization data flywheel. |
+| [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) <sub>· `pip install ag-os`</sub> | AI governance kernel — cost enforcement, Open Policy Agent-style policy-as-code, deterministic state tracking, Model Context Protocol server, and self-healing continuous-integration for autonomous agent fleets. |
+| [**gemma4-vllm-deployment**](https://github.com/Manzela/gemma4-vllm-deployment) | Forensic runbook documenting 20 failure modes across 30+ deployment versions of Gemma 4 Mixture-of-Experts on Vertex AI with vLLM. The community reference for production Mixture-of-Experts serving. |
 | [**pipeline-observatory**](https://github.com/Manzela/pipeline-observatory) | Source of the live observability site at [manzela.github.io/pipeline-observatory](https://manzela.github.io/pipeline-observatory/). Architecture visualization — Mixture-of-Experts sparse routing, causal directed-acyclic-graph tracing, live execution telemetry. |
 
 ---
