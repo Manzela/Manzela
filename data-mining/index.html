@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Data Mining">
+    <title>Data Mining &amp; Lead Intelligence — A Custom Pipeline · Daniel Manzela</title>
+    <meta name="description" content="A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for Eitam Finance, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.">
+    <meta name="author" content="Daniel Manzela">
+    <link rel="canonical" href="https://manzela.github.io/Manzela/data-mining/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Daniel Manzela — Portfolio">
+    <meta property="og:title" content="Data Mining &amp; Lead Intelligence — A Custom Pipeline">
+    <meta property="og:description" content="A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for a market enterprise data platforms didn't serve.">
+    <meta property="og:url" content="https://manzela.github.io/Manzela/data-mining/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://manzela.github.io/Manzela/data-mining/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Data Mining &amp; Lead Intelligence — A Custom Pipeline. A case study by Daniel Manzela.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data Mining &amp; Lead Intelligence — A Custom Pipeline">
+    <meta name="twitter:description" content="A bespoke five-stage scraping, structuring, and classification pipeline — built from scratch for a market enterprise data platforms didn't serve.">
+    <meta name="twitter:image" content="https://manzela.github.io/Manzela/data-mining/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Data Mining &amp; Lead Intelligence — A Custom Pipeline. A case study by Daniel Manzela.">
+    <meta name="twitter:creator" content="@danielmanzela">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Data Mining & Lead Intelligence — A Custom Pipeline",
+        "description": "A bespoke five-stage web scraping, structuring, and classification pipeline — built from scratch for Eitam Finance, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.",
+        "url": "https://manzela.github.io/Manzela/data-mining/",
+        "image": "https://manzela.github.io/Manzela/data-mining/assets/og-image.png",
+        "datePublished": "2020-07-01",
+        "dateModified": "2026-05-12",
+        "author": {
+            "@type": "Person",
+            "name": "Daniel Manzela",
+            "url": "https://manzela.github.io/Manzela/",
+            "sameAs": [
+                "https://github.com/Manzela",
+                "https://linkedin.com/in/danielmanzela"
+            ]
+        }
+    }
+    </script>
+
+    <noscript><style>.fade-in{opacity:1 !important;transform:none !important}</style></noscript>
+
+    <style>
+        /* ============ DESIGN TOKENS — Elysium canonical ============ */
+        :root {
+            --appleDark: #000000;
+            --appleDarker: #1d1d1f;
+            --appleGray: #86868b;
+            --appleLight: #f5f5f7;
+            --appleBlue: #2997ff;
+            --appleBorder: rgba(255, 255, 255, 0.1);
+            --appleBorderSoft: rgba(255, 255, 255, 0.06);
+            --appleBorderHover: rgba(255, 255, 255, 0.12);
+            --appleSurface: #1d1d1f;
+            --fontUI: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, "Inter", "Helvetica Neue", Arial, sans-serif;
+            --fontMono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", "Menlo", "Consolas", monospace;
+        }
+
+        /* ============ RESET ============ */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        /* ============ A11Y ============ */
+        .skip-link {
+            position: absolute; left: -9999px; top: 0; z-index: 100;
+            background: var(--appleBlue); color: #000; font-weight: 500;
+            padding: 10px 16px; border-radius: 0 0 8px 0; font-size: 13px;
+        }
+        .skip-link:focus { left: 0; outline: 2px solid var(--appleLight); outline-offset: 2px; }
+        :focus-visible {
+            outline: 2px solid var(--appleBlue); outline-offset: 3px; border-radius: 4px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+            .fade-in { opacity: 1 !important; transform: none !important; }
+        }
+        body {
+            margin: 0;
+            background-color: var(--appleDark);
+            color: var(--appleLight);
+            font-family: var(--fontUI);
+            font-weight: 400;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3, h4 { letter-spacing: -0.025em; font-weight: 600; margin: 0; }
+        p { margin: 0; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        ::selection { background: rgba(41, 151, 255, 0.3); color: var(--appleLight); }
+        button { font-family: inherit; }
+
+        /* ============ LAYOUT ============ */
+        .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+        .container-tight { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+        .section-padding { padding: 120px 0; }
+        @media (max-width: 767px) { .section-padding { padding: 80px 0; } }
+
+        /* ============ NAV ============ */
+        .glass-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-inner {
+            max-width: 1024px; margin: 0 auto; padding: 0 24px;
+            height: 48px; display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; font-weight: 500;
+        }
+        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; }
+        .nav-brand .nav-brand-sub { color: var(--appleGray); font-weight: 400; margin-left: 6px; }
+        .desktop-nav { display: flex; gap: 28px; color: var(--appleGray); align-items: center; }
+        .desktop-nav a { transition: color 0.2s ease; font-size: 11px; }
+        .desktop-nav a:hover { color: var(--appleLight); }
+        .desktop-nav a.nav-back { color: var(--appleLight); display: inline-flex; align-items: center; gap: 4px; }
+        .desktop-nav a.nav-back .arrow { font-family: var(--fontMono); opacity: 0.6; }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
+        .nav-right a.profile-link:hover { opacity: 0.75; }
+        .mobile-toggle {
+            display: none; background: none; border: none; cursor: pointer; padding: 4px;
+            width: 28px; height: 28px; position: relative;
+        }
+        .mobile-toggle span {
+            display: block; width: 18px; height: 1.5px; background: var(--appleLight);
+            border-radius: 1px; position: absolute; left: 5px;
+            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, top 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-toggle span:nth-child(1) { top: 9px; }
+        .mobile-toggle span:nth-child(2) { top: 13px; }
+        .mobile-toggle span:nth-child(3) { top: 17px; }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(1) { top: 13px; transform: rotate(45deg); }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(3) { top: 13px; transform: rotate(-45deg); }
+        @media (max-width: 767px) {
+            .mobile-toggle { display: block; }
+            .desktop-nav { display: none; }
+            .desktop-nav.open {
+                display: flex !important;
+                position: fixed; top: 48px; left: 0; right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column; padding: 24px; gap: 18px; align-items: flex-start;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                z-index: 49;
+            }
+        }
+
+        /* ============ TYPOGRAPHY ============ */
+        .h-display { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.05; }
+        .h-section { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; }
+        .h-card { font-size: 1.125rem; font-weight: 500; }
+        .text-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--appleGray); line-height: 1.55; font-weight: 400; }
+        .text-body { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
+        .text-meta { font-size: 0.75rem; color: var(--appleGray); }
+        .text-light { color: var(--appleLight); }
+        .text-gray { color: var(--appleGray); }
+        .text-blue { color: var(--appleBlue); }
+        .mono { font-family: var(--fontMono); }
+
+        /* ============ LABEL TAG ============ */
+        .label-tag {
+            display: inline-block; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px;
+            border: 1px solid var(--appleBorder); color: var(--appleGray);
+        }
+
+        /* ============ GLOW LINE ============ */
+        .glow-line {
+            height: 1px; max-width: 1024px; margin: 0 auto;
+            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
+        }
+
+        /* ============ CARDS ============ */
+        .card {
+            background: var(--appleDarker);
+            border-radius: 18px;
+            border: 1px solid var(--appleBorderSoft);
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .card:hover {
+            border-color: var(--appleBorderHover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .card-pad { padding: 32px; }
+
+        /* ============ ICONS ============ */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .icon-blue { color: var(--appleBlue); }
+        .icon-md { font-size: 22px; }
+
+        /* ============ GRIDS ============ */
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        @media (max-width: 767px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* ============ HERO ============ */
+        .hero { padding: 140px 24px 100px; text-align: center; }
+        @media (max-width: 767px) { .hero { padding: 100px 24px 60px; } }
+        .hero-line2 { color: var(--appleGray); }
+        .hero-sub { max-width: 660px; margin: 24px auto 0; }
+        .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
+
+        /* Hero stat strip — 4 columns */
+        .hero-stats {
+            display: grid; gap: 1px;
+            grid-template-columns: 1fr;
+            background: var(--appleBorderSoft);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px; overflow: hidden;
+            margin: 56px auto 0; max-width: 760px;
+        }
+        @media (min-width: 640px) { .hero-stats { grid-template-columns: repeat(4, 1fr); } }
+        .hero-stat { background: var(--appleDarker); padding: 24px 16px; text-align: center; }
+        .hero-stat-value {
+            font-family: var(--fontMono);
+            font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+            font-weight: 600; color: var(--appleLight); margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        .hero-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--appleGray); }
+
+        /* Hero compact 5-stage preview */
+        .hero-stages {
+            display: grid; gap: 10px;
+            grid-template-columns: 1fr;
+            margin: 32px auto 0; max-width: 880px;
+        }
+        @media (min-width: 640px) { .hero-stages { grid-template-columns: repeat(5, 1fr); } }
+        .hero-stage {
+            padding: 14px 12px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .hero-stage-num {
+            font-family: var(--fontMono); font-size: 9px;
+            color: var(--appleBlue); letter-spacing: 0.14em; margin-bottom: 4px;
+        }
+        .hero-stage-name {
+            font-size: 0.78rem; color: var(--appleLight); font-weight: 500;
+            letter-spacing: -0.005em;
+        }
+
+        /* ============ SECTION HEAD ============ */
+        .section-head { text-align: center; margin-bottom: 64px; }
+        .section-head .label-tag { margin-bottom: 16px; }
+        .section-head h2 { margin-bottom: 16px; margin-top: 12px; }
+        .section-head p { max-width: 660px; margin: 0 auto; }
+
+        /* ============ STAGE CARDS ============ */
+        .stage-stack { display: grid; gap: 20px; }
+        .stage-card {
+            background: var(--appleDarker);
+            border-radius: 20px;
+            border: 1px solid var(--appleBorderSoft);
+            padding: 40px;
+            transition: border-color 0.4s ease;
+        }
+        .stage-card:hover { border-color: var(--appleBorderHover); }
+        @media (max-width: 767px) { .stage-card { padding: 28px 24px; } }
+
+        .stage-head {
+            display: flex; align-items: flex-start; gap: 20px;
+            margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .stage-badge {
+            width: 56px; height: 56px; border-radius: 14px;
+            background: rgba(41, 151, 255, 0.1);
+            border: 1px solid rgba(41, 151, 255, 0.25);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .stage-badge .material-symbols-outlined {
+            color: var(--appleBlue); font-size: 26px;
+        }
+        .stage-head-text { flex: 1; min-width: 200px; }
+        .stage-num {
+            display: inline-block;
+            font-family: var(--fontMono); font-size: 10px;
+            color: var(--appleBlue); letter-spacing: 0.16em;
+            margin-bottom: 6px;
+        }
+        .stage-title {
+            font-size: clamp(1.4rem, 2.4vw, 1.75rem); font-weight: 600;
+            color: var(--appleLight); letter-spacing: -0.02em; margin: 0;
+        }
+        .stage-subtitle { color: var(--appleGray); font-weight: 400; }
+
+        .stage-desc {
+            font-size: 0.95rem; color: var(--appleGray); line-height: 1.7;
+            max-width: 760px;
+        }
+        .stage-desc strong { color: var(--appleLight); font-weight: 500; }
+
+        /* MINI TIMELINE — for stage internals */
+        .mini-timeline {
+            display: grid; gap: 16px; grid-template-columns: 1fr;
+            margin-top: 28px;
+            padding: 22px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 14px;
+        }
+        @media (min-width: 768px) {
+            .mini-timeline { grid-template-columns: repeat(4, 1fr); gap: 0; padding: 26px 18px; }
+        }
+        .mini-timeline-label {
+            grid-column: 1 / -1;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em;
+            color: var(--appleGray); margin-bottom: 8px;
+        }
+        .mini-step {
+            padding: 0 18px;
+            border-left: 1px solid var(--appleBorderSoft);
+        }
+        .mini-step:first-of-type { border-left: none; padding-left: 4px; }
+        @media (max-width: 767px) {
+            .mini-step {
+                padding: 12px 0; border-left: none;
+                border-top: 1px solid var(--appleBorderSoft);
+            }
+            .mini-step:first-of-type { border-top: none; padding-top: 4px; }
+        }
+        .mini-step-num {
+            font-family: var(--fontMono); font-size: 10px;
+            color: var(--appleBlue); letter-spacing: 0.1em; margin-bottom: 8px;
+        }
+        .mini-step-title {
+            font-size: 0.85rem; color: var(--appleLight); font-weight: 500;
+            margin-bottom: 6px; letter-spacing: -0.005em;
+        }
+        .mini-step-desc {
+            font-size: 0.78rem; color: var(--appleGray); line-height: 1.55;
+        }
+
+        /* SOURCE CHIPS — for Stage 02 */
+        .src-grid {
+            display: grid; gap: 8px; grid-template-columns: 1fr;
+            margin-top: 24px;
+        }
+        @media (min-width: 600px) { .src-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 920px) { .src-grid { grid-template-columns: repeat(4, 1fr); } }
+        .src-chip {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 10px;
+            transition: border-color 0.2s ease;
+        }
+        .src-chip:hover { border-color: var(--appleBorderHover); }
+        .src-chip .material-symbols-outlined {
+            color: var(--appleBlue); font-size: 18px; flex-shrink: 0;
+        }
+        .src-chip-name { font-size: 0.78rem; color: var(--appleLight); font-weight: 500; letter-spacing: -0.005em; }
+
+        /* PULLQUOTE — for Stage 04 */
+        .pullquote {
+            margin: 28px 0 8px;
+            padding: 28px 32px;
+            border-left: 3px solid var(--appleBlue);
+            background: linear-gradient(90deg, rgba(41, 151, 255, 0.06), rgba(41, 151, 255, 0));
+            border-radius: 0 14px 14px 0;
+        }
+        .pullquote p {
+            font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+            color: var(--appleLight); line-height: 1.45;
+            font-weight: 500; letter-spacing: -0.015em;
+        }
+        .pullquote em {
+            font-style: normal; color: var(--appleBlue); font-weight: 600;
+        }
+        @media (max-width: 767px) {
+            .pullquote { padding: 22px 22px 22px 24px; }
+        }
+
+        /* CALLOUT — sub-callout inside stage cards */
+        .stage-callout {
+            margin-top: 24px;
+            padding: 18px 22px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--appleBorderSoft);
+            border-left: 2px solid var(--appleBlue);
+            border-radius: 0 12px 12px 0;
+            font-size: 0.82rem; color: var(--appleGray); line-height: 1.6;
+        }
+        .stage-callout strong { color: var(--appleLight); font-weight: 500; }
+
+        /* SCHEMA TABLE — for Stage 03 */
+        .schema-grid {
+            display: grid; gap: 10px; grid-template-columns: 1fr;
+            margin-top: 24px;
+            padding: 22px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 14px;
+        }
+        @media (min-width: 600px) { .schema-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 920px) { .schema-grid { grid-template-columns: repeat(3, 1fr); } }
+        .schema-grid-label {
+            grid-column: 1 / -1;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em;
+            color: var(--appleGray); margin-bottom: 4px;
+        }
+        .schema-field {
+            display: flex; flex-direction: column; gap: 4px;
+            padding: 10px 12px;
+            background: rgba(29, 29, 31, 0.6);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 8px;
+        }
+        .schema-field-name {
+            font-family: var(--fontMono); font-size: 0.72rem;
+            color: var(--appleBlue); letter-spacing: 0.02em;
+        }
+        .schema-field-desc {
+            font-size: 0.74rem; color: var(--appleGray); line-height: 1.4;
+        }
+
+        /* SIGNAL ROWS — for Stage 04 classifier */
+        .signal-list {
+            display: flex; flex-direction: column; gap: 10px;
+            margin-top: 24px;
+        }
+        .signal-row {
+            display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 10px;
+        }
+        .signal-tag {
+            font-family: var(--fontMono); font-size: 10px;
+            color: var(--appleBlue); letter-spacing: 0.12em;
+            min-width: 100px;
+        }
+        .signal-name { font-size: 0.85rem; color: var(--appleLight); font-weight: 500; flex: 1; min-width: 160px; }
+        .signal-desc { font-size: 0.78rem; color: var(--appleGray); flex: 2; min-width: 200px; line-height: 1.5; }
+
+        /* ============ INFO NOTE ============ */
+        .info-note {
+            margin-top: 32px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex; gap: 18px; align-items: flex-start;
+        }
+        .info-note .material-symbols-outlined { color: var(--appleBlue); font-size: 24px; flex-shrink: 0; }
+        .info-note p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
+        .info-note strong { color: var(--appleLight); font-weight: 500; }
+
+        /* ============ TECH STACK STRIP ============ */
+        .tech-strip {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            justify-content: center; align-items: center;
+            margin-top: 32px;
+            padding: 24px 24px;
+            background: rgba(29, 29, 31, 0.5);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 16px;
+        }
+        .tech-strip-label {
+            width: 100%; text-align: center;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em;
+            color: var(--appleGray); margin-bottom: 4px;
+        }
+        .tech-chip {
+            display: inline-flex; align-items: baseline; gap: 8px;
+            padding: 7px 14px;
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            font-size: 0.78rem; color: var(--appleLight);
+            letter-spacing: -0.005em;
+            white-space: nowrap;
+        }
+        .tech-chip .tech-purpose {
+            color: var(--appleGray); font-size: 0.7rem;
+            font-family: var(--fontMono);
+            padding-left: 8px; border-left: 1px solid var(--appleBorderSoft);
+        }
+
+        /* ============ ARCHITECTURE SVG WRAPPER ============ */
+        .arch-svg-wrap {
+            background: rgba(29, 29, 31, 0.4);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 20px;
+            padding: 32px 24px;
+            margin-bottom: 32px;
+            overflow-x: auto;
+        }
+        @media (min-width: 768px) { .arch-svg-wrap { padding: 40px 32px; } }
+        .arch-svg-wrap svg {
+            width: 100%; max-width: 880px; height: auto; display: block;
+            margin: 0 auto;
+        }
+
+        /* ============ LESSONS ============ */
+        .lessons {
+            display: flex; flex-direction: column; gap: 14px;
+            margin-top: 40px;
+        }
+        .lesson-item {
+            display: flex; gap: 18px; align-items: flex-start;
+            padding: 22px 26px;
+            background: var(--appleDarker);
+            border: 1px solid var(--appleBorderSoft);
+            border-radius: 14px;
+        }
+        .lesson-num {
+            font-family: var(--fontMono); font-size: 11px;
+            color: var(--appleBlue); letter-spacing: 0.14em;
+            flex-shrink: 0; padding-top: 3px; min-width: 36px;
+        }
+        .lesson-text { font-size: 0.9rem; color: var(--appleGray); line-height: 1.65; }
+        .lesson-text strong { color: var(--appleLight); font-weight: 500; }
+
+        /* ============ OUTCOME STATEMENT ============ */
+        .outcome {
+            margin-top: 40px;
+            padding: 36px 40px;
+            background: linear-gradient(135deg, rgba(41, 151, 255, 0.06) 0%, rgba(29, 29, 31, 0.5) 100%);
+            border: 1px solid rgba(41, 151, 255, 0.18);
+            border-radius: 18px;
+            text-align: center;
+        }
+        .outcome p.outcome-line {
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            color: var(--appleLight); line-height: 1.55; font-weight: 400;
+            max-width: 640px; margin: 0 auto;
+        }
+        .outcome .bridge {
+            margin-top: 18px;
+            font-size: 0.85rem; color: var(--appleGray); line-height: 1.65;
+            max-width: 640px; margin-left: auto; margin-right: auto;
+        }
+        .outcome .bridge a { color: var(--appleBlue); }
+        .outcome .bridge a:hover { text-decoration: underline; }
+        @media (max-width: 767px) { .outcome { padding: 28px 24px; } }
+
+        /* ============ FADE-IN ============ */
+        .fade-in {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ FOOTER ============ */
+        footer {
+            border-top: 1px solid var(--appleBorderSoft);
+            padding: 48px 24px;
+            margin-top: 32px;
+        }
+        .footer-inner {
+            max-width: 1024px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 24px; flex-wrap: wrap;
+        }
+        .footer-copy { font-size: 12px; color: var(--appleGray); }
+        .footer-links {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--appleGray);
+        }
+        .footer-links a { transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--appleLight); }
+
+        /* ============ INLINE LINK ============ */
+        .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
+        .inline-link:hover { opacity: 0.8; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<nav class="glass-nav" aria-label="Primary">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-brand">Data Mining<span class="nav-brand-sub">2019–2020</span></a>
+        <div class="desktop-nav" id="mainNav">
+            <a href="#problem">Problem</a>
+            <a href="#pipeline">Pipeline</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#reflection">Reflection</a>
+            <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow">←</span> Portfolio</a>
+        </div>
+        <div class="nav-right">
+            <a href="https://manzela.github.io/Manzela/" class="profile-link">Profile</a>
+            <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
+                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main id="main-content">
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero fade-in">
+        <h1 class="h-display">
+            From Open Data<br>
+            <span class="hero-line2">to Ranked Prospects.</span>
+        </h1>
+        <p class="text-lead hero-sub">
+            A bespoke five-stage scraping, structuring, and classification pipeline &mdash;
+            built from scratch for a market existing data platforms didn&rsquo;t serve.
+        </p>
+        <div class="hero-meta">Daniel Manzela · Eitam Finance · Feb 2019 — Jul 2020</div>
+
+        <!-- Compact 5-stage preview -->
+        <div class="hero-stages" aria-label="Five-stage pipeline overview">
+            <div class="hero-stage">
+                <div class="hero-stage-num">STAGE 01</div>
+                <div class="hero-stage-name">Target</div>
+            </div>
+            <div class="hero-stage">
+                <div class="hero-stage-num">STAGE 02</div>
+                <div class="hero-stage-name">Extract</div>
+            </div>
+            <div class="hero-stage">
+                <div class="hero-stage-num">STAGE 03</div>
+                <div class="hero-stage-name">Structure</div>
+            </div>
+            <div class="hero-stage">
+                <div class="hero-stage-num">STAGE 04</div>
+                <div class="hero-stage-name">Classify</div>
+            </div>
+            <div class="hero-stage">
+                <div class="hero-stage-num">STAGE 05</div>
+                <div class="hero-stage-name">Deliver</div>
+            </div>
+        </div>
+
+        <!-- Verifiable hero metrics -->
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-value">5</div>
+                <div class="hero-stat-label">Pipeline Stages</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">17 mo</div>
+                <div class="hero-stat-label">Build &amp; Operation</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">Solo</div>
+                <div class="hero-stat-label">Engineer</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-value">$0</div>
+                <div class="hero-stat-label">Vendor Stack</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ PROBLEM ============ -->
+    <section id="problem" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">The Problem</span>
+                <h2 class="h-section">No Vendor for the Job.</h2>
+                <p class="text-lead">
+                    A small Israeli financial services firm needed targeted prospects.
+                    The available enterprise data platforms didn&rsquo;t serve the market &mdash;
+                    wrong language, wrong geography, wrong price point.
+                </p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">list_alt</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Generic Lists, Low Conversion</h3>
+                    <p class="text-body">
+                        Sales worked from purchased lead lists with no geographic or income filtering.
+                        Conversion was poor because the prospect base wasn&rsquo;t the right one &mdash;
+                        cold-calling people who had no need for wealth management or pension planning.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">domain_disabled</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">No Vendor for This Market</h3>
+                    <p class="text-body">
+                        Enterprise data platforms (ZoomInfo, Clearbit, Apollo) were US-focused,
+                        priced at enterprise tier, and had thin coverage of Israeli business and
+                        professional records. None of them indexed the Hebrew-language sources where
+                        the actual prospects lived.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">explore_off</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Geographic Targeting by Hand</h3>
+                    <p class="text-body">
+                        Filtering prospects by income tier, neighborhood, or postal code &mdash;
+                        the dimensions that actually predicted whether someone needed financial
+                        services &mdash; required a custom layer that no off-the-shelf tool offered
+                        for this region.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-note">
+                <span class="material-symbols-outlined" aria-hidden="true">target</span>
+                <p>
+                    <strong>Engineering objective.</strong> Build a custom pipeline that pulls publicly
+                    available business and professional data from the open web, geo-classifies it by
+                    income tier, scores each record for financial-services relevance, and delivers
+                    structured prospect lists to the sales team in the format they already use &mdash;
+                    replacing what would otherwise have been an enterprise data subscription that
+                    didn&rsquo;t exist for this market anyway.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ THE PIPELINE ============ -->
+    <section id="pipeline" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">The Build</span>
+                <h2 class="h-section">Five Stages from Public Web to Sales-Ready List</h2>
+                <p class="text-lead">
+                    Each stage was a discrete unit with a single job. The pipeline ran on a
+                    workstation; outputs landed on the sales team&rsquo;s shared drive in Excel.
+                </p>
+            </div>
+
+            <div class="stage-stack">
+
+                <!-- STAGE 01: TARGET DEFINITION -->
+                <article class="stage-card">
+                    <div class="stage-head">
+                        <div class="stage-badge" aria-hidden="true">
+                            <span class="material-symbols-outlined">my_location</span>
+                        </div>
+                        <div class="stage-head-text">
+                            <div class="stage-num">STAGE 01</div>
+                            <h3 class="stage-title">Target Definition <span class="stage-subtitle">&middot; Geo &amp; Income Classification</span></h3>
+                        </div>
+                    </div>
+                    <p class="stage-desc">
+                        Before scraping anything, the pipeline needed to know <strong>where to look</strong>.
+                        Israeli postal codes, cities, and neighborhoods were classified into income tiers
+                        using publicly available demographic indicators, real-estate price signals, and
+                        municipal classifications. The output was a ranked geographic-target list &mdash;
+                        the high-density areas where the prospect base for wealth-management services was
+                        most likely to live. Every downstream stage filtered against this list.
+                    </p>
+
+                    <div class="mini-timeline" aria-label="Geo-classification flow">
+                        <div class="mini-timeline-label">How the geo-target list was built</div>
+                        <div class="mini-step">
+                            <div class="mini-step-num">01 · INVENTORY</div>
+                            <div class="mini-step-title">Postal codes &amp; areas</div>
+                            <div class="mini-step-desc">National inventory of postal codes, cities, and named neighborhoods.</div>
+                        </div>
+                        <div class="mini-step">
+                            <div class="mini-step-num">02 · SIGNAL</div>
+                            <div class="mini-step-title">Public price &amp; demo data</div>
+                            <div class="mini-step-desc">Real-estate transaction averages and demographic indicators per area.</div>
+                        </div>
+                        <div class="mini-step">
+                            <div class="mini-step-num">03 · RANK</div>
+                            <div class="mini-step-title">Income-tier scoring</div>
+                            <div class="mini-step-desc">Areas scored by composite signal; high-tier surfaced for targeting.</div>
+                        </div>
+                        <div class="mini-step">
+                            <div class="mini-step-num">04 · OUTPUT</div>
+                            <div class="mini-step-title">Geo-target list</div>
+                            <div class="mini-step-desc">Filtered list passed downstream as the scraping scope.</div>
+                        </div>
+                    </div>
+
+                    <div class="stage-callout">
+                        <strong>Why geo first.</strong> Scraping every record on the public web and
+                        filtering at the end would have wasted months. Filtering geography first
+                        collapsed the search space by an order of magnitude before a single page
+                        was fetched.
+                    </div>
+                </article>
+
+                <!-- STAGE 02: EXTRACTION -->
+                <article class="stage-card">
+                    <div class="stage-head">
+                        <div class="stage-badge" aria-hidden="true">
+                            <span class="material-symbols-outlined">cloud_download</span>
+                        </div>
+                        <div class="stage-head-text">
+                            <div class="stage-num">STAGE 02</div>
+                            <h3 class="stage-title">Extraction <span class="stage-subtitle">&middot; Source-Tuned Scrapers</span></h3>
+                        </div>
+                    </div>
+                    <p class="stage-desc">
+                        Python scrapers &mdash; <strong>BeautifulSoup</strong> for static pages,
+                        <strong>Selenium</strong> for JavaScript-rendered pages &mdash; pulled
+                        publicly available records: business registries, professional directories,
+                        public listings, and municipal records. Each scraper was tuned to a specific
+                        source&rsquo;s structure, rate-limited to be polite, and ran in batches against
+                        the geo-target list from Stage 01. Raw HTML was cached locally before parsing,
+                        so a parser change didn&rsquo;t require re-fetching.
+                    </p>
+
+                    <div class="src-grid" aria-label="Public-web data sources">
+                        <div class="src-chip">
+                            <span class="material-symbols-outlined" aria-hidden="true">storefront</span>
+                            <span class="src-chip-name">Business registries</span>
+                        </div>
+                        <div class="src-chip">
+                            <span class="material-symbols-outlined" aria-hidden="true">badge</span>
+                            <span class="src-chip-name">Professional directories</span>
+                        </div>
+                        <div class="src-chip">
+                            <span class="material-symbols-outlined" aria-hidden="true">apartment</span>
+                            <span class="src-chip-name">Public real-estate listings</span>
+                        </div>
+                        <div class="src-chip">
+                            <span class="material-symbols-outlined" aria-hidden="true">account_balance</span>
+                            <span class="src-chip-name">Municipal records</span>
+                        </div>
+                    </div>
+
+                    <div class="stage-callout">
+                        <strong>Why source-tuned scrapers.</strong> Each source had a different DOM
+                        structure. A generic configurable scraper would have meant maintaining a
+                        config layer for every site &mdash; one-off scrapers were cheaper to write,
+                        easier to repair when a source changed its markup, and isolated failures to
+                        a single source without taking the whole pipeline down.
+                    </div>
+                </article>
+
+                <!-- STAGE 03: STRUCTURING -->
+                <article class="stage-card">
+                    <div class="stage-head">
+                        <div class="stage-badge" aria-hidden="true">
+                            <span class="material-symbols-outlined">data_object</span>
+                        </div>
+                        <div class="stage-head-text">
+                            <div class="stage-num">STAGE 03</div>
+                            <h3 class="stage-title">Structuring <span class="stage-subtitle">&middot; Normalize, Schema, Deduplicate</span></h3>
+                        </div>
+                    </div>
+                    <p class="stage-desc">
+                        Raw extractions were noisy &mdash; duplicate records across sources, mixed
+                        Hebrew/English encodings, inconsistent address and name formats. A
+                        <strong>Pandas pipeline</strong> normalized records into a single schema,
+                        deduplicated on a fuzzy match across name + location + profession, and
+                        persisted the cleaned dataset to a local <strong>SQLite</strong> store.
+                        Every record in the database was guaranteed to have a known shape and a
+                        unique identity.
+                    </p>
+
+                    <div class="schema-grid" aria-label="Unified record schema">
+                        <div class="schema-grid-label">Unified record schema</div>
+                        <div class="schema-field">
+                            <span class="schema-field-name">name</span>
+                            <span class="schema-field-desc">Normalized full name, encoding-corrected.</span>
+                        </div>
+                        <div class="schema-field">
+                            <span class="schema-field-name">contact</span>
+                            <span class="schema-field-desc">Phone or other public channel where available.</span>
+                        </div>
+                        <div class="schema-field">
+                            <span class="schema-field-name">location</span>
+                            <span class="schema-field-desc">Postal code + neighborhood + geo-tier from Stage 01.</span>
+                        </div>
+                        <div class="schema-field">
+                            <span class="schema-field-name">profession</span>
+                            <span class="schema-field-desc">Occupation or business category, mapped to a controlled vocab.</span>
+                        </div>
+                        <div class="schema-field">
+                            <span class="schema-field-name">source</span>
+                            <span class="schema-field-desc">Which scraper found the record &mdash; for traceability.</span>
+                        </div>
+                        <div class="schema-field">
+                            <span class="schema-field-name">raw_notes</span>
+                            <span class="schema-field-desc">Source-specific fragments preserved for the classifier.</span>
+                        </div>
+                    </div>
+
+                    <div class="stage-callout">
+                        <strong>Why dedupe before classify.</strong> A single prospect surfacing under
+                        three slightly different spellings across three sources would inflate volume
+                        and waste sales time on duplicate calls. The fuzzy match collapsed those into
+                        one canonical record before any scoring touched it.
+                    </div>
+                </article>
+
+                <!-- STAGE 04: CLASSIFICATION -->
+                <article class="stage-card">
+                    <div class="stage-head">
+                        <div class="stage-badge" aria-hidden="true">
+                            <span class="material-symbols-outlined">tune</span>
+                        </div>
+                        <div class="stage-head-text">
+                            <div class="stage-num">STAGE 04</div>
+                            <h3 class="stage-title">Classification <span class="stage-subtitle">&middot; Relevance Scoring</span></h3>
+                        </div>
+                    </div>
+                    <p class="stage-desc">
+                        Each cleaned record was scored against a set of relevance signals for financial
+                        services. The output was a <strong>ranked prospect list</strong> &mdash; sorted
+                        by likelihood that a cold-call would land on someone who actually had a need
+                        for wealth management, pension planning, or insurance brokerage. This is the
+                        layer that turned data into a usable product.
+                    </p>
+
+                    <div class="signal-list" aria-label="Classifier signals">
+                        <div class="signal-row">
+                            <span class="signal-tag">SIGNAL · 01</span>
+                            <span class="signal-name">Geo-tier (Stage 01)</span>
+                            <span class="signal-desc">Income-tier of the prospect&rsquo;s area &mdash; the strongest single predictor.</span>
+                        </div>
+                        <div class="signal-row">
+                            <span class="signal-tag">SIGNAL · 02</span>
+                            <span class="signal-name">Profession weight</span>
+                            <span class="signal-desc">Lawyers, doctors, business owners and senior professionals scored higher.</span>
+                        </div>
+                        <div class="signal-row">
+                            <span class="signal-tag">SIGNAL · 03</span>
+                            <span class="signal-name">Business-ownership indicator</span>
+                            <span class="signal-desc">Presence of a registered business under the same name lifted the score.</span>
+                        </div>
+                        <div class="signal-row">
+                            <span class="signal-tag">SIGNAL · 04</span>
+                            <span class="signal-name">Cross-source coverage</span>
+                            <span class="signal-desc">Records that appeared in multiple sources scored higher &mdash; signal of presence.</span>
+                        </div>
+                    </div>
+
+                    <div class="pullquote">
+                        <p>The scraping was the <em>easy</em> part.<br>The classifier was the <em>product</em>.</p>
+                    </div>
+
+                    <div class="stage-callout">
+                        <strong>Tuned against feedback.</strong> Scoring weights were adjusted manually
+                        between batches based on conversion-rate signal from the sales team. Each
+                        batch came back with a sense of which leads landed and which didn&rsquo;t;
+                        the next batch reflected what was learned. The classifier was the single
+                        place in the pipeline where iteration paid the most.
+                    </div>
+                </article>
+
+                <!-- STAGE 05: DELIVERY -->
+                <article class="stage-card">
+                    <div class="stage-head">
+                        <div class="stage-badge" aria-hidden="true">
+                            <span class="material-symbols-outlined">outbox</span>
+                        </div>
+                        <div class="stage-head-text">
+                            <div class="stage-num">STAGE 05</div>
+                            <h3 class="stage-title">Delivery <span class="stage-subtitle">&middot; Excel to the Sales Team</span></h3>
+                        </div>
+                    </div>
+                    <p class="stage-desc">
+                        Sales worked in <strong>Excel</strong>. The final stage exported the ranked
+                        prospect list into themed workbooks &mdash; sorted by region, profession,
+                        and score band &mdash; with all relevant fields formatted for cold outreach.
+                        Workbooks were timestamped, versioned, and dropped to a shared drive. The
+                        sales team never had to interact with the pipeline; they just opened a file.
+                    </p>
+
+                    <div class="stage-callout">
+                        <strong>Meet users where they are.</strong> Sales had no appetite for a
+                        dashboard, no tolerance for a login screen, and no patience for a CRM
+                        integration. Excel was the right interface &mdash; invisible engineering
+                        on the back end, the familiar tool on the front. Forcing a custom UI would
+                        have killed adoption regardless of how good the leads were.
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ ARCHITECTURE ============ -->
+    <section id="architecture" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">System Architecture</span>
+                <h2 class="h-section">A Local Pipeline, Not a Platform</h2>
+                <p class="text-lead">
+                    No cloud, no API gateway, no monitoring stack &mdash; by design.
+                    The right amount of infrastructure for a one-engineer system serving one team.
+                </p>
+            </div>
+
+            <!-- ============ INLINE 5-STAGE SVG DIAGRAM ============ -->
+            <div class="arch-svg-wrap">
+                <svg viewBox="0 0 960 980" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five-stage data mining pipeline production flow">
+                    <defs>
+                        <linearGradient id="layerGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="rgba(41,151,255,0.05)" />
+                            <stop offset="100%" stop-color="rgba(29,29,31,0)" />
+                        </linearGradient>
+                        <filter id="layerGlow" x="-10%" y="-30%" width="120%" height="160%">
+                            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#2997ff" flood-opacity="0.25"/>
+                        </filter>
+                        <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2997ff" />
+                        </marker>
+                    </defs>
+
+                    <!-- Top label -->
+                    <text x="480" y="22" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" letter-spacing="0.18em" text-anchor="middle">PRODUCTION FLOW</text>
+
+                    <!-- INPUT: Public web -->
+                    <rect x="320" y="44" width="320" height="50" rx="14" fill="rgba(29,29,31,0.9)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                    <text x="480" y="68" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Public web · Israeli sources</text>
+                    <text x="480" y="85" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" text-anchor="middle">registries · directories · listings · municipal records</text>
+
+                    <!-- arrow → STAGE 01 -->
+                    <line x1="480" y1="94" x2="480" y2="124" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+
+                    <!-- STAGE 01 — Target -->
+                    <rect x="60" y="130" width="840" height="100" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
+                    <text x="80" y="158" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">STAGE 01</text>
+                    <text x="80" y="184" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Target Definition</text>
+                    <text x="80" y="208" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12">Postal codes &amp; neighborhoods classified into income tiers · output: geo-target list</text>
+                    <rect x="710" y="172" width="170" height="32" rx="16" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.22)" stroke-width="1" />
+                    <text x="795" y="192" fill="#f5f5f7" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">geo filter</text>
+
+                    <!-- arrow → STAGE 02 -->
+                    <line x1="480" y1="230" x2="480" y2="258" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+
+                    <!-- STAGE 02 — Extract -->
+                    <rect x="60" y="264" width="840" height="100" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
+                    <text x="80" y="292" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">STAGE 02</text>
+                    <text x="80" y="318" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Extraction</text>
+                    <text x="80" y="342" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12">Source-tuned Python scrapers · cached HTML · rate-limited batches against the geo-list</text>
+                    <rect x="710" y="306" width="170" height="32" rx="16" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.22)" stroke-width="1" />
+                    <text x="795" y="326" fill="#f5f5f7" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">BS4 · Selenium</text>
+
+                    <!-- arrow → STAGE 03 -->
+                    <line x1="480" y1="364" x2="480" y2="392" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+
+                    <!-- STAGE 03 — Structure -->
+                    <rect x="60" y="398" width="840" height="100" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
+                    <text x="80" y="426" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">STAGE 03</text>
+                    <text x="80" y="452" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Structuring</text>
+                    <text x="80" y="476" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12">Pandas normalize · unified schema · fuzzy dedupe · persisted to local SQLite</text>
+                    <rect x="710" y="440" width="170" height="32" rx="16" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.22)" stroke-width="1" />
+                    <text x="795" y="460" fill="#f5f5f7" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">Pandas · SQLite</text>
+
+                    <!-- arrow → STAGE 04 -->
+                    <line x1="480" y1="498" x2="480" y2="526" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+
+                    <!-- STAGE 04 — Classify -->
+                    <rect x="60" y="532" width="840" height="120" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.3)" stroke-width="1.5" filter="url(#layerGlow)" />
+                    <text x="80" y="560" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">STAGE 04</text>
+                    <text x="80" y="586" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Classification</text>
+                    <text x="80" y="610" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12">Score on geo-tier · profession · business indicator · cross-source coverage</text>
+                    <rect x="710" y="568" width="170" height="32" rx="16" fill="rgba(41,151,255,0.12)" stroke="rgba(41,151,255,0.35)" stroke-width="1" />
+                    <text x="795" y="588" fill="#f5f5f7" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">the product</text>
+                    <g opacity="0.85">
+                        <rect x="100" y="624" width="120" height="20" rx="10" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                        <text x="160" y="638" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" text-anchor="middle">Score record</text>
+                        <text x="232" y="638" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" text-anchor="middle">→</text>
+                        <rect x="248" y="624" width="120" height="20" rx="10" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                        <text x="308" y="638" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" text-anchor="middle">Rank batch</text>
+                        <text x="380" y="638" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" text-anchor="middle">→</text>
+                        <rect x="396" y="624" width="160" height="20" rx="10" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                        <text x="476" y="638" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" text-anchor="middle">Tune weights from feedback</text>
+                    </g>
+
+                    <!-- arrow → STAGE 05 -->
+                    <line x1="480" y1="652" x2="480" y2="680" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+
+                    <!-- STAGE 05 — Deliver -->
+                    <rect x="60" y="686" width="840" height="100" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
+                    <text x="80" y="714" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">STAGE 05</text>
+                    <text x="80" y="740" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Delivery</text>
+                    <text x="80" y="764" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12">Themed Excel workbooks · sorted by region, profession, and score band · shared drive</text>
+                    <rect x="710" y="728" width="170" height="32" rx="16" fill="rgba(41,151,255,0.08)" stroke="rgba(41,151,255,0.22)" stroke-width="1" />
+                    <text x="795" y="748" fill="#f5f5f7" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle">Excel · CSV</text>
+
+                    <!-- arrow → OUTPUT -->
+                    <line x1="480" y1="786" x2="480" y2="814" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+
+                    <!-- OUTPUT -->
+                    <rect x="280" y="820" width="400" height="56" rx="14" fill="rgba(29,29,31,0.9)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                    <text x="480" y="845" fill="#f5f5f7" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Sales-ready prospect lists</text>
+                    <text x="480" y="863" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" text-anchor="middle">name · contact · location · profession · score · source &middot; in Excel</text>
+
+                    <!-- Foot label -->
+                    <text x="480" y="920" fill="#86868b" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" letter-spacing="0.16em" text-anchor="middle">ACTIVE · FEB 2019 — JUL 2020 · EITAM FINANCE</text>
+                </svg>
+            </div>
+
+            <!-- 3 essential architecture cards -->
+            <div class="grid grid-3">
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">desktop_windows</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Local Compute</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">Python</strong> on a single workstation.
+                        Each scraper, the structuring step, the classifier, and the exporter were
+                        independently runnable scripts &mdash; no server, no daemon, no orchestrator.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">database</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Local Storage</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">SQLite</strong> for the structured
+                        record store, cached <strong style="color:var(--appleLight)">HTML</strong>
+                        for re-parsing, and <strong style="color:var(--appleLight)">Excel</strong>
+                        for the sales-facing output. No managed database. Backups were file copies.
+                    </p>
+                </div>
+                <div class="card card-pad">
+                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">schedule</span>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Manual Orchestration</h3>
+                    <p class="text-body">
+                        <strong style="color:var(--appleLight)">Cron</strong> for recurring scrapes,
+                        manual review between batches, and a deliberate human in the loop on the
+                        classifier weights. The pipeline operator was the orchestrator.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tech-stack chip strip -->
+            <div class="tech-strip">
+                <div class="tech-strip-label">Stack</div>
+                <span class="tech-chip">Python 3.x<span class="tech-purpose">language</span></span>
+                <span class="tech-chip">BeautifulSoup<span class="tech-purpose">static html</span></span>
+                <span class="tech-chip">Selenium<span class="tech-purpose">dynamic pages</span></span>
+                <span class="tech-chip">Pandas<span class="tech-purpose">data ops</span></span>
+                <span class="tech-chip">SQLite<span class="tech-purpose">local store</span></span>
+                <span class="tech-chip">Excel · CSV<span class="tech-purpose">output</span></span>
+                <span class="tech-chip">Cron<span class="tech-purpose">scheduling</span></span>
+                <span class="tech-chip">Workstation<span class="tech-purpose">infrastructure</span></span>
+            </div>
+
+            <!-- Why no cloud -->
+            <div class="info-note">
+                <span class="material-symbols-outlined" aria-hidden="true">architecture</span>
+                <p>
+                    <strong>Why no cloud.</strong> The data lived on one machine, the engineer was
+                    one person, the consumer was one team in the same office. Cloud infrastructure
+                    would have added cost and operational surface without solving any constraint
+                    that existed. The architecture matched the team &mdash; that match was the point.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ REFLECTION ============ -->
+    <section id="reflection" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">Reflection</span>
+                <h2 class="h-section">What This Project Taught</h2>
+                <p class="text-lead">
+                    The lessons from a 17-month custom pipeline outlasted the pipeline itself.
+                    They recurred, at much larger scale, in everything that came after.
+                </p>
+            </div>
+
+            <!-- Three lessons -->
+            <div class="lessons">
+                <div class="lesson-item">
+                    <div class="lesson-num">01</div>
+                    <div class="lesson-text">
+                        <strong>Data quality eats data volume.</strong> Early batches pulled large
+                        volumes and converted at near-zero. Tighter geo-filtering and stricter
+                        classification thresholds reduced volume and lifted conversion. The same
+                        lesson recurred years later at twenty-thousand-record scale at
+                        <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>:
+                        the bottleneck was never the model, it was the pipeline that produced its inputs.
+                    </div>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-num">02</div>
+                    <div class="lesson-text">
+                        <strong>A custom pipeline beats a generic platform when the domain is narrow.</strong>
+                        Enterprise data tools generalize at the cost of the specializations that
+                        actually mattered for this market: language, geography, regulatory context,
+                        target profile. A scoped pipeline ran cheaper, ranked better, and changed
+                        faster. The same trade-off resurfaces every time the choice is between
+                        buying a horizontal platform and building a vertical one.
+                    </div>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-num">03</div>
+                    <div class="lesson-text">
+                        <strong>The classifier is the product.</strong> Anyone can scrape. The layer
+                        that decides whether a pipeline ships value is the one between raw data and
+                        the customer&rsquo;s decision &mdash; and that layer is bought with iteration
+                        on real feedback, not engineering elegance. The first thing the team felt
+                        was the classifier, not the scrapers.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outcome statement + bridge -->
+            <div class="outcome">
+                <p class="outcome-line">
+                    For seventeen months the sales team at Eitam Finance worked from leads generated
+                    by this pipeline instead of purchased generic lists. Cost: a workstation and an
+                    engineer. Replaced: an enterprise data subscription that wasn&rsquo;t available
+                    for this market anyway.
+                </p>
+                <p class="bridge">
+                    The same pattern &mdash; extract from a noisy source, classify into something
+                    useful, deliver in the format the consumer already uses &mdash; recurred at
+                    much larger scale: a 21,000-record service taxonomy at
+                    <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>,
+                    and millions of product pages through a deterministic-gate-first DAG at the
+                    <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Pipeline Observatory</a>.
+                    The earliest version of that thinking lived here.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-copy">© 2019–2026 Daniel Manzela · Pipeline active Feb 2019 – Jul 2020.</div>
+        <div class="footer-links">
+            <a href="https://manzela.github.io/Manzela/">Profile</a>
+            <a href="https://manzela.github.io/Manzela/seller-app/">Seller App</a>
+            <a href="https://manzela.github.io/Manzela/tasko-ai/">Tasko.ai</a>
+            <a href="https://manzela.github.io/Elysium/">Elysium</a>
+            <a href="https://manzela.github.io/pipeline-observatory/">Autonomous Pipeline</a>
+            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/danielmanzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (function () {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll reveal — skipped for users who prefer reduced motion
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        }
+
+        // Mobile nav toggle — aria-expanded kept in sync
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const setNavOpen = (open) => {
+            mainNav.classList.toggle('open', open);
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        navToggle?.addEventListener('click', () => {
+            setNavOpen(!mainNav.classList.contains('open'));
+        });
+
+        // Smooth scroll + auto-close mobile nav on in-page navigation
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const href = a.getAttribute('href');
+                if (href.length < 2) return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
+                    if (mainNav?.classList.contains('open')) setNavOpen(false);
+                }
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>
