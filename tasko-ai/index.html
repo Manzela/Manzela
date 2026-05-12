@@ -1218,27 +1218,27 @@
                     <div class="proc-grid" aria-label="Example procedures the agent executes">
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>Purchasing protocol</h4>
-                            <p>Sequence the agent runs to buy a product on a client&rsquo;s behalf &mdash; quote, approval, fulfillment, receipt.</p>
+                            <p>Quote &rarr; approval &rarr; fulfillment &rarr; receipt.</p>
                         </div>
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">build_circle</span>Vehicle service protocol</h4>
-                            <p>Schedules an appointment with one of the company&rsquo;s authorized garages, threading vehicle and client metadata.</p>
+                            <p>Schedules an appointment with an authorized garage, threading vehicle &amp; client metadata.</p>
                         </div>
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">description</span>Insurance claim filing</h4>
-                            <p>Multi-step submission of government and insurer forms &mdash; the agent collects evidence and stages the packet.</p>
+                            <p>Collects evidence and stages the government / insurer form packet.</p>
                         </div>
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">request_quote</span>Monthly billing</h4>
-                            <p>Closes the open task ledger for a client, reconciles, and generates the period invoice.</p>
+                            <p>Closes the open task ledger, reconciles, generates the period invoice.</p>
                         </div>
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">support_agent</span>Dissatisfied client (5 steps)</h4>
-                            <p>Detect dissatisfaction signal &rarr; triage cause &rarr; offer remediation &rarr; escalate if unresolved &rarr; close-the-loop.</p>
+                            <p>Detect &rarr; triage &rarr; remediate &rarr; escalate &rarr; close-the-loop.</p>
                         </div>
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">schedule_send</span>Follow-up tracking</h4>
-                            <p>Scheduled nudges to external parties holding up an open task &mdash; the agent owns the chase.</p>
+                            <p>Scheduled nudges to external parties holding up an open task.</p>
                         </div>
                     </div>
 
@@ -1323,22 +1323,22 @@
                         <div class="safety-item">
                             <span class="safety-tag">REAL-TIME VIEW</span>
                             <h4>Live session inspector</h4>
-                            <p>Operator sees the inbound message, the detected intent, the retrieved procedure, and the staged reply &mdash; all synchronized.</p>
+                            <p>Inbound message, detected intent, retrieved procedure, and staged reply &mdash; all synchronized.</p>
                         </div>
                         <div class="safety-item">
                             <span class="safety-tag">EDIT</span>
                             <h4>Editable response field</h4>
-                            <p>The auto-completion can be corrected in place; the corrected text replaces what would have been sent.</p>
+                            <p>Correct the auto-completion in place; the corrected text replaces what would have been sent.</p>
                         </div>
                         <div class="safety-item">
                             <span class="safety-tag">RECLASSIFY</span>
                             <h4>Intent override dropdown</h4>
-                            <p>If Layer 1 misjudged the request, the operator selects the correct category and the workflow re-routes from there.</p>
+                            <p>If Layer 1 misjudged, pick the correct category and the workflow re-routes from there.</p>
                         </div>
                         <div class="safety-item">
                             <span class="safety-tag">DEBUG</span>
                             <h4>Code logs in-line</h4>
-                            <p>Per-session decision trace exposed in the dashboard &mdash; every retrieval, every branch, every API call the agent made or planned.</p>
+                            <p>Per-session decision trace &mdash; every retrieval, every branch, every API call.</p>
                         </div>
                     </div>
 
@@ -1662,10 +1662,9 @@
 
             <!-- Outcome statement + bridge -->
             <div class="outcome">
-                <span class="outcome-prelude">In production · Oct 2020 — Dec 2023</span>
                 <p class="outcome-line">
-                    The agent handled live client requests via WhatsApp for <em>three years</em>,
-                    replacing the full-time human dispatcher loop.
+                    The agent handled live client requests via WhatsApp through December 2023 &mdash;
+                    over three years in research and development, replacing the full-time human dispatcher loop.
                 </p>
                 <p class="bridge">
                     This four-layer pattern &mdash; <strong style="color:var(--appleLight); font-weight:500;">classify, retrieve, execute, verify</strong> &mdash;
