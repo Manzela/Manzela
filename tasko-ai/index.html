@@ -210,25 +210,6 @@
         .hero-sub { max-width: 660px; margin: 24px auto 0; }
         .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
 
-        /* Hero metric strip — 4 columns */
-        .hero-stats {
-            display: grid; gap: 1px;
-            grid-template-columns: 1fr;
-            background: var(--appleBorderSoft);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 16px; overflow: hidden;
-            margin: 56px auto 0; max-width: 760px;
-        }
-        @media (min-width: 640px) { .hero-stats { grid-template-columns: repeat(4, 1fr); } }
-        .hero-stat { background: var(--appleDarker); padding: 24px 16px; text-align: center; }
-        .hero-stat-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(1.4rem, 2.6vw, 1.75rem);
-            font-weight: 600; color: var(--appleLight); margin-bottom: 6px;
-            letter-spacing: -0.02em;
-        }
-        .hero-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--appleGray); }
-
         /* Hero compact 4-layer preview */
         .hero-layers {
             display: grid; gap: 10px;
@@ -1032,26 +1013,6 @@
             <div class="hero-layer">
                 <div class="hero-layer-num">LAYER 04</div>
                 <div class="hero-layer-name">Safety Gate</div>
-            </div>
-        </div>
-
-        <!-- Verified metrics -->
-        <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat-value">21K+</div>
-                <div class="hero-stat-label">Tasks Labeled</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">15</div>
-                <div class="hero-stat-label">Service Categories</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">145</div>
-                <div class="hero-stat-label">Procedures Encoded</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">12+ mo</div>
-                <div class="hero-stat-label">R&amp;D Iteration</div>
             </div>
         </div>
 
