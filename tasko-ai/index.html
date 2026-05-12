@@ -735,6 +735,107 @@
         details.context > .context-body p { margin: 0; }
         details.context > .context-body p + p { margin-top: 10px; }
 
+        /* ============ LAYER-CAPTION — the Apple-style "tagline" under each killer visual ============ */
+        .layer-caption {
+            font-size: clamp(1.05rem, 1.55vw, 1.2rem);
+            color: var(--appleLight);
+            line-height: 1.45;
+            font-weight: 400;
+            letter-spacing: -0.012em;
+            margin: 32px 0 0;
+            max-width: 600px;
+        }
+
+        /* ============ LAYER DEEP-DIVE — Apple progressive-disclosure pattern ============ */
+        details.layer-dive {
+            margin-top: 40px;
+        }
+        details.layer-dive > summary {
+            list-style: none;
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 22px;
+            align-items: center;
+            padding: 4px 0;
+            user-select: none;
+        }
+        details.layer-dive > summary::-webkit-details-marker { display: none; }
+        details.layer-dive .dive-line {
+            height: 1px;
+            background: var(--appleBorderSoft);
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+        details.layer-dive[open] .dive-line {
+            background: rgba(41, 151, 255, 0.22);
+        }
+        details.layer-dive .dive-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--appleGray);
+            transition: color 0.2s ease;
+        }
+        details.layer-dive > summary:hover .dive-label { color: var(--appleLight); }
+        details.layer-dive[open] > summary .dive-label { color: var(--appleLight); }
+        details.layer-dive .dive-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 1px solid var(--appleBorderHover);
+            color: var(--appleLight);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px; font-weight: 400; line-height: 1;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+            background: rgba(0,0,0,0.2);
+        }
+        details.layer-dive[open] .dive-icon {
+            transform: rotate(45deg);
+            background: rgba(41, 151, 255, 0.15);
+            border-color: rgba(41, 151, 255, 0.4);
+            color: var(--appleBlue);
+        }
+        details.layer-dive > .layer-dive-body {
+            padding: 36px 0 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        details.layer-dive > .layer-dive-body > *:first-child { margin-top: 0; }
+        /* Soft fade-in when deep-dive opens (no JS, just CSS animation on open) */
+        @media (prefers-reduced-motion: no-preference) {
+            details.layer-dive[open] > .layer-dive-body {
+                animation: dive-reveal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            @keyframes dive-reveal {
+                from { opacity: 0; transform: translateY(-8px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+        }
+
+        /* Layer 3 — proc-item descriptions hidden until that layer's deep-dive is open */
+        .proc-grid.is-compact .proc-item p {
+            display: none;
+        }
+        .layer-card:has(details.layer-dive[open]) .proc-grid.is-compact .proc-item p {
+            display: block;
+            animation: dive-reveal 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        /* When compact, proc-item shrinks to icon+title rhythm */
+        .proc-grid.is-compact .proc-item {
+            padding: 16px 20px;
+        }
+        .proc-grid.is-compact .proc-item h4 { margin-bottom: 0; }
+        .layer-card:has(details.layer-dive[open]) .proc-grid.is-compact .proc-item h4 {
+            margin-bottom: 6px;
+        }
+
         /* ============ "NOW CALLED" BADGE — the structural visual motif on every layer card ============ */
         .now-called {
             display: inline-flex; align-items: center; gap: 8px;
@@ -1066,15 +1167,7 @@
                             <span class="now-called"><span class="now-called-prefix">Now called</span> Intent Classification + Slot Filling</span>
                         </div>
                     </div>
-                    <p class="layer-desc">
-                        Every inbound WhatsApp message routes through a classifier that places it
-                        into one of 15 service categories, auto-completes any missing fields it can infer,
-                        and asks the user to confirm before proceeding. The structural backbone the
-                        model learned to recognize was extracted from the company&rsquo;s nine years
-                        of chat history.
-                    </p>
-
-                    <!-- Marquee numbers — the data scale of the training corpus -->
+                    <!-- Killer visual: the data scale of the training corpus -->
                     <div class="layer-stats" aria-label="Layer 1 — training corpus scale">
                         <div class="layer-stat">
                             <div class="layer-stat-value">21,102</div>
@@ -1094,56 +1187,75 @@
                         </div>
                     </div>
 
-                    <!-- Service categories with verified counts -->
-                    <div class="cat-grid" aria-label="15 service categories with task counts">
-                        <div class="cat-chip"><span class="cat-name">Bureaucratic</span><span class="cat-count">4,018</span></div>
-                        <div class="cat-chip"><span class="cat-name">Insurance</span><span class="cat-count">3,761</span></div>
-                        <div class="cat-chip"><span class="cat-name">Secretarial</span><span class="cat-count">3,433</span></div>
-                        <div class="cat-chip"><span class="cat-name">Errands</span><span class="cat-count">1,602</span></div>
-                        <div class="cat-chip"><span class="cat-name">Vehicle</span><span class="cat-count">1,490</span></div>
-                        <div class="cat-chip"><span class="cat-name">Computer / IT</span><span class="cat-count">1,436</span></div>
-                        <div class="cat-chip"><span class="cat-name">Secretarial A.M.</span><span class="cat-count">941</span></div>
-                        <div class="cat-chip"><span class="cat-name">Purchasing</span><span class="cat-count">876</span></div>
-                        <div class="cat-chip"><span class="cat-name">Repairs</span><span class="cat-count">764</span></div>
-                        <div class="cat-chip"><span class="cat-name">Delivery</span><span class="cat-count">718</span></div>
-                        <div class="cat-chip"><span class="cat-name">Technician</span><span class="cat-count">672</span></div>
-                        <div class="cat-chip"><span class="cat-name">Professionals</span><span class="cat-count">671</span></div>
-                        <div class="cat-chip"><span class="cat-name">Escort</span><span class="cat-count">393</span></div>
-                        <div class="cat-chip"><span class="cat-name">Transportation</span><span class="cat-count">266</span></div>
-                        <div class="cat-chip"><span class="cat-name">Misc</span><span class="cat-count">61</span></div>
-                    </div>
+                    <p class="layer-caption">From 21,000 messages, 15 categories the agent learned to recognize.</p>
 
-                    <!-- Compact 4-step training-data pipeline -->
-                    <div class="mini-timeline" aria-label="Training-data pipeline">
-                        <div class="mini-timeline-label">How the training data was built</div>
-                        <div class="mini-step">
-                            <div class="mini-step-num">01 · EXTRACT</div>
-                            <div class="mini-step-title">WhatsApp text exports</div>
-                            <div class="mini-step-desc">Programmatic export of client threads spanning 2011&ndash;2020.</div>
-                        </div>
-                        <div class="mini-step">
-                            <div class="mini-step-num">02 · TAG ROLES</div>
-                            <div class="mini-step-title">Client vs. tasker per message</div>
-                            <div class="mini-step-desc">Speaker classification across mixed Hebrew / English threads.</div>
-                        </div>
-                        <div class="mini-step">
-                            <div class="mini-step-num">03 · TAXONOMY</div>
-                            <div class="mini-step-title">15 categories, 1,561 verbs</div>
-                            <div class="mini-step-desc">Hebrew keyword sets aligned to each service category.</div>
-                        </div>
-                        <div class="mini-step">
-                            <div class="mini-step-num">04 · Q&amp;A PAIRS</div>
-                            <div class="mini-step-title">SQuAD-format records</div>
-                            <div class="mini-step-desc">VBA + Excel macros generated context / question / answer triples.</div>
-                        </div>
-                    </div>
+                    <details class="layer-dive">
+                        <summary aria-label="Toggle deep dive for Layer 1">
+                            <span class="dive-line" aria-hidden="true"></span>
+                            <span class="dive-label">Deep dive <span class="dive-icon" aria-hidden="true">+</span></span>
+                            <span class="dive-line" aria-hidden="true"></span>
+                        </summary>
+                        <div class="layer-dive-body">
+                            <p class="layer-desc">
+                                Every inbound WhatsApp message routes through a classifier that places it
+                                into one of 15 service categories, auto-completes any missing fields it can infer,
+                                and asks the user to confirm before proceeding. The structural backbone the
+                                model learned to recognize was extracted from the company&rsquo;s nine years
+                                of chat history.
+                            </p>
 
-                    <div class="layer-callout">
-                        <strong>The Hebrew NLP problem</strong>
-                        In 2021 there was no off-the-shelf open-source toolchain for production Hebrew &mdash;
-                        tokenizers, NER, and labeled corpora were all sparse. The pipeline above is what
-                        getting it to work in production looked like.
-                    </div>
+                            <!-- Service categories with verified counts -->
+                            <div class="cat-grid" aria-label="15 service categories with task counts">
+                                <div class="cat-chip"><span class="cat-name">Bureaucratic</span><span class="cat-count">4,018</span></div>
+                                <div class="cat-chip"><span class="cat-name">Insurance</span><span class="cat-count">3,761</span></div>
+                                <div class="cat-chip"><span class="cat-name">Secretarial</span><span class="cat-count">3,433</span></div>
+                                <div class="cat-chip"><span class="cat-name">Errands</span><span class="cat-count">1,602</span></div>
+                                <div class="cat-chip"><span class="cat-name">Vehicle</span><span class="cat-count">1,490</span></div>
+                                <div class="cat-chip"><span class="cat-name">Computer / IT</span><span class="cat-count">1,436</span></div>
+                                <div class="cat-chip"><span class="cat-name">Secretarial A.M.</span><span class="cat-count">941</span></div>
+                                <div class="cat-chip"><span class="cat-name">Purchasing</span><span class="cat-count">876</span></div>
+                                <div class="cat-chip"><span class="cat-name">Repairs</span><span class="cat-count">764</span></div>
+                                <div class="cat-chip"><span class="cat-name">Delivery</span><span class="cat-count">718</span></div>
+                                <div class="cat-chip"><span class="cat-name">Technician</span><span class="cat-count">672</span></div>
+                                <div class="cat-chip"><span class="cat-name">Professionals</span><span class="cat-count">671</span></div>
+                                <div class="cat-chip"><span class="cat-name">Escort</span><span class="cat-count">393</span></div>
+                                <div class="cat-chip"><span class="cat-name">Transportation</span><span class="cat-count">266</span></div>
+                                <div class="cat-chip"><span class="cat-name">Misc</span><span class="cat-count">61</span></div>
+                            </div>
+
+                            <!-- Compact 4-step training-data pipeline -->
+                            <div class="mini-timeline" aria-label="Training-data pipeline">
+                                <div class="mini-timeline-label">How the training data was built</div>
+                                <div class="mini-step">
+                                    <div class="mini-step-num">01 · EXTRACT</div>
+                                    <div class="mini-step-title">WhatsApp text exports</div>
+                                    <div class="mini-step-desc">Programmatic export of client threads spanning 2011&ndash;2020.</div>
+                                </div>
+                                <div class="mini-step">
+                                    <div class="mini-step-num">02 · TAG ROLES</div>
+                                    <div class="mini-step-title">Client vs. tasker per message</div>
+                                    <div class="mini-step-desc">Speaker classification across mixed Hebrew / English threads.</div>
+                                </div>
+                                <div class="mini-step">
+                                    <div class="mini-step-num">03 · TAXONOMY</div>
+                                    <div class="mini-step-title">15 categories, 1,561 verbs</div>
+                                    <div class="mini-step-desc">Hebrew keyword sets aligned to each service category.</div>
+                                </div>
+                                <div class="mini-step">
+                                    <div class="mini-step-num">04 · Q&amp;A PAIRS</div>
+                                    <div class="mini-step-title">SQuAD-format records</div>
+                                    <div class="mini-step-desc">VBA + Excel macros generated context / question / answer triples.</div>
+                                </div>
+                            </div>
+
+                            <div class="layer-callout">
+                                <strong>The Hebrew NLP problem</strong>
+                                In 2021 there was no off-the-shelf open-source toolchain for production Hebrew &mdash;
+                                tokenizers, NER, and labeled corpora were all sparse. The pipeline above is what
+                                getting it to work in production looked like.
+                            </div>
+                        </div>
+                    </details>
                 </article>
 
                 <!-- LAYER 2: KNOWLEDGE -->
@@ -1158,14 +1270,11 @@
                             <span class="now-called"><span class="now-called-prefix">Now called</span> Retrieval-Augmented Generation (RAG)</span>
                         </div>
                     </div>
-                    <p class="layer-desc">
-                        Once an intent is classified, the agent retrieves a matching procedure from
-                        an authored corpus and injects it into the prompt at request time &mdash;
-                        constraining replies to the company&rsquo;s own rules (in Hebrew, no inference-time
-                        translation) instead of letting the model invent policy.
-                    </p>
+                    <!-- Killer visual: the principle, plus the corpus scale -->
+                    <div class="pullquote">
+                        <p>Fine-tuned weights handled <em>style</em>.<br>The RAG corpus handled <em>truth</em>.</p>
+                    </div>
 
-                    <!-- Marquee numbers — the knowledge corpus scale -->
                     <div class="layer-stats" aria-label="Layer 2 — knowledge corpus scale">
                         <div class="layer-stat">
                             <div class="layer-stat-value">145</div>
@@ -1185,16 +1294,29 @@
                         </div>
                     </div>
 
-                    <div class="pullquote">
-                        <p>Fine-tuned weights handled <em>style</em>.<br>The RAG corpus handled <em>truth</em>.</p>
-                    </div>
+                    <p class="layer-caption">Constrain the model to the company&rsquo;s own rules. Phrase, but don&rsquo;t invent.</p>
 
-                    <div class="layer-callout">
-                        <strong>Before &ldquo;RAG&rdquo; was a label</strong>
-                        Retrieve grounding text, inject it into the prompt at request time, let the model
-                        phrase but not invent &mdash; that pattern was the working solution for keeping a
-                        fine-tuned Hebrew model honest in 2021&ndash;2022, years before the field had a name for it.
-                    </div>
+                    <details class="layer-dive">
+                        <summary aria-label="Toggle deep dive for Layer 2">
+                            <span class="dive-line" aria-hidden="true"></span>
+                            <span class="dive-label">Deep dive <span class="dive-icon" aria-hidden="true">+</span></span>
+                            <span class="dive-line" aria-hidden="true"></span>
+                        </summary>
+                        <div class="layer-dive-body">
+                            <p class="layer-desc">
+                                Once an intent is classified, the agent retrieves a matching procedure from
+                                an authored corpus and injects it into the prompt at request time &mdash;
+                                constraining replies to the company&rsquo;s own rules (in Hebrew, no inference-time
+                                translation) instead of letting the model invent policy.
+                            </p>
+                            <div class="layer-callout">
+                                <strong>Before &ldquo;RAG&rdquo; was a label</strong>
+                                Retrieve grounding text, inject it into the prompt at request time, let the model
+                                phrase but not invent &mdash; that pattern was the working solution for keeping a
+                                fine-tuned Hebrew model honest in 2021&ndash;2022, years before the field had a name for it.
+                            </div>
+                        </div>
+                    </details>
                 </article>
 
                 <!-- LAYER 3: EXECUTION -->
@@ -1209,13 +1331,8 @@
                             <span class="now-called"><span class="now-called-prefix">Now called</span> Tool Use / Function Calling</span>
                         </div>
                     </div>
-                    <p class="layer-desc">
-                        Each procedure is a <strong>multi-step workflow the agent runs</strong> &mdash; not a
-                        paragraph it reads back. API calls, sequential coordination, asking the user for missing
-                        information. Every variant of <em>what to ask and when</em> was mapped and trained.
-                    </p>
-
-                    <div class="proc-grid" aria-label="Example procedures the agent executes">
+                    <!-- Killer visual: 6 workflow cards in compact form (descriptions reveal in deep-dive) -->
+                    <div class="proc-grid is-compact" aria-label="Six procedures the agent executes">
                         <div class="proc-item">
                             <h4><span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>Purchasing protocol</h4>
                             <p>Quote &rarr; approval &rarr; fulfillment &rarr; receipt.</p>
@@ -1242,13 +1359,29 @@
                         </div>
                     </div>
 
-                    <div class="layer-callout">
-                        <strong>Model evolution</strong>
-                        Fine-tuning ran across two platforms over 12+ months: OpenAI (Babbage &rarr; Davinci
-                        &rarr; GPT-3.5 as each became available) and HF AutoTrain. Hundreds of cycles tightened
-                        Hebrew fidelity, PII redaction, conversational state, and procedure adherence
-                        &mdash; not parameter counts.
-                    </div>
+                    <p class="layer-caption">The agent runs the workflow. It doesn&rsquo;t just retrieve text.</p>
+
+                    <details class="layer-dive">
+                        <summary aria-label="Toggle deep dive for Layer 3">
+                            <span class="dive-line" aria-hidden="true"></span>
+                            <span class="dive-label">Deep dive <span class="dive-icon" aria-hidden="true">+</span></span>
+                            <span class="dive-line" aria-hidden="true"></span>
+                        </summary>
+                        <div class="layer-dive-body">
+                            <p class="layer-desc">
+                                Each procedure is a <strong>multi-step workflow the agent runs</strong> &mdash; not a
+                                paragraph it reads back. API calls, sequential coordination, asking the user for missing
+                                information. Every variant of <em>what to ask and when</em> was mapped and trained.
+                            </p>
+                            <div class="layer-callout">
+                                <strong>Model evolution</strong>
+                                Fine-tuning ran across two platforms over 12+ months: OpenAI (Babbage &rarr; Davinci
+                                &rarr; GPT-3.5 as each became available) and HF AutoTrain. Hundreds of cycles tightened
+                                Hebrew fidelity, PII redaction, conversational state, and procedure adherence
+                                &mdash; not parameter counts.
+                            </div>
+                        </div>
+                    </details>
                 </article>
 
                 <!-- LAYER 4: SAFETY GATE -->
@@ -1263,14 +1396,7 @@
                             <span class="now-called"><span class="now-called-prefix">Now called</span> Human-in-the-Loop / Guardrails</span>
                         </div>
                     </div>
-                    <p class="layer-desc">
-                        After the agent prepares a reply, a <strong>5-minute human-override window</strong>
-                        opens. A human operator watches the session through a Debug Dashboard and can edit,
-                        reclassify, or approve. If no one intervenes, the system falls back to a deterministic
-                        message: <em>&ldquo;We&rsquo;ll get back to you soon.&rdquo;</em>
-                    </p>
-
-                    <!-- Safety-gate timeline — the 5-minute override window, shown -->
+                    <!-- Killer visual: the 5-minute override window, shown -->
                     <div class="safety-timeline" aria-label="Safety gate timeline — the 5-minute override window">
                         <div class="safety-timeline-caption">The 5-minute override window</div>
                         <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline showing T+0 agent stages reply, T+0 to T+5min human override window, T+5min decision point">
@@ -1319,36 +1445,52 @@
                         <p>Probabilistic output never escaped without a <em>deterministic decision</em> behind it.</p>
                     </div>
 
-                    <div class="safety-grid" aria-label="Debug Monitor Dashboard capabilities">
-                        <div class="safety-item">
-                            <span class="safety-tag">REAL-TIME VIEW</span>
-                            <h4>Live session inspector</h4>
-                            <p>Inbound message, detected intent, retrieved procedure, and staged reply &mdash; all synchronized.</p>
-                        </div>
-                        <div class="safety-item">
-                            <span class="safety-tag">EDIT</span>
-                            <h4>Editable response field</h4>
-                            <p>Correct the auto-completion in place; the corrected text replaces what would have been sent.</p>
-                        </div>
-                        <div class="safety-item">
-                            <span class="safety-tag">RECLASSIFY</span>
-                            <h4>Intent override dropdown</h4>
-                            <p>If Layer 1 misjudged, pick the correct category and the workflow re-routes from there.</p>
-                        </div>
-                        <div class="safety-item">
-                            <span class="safety-tag">DEBUG</span>
-                            <h4>Code logs in-line</h4>
-                            <p>Per-session decision trace &mdash; every retrieval, every branch, every API call.</p>
-                        </div>
-                    </div>
+                    <p class="layer-caption">Five minutes for a human to override. Otherwise, a deterministic fallback.</p>
 
-                    <div class="layer-callout">
-                        <strong>Deterministic-gate-first, in production</strong>
-                        In 2021, most production AI shipped raw model output straight to users. Putting every
-                        probabilistic decision behind a deterministic check &mdash; with a human-readable trace
-                        and an explicit fallback &mdash; was the design choice that later scaled into the
-                        multi-agent DAGs at the Pipeline Observatory.
-                    </div>
+                    <details class="layer-dive">
+                        <summary aria-label="Toggle deep dive for Layer 4">
+                            <span class="dive-line" aria-hidden="true"></span>
+                            <span class="dive-label">Deep dive <span class="dive-icon" aria-hidden="true">+</span></span>
+                            <span class="dive-line" aria-hidden="true"></span>
+                        </summary>
+                        <div class="layer-dive-body">
+                            <p class="layer-desc">
+                                After the agent prepares a reply, a <strong>5-minute human-override window</strong>
+                                opens. A human operator watches the session through a Debug Dashboard and can edit,
+                                reclassify, or approve. If no one intervenes, the system falls back to a deterministic
+                                message: <em>&ldquo;We&rsquo;ll get back to you soon.&rdquo;</em>
+                            </p>
+                            <div class="safety-grid" aria-label="Debug Monitor Dashboard capabilities">
+                                <div class="safety-item">
+                                    <span class="safety-tag">REAL-TIME VIEW</span>
+                                    <h4>Live session inspector</h4>
+                                    <p>Inbound message, detected intent, retrieved procedure, and staged reply &mdash; all synchronized.</p>
+                                </div>
+                                <div class="safety-item">
+                                    <span class="safety-tag">EDIT</span>
+                                    <h4>Editable response field</h4>
+                                    <p>Correct the auto-completion in place; the corrected text replaces what would have been sent.</p>
+                                </div>
+                                <div class="safety-item">
+                                    <span class="safety-tag">RECLASSIFY</span>
+                                    <h4>Intent override dropdown</h4>
+                                    <p>If Layer 1 misjudged, pick the correct category and the workflow re-routes from there.</p>
+                                </div>
+                                <div class="safety-item">
+                                    <span class="safety-tag">DEBUG</span>
+                                    <h4>Code logs in-line</h4>
+                                    <p>Per-session decision trace &mdash; every retrieval, every branch, every API call.</p>
+                                </div>
+                            </div>
+                            <div class="layer-callout">
+                                <strong>Deterministic-gate-first, in production</strong>
+                                In 2021, most production AI shipped raw model output straight to users. Putting every
+                                probabilistic decision behind a deterministic check &mdash; with a human-readable trace
+                                and an explicit fallback &mdash; was the design choice that later scaled into the
+                                multi-agent DAGs at the Pipeline Observatory.
+                            </div>
+                        </div>
+                    </details>
                 </article>
 
             </div>
