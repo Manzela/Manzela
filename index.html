@@ -1,475 +1,1426 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Manzela — AI Product Engineer</title>
-    <meta name="description" content="Stochastic models into deterministic infrastructure. 8+ years shipping autonomous pipelines, self-hosted inference, and fail-closed safety across 4 continents.">
-    
-    <meta property="og:title" content="Daniel Manzela — AI Product Engineer">
-    <meta property="og:description" content="Stochastic models into deterministic infrastructure. 8+ years shipping autonomous pipelines, self-hosted inference, and fail-closed safety across 4 continents.">
-    <meta property="og:url" content="https://manzela.github.io/Manzela/">
-    <meta property="og:type" content="profile">
-    <meta property="og:image" content="https://manzela.github.io/Manzela/assets/og-preview.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://manzela.github.io/Manzela/assets/og-preview.png">
-    <meta name="twitter:title" content="Daniel Manzela — AI Product Engineer">
-    <link rel="canonical" href="https://manzela.github.io/Manzela/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        appleBg: '#000000',
-                        appleSurface: '#1d1d1f',
-                        appleBorder: '#424245',
-                        appleLight: '#f5f5f7',
-                        appleGray: '#86868b',
-                        appleBlue: '#2997ff',
-                        appleDarker: '#151516'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daniel Manzela — Autonomous AI Systems Engineer</title>
+  <meta name="description" content="Autonomous AI Systems Engineer. Eight years building production AI in five iterations: data pipelines, agentic systems, computer vision, physical-context AI, and a 7-node fail-closed pipeline running 10.5M pages per cycle for 11 enterprise clients across 5 countries.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://manzela.github.io/Manzela/">
+
+  <meta property="og:title" content="Daniel Manzela — Autonomous AI Systems Engineer">
+  <meta property="og:description" content="Five projects, one pattern. Filters first, agents second, gates always. Active 2019 → 2026.">
+  <meta property="og:url" content="https://manzela.github.io/Manzela/">
+  <meta property="og:type" content="profile">
+  <meta property="og:image" content="https://manzela.github.io/Manzela/assets/og-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Daniel Manzela — Autonomous AI Systems Engineer">
+  <meta name="twitter:description" content="Five projects, one pattern. 2019 → 2026.">
+  <meta name="twitter:image" content="https://manzela.github.io/Manzela/assets/og-preview.png">
+
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23000'/><polygon points='32,8 56,32 32,56 8,32' fill='%232997ff'/></svg>" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --appleDark:         #000000;
+      --appleDarker:       #0a0a0c;
+      --appleSurface:      #131316;
+      --appleSurfaceElev:  #1d1d1f;
+      --appleBorder:       rgba(255, 255, 255, 0.08);
+      --appleBorderSoft:   rgba(255, 255, 255, 0.04);
+      --appleBorderHover:  rgba(255, 255, 255, 0.18);
+      --appleLight:        #f5f5f7;
+      --appleGray:         #86868b;
+      --appleGrayDim:      rgba(134, 134, 139, 0.55);
+      --appleBlue:         #2997ff;
+      --appleBlueDim:      rgba(41, 151, 255, 0.32);
+      --appleBlueGlow:     rgba(41, 151, 255, 0.18);
+      --appleSelection:    rgba(41, 151, 255, 0.3);
+
+      --statusGreen:       #34d399;
+      --statusRed:         #f87171;
+      --statusAmber:       #fbbf24;
+
+      --fontUI:   -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                  "Helvetica Neue", Helvetica, "Segoe UI", system-ui, sans-serif;
+      --fontMono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+      --type-display:  clamp(2.75rem, 7vw, 5.5rem);
+      --type-h2:       clamp(1.85rem, 4vw, 2.85rem);
+      --type-h3:       clamp(1.2rem, 2.2vw, 1.55rem);
+      --type-body:     clamp(0.95rem, 1.05vw, 1.05rem);
+      --type-eyebrow:  0.7rem;
+      --type-meta:     0.85rem;
+
+      --tracking-display: -0.025em;
+      --tracking-eyebrow: 0.14em;
+      --leading-display:  0.95;
+      --leading-body:     1.55;
+
+      --nav-height:               54px;
+      --nav-stuck-offset:         calc(var(--nav-height) + 24px);
+      --section-gap:              clamp(4.5rem, 9vw, 9rem);
+      --content-max:              74rem;
+      --spine-rail-width:         clamp(4rem, 8vw, 9rem);
+      --radius-card:              18px;
+      --radius-pill:              999px;
+
+      --ease-decel: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-snap:  cubic-bezier(0.32, 0.72, 0, 1);
+      --ease-pulse: cubic-bezier(0.4, 0, 0.6, 1);
+
+      --dur-reveal-hero:  900ms;
+      --dur-reveal-card:  500ms;
+      --dur-counter:      1400ms;
+      --dur-pulse:        2000ms;
+      --dur-micro:        180ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      background: var(--appleDark);
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--appleDark);
+      color: var(--appleLight);
+      font-family: var(--fontUI);
+      font-size: var(--type-body);
+      line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode: overlay;
+      opacity: 0.4;
+    }
+
+    ::selection { background: var(--appleSelection); color: var(--appleLight); }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size var(--dur-micro) var(--ease-snap),
+                  color var(--dur-micro) var(--ease-snap);
+    }
+    a:hover { background-size: 100% 1px; }
+    a.subtle { color: var(--appleGray); }
+    a.subtle:hover { color: var(--appleLight); }
+
+    :focus-visible {
+      outline: 2px solid var(--appleBlue);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      background: var(--appleBlue);
+      color: var(--appleDark);
+      padding: 0.75rem 1rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      font-weight: 500;
+      z-index: 1000;
+      background-image: none;
+      border-radius: 4px;
+      transition: top var(--dur-micro) var(--ease-snap);
+    }
+    .skip-link:focus { top: 0.5rem; }
+
+    .mono { font-family: var(--fontMono); font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1; }
+    .eyebrow {
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--appleGray);
+      margin: 0 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 2rem;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+    h1, h2, h3, h4 { margin: 0; }
+    h2 {
+      font-family: var(--fontUI);
+      font-size: var(--type-h2);
+      line-height: 1.05;
+      letter-spacing: var(--tracking-display);
+      font-weight: 600;
+      color: var(--appleLight);
+    }
+    h3 {
+      font-family: var(--fontUI);
+      font-size: var(--type-h3);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+      color: var(--appleLight);
+    }
+    p { margin: 0 0 1rem; max-width: 56rem; }
+    ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+    blockquote { margin: 0; padding: 0; }
+    hr.section-divider {
+      border: 0;
+      height: 1px;
+      max-width: var(--content-max);
+      margin: 0 auto;
+      background: linear-gradient(to right, transparent, var(--appleBorder), transparent);
+    }
+
+    .glass-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--nav-height);
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--appleBorder);
+      z-index: 100;
+    }
+    .glass-nav-inner {
+      max-width: var(--content-max);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--appleLight);
+      background-image: none;
+      font-weight: 500;
+    }
+    .nav-brand-glyph {
+      width: 14px;
+      height: 14px;
+      transform: rotate(45deg);
+      border: 1px solid var(--appleBlue);
+      flex-shrink: 0;
+    }
+    .nav-list {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-list a {
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--appleGray);
+      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      background-size: 0% 1px;
+      padding: 0.25rem 0;
+    }
+    .nav-list a:hover, .nav-list a[aria-current="page"] {
+      color: var(--appleLight);
+      background-size: 100% 1px;
+    }
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--appleBorder);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      transition: border-color var(--dur-micro) var(--ease-snap);
+    }
+    .nav-toggle:hover { border-color: var(--appleBorderHover); }
+    .nav-toggle-bar {
+      display: block;
+      width: 16px;
+      height: 1.5px;
+      background: var(--appleLight);
+      position: relative;
+    }
+    .nav-toggle-bar::before, .nav-toggle-bar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 16px;
+      height: 1.5px;
+      background: var(--appleLight);
+      transition: transform var(--dur-micro) var(--ease-snap);
+    }
+    .nav-toggle-bar::before { top: -5px; }
+    .nav-toggle-bar::after  { top: 5px; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bar { background: transparent; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bar::before { transform: translateY(5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bar::after  { transform: translateY(-5px) rotate(-45deg); }
+
+    main { padding-top: calc(var(--nav-height) + 4.5rem); position: relative; z-index: 2; }
+
+    main [id], section[id], header[id] {
+      scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+    }
+
+    .section {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 1.5rem var(--section-gap);
+      position: relative;
+    }
+    .section-narrow { max-width: 60rem; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--dur-reveal-card) var(--ease-decel),
+                  transform var(--dur-reveal-card) var(--ease-decel);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .hero { padding-top: 1rem; padding-bottom: var(--section-gap); }
+    .hero-h1 {
+      font-family: var(--fontUI);
+      font-size: var(--type-display);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+      font-weight: 600;
+      color: var(--appleLight);
+      margin: 0 0 1.75rem;
+      max-width: 22ch;
+    }
+    .hero-sub {
+      font-size: var(--type-h3);
+      line-height: 1.4;
+      color: var(--appleGray);
+      max-width: 50rem;
+      margin: 0 0 2.5rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1.4rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      margin: 0 0 1rem;
+    }
+    .hero-meta strong {
+      color: var(--appleLight);
+      font-weight: 500;
+    }
+    .hero-meta-sep {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.4;
+    }
+    .hero-live {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem 1.5rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      padding-top: 1.25rem;
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--appleBorder);
+    }
+    .hero-live a {
+      color: var(--appleBlue);
+      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+    }
+    .hero-live a:hover { color: var(--appleBlue); }
+    .hero-live time { color: var(--appleLight); }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--statusGreen);
+      flex-shrink: 0;
+      animation: status-pulse var(--dur-pulse) var(--ease-pulse) infinite;
+    }
+    @keyframes status-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+      50%      { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+    }
+
+    .now-metric {
+      margin: 1.75rem 0 1.5rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .now-metric-value {
+      display: block;
+      font-family: var(--fontMono);
+      font-weight: 700;
+      font-size: clamp(3.5rem, 11vw, 7.5rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+      color: var(--appleLight);
+    }
+    .now-metric-label {
+      font-family: var(--fontUI);
+      font-size: var(--type-h3);
+      color: var(--appleGray);
+    }
+    .now-satellites {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.6rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleLight);
+    }
+    .now-satellites li::before {
+      content: "—";
+      color: var(--appleGray);
+      margin-right: 0.5rem;
+    }
+    .now-prose {
+      max-width: 56rem;
+      color: var(--appleLight);
+      margin-bottom: 2rem;
+    }
+    .now-handoffs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--appleBorder);
+    }
+    .now-handoffs a {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+    }
+    .now-handoffs a:hover { color: var(--appleLight); }
+
+    .arc-lede {
+      max-width: 50rem;
+      color: var(--appleGray);
+      margin-bottom: 3.5rem;
+      font-size: var(--type-h3);
+      line-height: 1.4;
+    }
+    .spine {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: var(--spine-rail-width) 1fr;
+      gap: 0;
+      position: relative;
+    }
+    .spine::before {
+      content: "";
+      position: absolute;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      left: calc(var(--spine-rail-width) - 1px);
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0,
+        var(--appleBorder) 4rem,
+        var(--appleBorder) calc(100% - 4rem),
+        transparent 100%
+      );
+    }
+    .spine-item { display: contents; }
+    .spine-rail {
+      position: relative;
+      padding: 3rem 1.25rem 3rem 0;
+      text-align: right;
+    }
+    .spine-year {
+      display: inline-block;
+      font-family: var(--fontMono);
+      font-weight: 700;
+      font-size: clamp(1.65rem, 4.5vw, 3.25rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+      color: var(--appleGray);
+      position: sticky;
+      top: var(--nav-stuck-offset);
+      transition: color var(--dur-micro) var(--ease-snap);
+    }
+    .spine-item[data-current="true"] .spine-year { color: var(--appleLight); }
+    .spine-dot {
+      position: absolute;
+      right: -7px;
+      top: calc(3rem + 0.45em);
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--appleSurface);
+      border: 1px solid var(--appleBorderHover);
+      box-shadow: 0 0 0 4px var(--appleDark);
+    }
+    .spine-item[data-current="true"] .spine-dot {
+      background: var(--appleBlue);
+      border-color: var(--appleBlue);
+      animation: spine-pulse var(--dur-pulse) var(--ease-pulse) infinite;
+    }
+    @keyframes spine-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px var(--appleDark), 0 0 0 6px var(--appleBlueGlow); }
+      50%      { box-shadow: 0 0 0 4px var(--appleDark), 0 0 0 14px transparent; }
+    }
+    .spine-card {
+      background: var(--appleSurface);
+      border: 1px solid var(--appleBorder);
+      border-radius: var(--radius-card);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      margin: 1.5rem 0 2rem 1.75rem;
+      transition: border-color var(--dur-micro) var(--ease-snap),
+                  transform var(--dur-micro) var(--ease-snap);
+    }
+    .spine-card:hover { border-color: var(--appleBorderHover); }
+    .spine-item[data-current="true"] .spine-card {
+      box-shadow: inset 0 0 0 1px var(--appleBlueDim);
+      background: linear-gradient(
+        to bottom right,
+        rgba(41, 151, 255, 0.025),
+        var(--appleSurface) 60%
+      );
+    }
+    .spine-card-header { margin-bottom: 1.25rem; }
+    .spine-card-title {
+      font-size: var(--type-h3);
+      margin-bottom: 0.4rem;
+    }
+    .spine-card-meta {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.7rem;
+    }
+    .spine-card-meta time { color: var(--appleLight); }
+    .spine-card-quote {
+      margin: 1.25rem 0 1.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--appleBlue);
+      font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+      line-height: 1.4;
+      font-weight: 500;
+      letter-spacing: -0.012em;
+      color: var(--appleLight);
+    }
+    .spine-card-numerics {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleLight);
+    }
+    .spine-card-numerics li {
+      position: relative;
+      padding-left: 0.85rem;
+    }
+    .spine-card-numerics li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 4px;
+      height: 4px;
+      background: var(--appleGray);
+      border-radius: 50%;
+    }
+    .spine-card-lesson, .spine-card-bridge {
+      margin: 0.75rem 0;
+      color: var(--appleLight);
+      max-width: 56rem;
+    }
+    .spine-card-lesson .label, .spine-card-bridge .label {
+      display: inline-block;
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--appleGray);
+      font-weight: 500;
+      margin-right: 0.6rem;
+      vertical-align: 0.05em;
+    }
+    .spine-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleBlue);
+      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      background-size: 0% 1px;
+    }
+    .spine-card-cta:hover { background-size: 100% 1px; color: var(--appleBlue); }
+
+    .proved-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: proved;
+    }
+    .proved-list > li {
+      counter-increment: proved;
+      padding: 1.75rem 0 1.75rem 4rem;
+      border-top: 1px solid var(--appleBorder);
+      position: relative;
+    }
+    .proved-list > li:last-child { border-bottom: 1px solid var(--appleBorder); }
+    .proved-list > li::before {
+      content: counter(proved, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 1.95rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      letter-spacing: var(--tracking-eyebrow);
+      color: var(--appleGray);
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+    .proved-list h3 { margin-bottom: 0.4rem; font-size: 1.25rem; }
+    .proved-list p { margin: 0 0 0.4rem; }
+    .proved-source {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      margin-top: 0.3rem !important;
+    }
+
+    .stack-list {
+      display: grid;
+      grid-template-columns: minmax(11rem, max-content) 1fr;
+      gap: 1.25rem 2.5rem;
+      align-items: baseline;
+      margin: 0 0 3.5rem;
+      max-width: var(--content-max);
+    }
+    .stack-list dt {
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--appleGray);
+    }
+    .stack-list dd {
+      margin: 0;
+      color: var(--appleLight);
+      line-height: 1.55;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+    }
+
+    .social-proof {
+      margin-top: 2.5rem;
+      padding: 1.75rem 0 0;
+      border-top: 1px solid var(--appleBorder);
+    }
+    .social-proof-eyebrow {
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--appleGray);
+      margin: 0 0 1.5rem;
+    }
+    .social-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem 1.75rem;
+      margin: 0 0 1.75rem;
+      list-style: none;
+      padding: 0;
+    }
+    .social-proof-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 1rem;
+      border: 1px solid var(--appleBorderSoft);
+      border-radius: 12px;
+      background: var(--appleSurface);
+      transition: border-color var(--dur-micro) var(--ease-snap);
+      min-height: 100%;
+    }
+    .social-proof-item:hover { border-color: var(--appleBorderHover); }
+    .social-proof-item img {
+      max-height: 56px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      filter: saturate(0.95);
+    }
+    .social-proof-item .sp-label {
+      font-family: var(--fontMono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--appleLight);
+      line-height: 1.35;
+    }
+    .social-proof-item .sp-source {
+      font-family: var(--fontMono);
+      font-size: 0.65rem;
+      color: var(--appleGray);
+      letter-spacing: 0.04em;
+    }
+    .social-proof-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.75rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .social-proof-links a { color: var(--appleLight); }
+
+    .parallel-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .parallel-list > li {
+      background: var(--appleSurface);
+      border: 1px solid var(--appleBorder);
+      border-radius: var(--radius-card);
+      padding: 1.5rem 1.75rem;
+      transition: border-color var(--dur-micro) var(--ease-snap);
+    }
+    .parallel-list > li:hover { border-color: var(--appleBorderHover); }
+    .parallel-list h3 {
+      margin: 0 0 0.5rem;
+      font-size: var(--type-h3);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .parallel-list h3 .badge {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .parallel-list p { margin: 0; color: var(--appleGray); max-width: 60rem; }
+
+    .writing-list { list-style: none; padding: 0; margin: 0; }
+    .writing-list li {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--appleBorderSoft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem 1.5rem;
+    }
+    .writing-list li:last-child { border-bottom: 1px solid var(--appleBorder); }
+    .writing-list li:first-child { border-top: 1px solid var(--appleBorder); }
+    .writing-list .w-title { color: var(--appleLight); font-size: var(--type-body); }
+    .writing-list .w-meta {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      letter-spacing: 0.04em;
+    }
+
+    .contact-line {
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      align-items: baseline;
+    }
+    .contact-line a { color: var(--appleLight); }
+    .contact-sep { color: var(--appleGray); }
+
+    .site-footer {
+      border-top: 1px solid var(--appleBorder);
+      padding: 2.5rem 1.5rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--appleGray);
+      text-align: center;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 2;
+    }
+    .site-footer p { margin: 0; max-width: none; }
+
+    @media (max-width: 880px) {
+      .nav-list {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: calc(100vh - var(--nav-height));
+        height: calc(100dvh - var(--nav-height));
+        background: var(--appleDark);
+        backdrop-filter: saturate(180%) blur(28px);
+        -webkit-backdrop-filter: saturate(180%) blur(28px);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 1.5rem;
+        transform: translateX(100%);
+        transition: transform var(--dur-micro) var(--ease-snap);
+        border-left: 1px solid var(--appleBorder);
+        z-index: 99;
+        overflow-y: auto;
+      }
+      .nav-list.is-open { transform: translateX(0); }
+      .nav-list a {
+        display: block;
+        padding: 1rem 0;
+        font-size: 0.85rem;
+        width: 100%;
+        border-bottom: 1px solid var(--appleBorderSoft);
+      }
+      .nav-toggle { display: inline-flex; }
+      .stack-list { grid-template-columns: 1fr; gap: 0.4rem 0; }
+      .stack-list dt { margin-top: 1.25rem; }
+    }
+
+    @media (max-width: 720px) {
+      .spine { grid-template-columns: 1fr; }
+      .spine::before { left: 0.4rem; top: 0.5rem; bottom: 0.5rem; }
+      .spine-rail {
+        padding: 0.5rem 0 0 1.6rem;
+        text-align: left;
+        position: relative;
+      }
+      .spine-year { position: static; font-size: 1.6rem; }
+      .spine-dot {
+        right: auto;
+        left: -0.8rem;
+        top: 0.65rem;
+      }
+      .spine-card { margin: 0.5rem 0 2.5rem 1.6rem; padding: 1.25rem; }
+      .proved-list > li { padding-left: 3rem; }
+      .stack-list dd { font-size: 0.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .spine-year { position: static; }
+      .spine-item[data-current="true"] .spine-dot {
+        box-shadow: 0 0 0 4px var(--appleDark), 0 0 0 7px var(--appleBlueGlow);
+        animation: none;
+      }
+      .status-dot {
+        animation: none;
+        box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.2);
+      }
+    }
+  </style>
+
+  <noscript>
     <style>
-        body { background-color: #000000; color: #f5f5f7; -webkit-font-smoothing: antialiased; }
-        .card { background-color: #1d1d1f; border: 1px solid #424245; border-radius: 18px; }
-        .glass-nav { background: rgba(0, 0, 0, 0.7); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid #424245; }
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        ::selection { background: rgba(41, 151, 255, 0.3); color: #f5f5f7; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .spine-item[data-current="true"] .spine-dot { animation: none !important; }
+      .status-dot { animation: none !important; }
+      .nav-toggle { display: none !important; }
+      .nav-list { transform: none !important; position: static !important; flex-direction: row !important; background: transparent !important; padding: 0 !important; inset: auto !important; border-left: 0 !important; }
     </style>
+  </noscript>
 </head>
-<body class="bg-appleBg text-appleLight antialiased selection:bg-appleBlue/30">
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-            <div class="text-sm font-semibold tracking-tight text-appleLight">
-                Daniel<span class="text-appleGray font-medium ml-1">Manzela</span>
-            </div>
-            <div class="hidden md:flex gap-8">
-                <a href="#about" class="text-xs tracking-wider uppercase text-appleGray hover:text-appleLight transition-colors">About</a>
-                <a href="#work" class="text-xs tracking-wider uppercase text-appleGray hover:text-appleLight transition-colors">Work</a>
-                <a href="#engineering" class="text-xs tracking-wider uppercase text-appleGray hover:text-appleLight transition-colors">Engineering</a>
-                <a href="https://manzela.github.io/pipeline-observatory/case-studies.html" class="text-xs tracking-wider uppercase text-appleGray hover:text-appleLight transition-colors">Evidence</a>
-            </div>
-            <button class="md:hidden text-appleGray" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <span class="material-symbols-outlined">menu</span>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden absolute top-14 left-0 right-0 bg-appleBg/95 backdrop-blur border-b border-appleBorder p-6 flex flex-col gap-6">
-            <a href="#about" class="text-sm text-appleGray hover:text-appleLight" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
-            <a href="#work" class="text-sm text-appleGray hover:text-appleLight" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Work</a>
-            <a href="#engineering" class="text-sm text-appleGray hover:text-appleLight" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Engineering</a>
-            <a href="https://manzela.github.io/pipeline-observatory/case-studies.html" class="text-sm text-appleGray hover:text-appleLight">Evidence</a>
-        </div>
-    </nav>
-
-    <div class="max-w-5xl mx-auto px-6 pt-32 pb-20">
-        
-        <!-- Hero -->
-        <section class="py-20 md:py-32 text-center border-b border-appleBorder relative">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleBlue font-medium mb-6 reveal">AI Product Engineer</div>
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-8 max-w-3xl mx-auto reveal">
-                Stochastic models.<br><span class="text-appleLight">Deterministic infrastructure.</span>
-            </h1>
-            <p class="text-appleGray text-base md:text-lg max-w-2xl mx-auto mb-16 leading-relaxed reveal">
-                8+ years shipping AI from zero to production. Autonomous pipelines, self-hosted inference, eval-driven guardrails, and fail-closed safety&mdash;across 4 continents and 10M+ end users.
-            </p>
-
-            <div class="card p-2 md:p-4 grid grid-cols-2 md:grid-cols-4 gap-px bg-appleBorder max-w-4xl mx-auto mb-16 reveal">
-                <div class="bg-appleSurface p-6 text-center hover:bg-appleBorder/20 transition-colors">
-                    <span class="block font-mono text-2xl font-semibold text-appleLight mb-2">11</span>
-                    <span class="block text-[10px] uppercase tracking-widest text-appleGray">Enterprise Clients</span>
-                </div>
-                <div class="bg-appleSurface p-6 text-center hover:bg-appleBorder/20 transition-colors">
-                    <span class="block font-mono text-2xl font-semibold text-appleLight mb-2">~10.5M</span>
-                    <span class="block text-[10px] uppercase tracking-widest text-appleGray">Pages / Cycle</span>
-                </div>
-                <div class="bg-appleSurface p-6 text-center hover:bg-appleBorder/20 transition-colors">
-                    <span class="block font-mono text-2xl font-semibold text-appleLight mb-2">234</span>
-                    <span class="block text-[10px] uppercase tracking-widest text-appleGray">Websites</span>
-                </div>
-                <div class="bg-appleSurface p-6 text-center hover:bg-appleBorder/20 transition-colors">
-                    <span class="block font-mono text-2xl font-semibold text-appleLight mb-2">$0.0006</span>
-                    <span class="block text-[10px] uppercase tracking-widest text-appleGray">Per Page Generated</span>
-                </div>
-            </div>
-
-            <div class="flex justify-center gap-4 reveal">
-                <a href="#work" class="px-6 py-3 bg-appleLight text-black font-medium text-sm rounded-full hover:bg-white transition-colors">View Projects</a>
-                <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer" class="px-6 py-3 border border-appleBorder text-appleLight font-medium text-sm rounded-full hover:bg-appleBorder/50 transition-colors">GitHub</a>
-                <a href="https://linkedin.com/in/danielmanzela" target="_blank" rel="noopener noreferrer" class="px-6 py-3 border border-appleBorder text-appleLight font-medium text-sm rounded-full hover:bg-appleBorder/50 transition-colors">LinkedIn</a>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section id="about" class="py-24 border-b border-appleBorder">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleGray font-medium mb-12">About</div>
-            <div class="grid md:grid-cols-[1fr_300px] gap-12 md:gap-20 items-start reveal">
-                <div>
-                    <h2 class="text-2xl font-bold tracking-tight mb-8">From developer to product leader.</h2>
-                    <div class="space-y-6 text-sm text-appleGray leading-relaxed">
-                        <p>Foundation models are commodities; execution is the differentiator. I turn stochastic outputs into deterministic business infrastructure.</p>
-                        <p>I index on shipping. Relentless execution from zero to production&mdash;11 enterprise clients, 234 websites, every metric backed by production evidence. I operate full-stack across the entire business lifecycle: from closing enterprise sales to writing DAG pipelines and reviewing core infrastructure PRs.</p>
-                        <p>Leading a cross-functional team while remaining hands-on in the codebase forged a rigorous systems-thinking approach. I do not think in silos. Every technical architecture decision is a product strategy, and every product feature carries an engineering tax.</p>
-                    </div>
-                </div>
-                <div class="card p-px bg-appleBorder sticky top-24">
-                    <div class="grid grid-cols-2 gap-px bg-appleBorder rounded-[17px] overflow-hidden">
-                        <div class="bg-appleSurface p-6 text-center">
-                            <span class="block font-mono text-xl font-semibold text-appleLight mb-1">8+</span>
-                            <span class="block text-[9px] uppercase tracking-wider text-appleGray">Years Building</span>
-                        </div>
-                        <div class="bg-appleSurface p-6 text-center">
-                            <span class="block font-mono text-xl font-semibold text-appleLight mb-1">10M+</span>
-                            <span class="block text-[9px] uppercase tracking-wider text-appleGray">End Users</span>
-                        </div>
-                        <div class="bg-appleSurface p-6 text-center">
-                            <span class="block font-mono text-xl font-semibold text-appleLight mb-1">4</span>
-                            <span class="block text-[9px] uppercase tracking-wider text-appleGray">Continents</span>
-                        </div>
-                        <div class="bg-appleSurface p-6 text-center">
-                            <span class="block font-mono text-xl font-semibold text-appleLight mb-1">12</span>
-                            <span class="block text-[9px] uppercase tracking-wider text-appleGray">Peak Team</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Work -->
-        <section id="work" class="py-24 border-b border-appleBorder">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleGray font-medium mb-16">Featured Work</div>
-
-            <!-- Project 01 -->
-            <div class="reveal mb-24 last:mb-0">
-                <div class="flex items-start gap-6 mb-8">
-                    <div class="font-mono text-sm text-appleGray bg-appleDarker border border-appleBorder w-10 h-10 flex items-center justify-center rounded-xl shrink-0">01</div>
-                    <div>
-                        <h2 class="text-2xl font-bold tracking-tight mb-2">Autonomous Content Pipeline</h2>
-                        <p class="text-sm text-appleGray">Founder & Lead Engineer &mdash; TNG Shopper <span class="ml-2 px-3 py-1 bg-appleDarker border border-appleBorder text-[10px] uppercase tracking-wider rounded-full text-appleLight">Top 100 Retail Tech 2025/6</span></p>
-                    </div>
-                </div>
-
-                <div class="card p-px bg-appleBorder grid md:grid-cols-3 gap-px mb-8 overflow-hidden">
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Problem</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Manual content creation scales linearly. Naive LLM generation scales exponentially, but pollutes the index with SEO-toxic hallucinations.</p>
-                    </div>
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Architecture</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Engineered a 7-node Directed Acyclic Graph utilizing a strict Gate-Agent pattern. Deterministic validation (Pydantic, AST) fires first; probabilistic LLM execution activates only upon clearance.</p>
-                    </div>
-                    <div class="bg-appleDarker p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleBlue mb-4">Quality Enforcement</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">A multi-model &lsquo;LLM-as-Judge&rsquo; scores every generation via O-R-A-V criteria. First production month: 200K organic impressions and 2K unique visitors across client sites. Rejected outputs feed into a reinforcement learning flywheel.</p>
-                    </div>
-                </div>
-
-
-                <div class="flex flex-wrap gap-2 mb-8">
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Python</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Google ADK</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Gemini</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Pydantic</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Langfuse</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">BigQuery</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Redis</span>
-                </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="https://github.com/Manzela/agent-dag-pipeline" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">Open Source Repo <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                    <a href="https://manzela.github.io/pipeline-observatory/case-studies.html" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">GSC Evidence <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                    <a href="https://youtu.be/czZsPbylC1M" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">Video Demo <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                </div>
-            </div>
-
-            <!-- Project 02 -->
-            <div class="reveal mb-24 last:mb-0">
-                <div class="flex items-start gap-6 mb-8">
-                    <div class="font-mono text-sm text-appleGray bg-appleDarker border border-appleBorder w-10 h-10 flex items-center justify-center rounded-xl shrink-0">02</div>
-                    <div>
-                        <h2 class="text-2xl font-bold tracking-tight mb-2">Gemma 4 MoE — Vertex AI Deployment</h2>
-                        <p class="text-sm text-appleGray">Open-Source Contributor &mdash; Google Gemma Ecosystem</p>
-                    </div>
-                </div>
-
-                <div class="card p-px bg-appleBorder grid md:grid-cols-3 gap-px mb-8 overflow-hidden">
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Problem</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Deploying Gemma 4 26B-A4B-it (MoE) on Vertex AI with vLLM had zero community documentation. The dependency triangle between vLLM, Transformers 5.5, and huggingface_hub made PyPI-only deployments impossible.</p>
-                    </div>
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Engineering Solution</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Documented 20 distinct failure modes across 30+ deployment versions over 16+ hours. Built a GCSFUSE-enabled Dockerfile, dependency matrix proof, and working config for a single A100 80GB.</p>
-                    </div>
-                    <div class="bg-appleDarker p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleBlue mb-4">Community Impact</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Published the forensic runbook as open source. Posted deployment guide on Google's official Gemma 4 model card&mdash;became the most-engaged community discussion.</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap gap-2 mb-8">
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">vLLM</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Vertex AI</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">GCSFUSE</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">PagedAttention</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Docker</span>
-                </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="https://github.com/Manzela/gemma4-vllm-deployment" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">Forensic Runbook <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                    <a href="https://huggingface.co/google/gemma-4-26B-A4B-it/discussions/19" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">HuggingFace Post <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                </div>
-            </div>
-
-            <!-- Project 03 -->
-            <div class="reveal mb-24 last:mb-0">
-                <div class="flex items-start gap-6 mb-8">
-                    <div class="font-mono text-sm text-appleGray bg-appleDarker border border-appleBorder w-10 h-10 flex items-center justify-center rounded-xl shrink-0">03</div>
-                    <div>
-                        <h2 class="text-2xl font-bold tracking-tight mb-2">Antigravity-OS — AI Governance Kernel</h2>
-                        <p class="text-sm text-appleGray">Creator & Maintainer</p>
-                    </div>
-                </div>
-
-                <div class="card p-px bg-appleBorder grid md:grid-cols-3 gap-px mb-8 overflow-hidden">
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Problem</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Deploying autonomous agent fleets introduces unbounded cost risks and stochastic execution states. No lightweight, policy-enforced kernel existed for multi-agent governance.</p>
-                    </div>
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Architecture</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Architected a governance kernel utilizing Policy-as-Code (OPA) and real-time GCP billing hooks for hard-limit cost enforcement. Implemented deterministic state tracking and self-healing CI pipelines.</p>
-                    </div>
-                    <div class="bg-appleDarker p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleBlue mb-4">Production Pattern</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">MCP-native execution environments. Redis-backed memory networks and Firestore event sourcing. Hardened with comprehensive Open Source governance.</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap gap-2 mb-8">
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Python</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">MCP</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Redis</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Firestore</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">GitHub Actions</span>
-                </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="https://github.com/Manzela/Antigravity-OS" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">GitHub Repo <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                    <a href="https://github.com/Manzela/Antigravity-OS/blob/main/GOVERNANCE.md" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">Governance Model <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                </div>
-            </div>
-
-            <!-- Project 04 -->
-            <div class="reveal">
-                <div class="flex items-start gap-6 mb-8">
-                    <div class="font-mono text-sm text-appleGray bg-appleDarker border border-appleBorder w-10 h-10 flex items-center justify-center rounded-xl shrink-0">04</div>
-                    <div>
-                        <h2 class="text-2xl font-bold tracking-tight mb-2">Elysium — Physical-Context AI for Retail</h2>
-                        <p class="text-sm text-appleGray">Product Discovery & Lead Architecture</p>
-                    </div>
-                </div>
-
-                <div class="card p-px bg-appleBorder grid md:grid-cols-3 gap-px mb-8 overflow-hidden">
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Problem</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Retail allocation is blind to the present. Historic models fail against micro-trends and weather shifts, bleeding margin through stockouts and forced markdowns.</p>
-                    </div>
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Architecture</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">A spatial intelligence platform built on Vertex AI. Fuses live geo-signals with LLM reasoning via 11 specialized agents to predict exact SKU demand in real time.</p>
-                    </div>
-                    <div class="bg-appleDarker p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleBlue mb-4">Innovation</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">15 patent claims (3 independent) including O(1) H3 Geospatial Indexing and Z-Score Trigger Gating. Zero-trust 3-tier IAM access model with strict k-anonymity (&ge;10).</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap gap-2 mb-8">
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Vertex AI</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">PaLM 2 / Gemini</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">BigQuery</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">LightGBM</span>
-                </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="elysium/" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">View Case Study <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                </div>
-            </div>
-
-            <!-- Project 05 -->
-            <div class="reveal">
-                <div class="flex items-start gap-6 mb-8">
-                    <div class="font-mono text-sm text-appleGray bg-appleDarker border border-appleBorder w-10 h-10 flex items-center justify-center rounded-xl shrink-0">05</div>
-                    <div>
-                        <h2 class="text-2xl font-bold tracking-tight mb-2">Seller App — Computer Vision for Retail Digitization</h2>
-                        <p class="text-sm text-appleGray">Co-founder, Lead Product &amp; Engineering — 2020&ndash;2024 <span class="ml-2 px-3 py-1 bg-appleDarker border border-appleBorder text-[10px] uppercase tracking-wider rounded-full text-appleLight">0&rarr;1 case study</span></p>
-                    </div>
-                </div>
-
-                <div class="card p-px bg-appleBorder grid md:grid-cols-3 gap-px mb-8 overflow-hidden">
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Problem</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Physical retailers can&rsquo;t go online &mdash; manual product upload (~3 min/SKU &times; 50 SKUs = 2.5 hrs/store) is the rate-limiting step before a single photo is even taken.</p>
-                    </div>
-                    <div class="bg-appleSurface p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleGray mb-4">Architecture</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">React PWA over a two-database split: a 60M+ SKU canonical Global Product Database (retrieval-grounded) and a per-vendor Store DB. Three CV generations (barcode &rarr; image OCR &rarr; video RAG) over a stable retrieval layer.</p>
-                    </div>
-                    <div class="bg-appleDarker p-8">
-                        <h4 class="text-[10px] uppercase tracking-widest text-appleBlue mb-4">Outcome &amp; Pivot</h4>
-                        <p class="text-sm text-appleGray leading-relaxed">Bootstrapped four years to $10K MRR; field data exposed an incentive problem the product couldn&rsquo;t engineer around. Pivoted from SMB self-service to enterprise &mdash; the architectural insight (RAG-grounded CV) seeded the Autonomous Pipeline.</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap gap-2 mb-8">
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">React PWA</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">Google ML Kit</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">RAG over GPD</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">MongoDB</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">WooCommerce</span>
-                    <span class="px-3 py-1 bg-appleDarker border border-appleBorder rounded-lg text-xs text-appleLight">AWS</span>
-                </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="seller-app/" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">View Case Study <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Engineering Philosophy -->
-        <section id="engineering" class="py-24 border-b border-appleBorder">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleGray font-medium mb-12">Engineering Philosophy</div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-                <div class="card p-8 hover:bg-appleDarker transition-colors">
-                    <span class="font-mono text-xs text-appleGray mb-6 block">01</span>
-                    <h3 class="text-lg font-bold mb-4">Eval-First Development</h3>
-                    <p class="text-sm text-appleGray leading-relaxed">Every pipeline node has acceptance criteria enforced in CI. O-R-A-V semantic scoring blocks deployments below threshold. The LLM is the last thing that runs&mdash;deterministic gates fire first.</p>
-                </div>
-                <div class="card p-8 hover:bg-appleDarker transition-colors">
-                    <span class="font-mono text-xs text-appleGray mb-6 block">02</span>
-                    <h3 class="text-lg font-bold mb-4">Fail-Closed Safety</h3>
-                    <p class="text-sm text-appleGray leading-relaxed">If the system can&rsquo;t prove an output is safe, it rejects it. 68.9% pass rate by design&mdash;rejected outputs feed into the RL data flywheel for automatic prompt mutation and retraining.</p>
-                </div>
-                <div class="card p-8 hover:bg-appleDarker transition-colors">
-                    <span class="font-mono text-xs text-appleGray mb-6 block">03</span>
-                    <h3 class="text-lg font-bold mb-4">Cost as a Constraint</h3>
-                    <p class="text-sm text-appleGray leading-relaxed">$0.0006 per page, end-to-end on self-hosted inference. Achieved through model routing, semantic caching, and treating every token as a budget line item. Cost telemetry via Langfuse on every trace.</p>
-                </div>
-                <div class="card p-8 hover:bg-appleDarker transition-colors">
-                    <span class="font-mono text-xs text-appleGray mb-6 block">04</span>
-                    <h3 class="text-lg font-bold mb-4">White-Box by Default</h3>
-                    <p class="text-sm text-appleGray leading-relaxed">Every decision traceable. No black-box AutoML, no opaque model routing. Deterministic systems for traceability, probabilistic systems for generation&mdash;each with explicit observability boundaries.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Credentials -->
-        <section id="credentials" class="py-24 border-b border-appleBorder">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleGray font-medium mb-12">Credentials</div>
-            
-            <div class="card p-px bg-appleBorder overflow-hidden mb-12 reveal">
-                <div class="bg-appleSurface p-8 flex flex-col md:flex-row items-center gap-8">
-                    <img src="assets/top100-retailtech.png" alt="Top 100 Retail Tech" class="w-48 object-cover rounded-lg">
-                    <div>
-                        <h4 class="text-xl font-bold mb-2">Top 100 Retail Tech 2025/6</h4>
-                        <p class="text-sm text-appleGray mb-4">Re:Tech Innovation &mdash; TNG Shopper selected among the world's top 100 Retail Technology companies.</p>
-                        <a href="assets/retailtech-2025-report.pdf" target="_blank" rel="noopener noreferrer" class="text-sm font-medium hover:text-appleBlue transition-colors flex items-center gap-1">Full Report (PDF) <span class="material-symbols-outlined text-[16px]">arrow_outward</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6 reveal mb-12">
-                <div class="card p-8 text-center bg-appleDarker hover:bg-appleSurface transition-colors">
-                    <img src="assets/cert-genai-leader.png" alt="GenAI Leader" class="w-16 h-16 mx-auto mb-4 opacity-90">
-                    <h4 class="text-sm font-bold">Generative AI Leader</h4>
-                </div>
-                <div class="card p-8 text-center bg-appleDarker hover:bg-appleSurface transition-colors">
-                    <img src="assets/cert-cloud-architect.png" alt="Cloud Architect" class="w-16 h-16 mx-auto mb-4 opacity-90">
-                    <h4 class="text-sm font-bold">Cloud Architect</h4>
-                </div>
-                <div class="card p-8 text-center bg-appleDarker hover:bg-appleSurface transition-colors">
-                    <img src="assets/cert-ml-engineer.png" alt="ML Engineer" class="w-16 h-16 mx-auto mb-4 opacity-90">
-                    <h4 class="text-sm font-bold">ML Engineer</h4>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Writing -->
-        <section id="writing" class="py-24 border-b border-appleBorder">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleGray font-medium mb-12">Writing & Community</div>
-            <div class="grid md:grid-cols-3 gap-6 reveal">
-                <a href="https://medium.com/@manzela" target="_blank" rel="noopener noreferrer" class="card p-8 hover:bg-appleDarker transition-colors block group">
-                    <div class="text-[10px] uppercase tracking-widest text-appleGray mb-4 group-hover:text-appleBlue transition-colors">Medium</div>
-                    <h4 class="text-base font-bold mb-2">The Physical Context Flywheel</h4>
-                    <p class="text-sm text-appleGray">How city-level semantic context drives autonomous content generation at scale.</p>
-                </a>
-                <a href="https://huggingface.co/google/gemma-4-26B-A4B-it/discussions/19" target="_blank" rel="noopener noreferrer" class="card p-8 hover:bg-appleDarker transition-colors block group">
-                    <div class="text-[10px] uppercase tracking-widest text-appleGray mb-4 group-hover:text-appleBlue transition-colors">HuggingFace</div>
-                    <h4 class="text-base font-bold mb-2">Gemma 4 Deployment Guide</h4>
-                    <p class="text-sm text-appleGray">20 failure modes, dependency matrix, and working config for Vertex AI + vLLM.</p>
-                </a>
-                <a href="https://www.loom.com/share/be8a97a64f80414eae11176843c559bb" target="_blank" rel="noopener noreferrer" class="card p-8 hover:bg-appleDarker transition-colors block group">
-                    <div class="text-[10px] uppercase tracking-widest text-appleGray mb-4 group-hover:text-appleBlue transition-colors">Loom</div>
-                    <h4 class="text-base font-bold mb-2">Pipeline Deep-Dive</h4>
-                    <p class="text-sm text-appleGray">Technical walkthrough of the 7-node DAG, O-R-A-V scoring, and RL flywheel.</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact CTA -->
-        <section class="py-24 text-center reveal">
-            <div class="text-xs uppercase tracking-[0.2em] text-appleGray font-medium mb-6">Get in Touch</div>
-            <h2 class="text-3xl font-bold tracking-tight mb-4">Let&rsquo;s build something that ships.</h2>
-            <p class="text-appleGray text-sm max-w-lg mx-auto mb-10">I work best at the intersection of AI infrastructure and product strategy. If you&rsquo;re building autonomous systems that need to work in production, let&rsquo;s talk.</p>
-            <div class="flex justify-center gap-4">
-                <a href="mailto:danielq1603@gmail.com" class="px-6 py-3 bg-appleLight text-black font-medium text-sm rounded-full hover:bg-white transition-colors">Email</a>
-                <a href="https://linkedin.com/in/danielmanzela" target="_blank" rel="noopener noreferrer" class="px-6 py-3 border border-appleBorder text-appleLight font-medium text-sm rounded-full hover:bg-appleBorder/50 transition-colors">LinkedIn</a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="pt-12 mt-12 border-t border-appleBorder flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-sm font-semibold">Daniel Manzela</div>
-            <div class="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-wider font-medium text-appleGray">
-                <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer" class="hover:text-appleLight transition-colors">GitHub</a>
-                <a href="https://linkedin.com/in/danielmanzela" target="_blank" rel="noopener noreferrer" class="hover:text-appleLight transition-colors">LinkedIn</a>
-                <a href="https://medium.com/@manzela" target="_blank" rel="noopener noreferrer" class="hover:text-appleLight transition-colors">Medium</a>
-                <a href="https://huggingface.co/Manzela-D" target="_blank" rel="noopener noreferrer" class="hover:text-appleLight transition-colors">HuggingFace</a>
-                <a href="https://manzela.github.io/pipeline-observatory/" class="hover:text-appleLight transition-colors">Autonomous Pipeline</a>
-                <a href="elysium/" class="hover:text-appleLight transition-colors">Elysium</a>
-            </div>
-            <div class="text-xs text-appleGray">&copy; 2024&ndash;2026 Daniel Manzela</div>
-        </footer>
-
+  <nav class="glass-nav" aria-label="Primary">
+    <div class="glass-nav-inner">
+      <a href="#hero" class="nav-brand">
+        <span class="nav-brand-glyph" aria-hidden="true"></span>
+        <span>DM</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList" aria-label="Open menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-list" id="navList">
+        <li><a href="#now">Now</a></li>
+        <li><a href="#arc">Arc</a></li>
+        <li><a href="#proved">Proved</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <script>
-        const obs = new IntersectionObserver(e => e.forEach(x => {
-            if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); }
-        }), {threshold: 0.1});
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    </script>
+  <main id="main" tabindex="-1">
+
+    <header id="hero" class="section hero">
+      <p class="eyebrow reveal" style="transition-delay: 0ms;">AI Product Engineer · 2019 → Now · Israel → Lisbon</p>
+      <h1 class="hero-h1 reveal" style="transition-delay: 80ms;">
+        Stochastic models.<br>
+        Deterministic infrastructure.
+      </h1>
+      <p class="hero-sub reveal" style="transition-delay: 200ms;">
+        I build autonomous AI systems — pipelines, agents, fail-closed governance — that run in production for 11 enterprise clients across 5 countries.
+      </p>
+      <div class="hero-meta reveal" role="group" aria-label="Career timeframe and current role" style="transition-delay: 320ms;">
+        <span><strong>Active</strong> 2019 → 2026</span>
+        <span class="hero-meta-sep" aria-hidden="true"></span>
+        <span><strong>TNG Shopper</strong> · current</span>
+        <span class="hero-meta-sep" aria-hidden="true"></span>
+        <span>4 prior shipped systems</span>
+      </div>
+      <p class="hero-live reveal" style="transition-delay: 440ms;">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Pipeline last execution:&nbsp;<time datetime="2026-05-07T11:45:24Z" id="liveTimestamp">2026-05-07 11:45 UTC</time></span>
+        <a href="#now">→&nbsp;See what's running now</a>
+      </p>
+    </header>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="now" class="section" aria-labelledby="now-heading">
+      <p class="eyebrow">Now · 2024 → Present</p>
+      <h2 id="now-heading" class="reveal">What's running in production</h2>
+
+      <figure class="now-metric reveal" style="margin-block-start: 2.5rem;">
+        <output class="now-metric-value mono" id="nowCounter" aria-label="Approximately 10.5 million product pages per cycle">~10.5M</output>
+        <figcaption class="now-metric-label">product pages per cycle</figcaption>
+      </figure>
+
+      <ul class="now-satellites reveal" aria-label="Production scale">
+        <li>11 clients</li>
+        <li>5 countries (ES · PT · IL · US · MX)</li>
+        <li>234 websites</li>
+        <li>$0.0006 / page</li>
+      </ul>
+
+      <p class="now-prose reveal">
+        I lead the autonomous content pipeline at <strong>TNG Shopper</strong> — a 7-node DAG with deterministic gates and a fail-closed safety layer (DEMAS), serving 11 enterprise clients. Self-hosted Gemma 4 26B-A4B MoE on vLLM. ~73.5M sub-agent operations per full run. 68.9% O-R-A-V evaluation pass rate.
+      </p>
+
+      <nav class="now-handoffs reveal" aria-label="Pipeline observatory">
+        <a href="https://manzela.github.io/pipeline-observatory/">→&nbsp;Live observatory</a>
+        <a href="https://manzela.github.io/pipeline-observatory/architecture.html">→&nbsp;Architecture deep-dive</a>
+        <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">→&nbsp;Per-client GSC evidence</a>
+      </nav>
+    </section>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="arc" class="section" aria-labelledby="arc-heading">
+      <p class="eyebrow">The Arc · 2019 → 2026</p>
+      <h2 id="arc-heading">Five projects, one pattern</h2>
+      <p class="arc-lede">Each project taught me one primitive that's now load-bearing in production.</p>
+
+      <ol class="spine" role="list">
+
+        <li class="spine-item" data-year="2019">
+          <div class="spine-rail">
+            <span class="spine-year mono" aria-hidden="true">2019</span>
+            <span class="spine-dot" aria-hidden="true"></span>
+          </div>
+          <article class="spine-card reveal">
+            <header class="spine-card-header">
+              <h3 class="spine-card-title">Data Mining</h3>
+              <p class="spine-card-meta">
+                <time datetime="2019-02">Feb 2019 — Jul 2020</time>
+                <span aria-hidden="true">·</span>
+                <span>Israeli Financial Services Firm · Solo</span>
+              </p>
+            </header>
+            <blockquote class="spine-card-quote">
+              A pipeline is a series of filters, not a series of steps.
+            </blockquote>
+            <ul class="spine-card-numerics" aria-label="Production scale">
+              <li>17 mo in production</li>
+              <li>₪50M+ new AUM</li>
+              <li>5-stage manually orchestrated pipeline</li>
+            </ul>
+            <p class="spine-card-lesson">
+              <span class="label">Lesson</span>The five-stage filter is the architectural primitive everything later compounds. Frame any system as a chain of deterministic filters before adding probabilistic compute.
+            </p>
+            <p class="spine-card-bridge">
+              <span class="label">Bridge</span>Same pattern, larger scale, four years later: <a href="#tasko-ai">Tasko AI</a>.
+            </p>
+            <a class="spine-card-cta" href="data-mining/">Read the case study&nbsp;→</a>
+          </article>
+        </li>
+
+        <li id="tasko-ai" class="spine-item" data-year="2020">
+          <div class="spine-rail">
+            <span class="spine-year mono" aria-hidden="true">2020</span>
+            <span class="spine-dot" aria-hidden="true"></span>
+          </div>
+          <article class="spine-card reveal">
+            <header class="spine-card-header">
+              <h3 class="spine-card-title">Tasko AI</h3>
+              <p class="spine-card-meta">
+                <time datetime="2020-10">Oct 2020 — Dec 2023</time>
+                <span aria-hidden="true">·</span>
+                <span>Hasherut · Production agentic system</span>
+              </p>
+            </header>
+            <blockquote class="spine-card-quote">
+              An AI agent that learned to do a human's job — before agentic AI had a name.
+            </blockquote>
+            <ul class="spine-card-numerics" aria-label="Training scale">
+              <li>21,102 labeled tasks</li>
+              <li>153 unique clients</li>
+              <li>1,561 intent patterns</li>
+              <li>4-layer Classify / Retrieve / Execute / Verify</li>
+            </ul>
+            <p class="spine-card-lesson">
+              <span class="label">Lesson</span>The four-layer pattern is what every modern agent framework now calls "agentic with tool use." It shipped in production in 2020.
+            </p>
+            <p class="spine-card-bridge">
+              <span class="label">Bridge</span>Concurrent with the side-project that taught me when to kill a roadmap: <a href="#seller-app">Seller App</a>.
+            </p>
+            <a class="spine-card-cta" href="tasko-ai/">Read the case study&nbsp;→</a>
+          </article>
+        </li>
+
+        <li id="seller-app" class="spine-item" data-year="2020">
+          <div class="spine-rail">
+            <span class="spine-year mono" aria-hidden="true">2020</span>
+            <span class="spine-dot" aria-hidden="true"></span>
+          </div>
+          <article class="spine-card reveal">
+            <header class="spine-card-header">
+              <h3 class="spine-card-title">Seller App</h3>
+              <p class="spine-card-meta">
+                <time datetime="2020-01">Jan 2020 — Apr 2024</time>
+                <span aria-hidden="true">·</span>
+                <span>Co-founded with Dr. Eli Osherovich · Bootstrapped 4 yrs</span>
+              </p>
+            </header>
+            <blockquote class="spine-card-quote">
+              Computer vision for retail digitization — the side-project that taught me to ship, then to pivot, then to wind down.
+            </blockquote>
+            <ul class="spine-card-numerics" aria-label="Product scale">
+              <li>3 CV generations (Barcode → Image → Video + RAG)</li>
+              <li>60M+ canonical SKUs</li>
+              <li>$10K MRR plateau</li>
+            </ul>
+            <p class="spine-card-lesson">
+              <span class="label">Lesson</span>Vision-language pivot is when I learned that PMF without unit-economics is a research project, not a company.
+            </p>
+            <p class="spine-card-bridge">
+              <span class="label">Bridge</span>The wind-down was a deliberate sequencing decision; the next iteration of the engineering went into <a href="#elysium">Elysium</a>.
+            </p>
+            <a class="spine-card-cta" href="seller-app/">Read the case study&nbsp;→</a>
+          </article>
+        </li>
+
+        <li id="elysium" class="spine-item" data-year="2024">
+          <div class="spine-rail">
+            <span class="spine-year mono" aria-hidden="true">2024</span>
+            <span class="spine-dot" aria-hidden="true"></span>
+          </div>
+          <article class="spine-card reveal">
+            <header class="spine-card-header">
+              <h3 class="spine-card-title">Elysium</h3>
+              <p class="spine-card-meta">
+                <time datetime="2024">2024 — 2025</time>
+                <span aria-hidden="true">·</span>
+                <span>Physical-Context AI for Retail · Paused-pending-Pipeline</span>
+              </p>
+            </header>
+            <blockquote class="spine-card-quote">
+              Discovery-validated PMF can lose to sales-cycle structure.
+            </blockquote>
+            <ul class="spine-card-numerics" aria-label="Validation scale">
+              <li>13 brands validated</li>
+              <li>15,600+ store locations</li>
+              <li>15 patent claims (3 independent + 12 dependent)</li>
+              <li>11 specialized agents</li>
+            </ul>
+            <p class="spine-card-lesson">
+              <span class="label">Lesson</span>The right product can be the wrong order of operations. Pause is a routing decision, not a failure mode.
+            </p>
+            <p class="spine-card-bridge">
+              <span class="label">Bridge</span>The Pipeline became the prerequisite. Elysium activates as the next-phase intelligence product once the Pipeline is operating.
+            </p>
+            <a class="spine-card-cta" href="https://manzela.github.io/Elysium/">Read the case study&nbsp;→</a>
+          </article>
+        </li>
+
+        <li id="pipeline" class="spine-item" data-year="2024" data-current="true">
+          <div class="spine-rail">
+            <span class="spine-year mono" aria-hidden="true">2024</span>
+            <span class="spine-dot" aria-hidden="true"></span>
+          </div>
+          <article class="spine-card reveal">
+            <header class="spine-card-header">
+              <h3 class="spine-card-title">Pipeline / TNG Shopper</h3>
+              <p class="spine-card-meta">
+                <time datetime="2024">2024 — present</time>
+                <span aria-hidden="true">·</span>
+                <span>Production · Live observatory</span>
+              </p>
+            </header>
+            <blockquote class="spine-card-quote">
+              The synthesis. 7-node DAG, deterministic gates first, fail-closed by default.
+            </blockquote>
+            <ul class="spine-card-numerics" aria-label="Production scale">
+              <li>~10.5M PDPs / cycle</li>
+              <li>~73.5M agent operations / run</li>
+              <li>68.9% O-R-A-V pass rate</li>
+              <li>$0.0006 / PDP</li>
+              <li>Gemma 4 26B-A4B MoE on self-hosted vLLM</li>
+            </ul>
+            <p class="spine-card-lesson">
+              <span class="label">Lesson</span>The five-stage filter, the four-layer agent, the fail-closed governance — same architecture, finally fused.
+            </p>
+            <nav class="now-handoffs" aria-label="Pipeline observatory" style="margin-top: 1.5rem; padding-top: 1.25rem;">
+              <a href="https://manzela.github.io/pipeline-observatory/">→&nbsp;Live observatory</a>
+              <a href="https://manzela.github.io/pipeline-observatory/architecture.html">→&nbsp;Architecture</a>
+              <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">→&nbsp;Case studies</a>
+            </nav>
+          </article>
+        </li>
+
+      </ol>
+    </section>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="proved" class="section" aria-labelledby="proved-heading">
+      <p class="eyebrow">What it proved · Four claims</p>
+      <h2 id="proved-heading">The pattern across nine years</h2>
+      <ol class="proved-list" role="list" style="margin-top: 2.5rem;">
+        <li>
+          <h3>Pipeline-thinking before agent-thinking.</h3>
+          <p>Frame any system as a chain of deterministic filters before adding probabilistic compute.</p>
+          <p class="proved-source">Source: <a href="data-mining/">Data Mining (2019)</a>.</p>
+        </li>
+        <li>
+          <h3>Agentic patterns ship without the term.</h3>
+          <p>The four-layer Classify / Retrieve / Execute / Verify pattern was load-bearing in 2020.</p>
+          <p class="proved-source">Source: <a href="tasko-ai/">Tasko AI (2020 — 23)</a>.</p>
+        </li>
+        <li>
+          <h3>Discovery-validated PMF can lose to sales-cycle structure.</h3>
+          <p>The right product can be the wrong order of operations.</p>
+          <p class="proved-source">Source: <a href="https://manzela.github.io/Elysium/">Elysium (2024 — 25)</a>.</p>
+        </li>
+        <li>
+          <h3>Fail-closed is the only viable production posture for autonomous content at scale.</h3>
+          <p>The gate fires first; the agent activates only if the gate passes. 80% deterministic / 20% probabilistic compute.</p>
+          <p class="proved-source">Source: <a href="https://manzela.github.io/pipeline-observatory/">Pipeline (2024 — present)</a>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="stack" class="section" aria-labelledby="stack-heading">
+      <p class="eyebrow">Stack · Production system</p>
+      <h2 id="stack-heading">What I run, where</h2>
+
+      <dl class="stack-list" style="margin-top: 2.5rem;">
+        <dt>Inference & serving</dt>
+        <dd>Vertex AI · self-hosted Gemma 4 26B-A4B MoE on vLLM 0.17.2rc1 · PagedAttention · GCSFUSE · A100 80GB</dd>
+        <dt>Orchestration & data</dt>
+        <dd>Google ADK · Python · FastAPI · Pydantic · Jinja2 · BigQuery · GCS · Firestore · Redis · Cloud Functions</dd>
+        <dt>Observability & governance</dt>
+        <dd>Langfuse · OpenTelemetry · MCP · DEMAS (fail-closed safety layer) · O-R-A-V (4-axis evaluation) · DPO via RLAIF</dd>
+      </dl>
+
+      <section class="social-proof" aria-labelledby="social-proof-heading">
+        <p class="social-proof-eyebrow" id="social-proof-heading">Social proof · Verifiable credentials</p>
+        <ul class="social-proof-grid">
+          <li class="social-proof-item">
+            <img src="assets/top100-retailtech.png" alt="Top 100 Active Builders 2025 — RetailTech" loading="lazy" decoding="async">
+            <span class="sp-label">Top 100 Active Builders</span>
+            <span class="sp-source">RetailTech · 2025</span>
+          </li>
+          <li class="social-proof-item">
+            <img src="assets/cert-genai-leader.png" alt="Generative AI Leader certification" loading="lazy" decoding="async">
+            <span class="sp-label">Generative AI Leader</span>
+            <span class="sp-source">Google Cloud</span>
+          </li>
+          <li class="social-proof-item">
+            <img src="assets/cert-cloud-architect.png" alt="Professional Cloud Architect certification" loading="lazy" decoding="async">
+            <span class="sp-label">Professional Cloud Architect</span>
+            <span class="sp-source">Google Cloud</span>
+          </li>
+          <li class="social-proof-item">
+            <img src="assets/cert-ml-engineer.png" alt="Professional Machine Learning Engineer certification" loading="lazy" decoding="async">
+            <span class="sp-label">Pro ML Engineer</span>
+            <span class="sp-source">Google Cloud</span>
+          </li>
+        </ul>
+        <ul class="social-proof-links">
+          <li><a href="https://partner.skills.google/public_profiles/69fa3af8-3032-4a04-a818-f7277009c3a9">→&nbsp;32 Google Cloud credentials (verified profile)</a></li>
+          <li><a href="assets/retailtech-2025-report.pdf">→&nbsp;RetailTech 2025 report (PDF)</a></li>
+          <li><a href="assets/cert-product-experts.pdf">→&nbsp;Product Experts cert (PDF)</a></li>
+        </ul>
+      </section>
+    </section>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="parallel" class="section" aria-labelledby="parallel-heading">
+      <p class="eyebrow">Parallel track · Open-source distillations</p>
+      <h2 id="parallel-heading">Code you can read</h2>
+      <ul class="parallel-list" style="margin-top: 2.5rem;">
+        <li>
+          <h3><a href="https://github.com/Manzela/agent-dag-pipeline">agent-dag-pipeline</a></h3>
+          <p>Open-source distillation of the 7-node DAG. Google ADK + Vertex AI + O-R-A-V evaluation + DPO data flywheel.</p>
+        </li>
+        <li>
+          <h3>
+            <a href="https://github.com/Manzela/Antigravity-OS">Antigravity-OS</a>
+            <span class="badge mono">pip install ag-os</span>
+          </h3>
+          <p>Governance kernel for AI agents. OPA-style policy-as-code, MCP server, cost guard, "Dreaming Module" self-improvement loop.</p>
+        </li>
+        <li>
+          <h3><a href="https://github.com/Manzela/gemma4-vllm-deployment">gemma4-vllm-deployment</a></h3>
+          <p>Forensic runbook of 20 deployment failure modes for Gemma 4 26B-A4B MoE on Vertex AI + vLLM.</p>
+        </li>
+      </ul>
+    </section>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="writing" class="section" aria-labelledby="writing-heading">
+      <p class="eyebrow">Writing · Archive</p>
+      <h2 id="writing-heading">Recent essays</h2>
+      <ul class="writing-list" style="margin-top: 2rem;">
+        <li>
+          <span class="w-title"><a href="https://medium.com/kairi-ai/the-physical-context-flywheel-4964b6e45115">The Physical-Context Flywheel</a></span>
+          <span class="w-meta">Kairi-AI · Nov 2025</span>
+        </li>
+        <li>
+          <span class="w-title"><a href="https://medium.com/@manzela/epiphany-7d7c9f4dd857">Epiphany</a></span>
+          <span class="w-meta">Medium · Nov 2025</span>
+        </li>
+        <li>
+          <span class="w-title"><a href="https://medium.com/@manzela/the-marco-economy-of-hybrid-retail-ad51a977cba0">The Marco Economy of Hybrid Retail</a></span>
+          <span class="w-meta">Medium · Nov 2022</span>
+        </li>
+      </ul>
+    </section>
+
+    <hr class="section-divider" role="presentation">
+
+    <section id="contact" class="section section-narrow" aria-labelledby="contact-heading">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-heading">Reach me.</h2>
+      <p class="contact-line" style="margin-top: 1.5rem;">
+        <a href="mailto:danielq1603@gmail.com">danielq1603@gmail.com</a>
+        <span class="contact-sep" aria-hidden="true">·</span>
+        <a href="https://linkedin.com/in/manzela">LinkedIn</a>
+        <span class="contact-sep" aria-hidden="true">·</span>
+        <a href="https://github.com/Manzela">GitHub</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Daniel Manzela · Active 2019 → 2026 · <a href="#hero" class="subtle">Back to top&nbsp;↑</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var navToggle = document.getElementById('navToggle');
+      var navList   = document.getElementById('navList');
+      if (navToggle && navList) {
+        navToggle.addEventListener('click', function () {
+          var open = navToggle.getAttribute('aria-expanded') === 'true';
+          navToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+          navToggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+          navList.classList.toggle('is-open', !open);
+        });
+        navList.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Open menu');
+            navList.classList.remove('is-open');
+          });
+        });
+      }
+
+      var reveals = document.querySelectorAll('.reveal');
+      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+      } else {
+        reveals.forEach(function (el) {
+          if (el.closest('.hero')) el.classList.add('visible');
+        });
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        var spineCards = Array.prototype.slice.call(document.querySelectorAll('.spine-card'));
+        reveals.forEach(function (el) {
+          if (el.closest('.hero')) return;
+          if (el.classList.contains('spine-card')) {
+            var n = spineCards.indexOf(el);
+            el.style.transitionDelay = (n >= 0 ? n : 0) * 60 + 'ms';
+          }
+          observer.observe(el);
+        });
+      }
+
+      var counter = document.getElementById('nowCounter');
+      if (counter) {
+        var TARGET = 10500000;
+        var FORMAT = function (v) { return '~' + (v / 1000000).toFixed(1) + 'M'; };
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+          counter.textContent = FORMAT(TARGET);
+        } else {
+          counter.textContent = '~0.0M';
+          var ctrObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              var start = performance.now();
+              var dur = 1400;
+              function step(now) {
+                var t = Math.min(1, (now - start) / dur);
+                var eased = 1 - Math.pow(1 - t, 3);
+                counter.textContent = FORMAT(Math.round(TARGET * eased));
+                if (t < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+              ctrObs.unobserve(entry.target);
+            });
+          }, { threshold: 0.45 });
+          ctrObs.observe(counter);
+        }
+      }
+
+      var liveTime = document.getElementById('liveTimestamp');
+      if (liveTime) {
+        var iso = liveTime.getAttribute('datetime');
+        if (iso) {
+          var ts = new Date(iso);
+          var now = new Date();
+          var diffMs = now - ts;
+          if (!isNaN(diffMs) && diffMs > 0) {
+            var dayMs = 86400000;
+            var diffDays = Math.floor(diffMs / dayMs);
+            var diffHours = Math.floor(diffMs / 3600000);
+            var rel;
+            if (diffHours < 1) rel = 'less than an hour ago';
+            else if (diffHours < 24) rel = diffHours + ' hour' + (diffHours === 1 ? '' : 's') + ' ago';
+            else if (diffDays < 30) rel = diffDays + ' day' + (diffDays === 1 ? '' : 's') + ' ago';
+            else if (diffDays < 365) rel = Math.floor(diffDays / 30) + ' month' + (Math.floor(diffDays / 30) === 1 ? '' : 's') + ' ago';
+            else rel = Math.floor(diffDays / 365) + ' year' + (Math.floor(diffDays / 365) === 1 ? '' : 's') + ' ago';
+            liveTime.textContent = ts.toISOString().slice(0, 10) + ' · ' + rel;
+          }
+        }
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          var id = a.getAttribute('href').slice(1);
+          if (!id) return;
+          var sec = document.getElementById(id);
+          if (sec && !sec.hasAttribute('tabindex')) sec.setAttribute('tabindex', '-1');
+          if (sec) requestAnimationFrame(function () { sec.focus({ preventScroll: true }); });
+        });
+      });
+
+      var navLinks = document.querySelectorAll('.nav-list a[href^="#"]');
+      var sections = Array.prototype.map.call(navLinks, function (a) {
+        return document.getElementById(a.getAttribute('href').slice(1));
+      }).filter(Boolean);
+      if (sections.length && 'IntersectionObserver' in window) {
+        var sectionObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var id = entry.target.id;
+            navLinks.forEach(function (a) {
+              if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'page');
+              else a.removeAttribute('aria-current');
+            });
+          });
+        }, { rootMargin: '-30% 0px -55% 0px' });
+        sections.forEach(function (s) { sectionObs.observe(s); });
+      }
+    })();
+  </script>
 </body>
 </html>
