@@ -121,6 +121,7 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 | [**pipeline-observatory**](https://github.com/Manzela/pipeline-observatory) | Interactive architecture visualization of the autonomous pipeline — MoE sparse routing, causal DAG tracing, and live execution telemetry. [Live Demo →](https://manzela.github.io/pipeline-observatory/) |
 | [**gemma4-vllm-deployment**](https://github.com/Manzela/gemma4-vllm-deployment) | Forensic runbook documenting 20 failure modes across 30+ deployment versions of Gemma 4 MoE on Vertex AI with vLLM. The community reference for production MoE serving. |
 | [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) | AI governance kernel — cost enforcement, policy-as-code (OPA), deterministic state tracking, and self-healing CI for autonomous agent fleets. |
+| [**Seller App**](https://manzela.github.io/Manzela/seller-app/) | 0→1 case study (2020–2024). Computer Vision for retail digitization — barcode → image → video recognition over a 60M+ SKU canonical catalog. The architectural origin of retrieval-grounded CV. |
 
 ---
 

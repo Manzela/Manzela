@@ -219,6 +219,48 @@
       <a href="https://github.com/Manzela/Antigravity-OS/blob/main/GOVERNANCE.md" class="proof-link" target="_blank">Governance Model<span class="arr">&rarr;</span></a>
     </div>
   </div>
+
+  <!-- Project 4: Seller App -->
+  <div class="project reveal">
+    <div class="proj-head">
+      <div class="proj-num">04</div>
+      <div>
+        <h2>Seller App &mdash; Computer Vision for Retail Digitization</h2>
+        <p class="proj-role">Co-founder, Lead Product &amp; Engineering &mdash; 2020&ndash;2024 <span class="badge">0&rarr;1 case study</span></p>
+      </div>
+    </div>
+
+    <div class="par">
+      <div class="par-item">
+        <h4>Problem</h4>
+        <p>Physical retailers can&rsquo;t go online &mdash; manual product upload (~3 min/SKU &times; 50 SKUs = 2.5 hrs/store) is the rate-limiting step before a single photo is even taken.</p>
+      </div>
+      <div class="par-item">
+        <h4>Architecture</h4>
+        <p>React PWA over a two-database split: a 60M+ SKU canonical Global Product Database (retrieval-grounded) and a per-vendor Store DB. Three CV generations (barcode &rarr; image OCR &rarr; video RAG) over a stable retrieval layer.</p>
+      </div>
+      <div class="par-item accent">
+        <h4>Outcome &amp; Pivot</h4>
+        <p>Bootstrapped four years to $10K MRR; field data exposed an incentive problem the product couldn&rsquo;t engineer around. Pivoted from SMB self-service to enterprise &mdash; the architectural insight (RAG-grounded CV) seeded the Autonomous Pipeline.</p>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="m-item"><span class="m-val">60M+</span><span class="m-lbl">SKUs Canonicalized</span></div>
+      <div class="m-item"><span class="m-val">3</span><span class="m-lbl">CV Generations Shipped</span></div>
+      <div class="m-item"><span class="m-val">4 yrs</span><span class="m-lbl">Bootstrapped</span></div>
+      <div class="m-item"><span class="m-val">~50</span><span class="m-lbl">Products / Hour Target</span></div>
+    </div>
+
+    <div class="stack">
+      <span class="pill">React PWA</span><span class="pill">Google ML Kit</span><span class="pill">RAG over GPD</span>
+      <span class="pill">MongoDB</span><span class="pill">WooCommerce</span><span class="pill">AWS</span>
+    </div>
+
+    <div class="proof">
+      <a href="seller-app/" class="proof-link">View Case Study<span class="arr">&rarr;</span></a>
+    </div>
+  </div>
 </section>
 
 <!-- ════ ENGINEERING PHILOSOPHY ════ -->
