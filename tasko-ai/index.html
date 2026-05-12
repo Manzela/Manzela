@@ -210,29 +210,6 @@
         .hero-sub { max-width: 660px; margin: 24px auto 0; }
         .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
 
-        /* Hero compact 4-layer preview */
-        .hero-layers {
-            display: grid; gap: 10px;
-            grid-template-columns: 1fr;
-            margin: 32px auto 0; max-width: 720px;
-        }
-        @media (min-width: 640px) { .hero-layers { grid-template-columns: repeat(4, 1fr); } }
-        .hero-layer {
-            padding: 14px 12px;
-            background: rgba(29, 29, 31, 0.5);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 10px;
-            text-align: center;
-        }
-        .hero-layer-num {
-            font-family: 'JetBrains Mono', monospace; font-size: 9px;
-            color: var(--appleBlue); letter-spacing: 0.14em; margin-bottom: 4px;
-        }
-        .hero-layer-name {
-            font-size: 0.78rem; color: var(--appleLight); font-weight: 500;
-            letter-spacing: -0.005em;
-        }
-
         /* ============ SECTION HEAD ============ */
         .section-head { text-align: center; margin-bottom: 64px; }
         .section-head .label-tag { margin-bottom: 16px; }
@@ -995,26 +972,6 @@
             a production agentic system before the industry had a name for the architecture.
         </p>
         <div class="hero-meta">Daniel Manzela · Oct 2020 — Dec 2023</div>
-
-        <!-- Compact 4-layer preview -->
-        <div class="hero-layers" aria-label="Four-layer system overview">
-            <div class="hero-layer">
-                <div class="hero-layer-num">LAYER 01</div>
-                <div class="hero-layer-name">Understanding</div>
-            </div>
-            <div class="hero-layer">
-                <div class="hero-layer-num">LAYER 02</div>
-                <div class="hero-layer-name">Knowledge</div>
-            </div>
-            <div class="hero-layer">
-                <div class="hero-layer-num">LAYER 03</div>
-                <div class="hero-layer-name">Execution</div>
-            </div>
-            <div class="hero-layer">
-                <div class="hero-layer-num">LAYER 04</div>
-                <div class="hero-layer-name">Safety Gate</div>
-            </div>
-        </div>
 
         <!-- Plain-language orientation for visitors new to this work -->
         <aside class="orient-strip" aria-label="What you're about to read">
