@@ -297,11 +297,13 @@
         }
         .layer-subtitle { color: var(--appleGray); font-weight: 400; }
 
+        /* Layer lede — sets up the visual spine, doesn't compete with it */
         .layer-desc {
-            font-size: 0.95rem; color: var(--appleGray); line-height: 1.7;
-            max-width: 760px;
+            font-size: 0.875rem; color: var(--appleGray); line-height: 1.7;
+            max-width: 620px;
         }
         .layer-desc strong { color: var(--appleLight); font-weight: 500; }
+        .layer-desc em { color: var(--appleLight); font-style: italic; }
 
         /* MINI TIMELINE — for Layer 1's compact data pipeline */
         .mini-timeline {
@@ -430,17 +432,25 @@
         }
         .safety-item p { font-size: 0.8rem; color: var(--appleGray); line-height: 1.55; }
 
-        /* CALLOUT — inside layer cards (sub-callout for model evolution etc.) */
+        /* CALLOUT — restyled as editorial marginalia (not a content block competing with the spine) */
         .layer-callout {
-            margin-top: 24px;
-            padding: 18px 22px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--appleBorderSoft);
+            margin-top: 30px;
+            padding: 0 0 0 22px;
+            background: none;
+            border: none;
             border-left: 2px solid var(--appleBlue);
-            border-radius: 0 12px 12px 0;
-            font-size: 0.82rem; color: var(--appleGray); line-height: 1.6;
+            border-radius: 0;
+            font-size: 0.82rem; color: var(--appleGray); line-height: 1.7;
+            max-width: 720px;
         }
-        .layer-callout strong { color: var(--appleLight); font-weight: 500; }
+        .layer-callout strong {
+            display: block;
+            color: var(--appleLight);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
 
         /* ============ INFO NOTE ============ */
         .info-note {
@@ -529,48 +539,104 @@
         }
         .approach-result strong { color: var(--appleBlue); font-weight: 500; }
 
-        /* ============ LESSONS ============ */
+        /* ============ LESSONS — typographic stanzas, not paragraph rows ============ */
         .lessons {
-            display: flex; flex-direction: column; gap: 14px;
-            margin-top: 40px;
+            display: flex; flex-direction: column; gap: 0;
+            margin-top: 64px;
+            border-top: 1px solid var(--appleBorderSoft);
+        }
+        .lessons-prelude {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--appleGray);
+            margin-bottom: -8px; padding-top: 28px;
         }
         .lesson-item {
-            display: flex; gap: 18px; align-items: flex-start;
-            padding: 22px 26px;
-            background: var(--appleDarker);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 14px;
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 36px;
+            padding: 40px 0;
+            background: none;
+            border: none;
+            border-top: 1px solid var(--appleBorderSoft);
+            border-radius: 0;
+            align-items: baseline;
         }
+        .lesson-item:first-of-type { border-top: none; }
         .lesson-num {
-            font-family: 'JetBrains Mono', monospace; font-size: 11px;
-            color: var(--appleBlue); letter-spacing: 0.14em;
-            flex-shrink: 0; padding-top: 3px; min-width: 36px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+            font-weight: 500;
+            color: rgba(41, 151, 255, 0.4);
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            padding-top: 6px;
+            min-width: 0;
         }
-        .lesson-text { font-size: 0.9rem; color: var(--appleGray); line-height: 1.65; }
-        .lesson-text strong { color: var(--appleLight); font-weight: 500; }
+        .lesson-text { font-size: 0.92rem; color: var(--appleGray); line-height: 1.7; }
+        .lesson-text strong {
+            display: block;
+            color: var(--appleLight);
+            font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+        @media (max-width: 600px) {
+            .lesson-item {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                padding: 32px 0;
+            }
+            .lesson-num { font-size: 2rem; padding-top: 0; line-height: 1; }
+        }
 
-        /* ============ OUTCOME STATEMENT ============ */
+        /* ============ OUTCOME STATEMENT — closing climax ============ */
         .outcome {
-            margin-top: 40px;
-            padding: 36px 40px;
-            background: linear-gradient(135deg, rgba(41, 151, 255, 0.06) 0%, rgba(29, 29, 31, 0.5) 100%);
-            border: 1px solid rgba(41, 151, 255, 0.18);
-            border-radius: 18px;
+            margin-top: 64px;
+            padding: 56px 48px 44px;
+            background: linear-gradient(135deg, rgba(41, 151, 255, 0.07) 0%, rgba(29, 29, 31, 0.5) 100%);
+            border: 1px solid rgba(41, 151, 255, 0.2);
+            border-radius: 20px;
             text-align: center;
         }
+        .outcome-prelude {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--appleGray);
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .outcome-prelude::before, .outcome-prelude::after {
+            content: ''; display: inline-block; width: 28px; height: 1px;
+            background: rgba(41, 151, 255, 0.3);
+            vertical-align: middle; margin: 0 14px;
+        }
         .outcome p.outcome-line {
-            font-size: clamp(1rem, 1.5vw, 1.15rem);
-            color: var(--appleLight); line-height: 1.55; font-weight: 400;
-            max-width: 640px; margin: 0 auto;
+            font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+            color: var(--appleLight); line-height: 1.45; font-weight: 500;
+            letter-spacing: -0.02em;
+            max-width: 760px; margin: 0 auto;
+        }
+        .outcome p.outcome-line em {
+            color: var(--appleBlue); font-style: normal; font-weight: 600;
         }
         .outcome .bridge {
-            margin-top: 18px;
-            font-size: 0.85rem; color: var(--appleGray); line-height: 1.65;
+            margin-top: 32px;
+            padding-top: 26px;
+            border-top: 1px solid rgba(41, 151, 255, 0.12);
+            font-size: 0.85rem; color: var(--appleGray); line-height: 1.7;
             max-width: 640px; margin-left: auto; margin-right: auto;
         }
         .outcome .bridge a { color: var(--appleBlue); }
         .outcome .bridge a:hover { text-decoration: underline; }
-        @media (max-width: 767px) { .outcome { padding: 28px 24px; } }
+        @media (max-width: 767px) {
+            .outcome { padding: 40px 24px 32px; }
+            .outcome-prelude::before, .outcome-prelude::after { width: 16px; margin: 0 8px; }
+        }
 
         /* ============ FADE-IN ============ */
         .fade-in {
@@ -1073,9 +1139,10 @@
                     </div>
 
                     <div class="layer-callout">
-                        <strong>The Hebrew NLP problem.</strong> In 2021 there was no off-the-shelf open-source
-                        toolchain for production Hebrew &mdash; tokenizers, NER, and labeled corpora were all sparse.
-                        The pipeline above is what getting it to work in production looked like.
+                        <strong>The Hebrew NLP problem</strong>
+                        In 2021 there was no off-the-shelf open-source toolchain for production Hebrew &mdash;
+                        tokenizers, NER, and labeled corpora were all sparse. The pipeline above is what
+                        getting it to work in production looked like.
                     </div>
                 </article>
 
@@ -1123,10 +1190,10 @@
                     </div>
 
                     <div class="layer-callout">
-                        <strong>Before &ldquo;RAG&rdquo; was a label.</strong> Retrieve grounding text, inject it
-                        into the prompt at request time, let the model phrase but not invent &mdash; that pattern
-                        was the working solution for keeping a fine-tuned Hebrew model honest in 2021&ndash;2022,
-                        years before the field had a name for it.
+                        <strong>Before &ldquo;RAG&rdquo; was a label</strong>
+                        Retrieve grounding text, inject it into the prompt at request time, let the model
+                        phrase but not invent &mdash; that pattern was the working solution for keeping a
+                        fine-tuned Hebrew model honest in 2021&ndash;2022, years before the field had a name for it.
                     </div>
                 </article>
 
@@ -1143,12 +1210,9 @@
                         </div>
                     </div>
                     <p class="layer-desc">
-                        Each retrieved procedure is a <strong>multi-step workflow the agent runs</strong>,
-                        not a paragraph it reads back. Some steps are API calls (Monday.com,
-                        the company CRM, payment systems). Some are sequential human-coordinated tasks.
-                        Some require gathering missing information from the user before the agent can move
-                        forward &mdash; in which case the agent asks. Every variant of &ldquo;what to ask
-                        and when&rdquo; was mapped and trained.
+                        Each procedure is a <strong>multi-step workflow the agent runs</strong> &mdash; not a
+                        paragraph it reads back. API calls, sequential coordination, asking the user for missing
+                        information. Every variant of <em>what to ask and when</em> was mapped and trained.
                     </p>
 
                     <div class="proc-grid" aria-label="Example procedures the agent executes">
@@ -1179,10 +1243,11 @@
                     </div>
 
                     <div class="layer-callout">
-                        <strong>Model evolution.</strong> Fine-tuning ran across two platforms over 12+ months:
-                        OpenAI (Babbage &rarr; Davinci &rarr; GPT-3.5 as each became available) and HF AutoTrain.
-                        Hundreds of cycles tightened Hebrew fidelity, PII redaction, conversational state, and
-                        procedure adherence &mdash; not parameter counts.
+                        <strong>Model evolution</strong>
+                        Fine-tuning ran across two platforms over 12+ months: OpenAI (Babbage &rarr; Davinci
+                        &rarr; GPT-3.5 as each became available) and HF AutoTrain. Hundreds of cycles tightened
+                        Hebrew fidelity, PII redaction, conversational state, and procedure adherence
+                        &mdash; not parameter counts.
                     </div>
                 </article>
 
@@ -1278,10 +1343,11 @@
                     </div>
 
                     <div class="layer-callout">
-                        <strong>Deterministic-gate-first, in production.</strong> In 2021, most production AI shipped
-                        raw model output straight to users. Putting every probabilistic decision behind a deterministic
-                        check &mdash; with a human-readable trace and an explicit fallback &mdash; was the design
-                        choice that later scaled into the multi-agent DAGs at the Pipeline Observatory.
+                        <strong>Deterministic-gate-first, in production</strong>
+                        In 2021, most production AI shipped raw model output straight to users. Putting every
+                        probabilistic decision behind a deterministic check &mdash; with a human-readable trace
+                        and an explicit fallback &mdash; was the design choice that later scaled into the
+                        multi-agent DAGs at the Pipeline Observatory.
                     </div>
                 </article>
 
@@ -1507,8 +1573,7 @@
                 <span class="label-tag">Reflection</span>
                 <h2 class="h-section">What Three Years Taught</h2>
                 <p class="text-lead">
-                    Three architectures were evaluated. One went to production.
-                    The lessons that came out of that path outlasted the chatbot itself.
+                    Three architectures evaluated. One went to production.
                 </p>
             </div>
 
@@ -1559,47 +1624,51 @@
                 </table>
             </div>
             <p class="compare-matrix-foot">
-                <strong>The accumulated learnings from the AutoTrain branch fed directly into the production stack.</strong>
-                Ruled-out approaches were never wasted &mdash; each one shaped what the next layer of the agent had to handle.
+                <strong>Ruled-out approaches were never wasted</strong> &mdash; the AutoTrain branch&rsquo;s
+                accumulated learnings fed directly into the production stack.
             </p>
 
-            <!-- Three honest lessons -->
+            <!-- Three lessons that outlasted the chatbot -->
+            <span class="lessons-prelude">Three lessons that outlasted the chatbot</span>
             <div class="lessons">
                 <div class="lesson-item">
                     <div class="lesson-num">01</div>
                     <div class="lesson-text">
-                        <strong>Data quality eats model quality.</strong> The bottleneck was never the model.
-                        It was the SQuAD pipeline producing clean training pairs from informal multilingual chat &mdash;
-                        and a Hebrew NLP toolchain that didn&rsquo;t exist off-the-shelf in 2021.
+                        <strong>Data quality eats model quality.</strong>
+                        The bottleneck was never the model. It was the SQuAD pipeline producing clean training
+                        pairs from informal multilingual chat &mdash; and a Hebrew NLP toolchain that didn&rsquo;t
+                        exist off-the-shelf in 2021.
                     </div>
                 </div>
                 <div class="lesson-item">
                     <div class="lesson-num">02</div>
                     <div class="lesson-text">
-                        <strong>Style and truth are different problems.</strong> Fine-tuning shapes how the agent talks;
-                        retrieval determines what it&rsquo;s allowed to say. Conflate them and operational policy
-                        gets violated in ways the team only discovers after a client complaint.
+                        <strong>Style and truth are different problems.</strong>
+                        Fine-tuning shapes how the agent talks; retrieval determines what it&rsquo;s allowed to say.
+                        Conflate them and operational policy gets violated in ways the team only discovers after
+                        a client complaint.
                     </div>
                 </div>
                 <div class="lesson-item">
                     <div class="lesson-num">03</div>
                     <div class="lesson-text">
-                        <strong>The safety gate is the architecture.</strong> A 5-minute override isn&rsquo;t a feature
-                        you bolt on &mdash; it&rsquo;s the gate that lets a probabilistic system run in production
-                        without a brand-trust failure. The deterministic fallback was what made the model safe to ship,
-                        not the model itself.
+                        <strong>The safety gate <em>is</em> the architecture.</strong>
+                        A 5-minute override isn&rsquo;t a feature you bolt on &mdash; it&rsquo;s the gate that lets
+                        a probabilistic system run in production without a brand-trust failure. The deterministic
+                        fallback was what made the model safe to ship, not the model itself.
                     </div>
                 </div>
             </div>
 
             <!-- Outcome statement + bridge -->
             <div class="outcome">
+                <span class="outcome-prelude">In production · Oct 2020 — Dec 2023</span>
                 <p class="outcome-line">
-                    The agent handled live client requests via WhatsApp through December 2023 &mdash;
-                    over three years in research and development, replacing the full-time human dispatcher loop.
+                    The agent handled live client requests via WhatsApp for <em>three years</em>,
+                    replacing the full-time human dispatcher loop.
                 </p>
                 <p class="bridge">
-                    This four-layer pattern &mdash; classify, retrieve, execute, verify &mdash;
+                    This four-layer pattern &mdash; <strong style="color:var(--appleLight); font-weight:500;">classify, retrieve, execute, verify</strong> &mdash;
                     became the foundation for the deterministic-gate-first architecture later applied at scale in the
                     <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Pipeline Observatory</a>
                     and the multi-agent DAGs of <a href="https://github.com/Manzela/agent-dag-pipeline" class="inline-link">agent-dag-pipeline</a>.
