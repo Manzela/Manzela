@@ -1,0 +1,37 @@
+# Daniel Manzela
+
+> Daniel Manzela — Founding AI Product Builder. Co-founder, CEO and CPO at TNG Shopper, an AI content engine that gives multi-location brands unlimited organic scale on AI Search by generating search-intent-targeted content for every store, product, and locale (top-100 retail-tech 2025). Open-source author: Antigravity-OS (safety + cost guard for AI agent fleets, PyPI: ag-os), WP-Multisite, agent-dag-pipeline, gemma4-vllm-deployment.
+
+## Profile
+
+- [Profile portfolio](https://manzela.github.io/Manzela/): Career arc with case-study sub-pages.
+- [GitHub](https://github.com/Manzela): Open-source repos.
+- [LinkedIn](https://linkedin.com/in/manzela)
+
+## TNG Shopper
+
+11 paying enterprise customers across 5 countries (live: Spain, Portugal, Israel; historical: US, Mexico).
+
+- [Pipeline observatory](https://manzela.github.io/pipeline-observatory/): Live operational dashboard for the production content engine.
+- [Architecture](https://manzela.github.io/pipeline-observatory/architecture.html): How the engine works internally — multi-agent DAG, MoE routing, LoRA adapters, Modal serverless + Vertex AI + vLLM.
+- [Case studies](https://manzela.github.io/pipeline-observatory/case-studies.html): Operational outcomes by customer.
+
+## Open-Source Projects
+
+- [Antigravity-OS](https://github.com/Manzela/Antigravity-OS) ([PyPI: ag-os](https://pypi.org/project/ag-os/)): Safety + cost guard for AI agent fleets in production. 9-rule constitutional policy-as-code, Cost Guard, Flight Recorder for replay, Self-Healing CI, Dreaming Module, drop-in MCP server. MIT-licensed.
+- [WP-Multisite](https://github.com/Manzela/WP-Multisite): WordPress multisite written from scratch to be natively understood by AI search bots (ChatGPT, Claude, Perplexity, Google AI Overview). Sage 10 + custom `sunrise.php` + 1,056-LOC JSON-LD schema generator + `llms.txt` + AI-bot-aware `robots.txt`.
+- [agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline): Reference implementation of the multi-agent content DAG pattern behind TNG's production engine. Google ADK + Vertex AI, O-R-A-V evaluation, RLAIF / DPO data flywheel.
+- [gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment): Forensic runbook for production MoE serving — 20 distinct failure modes deploying Gemma 4 26B-A4B-it MoE on Vertex AI / vLLM.
+
+## Career history (chronological)
+
+- TNG Shopper (Jan 2024 → present) — Co-founder, CEO and CPO. → [pipeline-observatory](https://manzela.github.io/pipeline-observatory/)
+- Elysium (2024–2025, paused) — research line within TNG; physical-context AI for retail demand prediction. → [/Manzela/elysium](https://manzela.github.io/Manzela/elysium/)
+- Tasko AI (Oct 2020 – Dec 2023) — WhatsApp-native AI errand assistant; production agentic system before "agentic" was an industry term. → [/Manzela/tasko-ai](https://manzela.github.io/Manzela/tasko-ai/)
+- Seller App (Jan 2020 – Apr 2024) — Camera-first retail-onboarding tool; 60M+ canonical SKUs, $10K MRR. → [/Manzela/seller-app](https://manzela.github.io/Manzela/seller-app/)
+- Israeli Financial Services Firm (Feb 2019 – Jul 2020) — Lead-finding pipeline; ₪50M+ in new AUM. → [/Manzela/data-mining](https://manzela.github.io/Manzela/data-mining/)
+- Junior years (Sep 2016 – Dec 2019) — Solo contractor across 3 startups + 2 low-techs. → [/Manzela/junior-years](https://manzela.github.io/Manzela/junior-years/)
+
+## Contact
+
+danielq1603@gmail.com

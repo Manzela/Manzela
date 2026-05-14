@@ -2,9 +2,9 @@
 
 # Daniel Manzela
 
-**Builder of Autonomous AI Systems**
+**Founding AI Product Builder**
 
-*Ten years, six systems shipped. Today: a fail-closed AI pipeline serving 11 enterprise clients across 5 countries.*
+*Co-founder, CEO and CPO at TNG Shopper.*
 
 <br>
 
@@ -134,13 +134,14 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 | Repository | Description |
 |---|---|
 | [**agent-dag-pipeline**](https://github.com/Manzela/agent-dag-pipeline) | Open-source distillation of the seven-node directed acyclic graph. Google Agent Development Kit + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + Direct Preference Optimization data flywheel. |
-| [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) <sub>· `pip install ag-os`</sub> | AI governance kernel — cost enforcement, Open Policy Agent-style policy-as-code, deterministic state tracking, Model Context Protocol server, and self-healing continuous-integration for autonomous agent fleets. |
+| [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) <sub>· `pip install ag-os`</sub> | Safety + cost guard for AI agent fleets in production. 9-rule constitutional policy-as-code, Cost Guard, Flight Recorder for replay, Self-Healing CI, Dreaming Module for offline self-improvement, drop-in MCP server. |
 | [**gemma4-vllm-deployment**](https://github.com/Manzela/gemma4-vllm-deployment) | Forensic runbook documenting 20 failure modes across 30+ deployment versions of Gemma 4 Mixture-of-Experts on Vertex AI with vLLM. The community reference for production Mixture-of-Experts serving. |
 | [**pipeline-observatory**](https://github.com/Manzela/pipeline-observatory) | Source of the live observability site at [manzela.github.io/pipeline-observatory](https://manzela.github.io/pipeline-observatory/). Architecture visualization — Mixture-of-Experts sparse routing, causal directed-acyclic-graph tracing, live execution telemetry. |
+| [**WP-Multisite**](https://github.com/Manzela/WP-Multisite) | A WordPress multisite for retailer sites, written from scratch to be natively understood by AI search bots (ChatGPT, Claude, Perplexity, Google AI Overview). Explicit AI-bot ALLOW contracts (OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Applebot, Amazonbot, DuckAssistBot), `llms.txt` indexing surface, JSON-LD with `SpeakableSpecification` for voice. Sanitised from the TNG production stack (Sage 10 + custom `sunrise.php` + 1,056-LOC schema generator). |
 
 ---
 
 <div align="center">
-<sub>Israel (Relocating) · <a href="mailto:danielq1603@gmail.com">danielq1603@gmail.com</a></sub>
+<sub><a href="mailto:danielq1603@gmail.com">danielq1603@gmail.com</a></sub>
 </div>
 

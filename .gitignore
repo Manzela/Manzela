@@ -3,3 +3,10 @@
 
 # OS noise
 .DS_Store
+
+# Local-only assistant / tooling artefacts (do not commit)
+.claude/
+.firecrawl/
+.playwright-mcp/
+audit/
+data-mining-fullpage-*.png
