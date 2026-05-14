@@ -1,6 +1,6 @@
 # Daniel Manzela
 
-> Daniel Manzela — Founding AI Product Builder. Co-founder, CEO and CPO at TNG Shopper, where he built and leads the production multi-agent system that powers an AI content + AI-Search visibility platform for multi-location brands (top-100 retail-tech 2025). Open-source author: Antigravity-OS (safety + cost governance for AI agent fleets, PyPI: ag-os), agent-dag-pipeline (reference multi-agent DAG implementation), gemma4-vllm-deployment (production MoE serving runbook), WP-Multisite (sanitised CMS / AI-search-aware blueprint).
+> Daniel Manzela — Founding AI Product Builder. Co-founder, CEO and CPO at TNG Shopper, where he built and leads the production multi-agent system that powers an AI content + AI-Search visibility platform for multi-location brands (top-100 retail-tech 2025). Open-source author: Antigravity-OS (orchestration infra that lets a small team ship more product per engineer, safely; PyPI: ag-os), agent-dag-pipeline (reference multi-agent DAG implementation), gemma4-vllm-deployment (production MoE serving runbook), WP-Multisite (sanitised CMS / AI-search-aware blueprint).
 
 ## Profile
 
@@ -18,7 +18,7 @@
 
 ## Open-Source Projects
 
-- [Antigravity-OS](https://github.com/Manzela/Antigravity-OS) ([PyPI: ag-os](https://pypi.org/project/ag-os/)): Safety + cost guard for AI agent fleets in production. 9-rule constitutional policy-as-code, Cost Guard, Flight Recorder for replay, Self-Healing CI, Dreaming Module, drop-in MCP server. MIT-licensed.
+- [Antigravity-OS](https://github.com/Manzela/Antigravity-OS) ([PyPI: ag-os](https://pypi.org/project/ag-os/)): Open-source orchestration infra that lets a small team ship more product per engineer, safely. Built at TNG (2-engineer dev team) to streamline the SDLC by reducing human-dependencies in the dev loop. AI dev assistants run inside a 9-rule constitutional policy-as-code, with Cost Guard, Flight Recorder for replay, Self-Healing CI, Dreaming Module for offline agent self-improvement, drop-in MCP server. MIT-licensed.
 - [agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline): Reference implementation of the multi-agent DAG pattern behind TNG's production system. Google ADK + Vertex AI + four-axis O-R-A-V evaluation + RLAIF / DPO data flywheel.
 - [gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment): Community reference for production MoE serving — forensic runbook of 20 distinct failure modes deploying Gemma 4 26B-A4B-it MoE on Vertex AI / vLLM (128 experts, 4 active per token; 4B params per forward pass on a 26B model).
 - [WP-Multisite](https://github.com/Manzela/WP-Multisite): Sanitised blueprint of TNG's CMS / AI-search-aware infrastructure layer (Sage 10 + custom `sunrise.php` + 1,056-LOC JSON-LD schema generator + `llms.txt` + AI-bot-aware `robots.txt`).
