@@ -536,33 +536,31 @@
         .lesson p { font-size: 0.83rem; color: var(--appleGray); line-height: 1.6; }
 
         /* ============ FOOTER ============ */
-        footer {
-            border-top: 1px solid var(--appleBorderSoft);
-            padding: 48px 24px;
-            margin-top: 32px;
+        .site-footer {
+            border-top: 1px solid var(--appleBorder);
+            padding: 2.25rem 1.5rem 2.5rem;
+            font-family: var(--fontMono);
+            font-size: var(--type-meta, 11px);
+            color: var(--appleGray);
+            position: relative;
+            z-index: 2;
         }
         .footer-inner {
-            max-width: 1024px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center;
-            gap: 24px; flex-wrap: wrap;
+            max-width: var(--content-max, 1024px);
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem 2rem;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 0.04em;
         }
-        .footer-copy { font-size: 12px; color: var(--appleGray); max-width: 480px; }
         .footer-links {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 22px;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--appleGray);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1.5rem;
         }
-        .footer-links a { transition: color 0.2s ease; }
-        .footer-links a:hover { color: var(--appleLight); }
-
-        .back-to-top {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--appleGray); margin-top: 12px;
-            transition: color 0.2s ease;
-        }
-        .back-to-top:hover { color: var(--appleLight); }
-        .back-to-top .material-symbols-outlined { font-size: 14px; }
+        .footer-links a { color: var(--appleLight); }
 
         /* ============ COFOUNDER NOTE (kept for reuse if needed) ============ */
         .cofounder-note {
@@ -1118,25 +1116,21 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer>
-    <div class="footer-inner">
-        <div class="footer-copy">
-            © 2020–2026 Daniel Manzela · Seller App.
-            <br>
-            <a href="#hero" class="back-to-top"><span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span> Back to top</a>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>© 2020–2026 Daniel Manzela · Seller App.</p>
+            <div class="footer-links">
+                <a href="https://manzela.github.io/Manzela/">Profile</a>
+                <a href="https://manzela.github.io/Manzela/junior-years/">Junior Years</a>
+                <a href="https://manzela.github.io/Manzela/data-mining/">Data Mining</a>
+                <a href="https://manzela.github.io/Manzela/tasko-ai/">Tasko AI</a>
+                <a href="https://manzela.github.io/Manzela/elysium/">Elysium</a>
+                <a href="https://manzela.github.io/pipeline-observatory/">Pipeline</a>
+                <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/manzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
         </div>
-        <div class="footer-links" aria-label="Cross-portfolio links">
-            <a href="https://manzela.github.io/Manzela/">Profile</a>
-            <a href="https://manzela.github.io/Manzela/junior-years/">Junior Years</a>
-            <a href="https://manzela.github.io/Manzela/data-mining/">Data Mining</a>
-            <a href="https://manzela.github.io/Manzela/tasko-ai/">Tasko AI</a>
-            <a href="https://manzela.github.io/Manzela/elysium/">Elysium</a>
-            <a href="https://manzela.github.io/pipeline-observatory/">Pipeline</a>
-            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com/in/manzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 <script>
     (function () {
