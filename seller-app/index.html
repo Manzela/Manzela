@@ -617,7 +617,6 @@
         </button>
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">The Problem</a>
-            <a href="#product">The Solution</a>
             <a href="#architecture">System Design</a>
             <a href="#metrics">Traction</a>
             <a href="#pivot">Pivot</a>
@@ -695,20 +694,72 @@
         </div>
     </section>
 
-    <div class="glow-line"></div>
 
-    <!-- ============ PRODUCT EVOLUTION ============ -->
-    <section id="product" class="section-padding fade-in">
+    <!-- ============ ARCHITECTURE ============ -->
+    <section id="architecture" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">The Solution</span>
+                <span class="label-tag">System Design</span>
+                <h2 class="h-section">Technical Architecture</h2>
+                <p class="text-lead">A Progressive Web App over a WooCommerce-vendor backend,
+                    with a two-database split and a vision pipeline that swapped its front-end three times
+                    while the retrieval layer stayed stable.</p>
+            </div>
+
+
+
+            <div class="arch-grid">
+                <article class="arch-card">
+                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">devices</span>
+                    <h3>PWA topology</h3>
+                    <p>
+                        Single React-based PWA installable across iOS, Android, and desktop. Camera, push, and offline
+                        capabilities without an app-store dependency, updates rolled out the moment a seller refreshed.
+                    </p>
+                    <ul>
+                        <li><strong>RTL + Hebrew</strong>, Google Auto-Translate for the launch market</li>
+                        <li><strong>Push notifications</strong>, react-web-notification (orders, low-stock)</li>
+                        <li><strong>Analytics</strong>, Mixpanel events / HEART funnel · GA4 acquisition</li>
+                    </ul>
+                </article>
+
+                <article class="arch-card">
+                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">database</span>
+                    <h3>Two-database model</h3>
+                    <p>
+                        The architectural backbone. The catalog and the storefront were never the same thing, one
+                        is shared across vendors, the other is private to each vendor.
+                    </p>
+                    <ul>
+                        <li><strong>Global Product Database</strong>, shared, canonical, retrieval-indexed (60M+ SKUs)</li>
+                        <li><strong>Store Product Database</strong>, vendor-scoped inventory, pricing, overrides</li>
+                        <li><strong>Integration</strong>, WC Marketplace REST API · WCMp Vendors auth</li>
+                    </ul>
+
+                </article>
+
+                <article class="arch-card">
+                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">visibility</span>
+                    <h3>Vision stack</h3>
+                    <p>
+                        The product replaced its Computer Vision front-end three times. The retrieval layer behind it stayed stable,
+                        which is why a four-year stack didn&rsquo;t accumulate as much technical debt as it could have.
+                    </p>
+                    <ul>
+                        <li><strong>V1</strong>, ML Kit on-device barcode scanning + GPD lookup</li>
+                        <li><strong>V2</strong>, Vision-AI OCR + foundation-model background removal</li>
+                        <li><strong>V3</strong>, RAG retrieval over the GPD on video frames</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="section-head" style="margin-top:3rem;">
                 <h2 class="h-section">Three Generations of Vision</h2>
                 <p class="text-lead">The product evolved through three distinct computer-vision generations,
                     each removing a layer of friction from the seller&rsquo;s upload workflow.</p>
             </div>
 
             <div class="timeline">
-
                 <!-- V1 -->
                 <article class="version-card">
                     <div class="version-head">
@@ -912,73 +963,7 @@
                         </div>
                     </div>
                 </article>
-
             </div>
-        </div>
-    </section>
-
-    <div class="glow-line"></div>
-
-
-
-    <!-- ============ ARCHITECTURE ============ -->
-    <section id="architecture" class="section-padding fade-in">
-        <div class="container">
-            <div class="section-head">
-                <span class="label-tag">System Design</span>
-                <h2 class="h-section">Technical Architecture</h2>
-                <p class="text-lead">A Progressive Web App over a WooCommerce-vendor backend,
-                    with a two-database split and a vision pipeline that swapped its front-end three times
-                    while the retrieval layer stayed stable.</p>
-            </div>
-
-
-
-            <div class="arch-grid">
-                <article class="arch-card">
-                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">devices</span>
-                    <h3>PWA topology</h3>
-                    <p>
-                        Single React-based PWA installable across iOS, Android, and desktop. Camera, push, and offline
-                        capabilities without an app-store dependency, updates rolled out the moment a seller refreshed.
-                    </p>
-                    <ul>
-                        <li><strong>RTL + Hebrew</strong>, Google Auto-Translate for the launch market</li>
-                        <li><strong>Push notifications</strong>, react-web-notification (orders, low-stock)</li>
-                        <li><strong>Analytics</strong>, Mixpanel events / HEART funnel · GA4 acquisition</li>
-                    </ul>
-                </article>
-
-                <article class="arch-card">
-                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">database</span>
-                    <h3>Two-database model</h3>
-                    <p>
-                        The architectural backbone. The catalog and the storefront were never the same thing, one
-                        is shared across vendors, the other is private to each vendor.
-                    </p>
-                    <ul>
-                        <li><strong>Global Product Database</strong>, shared, canonical, retrieval-indexed (60M+ SKUs)</li>
-                        <li><strong>Store Product Database</strong>, vendor-scoped inventory, pricing, overrides</li>
-                        <li><strong>Integration</strong>, WC Marketplace REST API · WCMp Vendors auth</li>
-                    </ul>
-
-                </article>
-
-                <article class="arch-card">
-                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">visibility</span>
-                    <h3>Vision stack</h3>
-                    <p>
-                        The product replaced its Computer Vision front-end three times. The retrieval layer behind it stayed stable,
-                        which is why a four-year stack didn&rsquo;t accumulate as much technical debt as it could have.
-                    </p>
-                    <ul>
-                        <li><strong>V1</strong>, ML Kit on-device barcode scanning + GPD lookup</li>
-                        <li><strong>V2</strong>, Vision-AI OCR + foundation-model background removal</li>
-                        <li><strong>V3</strong>, RAG retrieval over the GPD on video frames</li>
-                    </ul>
-                </article>
-            </div>
-
 
         </div>
     </section>
