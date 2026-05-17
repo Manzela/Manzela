@@ -990,10 +990,10 @@
             <div class="grid grid-3">
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">forum</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">No Structured Intake</h3>
+                    <h3 class="h-card" style="margin-bottom: 8px;">Human-Dependency Bottleneck</h3>
                     <p class="text-body">
-                        Clients messaged the company on WhatsApp, taskers fulfilled.
-                        Every request passed through a dispatcher reading messages in real time.
+                        Every client request required a human dispatcher to read, interpret,
+                        and route it manually. The entire operation scaled with headcount, not software.
                     </p>
                 </div>
                 <div class="card card-pad">
@@ -1506,49 +1506,14 @@
                 <h2 class="h-section">What Three Years Taught</h2>
             </div>
 
-            <div class="lessons">
-                <div class="lesson-item">
-                    <div class="lesson-num">01</div>
-                    <div class="lesson-text">
-                        <strong>Data quality eats model quality.</strong>
-                        The bottleneck was never the model. It was the SQuAD pipeline producing clean training
-                        pairs from informal multilingual chat &mdash; and a Hebrew NLP toolchain that didn&rsquo;t
-                        exist off-the-shelf in 2021.
-                    </div>
-                </div>
-                <div class="lesson-item">
-                    <div class="lesson-num">02</div>
-                    <div class="lesson-text">
-                        <strong>Style and truth are different problems.</strong>
-                        Fine-tuning shapes how the agent talks; retrieval determines what it&rsquo;s allowed to say.
-                        Conflate them and operational policy gets violated in ways the team only discovers after
-                        a client complaint.
-                    </div>
-                </div>
-                <div class="lesson-item">
-                    <div class="lesson-num">03</div>
-                    <div class="lesson-text">
-                        <strong>The safety gate <em>is</em> the architecture.</strong>
-                        A 5-minute override isn&rsquo;t a feature you bolt on &mdash; it&rsquo;s the gate that lets
-                        a probabilistic system run in production without a brand-trust failure. The deterministic
-                        fallback was what made the model safe to ship, not the model itself.
-                    </div>
-                </div>
-            </div>
+            <p class="text-lead">
+                The biggest challenge was getting the AI to pay attention to the exact right details
+                for each person, forcing me to spend countless hours manually cleaning out useless
+                information so it wouldn&rsquo;t get confused. If we had an automatic way for the system
+                to dynamically filter and focus on what mattered in real-time, it would have changed everything.
+            </p>
 
-            <!-- Outcome statement + bridge -->
-            <div class="outcome">
-                <p class="outcome-line">
-                    The agent handled live client requests via WhatsApp through December 2023 &mdash;
-                    over three years in research and development, replacing the full-time human dispatcher loop.
-                </p>
-                <p class="bridge">
-                    This four-layer pattern &mdash; <strong style="color:var(--appleLight); font-weight:500;">classify, retrieve, execute, verify</strong> &mdash;
-                    became the foundation for the deterministic-gate-first architecture later applied at scale in the
-                    <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Pipeline Observatory</a>
-                    and the multi-agent DAGs of <a href="https://github.com/Manzela/agent-dag-pipeline" class="inline-link">agent-dag-pipeline</a>.
-                </p>
-            </div>
+
         </div>
     </section>
 
