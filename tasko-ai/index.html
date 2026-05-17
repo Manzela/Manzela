@@ -945,8 +945,8 @@
         <a href="#hero" class="nav-brand">Tasko.ai<span class="nav-brand-sub">2020–2023</span></a>
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">Problem</a>
-            <a href="#build">The Build</a>
-            <a href="#architecture">Architecture</a>
+            <a href="#solution">Solution</a>
+            <a href="#build">Architecture</a>
             <a href="#reflection">Reflection</a>
             <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow">←</span> Portfolio</a>
         </div>
@@ -968,19 +968,8 @@
             <span class="hero-line2">to Do a Human's Job.</span>
         </h1>
         <p class="text-lead hero-sub">
-            Built from 21,000 real task records and nine years of WhatsApp conversations &mdash;
-            a production agentic system before the industry had a name for the architecture.
+            A Personal Assistant WhatsApp chatbot trained on 11 year chat history
         </p>
-        <div class="hero-meta">Daniel Manzela · Oct 2020 — Dec 2023</div>
-
-        <!-- Plain-language orientation for visitors new to this work -->
-        <aside class="orient-strip" aria-label="What you're about to read">
-            <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
-            <p>
-                A case study of a chatbot that took over a dispatcher&rsquo;s job at an Israeli services company.
-                Read end-to-end in <strong>~5 minutes</strong>, or jump to <a href="#architecture" class="inline-link">the system diagram</a>.
-            </p>
-        </aside>
     </section>
 
     <div class="glow-line"></div>
@@ -992,9 +981,9 @@
                 <span class="label-tag">The Problem</span>
                 <h2 class="h-section">A Human Dispatcher in Every Conversation</h2>
                 <p class="text-lead">
-                    Hasherut ran a task-fulfillment service entirely over WhatsApp.
+                    <a href="https://www.hasherut.co.il" target="_blank" rel="noopener noreferrer" class="inline-link">Hasherut</a> ran a task-fulfillment service entirely over WhatsApp.
                     Every client request still required a person to read it, classify it,
-                    price it, and assign it. The institutional knowledge lived in chat history.
+                    price it, and assign it.
                 </p>
             </div>
 
@@ -1003,17 +992,15 @@
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">forum</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">No Structured Intake</h3>
                     <p class="text-body">
-                        Clients messaged the company on WhatsApp; taskers fulfilled.
-                        No ticketing system. No intake form. Every request passed
-                        through a dispatcher reading messages in real time.
+                        Clients messaged the company on WhatsApp, taskers fulfilled.
+                        Every request passed through a dispatcher reading messages in real time.
                     </p>
                 </div>
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">groups</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">Classification by Memory</h3>
                     <p class="text-body">
-                        Hundreds of active client threads spanning 15 service categories &mdash;
-                        bureaucratic errands, vehicle work, insurance filings, repairs, deliveries.
+                        Hundreds of active client threads across 15 service categories.
                         Categorization, pricing, and routing all sat in one person&rsquo;s head.
                     </p>
                 </div>
@@ -1022,18 +1009,26 @@
                     <h3 class="h-card" style="margin-bottom: 8px;">Knowledge Trapped in Text</h3>
                     <p class="text-body">
                         Nine years of pricing logic, escalation rules, and edge-case handling
-                        existed only as informal Hebrew chat &mdash; no database, no knowledge base,
+                        existed only as informal Hebrew chat. No database, no knowledge base,
                         no way to onboard a new dispatcher.
                     </p>
                 </div>
             </div>
 
-            <div class="info-note">
-                <span class="material-symbols-outlined" aria-hidden="true">target</span>
-                <p>
-                    <strong>Engineering objective.</strong> Convert nine years of unstructured Hebrew/English
-                    WhatsApp chat into a structured corpus, fine-tune a language model on it, and put that model
-                    behind the same WhatsApp number &mdash; replacing the dispatcher loop entirely.
+
+        </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- ============ SOLUTION ============ -->
+    <section id="solution" class="section-padding fade-in">
+        <div class="container">
+            <div class="section-head">
+                <span class="label-tag">The Solution</span>
+                <h2 class="h-section">Personalized WhatsApp AI-Chatbot</h2>
+                <p class="text-lead">
+                    Replacing human-dependencies with AI-Assistance that is trained on tasker&rsquo;s knowledge base and client&rsquo;s personalized tasks memory.
                 </p>
             </div>
         </div>
@@ -1045,8 +1040,8 @@
     <section id="build" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">How It Was Built</span>
-                <h2 class="h-section">Four Layers: Classify, Retrieve, Execute, Verify</h2>
+                <span class="label-tag">Architecture</span>
+                <h2 class="h-section">A software that thinks and acts for you</h2>
                 <p class="text-lead">
                     The same architecture now called &ldquo;agentic AI with tool use&rdquo; &mdash;
                     designed and shipped in 2020&ndash;2023, before the terminology existed.
@@ -1064,7 +1059,6 @@
                         <div class="layer-head-text">
                             <div class="layer-num">LAYER 01</div>
                             <h3 class="layer-title">Understanding <span class="layer-subtitle">&middot; Intent Classification</span></h3>
-                            <span class="now-called"><span class="now-called-prefix">Now called</span> Intent Classification + Slot Filling</span>
                         </div>
                     </div>
                     <!-- Killer visual: the data scale of the training corpus -->
@@ -1080,10 +1074,6 @@
                         <div class="layer-stat">
                             <div class="layer-stat-value">1,561</div>
                             <div class="layer-stat-label">Action-Verb Patterns</div>
-                        </div>
-                        <div class="layer-stat">
-                            <div class="layer-stat-value">30</div>
-                            <div class="layer-stat-label">Metadata Fields / Task</div>
                         </div>
                     </div>
 
@@ -1167,12 +1157,8 @@
                         <div class="layer-head-text">
                             <div class="layer-num">LAYER 02</div>
                             <h3 class="layer-title">Knowledge <span class="layer-subtitle">&middot; Retrieval-Augmented Generation</span></h3>
-                            <span class="now-called"><span class="now-called-prefix">Now called</span> Retrieval-Augmented Generation (RAG)</span>
                         </div>
                     </div>
-                    <!-- Killer visual: the principle, plus the corpus scale -->
-                    <div class="pullquote">
-                        <p>Fine-tuned weights handled <em>style</em>.<br>The RAG corpus handled <em>truth</em>.</p>
                     </div>
 
                     <div class="layer-stats" aria-label="Layer 2 — knowledge corpus scale">
@@ -1194,7 +1180,7 @@
                         </div>
                     </div>
 
-                    <p class="layer-caption">Constrain the model to the company&rsquo;s own rules. Phrase, but don&rsquo;t invent.</p>
+                    <p class="layer-caption">Constrain the model to the company&rsquo;s own rules.</p>
 
                     <details class="layer-dive">
                         <summary aria-label="Toggle deep dive for Layer 2">
@@ -1228,7 +1214,6 @@
                         <div class="layer-head-text">
                             <div class="layer-num">LAYER 03</div>
                             <h3 class="layer-title">Execution <span class="layer-subtitle">&middot; Tool Use &amp; Multi-Step Workflows</span></h3>
-                            <span class="now-called"><span class="now-called-prefix">Now called</span> Tool Use / Function Calling</span>
                         </div>
                     </div>
                     <!-- Killer visual: 6 workflow cards in compact form (descriptions reveal in deep-dive) -->
@@ -1259,7 +1244,7 @@
                         </div>
                     </div>
 
-                    <p class="layer-caption">The agent runs the workflow. It doesn&rsquo;t just retrieve text.</p>
+                    <p class="layer-caption">The agent runs the workflow or assigns the task to a human-tasker with all supporting context for human task execution.</p>
 
                     <details class="layer-dive">
                         <summary aria-label="Toggle deep dive for Layer 3">
@@ -1293,15 +1278,10 @@
                         <div class="layer-head-text">
                             <div class="layer-num">LAYER 04</div>
                             <h3 class="layer-title">Safety Gate <span class="layer-subtitle">&middot; Human-in-the-Loop Override</span></h3>
-                            <span class="now-called"><span class="now-called-prefix">Now called</span> Human-in-the-Loop / Guardrails</span>
                         </div>
                     </div>
-                    <!-- The deterministic-gate-first principle as a visual hero -->
-                    <div class="pullquote">
-                        <p>Probabilistic output never escaped without a <em>deterministic decision</em> behind it.</p>
-                    </div>
 
-                    <p class="layer-caption">Five minutes for a human to override. Otherwise, a deterministic fallback.</p>
+                    <p class="layer-caption">Five minutes for a human to override any outgoing message from the agent.</p>
 
                     <details class="layer-dive">
                         <summary aria-label="Toggle deep dive for Layer 4">
@@ -1349,23 +1329,6 @@
                     </details>
                 </article>
 
-            </div>
-        </div>
-    </section>
-
-    <div class="glow-line"></div>
-
-    <!-- ============ ARCHITECTURE ============ -->
-    <section id="architecture" class="section-padding fade-in">
-        <div class="container">
-            <div class="section-head">
-                <span class="label-tag">System Architecture</span>
-                <h2 class="h-section">The Production Flow</h2>
-                <p class="text-lead">
-                    WhatsApp in, four layers in sequence, then either a task created in Monday.com
-                    or a deterministic fallback message back to the client &mdash;
-                    served by AWS Lambda over Twilio.
-                </p>
             </div>
 
             <!-- ============ INLINE 4-LAYER SVG DIAGRAM ============ -->
@@ -1530,35 +1493,6 @@
                     </p>
                 </div>
             </div>
-
-            <!-- Tech-stack chip strip -->
-            <div class="tech-strip">
-                <div class="tech-strip-label">Stack</div>
-                <span class="tech-chip">WhatsApp / Twilio<span class="tech-purpose">channel</span></span>
-                <span class="tech-chip">AWS Lambda<span class="tech-purpose">compute</span></span>
-                <span class="tech-chip">Node.js · Serverless<span class="tech-purpose">runtime</span></span>
-                <span class="tech-chip">OpenAI Fine-Tuning<span class="tech-purpose">model</span></span>
-                <span class="tech-chip">HF AutoTrain<span class="tech-purpose">alt training</span></span>
-                <span class="tech-chip">Monday.com API<span class="tech-purpose">tasks / CRM</span></span>
-                <span class="tech-chip">Wix<span class="tech-purpose">customer surface</span></span>
-                <span class="tech-chip">Connecteam<span class="tech-purpose">operations</span></span>
-            </div>
-
-            <!-- Why serverless — tertiary implementation note, opt-in -->
-            <details class="context">
-                <summary>
-                    <span class="summary-label">Architecture note · why serverless</span>
-                    <span class="chev" aria-hidden="true">›</span>
-                </summary>
-                <div class="context-body">
-                    <p>
-                        Lambda + Twilio kept the production surface a thin proxy &mdash; no servers to maintain,
-                        no idle cost between conversations, and a clean re-deploy path each time a new fine-tuned
-                        model checkpoint replaced its predecessor. The agent could be updated independently of the
-                        messaging surface, the retrieval layer, or the operational integrations.
-                    </p>
-                </div>
-            </details>
         </div>
     </section>
 
@@ -1570,64 +1504,8 @@
             <div class="section-head">
                 <span class="label-tag">Reflection</span>
                 <h2 class="h-section">What Three Years Taught</h2>
-                <p class="text-lead">
-                    Three architectures evaluated. One went to production.
-                </p>
             </div>
 
-            <!-- Three approaches as a scannable engineering decision matrix -->
-            <div class="compare-matrix" role="region" aria-label="Three architectures evaluated, one shipped">
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Approach</th>
-                            <th scope="col">Fine-tunable on Hebrew?</th>
-                            <th scope="col">Encodes 145 procedures?</th>
-                            <th scope="col">Training ↔ Inference unified?</th>
-                            <th scope="col">Verdict</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-col="Approach" class="row-name">
-                                Dante AI <span class="cell-detail">no-code chatbot builder · native Twilio</span>
-                                <span class="row-tag">APPROACH 01</span>
-                            </td>
-                            <td data-col="Fine-tunable on Hebrew?"><span class="cell-no">No</span><span class="cell-detail">Black-box platform.</span></td>
-                            <td data-col="Encodes 145 procedures?"><span class="cell-no">No</span><span class="cell-detail">No surface to inject dispatcher logic.</span></td>
-                            <td data-col="Training ↔ Inference unified?"><span class="cell-detail">N/A &mdash; no training surface.</span></td>
-                            <td data-col="Verdict"><span class="verdict">Ruled out.</span><span class="cell-detail">Fastest pilot in week one; generalized at the cost of every specialization that mattered.</span></td>
-                        </tr>
-                        <tr>
-                            <td data-col="Approach" class="row-name">
-                                AutoTrain + ChatGPT <span class="cell-detail">HF AutoTrain → ChatGPT inference</span>
-                                <span class="row-tag">APPROACH 02</span>
-                            </td>
-                            <td data-col="Fine-tunable on Hebrew?"><span class="cell-yes">Yes</span><span class="cell-detail">Iterated dataset versions and snapshots.</span></td>
-                            <td data-col="Encodes 145 procedures?"><span class="cell-yes">Yes</span><span class="cell-detail">Via prompt context at inference.</span></td>
-                            <td data-col="Training ↔ Inference unified?"><span class="cell-no">No</span><span class="cell-detail">Two platforms; manual loop end-to-end.</span></td>
-                            <td data-col="Verdict"><span class="verdict">Ruled out.</span><span class="cell-detail">No automated quality loop. Cycle friction killed iteration speed.</span></td>
-                        </tr>
-                        <tr class="row-production">
-                            <td data-col="Approach" class="row-name">
-                                AWS Lambda + OpenAI <span class="cell-detail">Lambda · Twilio · fine-tuned OpenAI · RAG</span>
-                                <span class="row-tag">APPROACH 03 · PRODUCTION</span>
-                            </td>
-                            <td data-col="Fine-tunable on Hebrew?"><span class="cell-yes">Yes</span><span class="cell-detail">OpenAI fine-tuning API.</span></td>
-                            <td data-col="Encodes 145 procedures?"><span class="cell-yes">Yes</span><span class="cell-detail">RAG corpus injected per request.</span></td>
-                            <td data-col="Training ↔ Inference unified?"><span class="cell-yes">Yes</span><span class="cell-detail">One platform for both. Cycle friction eliminated.</span></td>
-                            <td data-col="Verdict"><span class="verdict verdict-shipped">Shipped.</span><span class="cell-detail">Production Oct 2020 &ndash; Dec 2023.</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="compare-matrix-foot">
-                <strong>Ruled-out approaches were never wasted</strong> &mdash; the AutoTrain branch&rsquo;s
-                accumulated learnings fed directly into the production stack.
-            </p>
-
-            <!-- Three lessons that outlasted the chatbot -->
-            <span class="lessons-prelude">Three lessons that outlasted the chatbot</span>
             <div class="lessons">
                 <div class="lesson-item">
                     <div class="lesson-num">01</div>
