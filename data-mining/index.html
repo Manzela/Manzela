@@ -518,8 +518,8 @@
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">Problem</a>
             <a href="#pipeline">Pipeline</a>
-            <a href="#reflection">Reflection</a>
-            <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow">←</span> Portfolio</a>
+            <a href="#reflection">Retrospective</a>
+            <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow">←</span> Manzela</a>
         </div>
         <div class="nav-right">
             <a href="https://manzela.github.io/Manzela/" class="profile-link">Profile</a>
@@ -538,18 +538,11 @@
             From Open Data<br>
             <span class="hero-line2">to Ranked Prospects.</span>
         </h1>
-        <p class="text-lead hero-sub">
-            A bespoke five-stage scraping, structuring, and classification pipeline &mdash;
-            built from scratch for a market existing data platforms didn&rsquo;t serve.
-        </p>
-        <div class="hero-meta">Daniel Manzela · Israeli Financial Services Firm (wealth-management focus) · Feb 2019 — Jul 2020</div>
+        <p class="text-lead hero-sub"></p>
+        <div class="hero-meta">Eitam Finance — A financial services firm (wealth management focus) · Feb 2019 — Jul 2020</div>
 
         <!-- Verifiable hero metrics -->
         <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat-value">17 mo</div>
-                <div class="hero-stat-label">In Production</div>
-            </div>
             <div class="hero-stat">
                 <div class="hero-stat-value">₪50M+</div>
                 <div class="hero-stat-label">New AUM Generated</div>
@@ -557,10 +550,6 @@
             <div class="hero-stat">
                 <div class="hero-stat-value">Solo</div>
                 <div class="hero-stat-label">Engineer</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">5</div>
-                <div class="hero-stat-label">Pipeline Stages</div>
             </div>
         </div>
     </section>
@@ -572,11 +561,9 @@
         <div class="container">
             <div class="section-head">
                 <span class="label-tag">The Problem</span>
-                <h2 class="h-section">No Vendor for the Job.</h2>
+                <h2 class="h-section">Customer Acquisition Costs were High</h2>
                 <p class="text-lead">
-                    A small Israeli financial services firm needed targeted prospects.
-                    The available enterprise data platforms didn&rsquo;t serve the market &mdash;
-                    wrong language, wrong geography, wrong price point.
+                    Eitam Finance, a small Israeli financial services firm needed cheap targeted prospects (leads for cold-calling). The available enterprise data platforms didn&rsquo;t serve the market (wrong language, wrong geography, wrong price point.) A new approach was required.
                 </p>
             </div>
 
@@ -585,29 +572,21 @@
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">list_alt</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">Generic Lists, Low Conversion</h3>
                     <p class="text-body">
-                        Sales worked from purchased lead lists with no geographic or income filtering.
-                        Conversion was poor because the prospect base wasn&rsquo;t the right one &mdash;
-                        cold-calling people who had no need for wealth management or pension planning.
+                        Purchased lead lists with no filtering. Cold-calling people who didn&rsquo;t need wealth management.
                     </p>
                 </div>
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">domain_disabled</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">No Vendor for This Market</h3>
                     <p class="text-body">
-                        Enterprise data platforms (ZoomInfo, Clearbit, Apollo) were US-focused,
-                        priced at enterprise tier, and had thin coverage of Israeli business and
-                        professional records. None of them indexed the Hebrew-language sources where
-                        the actual prospects lived.
+                        Enterprise platforms (ZoomInfo, Clearbit, Apollo) were US-focused and didn&rsquo;t index Hebrew-language sources.
                     </p>
                 </div>
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">explore_off</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">Geographic Targeting by Hand</h3>
                     <p class="text-body">
-                        Filtering prospects by income tier, neighborhood, or postal code &mdash;
-                        the dimensions that actually predicted whether someone needed financial
-                        services &mdash; required a custom layer that no off-the-shelf tool offered
-                        for this region.
+                        Filtering by income tier, neighborhood, or postal code required a custom layer no off-the-shelf tool offered for this region.
                     </p>
                 </div>
             </div>
@@ -620,12 +599,10 @@
     <section id="pipeline" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">The Build</span>
+                <span class="label-tag">The Solution</span>
                 <h2 class="h-section">Five Stages, Manually Orchestrated.</h2>
                 <p class="text-lead">
-                    Each stage was a standalone tool with a single job. Nothing was end-to-end
-                    automated &mdash; I ran, validated, and handed off each component myself.
-                    Outputs landed on the sales team&rsquo;s shared drive in Excel.
+                    Localized web-scraping of leads from highly targeted city-level web-directories.
                 </p>
             </div>
 
@@ -641,10 +618,7 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Target Definition</h3>
                         <p class="pipe-desc">
-                            Israeli postal codes and neighborhoods classified into income tiers using
-                            public demographic and real-estate signals. The geo-target list became
-                            the scope for every downstream stage &mdash; collapsing the search space
-                            before a single page was fetched.
+                            Postal codes and neighborhoods classified into income tiers using public demographic signals. This geo-target list scoped every downstream stage.
                         </p>
                     </div>
                 </article>
@@ -659,10 +633,7 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Extraction</h3>
                         <p class="pipe-desc">
-                            <strong>WebScraper</strong> (open-source) handled local extraction from
-                            registries, directories, listings, and municipal sites.
-                            <strong>BrightData&rsquo;s Residential Proxy</strong> provided rotating
-                            IPs and anti-bot bypass for rate-limited and geo-restricted sources.
+                            <strong>WebScraper</strong> extracted from registries, directories, and municipal sites. <strong>BrightData</strong> proxies handled anti-bot bypass.
                         </p>
                     </div>
                 </article>
@@ -677,11 +648,7 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Structuring</h3>
                         <p class="pipe-desc">
-                            Custom <strong>VBA Macro scripts</strong> in Excel handled normalization,
-                            enrichment, formatting, classification, and dedup &mdash; turning raw messy
-                            data into a structured, highly filterable index with multi-search and
-                            sort capabilities. Every record had a known shape and a unique identity
-                            before any score touched it.
+                            Custom <strong>VBA macros</strong> in Excel: normalization, enrichment, dedup &mdash; turning raw data into a structured, filterable index.
                         </p>
                     </div>
                 </article>
@@ -696,10 +663,7 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Classification</h3>
                         <p class="pipe-desc">
-                            Each record was scored against weighted signals &mdash; geo-tier, profession,
-                            business-ownership indicator, cross-source coverage &mdash; to produce a
-                            <strong>ranked prospect list</strong>. Weights were tuned manually between
-                            batches based on conversion-rate feedback from the sales team.
+                            Records scored against weighted signals (geo-tier, profession, ownership) to produce a <strong>ranked prospect list</strong>. Weights tuned on conversion feedback.
                         </p>
                     </div>
                 </article>
@@ -714,10 +678,7 @@
                     <div class="pipe-body">
                         <h3 class="pipe-title">Delivery</h3>
                         <p class="pipe-desc">
-                            The final stage exported themed <strong>Excel</strong> workbooks &mdash;
-                            sorted by region, profession, and score band &mdash; to the sales team&rsquo;s
-                            shared drive. The team never had to interact with the pipeline; they just
-                            opened a file in the tool they already used.
+                            Exported themed <strong>Excel</strong> workbooks &mdash; sorted by region, profession, and score &mdash; to the sales team&rsquo;s shared drive.
                         </p>
                     </div>
                 </article>
@@ -734,10 +695,7 @@
                 </p>
             </div>
 
-            <!-- The pullquote — the closer -->
-            <div class="pullquote">
-                <p>The scraping was the <em>easy</em> part.<br>The classifier was the <em>product</em>.</p>
-            </div>
+
         </div>
     </section>
 
@@ -747,7 +705,7 @@
     <section id="reflection" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">Reflection</span>
+                <span class="label-tag">Retrospective</span>
                 <h2 class="h-section">What This Project Taught</h2>
                 <p class="text-lead">
                     The lessons from a 17-month custom pipeline outlasted the pipeline itself.
@@ -755,16 +713,7 @@
                 </p>
             </div>
 
-            <!-- Tech-stack chip strip -->
-            <div class="tech-strip">
-                <div class="tech-strip-label">Stack</div>
-                <span class="tech-chip">WebScraper<span class="tech-purpose">extraction</span></span>
-                <span class="tech-chip">BrightData<span class="tech-purpose">proxy · anti-bot</span></span>
-                <span class="tech-chip">Excel + VBA<span class="tech-purpose">normalization</span></span>
-                <span class="tech-chip">VBA Macros<span class="tech-purpose">classification</span></span>
-                <span class="tech-chip">Excel<span class="tech-purpose">output · delivery</span></span>
-                <span class="tech-chip">Workstation<span class="tech-purpose">infrastructure</span></span>
-            </div>
+
 
             <!-- Four lessons -->
             <div class="lessons">
@@ -773,8 +722,7 @@
                     <div class="lesson-text">
                         <strong>Quality over volume.</strong> Early batches converted at near-zero.
                         Tighter geo-filtering and stricter scoring thresholds reduced volume and
-                        lifted conversion &mdash; the same lesson that recurred at
-                        <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>.
+                        lifted conversion.
                     </div>
                 </div>
                 <div class="lesson-item">
@@ -807,17 +755,8 @@
             <!-- Outcome statement + bridge -->
             <div class="outcome">
                 <p class="outcome-line">
-                    For seventeen months the sales team worked from leads generated by this pipeline.
                     The converted prospects represented over ₪50M in new asset-management client
                     portfolio. Cost: a workstation and one engineer.
-                </p>
-                <p class="bridge">
-                    The same pattern &mdash; extract, classify, deliver in the format the consumer
-                    already uses &mdash; recurred at larger scale:
-                    <a href="https://manzela.github.io/Manzela/tasko-ai/" class="inline-link">Tasko.ai</a>
-                    and the
-                    <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Pipeline Observatory</a>.
-                    The earliest version of that thinking lived here.
                 </p>
             </div>
         </div>
