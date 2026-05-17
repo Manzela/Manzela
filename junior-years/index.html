@@ -582,11 +582,12 @@
             border-radius: 1px;
             opacity: 0.85;
         }
-        .ledger-row[data-span="full"]   .span-bar::after { left: 0%;  right: 0%;  }
-        .ledger-row[data-span="late"]   .span-bar::after { left: 35%; right: 0%;  }
-        .ledger-row[data-span="early"]  .span-bar::after { left: 0%;  right: 35%; }
-        .ledger-row[data-span="middle"] .span-bar::after { left: 20%; right: 20%; }
-        .ledger-row[data-span="recur"]  .span-bar::after { left: 5%;  right: 5%;  }
+        /* Timeline: 2013–2019 = 6 years. left/right as % of 6.5rem bar */
+        .ledger-row[data-span="pa"]    .span-bar::after { left: 66.7%; right: 0%;    } /* 2017–2019 */
+        .ledger-row[data-span="bk"]    .span-bar::after { left: 50%;   right: 33.3%; } /* 2016–2017 */
+        .ledger-row[data-span="cl"]    .span-bar::after { left: 33.3%; right: 50%;   } /* 2015–2016 */
+        .ledger-row[data-span="sw"]    .span-bar::after { left: 16.7%; right: 33.3%; } /* 2014–2017 */
+        .ledger-row[data-span="wh"]    .span-bar::after { left: 0%;    right: 66.7%; } /* 2013–2014 */
 
         .ledger-desc {
             font-size: var(--type-body);
@@ -936,7 +937,7 @@
 
             <ol class="catalogue fade-in" role="list" aria-label="Gigs">
 
-                <li class="ledger-row" data-span="late">
+                <li class="ledger-row" data-span="pa">
                     <span class="ledger-num" aria-hidden="true">
                         01
                     </span>
@@ -952,7 +953,7 @@
                     </p>
                 </li>
 
-                <li class="ledger-row" data-span="middle">
+                <li class="ledger-row" data-span="bk">
                     <span class="ledger-num" aria-hidden="true">
                         02
                     </span>
@@ -968,7 +969,7 @@
                     </p>
                 </li>
 
-                <li class="ledger-row" data-span="middle">
+                <li class="ledger-row" data-span="cl">
                     <span class="ledger-num" aria-hidden="true">
                         03
                     </span>
@@ -984,7 +985,7 @@
                     </p>
                 </li>
 
-                <li class="ledger-row" data-span="middle">
+                <li class="ledger-row" data-span="sw">
                     <span class="ledger-num" aria-hidden="true">
                         04
                     </span>
@@ -1000,7 +1001,7 @@
                     </p>
                 </li>
 
-                <li class="ledger-row" data-span="early">
+                <li class="ledger-row" data-span="wh">
                     <span class="ledger-num" aria-hidden="true">
                         05
                     </span>
