@@ -83,9 +83,13 @@
 
     <nav class="glass-nav fixed top-0 w-full z-50 transition-all duration-300">
         <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between text-xs font-medium">
-            <a href="#" class="text-appleLight hover:text-white transition-colors font-semibold tracking-tight">Elysium</a>
+            <a href="#" class="text-appleLight hover:text-white transition-colors font-semibold tracking-tight">TNG Shopper &middot; Elysium</a>
+            <button class="mobile-toggle" onclick="document.getElementById('mainNav').classList.toggle('open')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <div class="desktop-nav flex space-x-8 text-appleGray" id="mainNav">
-                <a href="#discovery" class="hover:text-appleLight transition-colors">Discovery</a>
+                <a href="#problem" class="hover:text-appleLight transition-colors">Problem</a>
+                <a href="#solution" class="hover:text-appleLight transition-colors">Solution</a>
                 <a href="#architecture" class="hover:text-appleLight transition-colors">Architecture</a>
                 <a href="#privacy" class="hover:text-appleLight transition-colors">Privacy</a>
                 <a href="#patent" class="hover:text-appleLight transition-colors">Patent</a>
@@ -93,12 +97,7 @@
                 <a href="#validation" class="hover:text-appleLight transition-colors">Validation</a>
                 <a href="#decision" class="hover:text-appleLight transition-colors">Decision</a>
                 <a href="#research" class="hover:text-appleLight transition-colors">Research</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="https://manzela.github.io/Manzela/" class="text-appleLight hover:text-white transition-colors">Profile</a>
-                <button class="mobile-toggle" onclick="document.getElementById('mainNav').classList.toggle('open')" aria-label="Menu">
-                    <span></span><span></span><span></span>
-                </button>
+                <a href="https://manzela.github.io/Manzela/" class="text-appleLight hover:text-white transition-colors">&larr; Manzela</a>
             </div>
         </div>
     </nav>
@@ -111,9 +110,7 @@
             <p class="text-xl md:text-2xl text-appleGray max-w-2xl mx-auto mb-12 font-light">
                 A physical-context AI platform fusing search intent, geo-coordinates, and foot traffic data into store-level retail intelligence. Built and validated with enterprise buyers across multi-national multi-location retail markets.
             </p>
-            <div class="inline-block px-4 py-2 mb-10 rounded-full border border-appleBorder text-xs uppercase tracking-widest text-appleGray">
-                Status: paused — research line folded back into <a href="https://manzela.github.io/pipeline-observatory/" class="text-appleLight hover:text-white transition-colors underline">TNG Shopper&rsquo;s main pipeline</a>
-            </div>
+
             <div class="flex justify-center gap-12 text-center text-sm">
                 <div>
                     <div class="text-2xl font-semibold text-appleLight mb-1">13</div>
@@ -134,7 +131,7 @@
         <section id="discovery" class="section-padding px-6 max-w-5xl mx-auto fade-in">
             <div class="text-center mb-16">
                 <span class="label-tag mb-4">Product Discovery</span>
-                <h2 class="text-4xl font-semibold mb-4 mt-4">The Enterprise Problem</h2>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">Enterprise Discovery</h2>
                 <p class="text-xl text-appleGray max-w-2xl mx-auto">Validated through discovery sessions with enterprise retail stakeholders at multi-location retailers operating 15,600+ combined store locations.</p>
             </div>
 
@@ -153,18 +150,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="card p-8">
-                    <span class="label-tag mb-3">Enterprise Retail</span>
-                    <h3 class="text-lg font-medium mb-2 mt-2">13 Buyer Interviews</h3>
-                    <p class="text-appleGray text-sm leading-relaxed">Validated across Fashion, Sporting Goods, Home &amp; Living, and Jewelry verticals with enterprise retail buyers.</p>
-                    <div class="flex flex-wrap gap-4 mt-4">
-                        <span class="material-symbols-outlined text-lg text-appleGray">checkroom</span>
-                        <span class="material-symbols-outlined text-lg text-appleGray">sprint</span>
-                        <span class="material-symbols-outlined text-lg text-appleGray">chair</span>
-                        <span class="material-symbols-outlined text-lg text-appleGray">diamond</span>
+            </div>
+        </section>
 
-                    </div>
-                </div>
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="problem" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">The Problem</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">The Enterprise Problem</h2>
+                <p class="text-xl text-appleGray max-w-2xl mx-auto">Enterprise buyers lack the data infrastructure to make location-aware purchasing decisions.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
@@ -176,13 +170,21 @@
                 <div class="card p-8">
                     <span class="material-symbols-outlined text-3xl mb-4 text-appleGray">visibility_off</span>
                     <h3 class="text-xl font-medium mb-2">Blind to Geography</h3>
-                    <p class="text-appleGray text-sm leading-relaxed">Buyers need demand signals by size, color, and gender&mdash;segmented by store location. Current BI systems cannot provide geo-specific SKU-level intelligence.</p>
+                    <p class="text-appleGray text-sm leading-relaxed">Buyers need demand signals by size, color, and gender, segmented by store location. Current BI systems cannot provide geo-specific SKU-level intelligence.</p>
                 </div>
                 <div class="card p-8">
                     <span class="material-symbols-outlined text-3xl mb-4 text-appleGray">block</span>
                     <h3 class="text-xl font-medium mb-2">No Unified Signal Layer</h3>
-                    <p class="text-appleGray text-sm leading-relaxed">Search intent, visitor geo-coordinates, and product catalog data exist in separate silos. No system connects these signals into a unified, store-level demand view&mdash;leaving buyers without spatial evidence.</p>
+                    <p class="text-appleGray text-sm leading-relaxed">Search intent, visitor geo-coordinates, and product catalog data exist in separate silos. No system connects these signals into a unified, store-level demand view, leaving buyers without spatial evidence.</p>
                 </div>
+            </div>
+        </section>
+
+        <div class="glow-line max-w-5xl mx-auto"></div>
+        <section id="solution" class="section-padding px-6 max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <span class="label-tag mb-4">The Solution</span>
+                <h2 class="text-4xl font-semibold mb-4 mt-4">AI-Data Chatbot that helps make informed decisions based on first-party local demand data</h2>
             </div>
         </section>
 
@@ -190,16 +192,16 @@
         <div class="glow-line max-w-5xl mx-auto"></div>
         <section id="architecture" class="section-padding px-6 max-w-5xl mx-auto fade-in">
             <div class="text-center mb-16">
-                <span class="label-tag mb-4">System Design</span>
+                <span class="label-tag mb-4">Architecture</span>
                 <h2 class="text-4xl font-semibold mb-4 mt-4">How It Works</h2>
-                <p class="text-xl text-appleGray max-w-2xl mx-auto">A conversational multi-agent system. Ask a question in natural language&mdash;11 specialized agents collaborate to deliver store-level intelligence.</p>
+                <p class="text-xl text-appleGray max-w-2xl mx-auto">11 specialized agents collaborate to deliver store-level intelligence.</p>
             </div>
 
             <div class="card p-10 mb-8">
                 <div class="grid md:grid-cols-2 gap-12">
                     <div>
                         <h3 class="text-2xl font-medium mb-6">Conversational Interface</h3>
-                        <p class="text-appleGray text-sm leading-relaxed mb-6">A single orchestrator receives natural language queries in Hebrew or English, classifies intent, and dispatches work to the right combination of expert agents&mdash;no manual configuration required.</p>
+
                         <ul class="space-y-5 text-sm text-appleGray">
                             <li class="flex items-start">
                                 <span class="material-symbols-outlined mr-4 mt-0.5 text-appleBlue">route</span>
@@ -270,7 +272,7 @@
                     <span class="material-symbols-outlined text-2xl text-appleBlue mt-1">memory</span>
                     <div>
                         <h3 class="text-lg font-medium mb-3">Built on Vertex AI</h3>
-                        <p class="text-sm text-appleGray leading-relaxed">Vertex AI Agent Builder for orchestration. Vertex AI RAG and Vector Search for retrieval-augmented generation. Multiple tool executions per query chain. All agents operate within Google Cloud&rsquo;s enterprise security boundary.</p>
+                        <p class="text-sm text-appleGray leading-relaxed">Vertex AI Agent Builder for orchestration. Vertex AI RAG and Vector Search for retrieval-augmented generation. Multiple tool executions per query chain.</p>
                     </div>
                 </div>
             </div>
@@ -295,12 +297,12 @@
                 </div>
                 <div class="card p-8">
                     <h3 class="text-lg font-medium mb-2">Access Control</h3>
-                    <p class="text-sm text-appleGray">3-tier isolation (Public / Licensed / Enterprise) backed by strict cloud IAM boundaries and zero-trust network policies.</p>
+                    <p class="text-sm text-appleGray">3-tier isolation (Public / Licensed / Enterprise) backed by VPC Service Controls, strict cloud IAM boundaries, and zero-trust network policies.</p>
                 </div>
             </div>
             <div class="mt-8 card p-8 bg-appleDarker/30">
                 <h3 class="text-lg font-medium mb-3">&ldquo;Crowd Memory&rdquo; Architecture</h3>
-                <p class="text-sm text-appleGray">No persistent user profiles. Visitor identifiers are ephemeral and cryptographically hashed. All predictions are derived from aggregate cohort behavior within H3 micro-regions, not individual user histories. The system explicitly avoids persistent user profiling&mdash;using &ldquo;Crowd Memory&rdquo; instead of &ldquo;User Memory.&rdquo;</p>
+                <p class="text-sm text-appleGray">Visitor identifiers are ephemeral and cryptographically hashed. All predictions are derived from aggregate cohort behavior within H3 micro-regions, not individual user histories.</p>
             </div>
         </section>
 
@@ -314,7 +316,7 @@
                     <span class="text-appleLight font-mono">CCR = </span>
                     <span class="text-appleGray font-mono">Purchases / (Temporally Relevant + Geographically Proximate Impressions)</span>
                 </div>
-                <p class="text-xs text-appleGray max-w-xl mx-auto">Unlike standard conversion rate, CCR measures only impressions that are both temporally relevant and geographically proximate&mdash;the efficiency of physical-context matching.</p>
+                <p class="text-xs text-appleGray max-w-xl mx-auto">Unlike standard conversion rate, CCR measures only impressions that are both temporally relevant and geographically proximate.</p>
             </div>
 
             <h3 class="text-lg font-medium mb-4 text-appleGray">Independent Claims (Patent Scope)</h3>
@@ -488,15 +490,17 @@
 
     </main>
     <footer class="border-t border-appleBorder/50 py-12 px-6">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-appleGray gap-4">
-            <div>
-                &copy; 2024-2026 Daniel Manzela. All rights reserved.
-            </div>
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-appleGray gap-4" style="font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.04em;">
+            <p>&copy; 2024&ndash;2026 Daniel Manzela &middot; Elysium.</p>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="https://manzela.github.io/Manzela/" class="hover:text-appleLight transition-colors">Profile</a>
-                <a href="https://manzela.github.io/pipeline-observatory/" class="hover:text-appleLight transition-colors">Autonomous Pipeline</a>
-                <a href="https://github.com/manzela" class="hover:text-appleLight transition-colors">GitHub</a>
-                <a href="https://linkedin.com/in/manzela" class="hover:text-appleLight transition-colors">LinkedIn</a>
+                <a href="https://manzela.github.io/Manzela/" class="text-appleLight">Profile</a>
+                <a href="https://manzela.github.io/Manzela/junior-years/" class="text-appleLight">Junior Years</a>
+                <a href="https://manzela.github.io/Manzela/data-mining/" class="text-appleLight">Data Mining</a>
+                <a href="https://manzela.github.io/Manzela/seller-app/" class="text-appleLight">Seller App</a>
+                <a href="https://manzela.github.io/Manzela/tasko-ai/" class="text-appleLight">Tasko AI</a>
+                <a href="https://manzela.github.io/pipeline-observatory/" class="text-appleLight">Pipeline</a>
+                <a href="https://github.com/manzela" class="text-appleLight" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/manzela" class="text-appleLight" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
         </div>
     </footer>
