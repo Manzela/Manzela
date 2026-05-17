@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Tasko.ai">
     <title>Tasko.ai — A Production Agentic System · Daniel Manzela</title>
-    <meta name="description" content="An AI agent that learned to do a human's job. 21,000 task records, 145 procedures, four layers — classify, retrieve, execute, verify — built on WhatsApp before the industry had a name for it. Oct 2020 – Dec 2023.">
+    <meta name="description" content="An AI agent that learned to do a human's job. 21,000 task records, 145 procedures, four layers, classify, retrieve, execute, verify, built on WhatsApp before the industry had a name for it. Oct 2020 – Dec 2023.">
     <meta name="author" content="Daniel Manzela">
     <link rel="canonical" href="https://manzela.github.io/Manzela/tasko-ai/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
@@ -18,7 +18,7 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Daniel Manzela — Portfolio">
     <meta property="og:title" content="Tasko.ai — A Production Agentic System">
-    <meta property="og:description" content="An AI agent that learned to do a human's job. Built from 21,000 task records and nine years of WhatsApp data — a four-layer agentic system shipped before the industry had a name for it.">
+    <meta property="og:description" content="An AI agent that learned to do a human's job. Built from 21,000 task records and 11 years of WhatsApp data, a four-layer agentic system shipped before the industry had a name for it.">
     <meta property="og:url" content="https://manzela.github.io/Manzela/tasko-ai/">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://manzela.github.io/Manzela/tasko-ai/assets/og-image.png">
@@ -29,7 +29,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tasko.ai — A Production Agentic System">
-    <meta name="twitter:description" content="An AI agent that learned to do a human's job. Four layers — classify, retrieve, execute, verify — shipped on WhatsApp before the industry had a name for it.">
+    <meta name="twitter:description" content="An AI agent that learned to do a human's job. Four layers, classify, retrieve, execute, verify, shipped on WhatsApp before the industry had a name for it.">
     <meta name="twitter:image" content="https://manzela.github.io/Manzela/tasko-ai/assets/og-image.png">
     <meta name="twitter:image:alt" content="Tasko.ai — A Production Agentic System. A case study by Daniel Manzela.">
     <meta name="twitter:creator" content="@danielmanzela">
@@ -1062,7 +1062,7 @@
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">history_edu</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">Knowledge Trapped in Text</h3>
                     <p class="text-body">
-                        Nine years of pricing logic, escalation rules, and edge-case handling
+                        11 years of pricing logic, escalation rules, and edge-case handling
                         existed only as informal Hebrew chat. No database, no knowledge base,
                         no way to onboard a new dispatcher.
                     </p>
@@ -1097,7 +1097,7 @@
                 <span class="label-tag">Architecture</span>
                 <h2 class="h-section">A software that thinks and acts for you</h2>
                 <p class="text-lead">
-                    The same architecture now called &ldquo;agentic AI with tool use&rdquo; &mdash;
+                    The same architecture now called &ldquo;agentic AI with tool use&rdquo;,
                     designed and shipped in 2020&ndash;2023, before the terminology existed.
                 </p>
             </div>
@@ -1234,7 +1234,7 @@
                                 Every inbound WhatsApp message routes through a classifier that places it
                                 into one of 15 service categories, auto-completes any missing fields it can infer,
                                 and asks the user to confirm before proceeding. The structural backbone the
-                                model learned to recognize was extracted from the company&rsquo;s nine years
+                                model learned to recognize was extracted from the company&rsquo;s 11 years
                                 of chat history.
                             </p>
 
@@ -1282,12 +1282,7 @@
                                 </div>
                             </div>
 
-                            <div class="layer-callout">
-                                <strong>The Hebrew NLP problem</strong>
-                                In 2021 there was no off-the-shelf open-source toolchain for production Hebrew &mdash;
-                                tokenizers, NER, and labeled corpora were all sparse. The pipeline above is what
-                                getting it to work in production looked like.
-                            </div>
+
                         </div>
                     </details>
                 </article>
@@ -1334,7 +1329,7 @@
                         <div class="layer-dive-body">
                             <p class="layer-desc">
                                 Once an intent is classified, the agent retrieves a matching procedure from
-                                an authored corpus and injects it into the prompt at request time &mdash;
+                                an authored corpus and injects it into the prompt at request time,
                                 constraining replies to the company&rsquo;s own rules instead of letting the
                                 model invent policy.
                             </p>
@@ -1392,7 +1387,7 @@
                         </summary>
                         <div class="layer-dive-body">
                             <p class="layer-desc">
-                                Each procedure is a <strong>multi-step workflow the agent runs</strong> &mdash; not a
+                                Each procedure is a <strong>multi-step workflow the agent runs</strong>, not a
                                 paragraph it reads back. API calls, sequential coordination, asking the user for missing
                                 information. Every variant of <em>what to ask and when</em> was mapped and trained.
                             </p>
@@ -1400,8 +1395,8 @@
                                 <strong>Model evolution</strong>
                                 Fine-tuning ran across two platforms over 12+ months: OpenAI (Babbage &rarr; Davinci
                                 &rarr; GPT-3.5 as each became available) and HF AutoTrain. Hundreds of cycles tightened
-                                Hebrew fidelity, PII redaction, conversational state, and procedure adherence
-                                &mdash; not parameter counts.
+                                Hebrew fidelity, PII redaction, conversational state, and procedure adherence,
+                                not parameter counts.
                             </div>
                         </div>
                     </details>
@@ -1420,6 +1415,29 @@
                     </div>
 
                     <p class="layer-caption">Five minutes for a human to override any outgoing message from the agent.</p>
+
+                    <div class="safety-grid" aria-label="Applied AI safety protocols">
+                        <div class="safety-item">
+                            <span class="safety-tag">HUMAN OVERSIGHT</span>
+                            <h4>Human-in-the-loop control</h4>
+                            <p>Every agent output passes through a 5-minute human review window. Operators can edit, reclassify, or reject before delivery.</p>
+                        </div>
+                        <div class="safety-item">
+                            <span class="safety-tag">TRANSPARENCY</span>
+                            <h4>Explainable decision trace</h4>
+                            <p>Full reasoning chain logged per session: detected intent, retrieved procedure, staged reply, and every branch the agent took.</p>
+                        </div>
+                        <div class="safety-item">
+                            <span class="safety-tag">ROBUSTNESS</span>
+                            <h4>Deterministic fallback</h4>
+                            <p>If no human intervenes, the system defaults to a safe deterministic message. No unreviewed model output ever reaches the client.</p>
+                        </div>
+                        <div class="safety-item">
+                            <span class="safety-tag">ACCOUNTABILITY</span>
+                            <h4>Grounded, auditable generation</h4>
+                            <p>Every reply is constrained to the 145-procedure authored corpus with a per-session audit trail.</p>
+                        </div>
+                    </div>
 
                     <details class="layer-dive">
                         <summary aria-label="Toggle deep dive for Layer 4">
