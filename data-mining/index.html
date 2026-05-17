@@ -142,12 +142,26 @@
             height: 48px; display: flex; align-items: center; justify-content: space-between;
             font-size: 12px; font-weight: 500;
         }
-        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; }
-        .nav-brand .nav-brand-sub { color: var(--appleGray); font-weight: 400; margin-left: 6px; }
-        .desktop-nav { display: flex; gap: 28px; color: var(--appleGray); align-items: center; }
-        .desktop-nav a { transition: color 0.2s ease; font-size: 11px; }
-        .desktop-nav a:hover { color: var(--appleLight); }
-        .desktop-nav a.nav-back { color: var(--appleLight); display: inline-flex; align-items: center; gap: 4px; }
+        .nav-brand {
+            display: inline-flex; align-items: baseline; gap: 0.45rem;
+            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
+            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
+            color: var(--appleLight); font-weight: 600; background-image: none;
+        }
+        .nav-brand-sub { color: var(--appleGray); font-weight: 400; }
+        .desktop-nav {
+            display: flex; gap: 1.5rem; align-items: center; color: var(--appleGray);
+            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
+            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
+        }
+        .desktop-nav a {
+            color: var(--appleGray);
+            background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+            background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
+            padding: 0.25rem 0; transition: color 0.2s ease;
+        }
+        .desktop-nav a:hover { color: var(--appleLight); background-size: 100% 1px; }
+        .desktop-nav a.nav-back { color: var(--appleLight) !important; display: inline-flex; align-items: center; gap: 0.4rem; }
         .desktop-nav a.nav-back .arrow { font-family: var(--fontMono); opacity: 0.6; }
         .nav-right { display: flex; align-items: center; gap: 16px; }
         .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
@@ -514,7 +528,10 @@
 <!-- ============ NAV ============ -->
 <nav class="glass-nav" aria-label="Primary">
     <div class="nav-inner">
-        <a href="#hero" class="nav-brand">Data Mining<span class="nav-brand-sub">2019–2020</span></a>
+        <a href="#hero" class="nav-brand">
+            <span>Data Mining</span>
+            <span class="nav-brand-sub">2019–2020</span>
+        </a>
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">Problem</a>
             <a href="#pipeline">Solution</a>
