@@ -123,9 +123,7 @@
         .desktop-nav a:hover { color: var(--appleLight); }
         .desktop-nav a.nav-back { color: var(--appleLight); display: inline-flex; align-items: center; gap: 4px; }
         .desktop-nav a.nav-back .arrow { font-family: 'JetBrains Mono', monospace; opacity: 0.6; }
-        .nav-right { display: flex; align-items: center; gap: 16px; }
-        .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
-        .nav-right a.profile-link:hover { opacity: 0.75; }
+
         .mobile-toggle {
             display: none; background: none; border: none; cursor: pointer; padding: 4px;
         }
@@ -660,24 +658,28 @@
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* ============ FOOTER ============ */
-        footer {
-            border-top: 1px solid var(--appleBorderSoft);
-            padding: 48px 24px;
-            margin-top: 32px;
+        .site-footer {
+            border-top: 1px solid var(--appleBorder);
+            padding: 2.25rem 1.5rem 2.5rem;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 11px;
+            color: var(--appleGray);
+            position: relative;
+            z-index: 2;
         }
         .footer-inner {
             max-width: 1024px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center;
-            gap: 24px; flex-wrap: wrap;
+            display: flex; flex-wrap: wrap;
+            gap: 1.25rem 2rem;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 0.04em;
         }
-        .footer-copy { font-size: 12px; color: var(--appleGray); }
         .footer-links {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--appleGray);
+            display: flex; flex-wrap: wrap;
+            gap: 0.4rem 1.5rem;
         }
-        .footer-links a { transition: color 0.2s ease; }
-        .footer-links a:hover { color: var(--appleLight); }
+        .footer-links a { color: var(--appleLight); }
 
         /* ============ INLINE LINK ============ */
         .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
@@ -998,18 +1000,15 @@
 <nav class="glass-nav" aria-label="Primary">
     <div class="nav-inner">
         <a href="#hero" class="nav-brand">Tasko.ai<span class="nav-brand-sub">2020–2023</span></a>
+        <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">Problem</a>
             <a href="#solution">Solution</a>
             <a href="#build">Architecture</a>
             <a href="#reflection">Reflection</a>
-            <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow">←</span> Portfolio</a>
-        </div>
-        <div class="nav-right">
-            <a href="https://manzela.github.io/Manzela/" class="profile-link">Profile</a>
-            <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
-                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-            </button>
+            <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow" aria-hidden="true">←</span> Manzela</a>
         </div>
     </div>
 </nav>
@@ -1034,7 +1033,7 @@
         <div class="container">
             <div class="section-head">
                 <span class="label-tag">The Problem</span>
-                <h2 class="h-section">A Human Dispatcher in Every Conversation</h2>
+                <h2 class="h-section">Human-Dependencies</h2>
                 <p class="text-lead">
                     <a href="https://www.hasherut.co.il" target="_blank" rel="noopener noreferrer" class="inline-link">Hasherut</a> ran a task-fulfillment service entirely over WhatsApp.
                     Every client request still required a person to read it, classify it,
@@ -1181,8 +1180,7 @@
                     <text x="680" y="589" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp completion message</text>
                     <text x="680" y="607" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">sent through the same client number</text>
 
-                    <!-- Foot label -->
-                    <text x="480" y="648" fill="#86868b" font-family="Inter,sans-serif" font-size="9" letter-spacing="0.16em" text-anchor="middle">PRODUCTION ACTIVE &middot; OCT 2020 — DEC 2023</text>
+
                 </svg>
             </div>
 
@@ -1340,12 +1338,7 @@
                                 constraining replies to the company&rsquo;s own rules instead of letting the
                                 model invent policy.
                             </p>
-                            <div class="layer-callout">
-                                <strong>Before &ldquo;RAG&rdquo; was a label</strong>
-                                Retrieve grounding text, inject it into the prompt at request time, let the model
-                                phrase but not invent &mdash; that pattern was the working solution for keeping a
-                                fine-tuned Hebrew model honest in 2021&ndash;2022, years before the field had a name for it.
-                            </div>
+
                         </div>
                     </details>
                 </article>
@@ -1441,76 +1434,14 @@
                                 reclassify, or approve. If no one intervenes, the system falls back to a deterministic
                                 message: <em>&ldquo;We&rsquo;ll get back to you soon.&rdquo;</em>
                             </p>
-                            <div class="safety-grid" aria-label="Debug Monitor Dashboard capabilities">
-                                <div class="safety-item">
-                                    <span class="safety-tag">REAL-TIME VIEW</span>
-                                    <h4>Live session inspector</h4>
-                                    <p>Inbound message, detected intent, retrieved procedure, and staged reply &mdash; all synchronized.</p>
-                                </div>
-                                <div class="safety-item">
-                                    <span class="safety-tag">EDIT</span>
-                                    <h4>Editable response field</h4>
-                                    <p>Correct the auto-completion in place; the corrected text replaces what would have been sent.</p>
-                                </div>
-                                <div class="safety-item">
-                                    <span class="safety-tag">RECLASSIFY</span>
-                                    <h4>Intent override dropdown</h4>
-                                    <p>If Layer 1 misjudged, pick the correct category and the workflow re-routes from there.</p>
-                                </div>
-                                <div class="safety-item">
-                                    <span class="safety-tag">DEBUG</span>
-                                    <h4>Code logs in-line</h4>
-                                    <p>Per-session decision trace &mdash; every retrieval, every branch, every API call.</p>
-                                </div>
-                            </div>
-                            <div class="layer-callout">
-                                <strong>Deterministic-gate-first, in production</strong>
-                                In 2021, most production AI shipped raw model output straight to users. Putting every
-                                probabilistic decision behind a deterministic check &mdash; with a human-readable trace
-                                and an explicit fallback &mdash; was the design choice that later scaled into the
-                                multi-agent DAGs at the Pipeline Observatory.
-                            </div>
+
                         </div>
                     </details>
                 </article>
 
             </div>
 
-            <!-- ============ INFRASTRUCTURE SUBHEAD ============ -->
-            <div class="infra-head">
-                <span class="label-tag">Infrastructure</span>
-                <p class="infra-lead">What it ran on.</p>
-            </div>
 
-            <!-- 3 essential architecture cards -->
-            <div class="grid grid-3">
-                <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">bolt</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">Serverless Compute</h3>
-                    <p class="text-body">
-                        <strong style="color:var(--appleLight)">AWS Lambda</strong> (Node.js) handles every Twilio webhook
-                        &mdash; orchestrates retrieval, calls the model, posts the reply.
-                        Pay-per-invocation matched the conversational workload.
-                    </p>
-                </div>
-                <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">smart_toy</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">Inference Layer</h3>
-                    <p class="text-body">
-                        Fine-tuned <strong style="color:var(--appleLight)">OpenAI</strong> model for in-domain replies,
-                        with retrieval against the 145-procedure corpus injected into prompt context at request time.
-                    </p>
-                </div>
-                <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 14px;">hub</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">Operational Integration</h3>
-                    <p class="text-body">
-                        <strong style="color:var(--appleLight)">Monday.com</strong> for task creation,
-                        <strong style="color:var(--appleLight)">Wix</strong> as the client-facing CRM surface,
-                        <strong style="color:var(--appleLight)">Connecteam</strong> for tasker management.
-                    </p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1538,10 +1469,10 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer>
+<footer class="site-footer">
     <div class="footer-inner">
-        <div class="footer-copy">© 2020–2026 Daniel Manzela · Tasko.ai was active Oct 2020 – Dec 2023.</div>
-        <div class="footer-links" aria-label="Cross-portfolio links">
+        <p>© 2020–2026 Daniel Manzela · Tasko.ai.</p>
+        <div class="footer-links">
             <a href="https://manzela.github.io/Manzela/">Profile</a>
             <a href="https://manzela.github.io/Manzela/junior-years/">Junior Years</a>
             <a href="https://manzela.github.io/Manzela/data-mining/">Data Mining</a>
