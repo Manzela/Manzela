@@ -145,14 +145,27 @@
             height: 48px; display: flex; align-items: center; justify-content: space-between;
             font-size: 12px; font-weight: 500;
         }
-        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; }
-        .nav-brand .nav-brand-sub { color: var(--appleGray); font-weight: 400; margin-left: 6px; }
-        .desktop-nav { display: flex; gap: 24px; color: var(--appleGray); }
-        .desktop-nav a { transition: color 0.2s ease; font-size: 11px; }
-        .desktop-nav a:hover { color: var(--appleLight); }
-        .nav-right { display: flex; align-items: center; gap: 16px; }
-        .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
-        .nav-right a.profile-link:hover { opacity: 0.75; }
+        .nav-brand {
+            display: inline-flex; align-items: baseline; gap: 0.45rem;
+            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
+            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
+            color: var(--appleLight); font-weight: 600; background-image: none;
+        }
+        .nav-brand-sub { color: var(--appleGray); font-weight: 400; }
+        .desktop-nav {
+            display: flex; gap: 1.5rem; align-items: center; color: var(--appleGray);
+            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
+            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
+        }
+        .desktop-nav a {
+            color: var(--appleGray);
+            background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+            background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
+            padding: 0.25rem 0; transition: color 0.2s ease;
+        }
+        .desktop-nav a:hover { color: var(--appleLight); background-size: 100% 1px; }
+        .desktop-nav a.nav-back { color: var(--appleLight) !important; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .desktop-nav a.nav-back .arrow { font-family: var(--fontMono); opacity: 0.6; }
         .mobile-toggle {
             display: none; background: none; border: none; cursor: pointer; padding: 4px;
             width: 28px; height: 28px; position: relative;
@@ -597,22 +610,22 @@
 <!-- ============ NAV ============ -->
 <nav class="glass-nav" aria-label="Primary">
     <div class="nav-inner">
-        <a href="#hero" class="nav-brand">Seller App<span class="nav-brand-sub">2020–2024</span></a>
+        <a href="#hero" class="nav-brand">
+            <span>Seller App</span>
+            <span class="nav-brand-sub">2020–2024</span>
+        </a>
+        <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">Problem</a>
             <a href="#product">Product</a>
-            <a href="#gpd">Database</a>
             <a href="#architecture">Architecture</a>
             <a href="#evidence">Evidence</a>
             <a href="#metrics">Metrics</a>
             <a href="#pivot">Pivot</a>
             <a href="#lessons">Lessons</a>
-        </div>
-        <div class="nav-right">
-            <a href="https://manzela.github.io/Manzela/" class="profile-link">Profile</a>
-            <button id="navToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="mainNav" aria-expanded="false">
-                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-            </button>
+            <a href="https://manzela.github.io/Manzela/" class="nav-back"><span class="arrow" aria-hidden="true">←</span> Manzela</a>
         </div>
     </div>
 </nav>
@@ -626,14 +639,13 @@
             <span class="hero-line2">Retail Digitization.</span>
         </h1>
         <p class="text-lead hero-sub">
-            A camera-first onboarding tool that turned a retailer&rsquo;s stockroom into a published storefront —
-            barcode, then image, then video recognition over a 60M+ SKU canonical catalog.
+            A camera-first onboarding tool that turned a retailer&rsquo;s stockroom into a published storefront.
         </p>
         <div class="hero-meta">
-            Daniel Manzela &nbsp;·&nbsp; Active Jan 2020 — Apr 2024
+            First Startup
         </div>
         <p class="hero-credibility">
-            Co-founded with <strong>Dr. Eli Osherovich</strong> — Senior Applied Scientist at Amazon
+            Co-founded with <strong>Dr. Eli Osherovich</strong>, Senior Applied Scientist at Amazon
             (Alexa Shopping / Amazon Go), now leading AI &amp; infrastructure at Google.
             Bootstrapped four years with no external capital.
         </p>
@@ -648,16 +660,10 @@
             </div>
             <div class="hero-metric">
                 <div class="hero-metric-value">60M+</div>
-                <div class="hero-metric-label">Unique SKUs canonicalized</div>
+                <div class="hero-metric-label">Unique SKUs database</div>
             </div>
         </div>
-        <figure class="hero-visual">
-            <img src="assets/media/IMG-20220522-WA0025.jpg"
-                 alt="A retailer scanning a product on the shop floor during a Seller App field test"
-                 width="1536" height="2048"
-                 loading="eager" fetchpriority="high" decoding="async">
-            <figcaption>Field test · in-store first scan · May 2022</figcaption>
-        </figure>
+
     </section>
 
     <div class="glow-line"></div>
@@ -666,7 +672,7 @@
     <section id="problem" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">Market Context</span>
+                <span class="label-tag">The Problem</span>
                 <h2 class="h-section">The Onboarding Bottleneck</h2>
                 <p class="text-lead">Physical retailers need an online presence but lack the technical skills.
                     Manual product upload is the single largest barrier to eCommerce adoption.</p>
@@ -676,22 +682,17 @@
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">storefront</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">Skill gap</h3>
-                    <p class="text-body">Brick-and-mortar retailers operate without in-house digital teams.
-                        Photographing, captioning, categorizing, and listing products is a workflow they have neither
-                        time nor expertise to perform.</p>
+                    <p class="text-body">Brick-and-mortar retailers lack in-house digital teams to photograph, categorize, and list products.</p>
                 </div>
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">inventory_2</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">Manual upload cost</h3>
-                    <p class="text-body">~3 minutes per product × 50 products = 2.5 hours per store
-                        before a single photograph is taken. The rate-limiting step between a physical
-                        retailer and a working online storefront.</p>
+                    <p class="text-body">~3 minutes per product × 50 products = 2.5 hours per store before a single photograph is taken.</p>
                 </div>
                 <div class="card card-pad">
                     <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">alt_route</span>
                     <h3 class="h-card" style="margin-bottom: 8px;">No frictionless path</h3>
-                    <p class="text-body">No existing solution generated a complete product catalog from the camera alone.
-                        Every alternative still required typing, tagging, and image curation by hand.</p>
+                    <p class="text-body">No existing solution generated a complete product catalog from the camera alone.</p>
                 </div>
             </div>
         </div>
@@ -703,7 +704,7 @@
     <section id="product" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">Product Versions</span>
+                <span class="label-tag">The Solution</span>
                 <h2 class="h-section">Three Generations of Vision</h2>
                 <p class="text-lead">The product evolved through three distinct computer-vision generations,
                     each removing a layer of friction from the seller&rsquo;s upload workflow.</p>
@@ -720,12 +721,7 @@
                         </div>
                         <span class="version-tagline">Barcode + Database</span>
                     </div>
-                    <p class="version-desc">
-                        A PWA-side barcode scanner powered by <strong style="color:var(--appleLight)">Google ML Kit</strong>
-                        (with <strong style="color:var(--appleLight)">zxing-cpp-emscripten</strong> as fallback).
-                        Each scan is enriched against the Global Product Database and pushed to a vendor&rsquo;s WooCommerce store
-                        via the WC Marketplace REST API — the target was onboarding plus 50 products in under one hour.
-                    </p>
+
 
                     <div class="version-flow">
                         <svg class="flow-svg" viewBox="0 0 760 96" role="img" aria-label="Version 1 flow: camera scans a barcode, ML Kit reads it, the Global Product Database returns a record, the form auto-fills, and the product publishes to WooCommerce.">
@@ -777,14 +773,10 @@
                         </div>
                         <div class="version-feature">
                             <span class="material-symbols-outlined" aria-hidden="true">timer</span>
-                            <div><strong>Target:</strong> store onboard + 50 products in &lt; 1 hour</div>
+                            <div><strong>Target:</strong> store onboard + 30 products in &lt; 1 hour</div>
                         </div>
                     </div>
-                    <p class="version-bridge">
-                        Platform foundations shipped alongside V1 — sign-up, orders, marketing, settings,
-                        WooCommerce integration — and were inherited by every later version.
-                        See <a href="#architecture">Architecture</a>.
-                    </p>
+
                 </article>
 
                 <!-- V2 -->
@@ -796,11 +788,7 @@
                         </div>
                         <span class="version-tagline">Image + OCR</span>
                     </div>
-                    <p class="version-desc">
-                        For products without scannable barcodes, a single photo became the input.
-                        Vision-AI OCR extracted on-package text, generated descriptions, tags, categories, and attributes,
-                        and a Computer Vision foundation-model API cleaned up product photography by removing backgrounds.
-                    </p>
+
 
                     <div class="version-flow">
                         <svg class="flow-svg" viewBox="0 0 760 96" role="img" aria-label="Version 2 flow: camera takes one photo, OCR extracts text on the package, the GPD enriches the attributes, background removal cleans up the image, and the result publishes to WooCommerce.">
@@ -827,7 +815,7 @@
                             <polygon points="526,44 534,48 526,52" class="flow-arrow-head"/>
                             <g>
                                 <rect x="538" y="28" width="120" height="40" rx="10" class="flow-box-fill flow-box-stroke"/>
-                                <text x="598" y="48" text-anchor="middle">CV cleanup</text>
+                                <text x="598" y="48" text-anchor="middle">Vision cleanup</text>
                                 <text x="598" y="62" text-anchor="middle" class="flow-sub">bg removal</text>
                             </g>
                             <path d="M 662 48 L 700 48" class="flow-arrow-stroke"/>
@@ -868,11 +856,7 @@
                         </div>
                         <span class="version-tagline">Video + Retrieval</span>
                     </div>
-                    <p class="version-desc">
-                        The seller pans the camera across a shelf; frame-by-frame recognition retrieves matching SKUs
-                        from a dedicated <strong style="color:var(--appleLight)">RAG model over the Global Product Database</strong>.
-                        Attribute extraction expanded with synonym support, with the dataset mass-scraped per country, region, and language.
-                    </p>
+
 
                     <div class="version-flow">
                         <svg class="flow-svg" viewBox="0 0 760 96" role="img" aria-label="Version 3 flow: video stream is split into frames, each frame queries a RAG retrieval over the GPD, multiple SKU matches are batched into a draft catalog, and the result publishes to WooCommerce.">
@@ -915,7 +899,7 @@
                     <div class="version-features">
                         <div class="version-feature">
                             <span class="material-symbols-outlined" aria-hidden="true">videocam</span>
-                            <div><strong>Input:</strong> video stream — frame-by-frame product recognition</div>
+                            <div><strong>Input:</strong> video stream, frame-by-frame product recognition</div>
                         </div>
                         <div class="version-feature">
                             <span class="material-symbols-outlined" aria-hidden="true">hub</span>
@@ -927,7 +911,7 @@
                         </div>
                         <div class="version-feature">
                             <span class="material-symbols-outlined" aria-hidden="true">language</span>
-                            <div><strong>Coverage:</strong> per country / region / language scraping</div>
+                            <div><strong>Fallback:</strong> single product photo from the camera</div>
                         </div>
                     </div>
                 </article>
@@ -938,54 +922,7 @@
 
     <div class="glow-line"></div>
 
-    <!-- ============ GLOBAL PRODUCT DATABASE ============ -->
-    <section id="gpd" class="section-padding fade-in">
-        <div class="container">
-            <div class="section-head">
-                <span class="label-tag">Data Infrastructure</span>
-                <h2 class="h-section">The Global Product Database</h2>
-                <p class="text-lead">
-                    We did not ask the model to invent products. We asked it to <em>find</em> them.
-                    Every Computer Vision generation was constrained by a record already in the catalog —
-                    barcode, photo, and video became three different ways into the same retrieval layer.
-                </p>
-            </div>
 
-            <div class="grid grid-2">
-                <div class="card card-pad">
-                    <span class="label-tag" style="margin-bottom: 16px;">Vision &amp; Mission</span>
-                    <h3 class="h-card" style="margin-bottom: 12px;">One catalog, every retailer</h3>
-                    <p class="text-body">
-                        A single canonical product record per SKU, enriched once and reused across every vendor on the platform.
-                        A small bodega and a regional chain receive the same structured data the moment they scan a product.
-                    </p>
-
-                </div>
-                <div class="card card-pad">
-                    <span class="label-tag" style="margin-bottom: 16px;">Ingestion stack</span>
-                    <h3 class="h-card" style="margin-bottom: 12px;">From scrapers to multilingual RAG</h3>
-                    <ul class="text-body" style="display:flex; flex-direction:column; gap:10px;">
-                        <li>
-                            <span class="label-tag shipped" style="font-size:9px; padding:2px 8px;">Shipped</span>
-                            <strong style="color:var(--appleLight)">&nbsp;Web scraping</strong> — UPC / BarcodeLookup / image cropping
-                        </li>
-                        <li>
-                            <span class="label-tag shipped" style="font-size:9px; padding:2px 8px;">Shipped</span>
-                            <strong style="color:var(--appleLight)">&nbsp;Bright Data</strong> — managed proxy &amp; structured ingestion
-                        </li>
-                        <li>
-                            <span class="label-tag planned" style="font-size:9px; padding:2px 8px;">Planned</span>
-                            <strong style="color:var(--appleLight)">&nbsp;Multilingual RAG</strong> — per-region language coverage
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-        </div>
-    </section>
-
-    <div class="glow-line"></div>
 
     <!-- ============ ARCHITECTURE ============ -->
     <section id="architecture" class="section-padding fade-in">
@@ -998,17 +935,7 @@
                     while the retrieval layer stayed stable.</p>
             </div>
 
-            <div class="stack-strip" aria-label="Stack chip strip">
-                <span class="stack-chip">AWS <span class="chip-dim">· compute</span></span>
-                <span class="stack-chip">MongoDB <span class="chip-dim">· two DBs</span></span>
-                <span class="stack-chip">React PWA</span>
-                <span class="stack-chip">WC Marketplace REST API</span>
-                <span class="stack-chip">WCMp Vendors API</span>
-                <span class="stack-chip">Google ML Kit</span>
-                <span class="stack-chip">Mixpanel</span>
-                <span class="stack-chip">GA4</span>
-                <span class="stack-chip">CI / CD</span>
-            </div>
+
 
             <div class="arch-grid">
                 <article class="arch-card">
@@ -1016,12 +943,12 @@
                     <h3>PWA topology</h3>
                     <p>
                         Single React-based PWA installable across iOS, Android, and desktop. Camera, push, and offline
-                        capabilities without an app-store dependency — updates rolled out the moment a seller refreshed.
+                        capabilities without an app-store dependency, updates rolled out the moment a seller refreshed.
                     </p>
                     <ul>
-                        <li><strong>RTL + Hebrew</strong> — Google Auto-Translate for the launch market</li>
-                        <li><strong>Push notifications</strong> — react-web-notification (orders, low-stock)</li>
-                        <li><strong>Analytics</strong> — Mixpanel events / HEART funnel · GA4 acquisition</li>
+                        <li><strong>RTL + Hebrew</strong>, Google Auto-Translate for the launch market</li>
+                        <li><strong>Push notifications</strong>, react-web-notification (orders, low-stock)</li>
+                        <li><strong>Analytics</strong>, Mixpanel events / HEART funnel · GA4 acquisition</li>
                     </ul>
                 </article>
 
@@ -1029,13 +956,13 @@
                     <span class="material-symbols-outlined arch-icon" aria-hidden="true">database</span>
                     <h3>Two-database model</h3>
                     <p>
-                        The architectural backbone. The catalog and the storefront were never the same thing — one
+                        The architectural backbone. The catalog and the storefront were never the same thing, one
                         is shared across vendors, the other is private to each vendor.
                     </p>
                     <ul>
-                        <li><strong>Global Product Database</strong> — shared, canonical, retrieval-indexed (60M+ SKUs)</li>
-                        <li><strong>Store Product Database</strong> — vendor-scoped inventory, pricing, overrides</li>
-                        <li><strong>Integration</strong> — WC Marketplace REST API · WCMp Vendors auth</li>
+                        <li><strong>Global Product Database</strong>, shared, canonical, retrieval-indexed (60M+ SKUs)</li>
+                        <li><strong>Store Product Database</strong>, vendor-scoped inventory, pricing, overrides</li>
+                        <li><strong>Integration</strong>, WC Marketplace REST API · WCMp Vendors auth</li>
                     </ul>
 
                 </article>
@@ -1044,13 +971,13 @@
                     <span class="material-symbols-outlined arch-icon" aria-hidden="true">visibility</span>
                     <h3>Vision stack</h3>
                     <p>
-                        The product replaced its CV front-end three times. The retrieval layer behind it stayed stable —
+                        The product replaced its Computer Vision front-end three times. The retrieval layer behind it stayed stable,
                         which is why a four-year stack didn&rsquo;t accumulate as much technical debt as it could have.
                     </p>
                     <ul>
-                        <li><strong>V1</strong> — ML Kit on-device barcode scanning + GPD lookup</li>
-                        <li><strong>V2</strong> — Vision-AI OCR + foundation-model background removal</li>
-                        <li><strong>V3</strong> — RAG retrieval over the GPD on video frames</li>
+                        <li><strong>V1</strong>, ML Kit on-device barcode scanning + GPD lookup</li>
+                        <li><strong>V2</strong>, Vision-AI OCR + foundation-model background removal</li>
+                        <li><strong>V3</strong>, RAG retrieval over the GPD on video frames</li>
                     </ul>
                 </article>
             </div>
@@ -1065,10 +992,9 @@
     <section id="evidence" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">In the Field</span>
+                <span class="label-tag">Experimintation</span>
                 <h2 class="h-section">Evidence from the Floor</h2>
-                <p class="text-lead">Raw field documentation from physical-store testing —
-                    the seller, the camera, the product, and the upload happening in real time.</p>
+                <p class="text-lead">Raw field documentation from physical-store testing.</p>
             </div>
 
             <div class="media-grid">
@@ -1137,7 +1063,7 @@
                     <div class="media-caption">
                         <span class="label-tag">Field testing · May 2022</span>
                         <h3>On-floor co-discovery</h3>
-                        <p>Co-discovery work alongside the retailer — observing where the camera workflow broke.</p>
+                        <p>Co-discovery work alongside the retailer, observing where the camera workflow broke.</p>
                     </div>
                 </div>
 
@@ -1154,7 +1080,7 @@
                 <span class="label-tag">Metrics</span>
                 <h2 class="h-section">Traction &amp; KPIs</h2>
                 <p class="text-lead">Bootstrapped to <strong style="color:var(--appleLight)">$10K MRR from SMB customers</strong>
-                    over four years. Instrumented from day one against the HEART framework — see Pivot for
+                    over four years. Instrumented from day one against the HEART framework, see Pivot for
                     why the revenue line stopped scaling and what we did about it.</p>
             </div>
 
@@ -1178,15 +1104,15 @@
                     <span class="label-tag" style="margin-bottom: 16px;">HEART Framework</span>
                     <h3 class="h-card" style="margin-bottom: 12px;">Five axes wired to the roadmap</h3>
                     <ul class="text-body" style="display:flex; flex-direction:column; gap:10px;">
-                        <li><strong style="color:var(--appleLight)">Happiness</strong> — in-app survey + NPS after onboarding</li>
-                        <li><strong style="color:var(--appleLight)">Engagement</strong> — scans / session, products / week</li>
-                        <li><strong style="color:var(--appleLight)">Adoption</strong> — first scan, first published product, first sale</li>
-                        <li><strong style="color:var(--appleLight)">Retention</strong> — week-2 / week-4 / month-3 cohorts</li>
-                        <li><strong style="color:var(--appleLight)">Task Success</strong> — completed-upload rate per session</li>
+                        <li><strong style="color:var(--appleLight)">Happiness</strong>, in-app survey + NPS after onboarding</li>
+                        <li><strong style="color:var(--appleLight)">Engagement</strong>, scans / session, products / week</li>
+                        <li><strong style="color:var(--appleLight)">Adoption</strong>, first scan, first published product, first sale</li>
+                        <li><strong style="color:var(--appleLight)">Retention</strong>, week-2 / week-4 / month-3 cohorts</li>
+                        <li><strong style="color:var(--appleLight)">Task Success</strong>, completed-upload rate per session</li>
                     </ul>
                     <p class="nda-note">
                         Cohort, NPS, and task-success figures held under prior NDA.
-                        Instrumentation was production-grade — Mixpanel events with a HEART-aligned schema, GA4 for acquisition,
+                        Instrumentation was production-grade, Mixpanel events with a HEART-aligned schema, GA4 for acquisition,
                         and a roadmap that took a backlog item only when a HEART signal moved.
                     </p>
                 </div>
@@ -1217,7 +1143,7 @@
             <div class="section-head">
                 <span class="label-tag">Strategic Decision</span>
                 <h2 class="h-section">Why We Pivoted</h2>
-                <p class="text-lead">Field data revealed an incentive problem the product could not engineer around —
+                <p class="text-lead">Field data revealed an incentive problem the product could not engineer around,
                     so we changed the customer.</p>
             </div>
 
@@ -1229,26 +1155,26 @@
                 </div>
                 <div class="decision-card">
                     <h3>The discovery</h3>
-                    <p>Big-box retailers — operating eCom sites without local visibility — turned out to be the right buyer
+                    <p>Big-box retailers, operating eCom sites without local visibility, turned out to be the right buyer
                         for a frictionless, automated, large-scale eCom-per-location setup. The need was upstream of the seller.</p>
                 </div>
                 <div class="decision-card">
                     <h3>The Covid-19 window</h3>
-                    <p>The pandemic was the right macro window for digital transformation in retail —
+                    <p>The pandemic was the right macro window for digital transformation in retail,
                         and it was precisely the window that exposed the human-on-the-ground friction at scale.</p>
                 </div>
                 <div class="decision-card">
                     <h3>The outcome</h3>
                     <p>Pivoted from SMB self-service to enterprise frictionless solutions. That move directly seeded the
-                        <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Autonomous Content Pipeline</a> —
-                        and the <a href="https://github.com/Manzela/agent-dag-pipeline" class="inline-link">open-source spinout</a> —
+                        <a href="https://manzela.github.io/pipeline-observatory/" class="inline-link">Autonomous Content Pipeline</a>,
+                        and the <a href="https://github.com/Manzela/agent-dag-pipeline" class="inline-link">open-source spinout</a>,
                         same insight, different blast radius.</p>
                 </div>
             </div>
 
             <div class="decision-callout">
                 <p><strong style="color:var(--appleLight)">Two-stage wind-down.</strong>
-                    <strong style="color:var(--appleLight)">April 2024</strong> — active Seller App development ended; team rolled to enterprise.
+                    <strong style="color:var(--appleLight)">April 2024</strong>, active Seller App development ended; team rolled to enterprise.
 
                     The Computer Vision stack and the Global Product Database carried forward as feedstock for the next product generation.</p>
             </div>
@@ -1263,7 +1189,7 @@
             <div class="section-head">
                 <span class="label-tag">Reflection</span>
                 <h2 class="h-section">What I&rsquo;d Do Differently</h2>
-                <p class="text-lead">Three concrete things, named honestly. Not platitudes — the operational
+                <p class="text-lead">Three concrete things, named honestly. Not platitudes, the operational
                     detail senior recruiters and operators recognize.</p>
             </div>
 
@@ -1273,7 +1199,7 @@
                     <h4>Confused a sales / ops problem for a UX problem.</h4>
                     <p>
                         Seller incentive friction looked like &ldquo;the onboarding flow is too hard&rdquo;
-                        for nine months longer than it should have. The fix was not another camera generation —
+                        for nine months longer than it should have. The fix was not another camera generation,
                         it was a field-ops person who could sit next to the seller and earn the first 50 SKUs.
                         I&rsquo;d hire that person before shipping V2.
                     </p>
@@ -1285,7 +1211,7 @@
                         Building the GPD as a retrieval layer (not as model fine-tuning data) felt like
                         defensive engineering at the time. It turned out to be the only piece of the stack
                         that survived the pivot intact and is the load-bearing pattern of every product since.
-                        I&rsquo;d commit to retrieval-grounded CV from day one on the next zero-to-one.
+                        I&rsquo;d commit to retrieval-grounded Computer Vision from day one on the next zero-to-one.
                     </p>
                 </div>
                 <div class="lesson">
@@ -1295,7 +1221,7 @@
                         We instrumented the funnel correctly from week one and then let revenue conversations
                         override what HEART signals were saying for a full quarter. When the retention cohort
                         and the MRR line disagree, the cohort is right earlier. I&rsquo;d put a forcing function
-                        on that — a monthly review where the cohort number has veto power over the roadmap.
+                        on that, a monthly review where the cohort number has veto power over the roadmap.
                     </p>
                 </div>
             </div>
@@ -1308,7 +1234,7 @@
 <footer>
     <div class="footer-inner">
         <div class="footer-copy">
-            © 2020–2026 Daniel Manzela · Seller App · Active Jan 2020 – Apr 2024.
+            © 2020–2026 Daniel Manzela · Seller App.
             <br>
             <a href="#hero" class="back-to-top"><span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span> Back to top</a>
         </div>
