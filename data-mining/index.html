@@ -609,13 +609,13 @@
                     <div class="pipe-rail">
                         <div class="pipe-num">01</div>
                         <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">my_location</span>
+                            <span class="material-symbols-outlined" aria-hidden="true">cloud_download</span>
                         </div>
                     </div>
                     <div class="pipe-body">
-                        <h3 class="pipe-title">Target Definition</h3>
+                        <h3 class="pipe-title">Extraction</h3>
                         <p class="pipe-desc">
-                            Postal codes and neighborhoods classified into income tiers using public demographic signals. This geo-target list scoped every downstream stage.
+                            <strong>WebScraper</strong> extracted from registries, directories, and local sites. <strong>BrightData</strong> residential proxies handled anti-bot bypass and IP rotation.
                         </p>
                     </div>
                 </article>
@@ -624,13 +624,16 @@
                     <div class="pipe-rail">
                         <div class="pipe-num">02</div>
                         <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">cloud_download</span>
+                            <span class="material-symbols-outlined" aria-hidden="true">my_location</span>
                         </div>
                     </div>
                     <div class="pipe-body">
-                        <h3 class="pipe-title">Extraction</h3>
+                        <h3 class="pipe-title">Data Enrichment &amp; Classification</h3>
                         <p class="pipe-desc">
-                            <strong>WebScraper</strong> extracted from registries, directories, and municipal sites. <strong>BrightData</strong> proxies handled anti-bot bypass.
+                            Cities classified into income tiers using public demographic signals.
+                        </p>
+                        <p class="pipe-desc" style="margin-top: 12px;">
+                            Records scored against weighted signals (geo-tier, profession, ownership) to produce a <strong>ranked prospect list</strong>.
                         </p>
                     </div>
                 </article>
@@ -649,47 +652,6 @@
                         </p>
                     </div>
                 </article>
-
-                <article class="pipe-stage">
-                    <div class="pipe-rail">
-                        <div class="pipe-num">04</div>
-                        <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
-                        </div>
-                    </div>
-                    <div class="pipe-body">
-                        <h3 class="pipe-title">Classification</h3>
-                        <p class="pipe-desc">
-                            Records scored against weighted signals (geo-tier, profession, ownership) to produce a <strong>ranked prospect list</strong>. Weights tuned on conversion feedback.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="pipe-stage">
-                    <div class="pipe-rail">
-                        <div class="pipe-num">05</div>
-                        <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">outbox</span>
-                        </div>
-                    </div>
-                    <div class="pipe-body">
-                        <h3 class="pipe-title">Delivery</h3>
-                        <p class="pipe-desc">
-                            Exported themed <strong>Excel</strong> workbooks &mdash; sorted by region, profession, and score &mdash; to the sales team&rsquo;s shared drive.
-                        </p>
-                    </div>
-                </article>
-            </div>
-
-            <!-- Single consolidated engineering insight -->
-            <div class="insight">
-                <span class="insight-label">Engineering principle</span>
-                <p>
-                    <strong>A pipeline is a series of filters, not a series of steps.</strong>
-                    Each stage shrinks the input for the next &mdash; geo collapses scope before
-                    a page is fetched, dedupe collapses records before a score is computed.
-                    That discipline is what kept a manually-orchestrated system tractable.
-                </p>
             </div>
 
 
