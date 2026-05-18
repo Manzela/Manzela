@@ -13,7 +13,7 @@
 11 paying enterprise customers across 5 countries (live: Spain, Portugal, Israel; historical: US, Mexico). The agent fleet runs ~73.5M agent operations per cycle, producing ~10.5M output pages at $0.0006/page, with a deterministic O-R-A-V (Observe / Reason / Act / Validate) gating that delivers a 68.9% pass-by-design quality threshold.
 
 - [Pipeline observatory](https://manzela.github.io/pipeline-observatory/): Live operational dashboard.
-- [Architecture](https://manzela.github.io/pipeline-observatory/architecture.html): Multi-agent DAG, MoE routing, LoRA adapters, Modal serverless + Vertex AI + vLLM.
+- [Architecture (anchor)](https://manzela.github.io/pipeline-observatory/#dag): Multi-agent DAG, MoE routing, LoRA adapters, Modal serverless + Vertex AI + vLLM.
 - [Case studies](https://manzela.github.io/pipeline-observatory/case-studies.html): Operational outcomes by customer.
 
 ## Open-Source Projects
