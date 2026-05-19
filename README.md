@@ -22,7 +22,7 @@ I design and operate **end-to-end autonomous AI systems** — from zero-to-one a
 
 **Current system in production (TNG Shopper, 2024 → present):**
 - **11 enterprise clients** across **5 countries** (ES · PT · IL · US · MX) — **~10.5M product pages under autonomous management** at **$0.0006 / page**
-- **7-node multi-agent directed acyclic graph** with **~73.5M sub-agent operations per run** · 234 managed websites
+- **7-node multi-agent directed acyclic graph** with **~73.5M sub-agent operations per month** · 234 managed websites
 - **Gemma 4 26B-A4B Mixture-of-Experts** on self-hosted vLLM with PagedAttention inference. Multi-Low-Rank-Adaptation research documented in the [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment).
 - **Originality, Relevance, Accuracy, Value** — four-axis multi-model evaluation with fail-closed policy at **68.9% pass rate by design** · Deterministic Evaluation and Monitoring Audit System enforcing every boundary
 
@@ -127,7 +127,7 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 | 2020 | [**Seller App**](https://manzela.github.io/Manzela/seller-app/) <sub>(Jan 2020 — Apr 2024)</sub> | Computer vision for retail digitization. 3 computer-vision generations · 60M+ canonical Stock-Keeping Units · $10K Monthly Recurring Revenue plateau. The architectural origin of retrieval-grounded computer vision. |
 | 2020 | [**Tasko AI**](https://manzela.github.io/Manzela/tasko-ai/) <sub>(Oct 2020 — Dec 2023)</sub> | Production agentic system before the term existed. 21,102 labeled tasks · 153 clients · 1,561 intent patterns · 4-layer Classify / Retrieve / Execute / Verify. |
 | 2024 | [**Elysium**](https://manzela.github.io/Manzela/elysium/) <sub>(2024 — 2025, paused-pending-Pipeline)</sub> | Physical-Context AI for Retail. 13 brands validated · 15,600+ store locations · 15 patent claims (3 independent + 12 dependent). |
-| 2024 | [**Pipeline Observatory**](https://manzela.github.io/pipeline-observatory/) <sub>(2024 — present)</sub> | The synthesis. Seven-node directed acyclic graph, deterministic gates first, fail-closed by default. 10.5M product detail pages / cycle · 73.5M ops / run · $0.0006 / page · 68.9% pass rate across Originality, Relevance, Accuracy, Value. |
+| 2024 | [**Pipeline Observatory**](https://manzela.github.io/pipeline-observatory/) <sub>(2024 — present)</sub> | The synthesis. Seven-node directed acyclic graph, deterministic gates first, fail-closed by default. 10.5M product detail pages / month · 73.5M ops / month · $0.0006 / page · 68.9% pass rate across Originality, Relevance, Accuracy, Value. |
 
 #### Open-source distillations (parallel track)
 
