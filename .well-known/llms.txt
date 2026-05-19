@@ -1,1 +1,27 @@
-# Mirror of https://manzela.github.io/llms.txt
+# Daniel Manzela
+
+> Founding AI Product Builder. Co-founder CEO/CPO at TNG Shopper (top-100 retail-tech 2025). 9 years full-stack engineering + 6 years production AI. 5 zero-to-one AI products shipped. Open to relocation.
+
+## Live work
+
+- [TNG Pipeline Observatory](https://manzela.github.io/pipeline-observatory/): operational metrics for the production 7-node multi-agent system running for 11 enterprise customers across 5 countries.
+- [TNG DAG schematic (anchor)](https://manzela.github.io/pipeline-observatory/#dag): the 7-node DAG, MoE routing, LoRA adapters, deterministic O-R-A-V (Observe / Reason / Act / Validate) gating.
+- [TNG Case Studies](https://manzela.github.io/pipeline-observatory/case-studies.html): per-client outcomes, indexed pages, impressions.
+- [TNG Front-end demo](https://youtu.be/czZsPbylC1M): sole-engineer build in less than a month from ideation to production.
+
+## Portfolio
+
+- [Profile](https://manzela.github.io/Manzela/): career arc, work overview.
+- [Seller App](https://manzela.github.io/Manzela/seller-app/): 4-year bootstrap. 60M+ canonical SKUs, $10K MRR.
+- [Tasko AI](https://manzela.github.io/Manzela/tasko-ai/): production agentic system before the term existed. 21M+ messages trained.
+- [Data Mining](https://manzela.github.io/Manzela/data-mining/): 5-stage scraping pipeline. ₪50M+ AUM.
+- [Junior Years](https://manzela.github.io/Manzela/junior-years/): solo contractor, 3 startups + 2 low-techs.
+- [Elysium](https://manzela.github.io/Manzela/elysium/): physical-context AI for retail. 11 specialized agents, 15 patent claims.
+
+## Open-source
+
+- [Antigravity-OS](https://github.com/Manzela/Antigravity-OS) (PyPI: ag-os): open-source governance kernel for AI agents. 9-rule Constitution, MCP server, Dreaming Module.
+- [agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline): reference 7-node multi-agent DAG with Google ADK + Vertex AI.
+- [gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment): forensic runbook of 20 production-MoE failure modes.
+- [WP-Multisite](https://github.com/Manzela/WP-Multisite): sanitized blueprint of the TNG WordPress multisite SEO/AEO infrastructure.
+- [Atelier](https://github.com/Manzela/Atelier): autonomous design agent for Google AI Agents Challenge 2026 (submission 2026-06-03).

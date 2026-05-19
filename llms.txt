@@ -1,37 +1,27 @@
 # Daniel Manzela
 
-> Daniel Manzela — Founding AI Product Builder. Co-founder, CEO and CPO at TNG Shopper, where he built and leads the production multi-agent system that powers an AI content + AI-Search visibility platform for multi-location brands (top-100 retail-tech 2025). Open-source author: Antigravity-OS (orchestration infra that lets a small team ship more product per engineer, safely; PyPI: ag-os), agent-dag-pipeline (reference multi-agent DAG implementation), gemma4-vllm-deployment (production MoE serving runbook), WP-Multisite (sanitised CMS / AI-search-aware blueprint).
+> Founding AI Product Builder. Co-founder CEO/CPO at TNG Shopper (top-100 retail-tech 2025). 9 years full-stack engineering + 6 years production AI. 5 zero-to-one AI products shipped. Open to relocation.
 
-## Profile
+## Live work
 
-- [Profile portfolio](https://manzela.github.io/Manzela/): Career arc with case-study sub-pages.
-- [GitHub](https://github.com/Manzela): Open-source repos.
-- [LinkedIn](https://linkedin.com/in/manzela)
+- [TNG Pipeline Observatory](https://manzela.github.io/pipeline-observatory/): operational metrics for the production 7-node multi-agent system running for 11 enterprise customers across 5 countries.
+- [TNG DAG schematic (anchor)](https://manzela.github.io/pipeline-observatory/#dag): the 7-node DAG, MoE routing, LoRA adapters, deterministic O-R-A-V (Observe / Reason / Act / Validate) gating.
+- [TNG Case Studies](https://manzela.github.io/pipeline-observatory/case-studies.html): per-client outcomes, indexed pages, impressions.
+- [TNG Front-end demo](https://youtu.be/czZsPbylC1M): sole-engineer build in less than a month from ideation to production.
 
-## TNG Shopper — production multi-agent system
+## Portfolio
 
-11 paying enterprise customers across 5 countries (live: Spain, Portugal, Israel; historical: US, Mexico). The agent fleet produces ~73.5M operations per full pipeline run (weekly executions, with daily price-delta updates), generating ~10.5M output pages per month at $0.0006/page, with a deterministic O-R-A-V (Observe / Reason / Act / Validate) gating that delivers a 68.9% pass-by-design quality threshold.
+- [Profile](https://manzela.github.io/Manzela/): career arc, work overview.
+- [Seller App](https://manzela.github.io/Manzela/seller-app/): 4-year bootstrap. 60M+ canonical SKUs, $10K MRR.
+- [Tasko AI](https://manzela.github.io/Manzela/tasko-ai/): production agentic system before the term existed. 21M+ messages trained.
+- [Data Mining](https://manzela.github.io/Manzela/data-mining/): 5-stage scraping pipeline. ₪50M+ AUM.
+- [Junior Years](https://manzela.github.io/Manzela/junior-years/): solo contractor, 3 startups + 2 low-techs.
+- [Elysium](https://manzela.github.io/Manzela/elysium/): physical-context AI for retail. 11 specialized agents, 15 patent claims.
 
-- [Pipeline observatory](https://manzela.github.io/pipeline-observatory/): Live operational dashboard.
-- [Architecture (anchor)](https://manzela.github.io/pipeline-observatory/#dag): Multi-agent DAG, MoE routing, LoRA adapters, Modal serverless + Vertex AI + vLLM.
-- [Case studies](https://manzela.github.io/pipeline-observatory/case-studies.html): Operational outcomes by customer.
+## Open-source
 
-## Open-Source Projects
-
-- [Antigravity-OS](https://github.com/Manzela/Antigravity-OS) ([PyPI: ag-os](https://pypi.org/project/ag-os/)): Open-source orchestration infra that lets a small team ship more product per engineer, safely. Built at TNG (2-engineer dev team) to streamline the SDLC by reducing human-dependencies in the dev loop. AI dev assistants run inside a 9-rule constitutional policy-as-code, with Cost Guard, Flight Recorder for replay, Self-Healing CI, Dreaming Module for offline agent self-improvement, drop-in MCP server. MIT-licensed.
-- [agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline): Reference implementation of the multi-agent DAG pattern behind TNG's production system. Google ADK + Vertex AI + four-axis O-R-A-V evaluation + RLAIF / DPO data flywheel.
-- [gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment): Community reference for production MoE serving — forensic runbook of 20 distinct failure modes deploying Gemma 4 26B-A4B-it MoE on Vertex AI / vLLM (128 experts, 4 active per token; 4B params per forward pass on a 26B model).
-- [WP-Multisite](https://github.com/Manzela/WP-Multisite): Sanitised blueprint of TNG's CMS / AI-search-aware infrastructure layer (Sage 10 + custom `sunrise.php` + 1,056-LOC JSON-LD schema generator + `llms.txt` + AI-bot-aware `robots.txt`).
-
-## Career history (chronological)
-
-- TNG Shopper (Jan 2024 → present) — Co-founder, CEO and CPO. → [pipeline-observatory](https://manzela.github.io/pipeline-observatory/)
-- Elysium (2024–2025, paused) — research line within TNG; physical-context AI for retail demand prediction (11 specialised agents). → [/Manzela/elysium](https://manzela.github.io/Manzela/elysium/)
-- Tasko AI (Oct 2020 – Dec 2023) — production agentic system before "agentic" was an industry term; four-layer agent stack (Classify → Retrieve → Execute → Verify); 21M+ messages, 1,561 intents, 153 paying clients. → [/Manzela/tasko-ai](https://manzela.github.io/Manzela/tasko-ai/)
-- Seller App (Jan 2020 – Apr 2024) — Camera-first retail-onboarding tool; 60M+ canonical SKUs, $10K MRR. → [/Manzela/seller-app](https://manzela.github.io/Manzela/seller-app/)
-- Israeli Financial Services Firm (Feb 2019 – Jul 2020) — Lead-finding pipeline; ₪50M+ in new AUM. → [/Manzela/data-mining](https://manzela.github.io/Manzela/data-mining/)
-- Junior years (Sep 2016 – Dec 2019) — Solo contractor across 3 startups + 2 low-techs. → [/Manzela/junior-years](https://manzela.github.io/Manzela/junior-years/)
-
-## Contact
-
-danielq1603@gmail.com
+- [Antigravity-OS](https://github.com/Manzela/Antigravity-OS) (PyPI: ag-os): open-source governance kernel for AI agents. 9-rule Constitution, MCP server, Dreaming Module.
+- [agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline): reference 7-node multi-agent DAG with Google ADK + Vertex AI.
+- [gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment): forensic runbook of 20 production-MoE failure modes.
+- [WP-Multisite](https://github.com/Manzela/WP-Multisite): sanitized blueprint of the TNG WordPress multisite SEO/AEO infrastructure.
+- [Atelier](https://github.com/Manzela/Atelier): autonomous design agent for Google AI Agents Challenge 2026 (submission 2026-06-03).

@@ -1,69 +1,40 @@
-# robots.txt — manzela.github.io
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Gemini-Deep-Research
-Allow: /
-
-User-agent: Google-CloudVertexBot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: DuckAssistBot
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: Amazonbot
-Allow: /
-
-User-agent: Bytespider
-Disallow: /
-
 User-agent: *
 Allow: /
 
 Sitemap: https://manzela.github.io/sitemap.xml
+
+# AI bots — explicit ALLOW (per v5.2 § 8.1 — for personal portfolio, corpus inclusion is the goal)
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: DuckAssistBot
+Allow: /
+User-agent: Gemini-Deep-Research
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Meta-ExternalAgent
+Allow: /
+User-agent: CCBot
+Allow: /
+
+# Block known abusers
+User-agent: Bytespider
+Disallow: /
