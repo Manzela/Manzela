@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#f4f1ea">
+    <meta name="color-scheme" content="light">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Seller App">
     <title>Seller App — Computer Vision for Retail Digitization | Daniel Manzela</title>
     <meta name="description" content="A 0→1 case study: Computer Vision-powered retail onboarding. Barcode → image → video recognition over a 60M+ SKU canonical catalog. Active Jan 2020 – Apr 2024.">
     <meta name="author" content="Daniel Manzela">
     <link rel="canonical" href="https://manzela.github.io/Manzela/seller-app/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f4f1ea%22/><circle cx=%2250%22 cy=%2250%22 r=%2228%22 fill=%22none%22 stroke=%22%23b45309%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23b45309%22/></svg>">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
@@ -35,70 +35,163 @@
     <meta name="twitter:image:alt" content="Seller App — Computer Vision for eCom. A 0→1 product case study by Daniel Manzela.">
     <meta name="twitter:creator" content="@danielmanzela">
 
-    <!-- Fonts: SF Pro via -apple-system first; Material Symbols only -->
+    <!-- Fonts: Manrope (display + body) + IBM Plex Mono (technical) + Material Symbols Outlined (icons) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
 
-    <!-- Schema.org -->
+    <!-- Schema.org: Article + Person + SoftwareApplication + BreadcrumbList -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Seller App — Computer Vision for Retail Digitization",
-        "description": "A 0→1 product case study. Barcode, image, and video recognition over a 60M+ SKU canonical catalog. Active Jan 2020 – Apr 2024.",
-        "url": "https://manzela.github.io/Manzela/seller-app/",
-        "image": "https://manzela.github.io/Manzela/seller-app/assets/og-image.png",
-        "datePublished": "2024-04-01",
-        "dateModified": "2026-05-12",
-        "author": {
-            "@type": "Person",
-            "name": "Daniel Manzela",
-            "url": "https://manzela.github.io/Manzela/",
-            "sameAs": [
-                "https://github.com/Manzela",
-                "https://linkedin.com/in/manzela"
-            ]
-        },
-        "mainEntity": {
-            "@type": "SoftwareApplication",
-            "name": "Seller App",
-            "applicationCategory": "BusinessApplication",
-            "operatingSystem": "Progressive Web App",
-            "description": "Camera-first retail onboarding tool: barcode → image → video product recognition with auto-publish to WooCommerce."
-        }
+        "@graph": [
+            {
+                "@type": "Article",
+                "headline": "Seller App — Computer Vision for Retail Digitization",
+                "description": "A 0→1 product case study. Barcode, image, and video recognition over a 60M+ SKU canonical catalog. Active Jan 2020 – Apr 2024.",
+                "url": "https://manzela.github.io/Manzela/seller-app/",
+                "image": "https://manzela.github.io/Manzela/seller-app/assets/og-image.png",
+                "datePublished": "2024-04-01",
+                "dateModified": "2026-05-19",
+                "author": {
+                    "@type": "Person",
+                    "name": "Daniel Manzela",
+                    "url": "https://manzela.github.io/Manzela/",
+                    "sameAs": ["https://github.com/Manzela", "https://linkedin.com/in/manzela"]
+                },
+                "mainEntity": {
+                    "@type": "SoftwareApplication",
+                    "name": "Seller App",
+                    "applicationCategory": "BusinessApplication",
+                    "operatingSystem": "Progressive Web App",
+                    "description": "Camera-first retail onboarding tool: barcode → image → video product recognition with auto-publish to WooCommerce."
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Daniel Manzela", "item": "https://manzela.github.io/Manzela/" },
+                    { "@type": "ListItem", "position": 2, "name": "Seller App", "item": "https://manzela.github.io/Manzela/seller-app/" }
+                ]
+            }
+        ]
     }
     </script>
 
     <style>
-        /* ============ DESIGN TOKENS ============ */
+        /* ============ DESIGN TOKENS — Modern Skeuomorphic / Tactile ============ */
         :root {
-            --appleDark: #000000;
-            --appleDarker: #1d1d1f;
-            --appleGray: #86868b;
-            --appleLight: #f5f5f7;
-            --appleBlue: #2997ff;
-            --appleBorder: rgba(255, 255, 255, 0.1);
-            --appleBorderSoft: rgba(255, 255, 255, 0.06);
-            --appleBorderHover: rgba(255, 255, 255, 0.12);
-            --appleSurface: #1d1d1f;
-            --fontUI: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, "Inter", "Helvetica Neue", Arial, sans-serif;
-            --fontMono: ui-monospace, SFMono-Regular, "SF Mono", "Menlo", "Consolas", "JetBrains Mono", monospace;
+            --paper:           #f4f1ea;
+            --paper-glow:      #fffaf0;
+            --paper-edge:      #e7e0d2;
+            --paper-edge-soft: #ede6d6;
+            --paper-deep:      #e0d7c4;
+
+            --ink:             #1a1a1a;
+            --ink-dim:         #3f3f46;
+            --ink-faint:       #71717a;
+            --ink-mute:        #a1a1aa;
+
+            --copper:          #b45309;
+            --copper-bright:   #d97706;
+            --copper-glow:     rgba(180, 83, 9, 0.14);
+            --copper-dim:      rgba(180, 83, 9, 0.28);
+            --copper-faint:    rgba(180, 83, 9, 0.06);
+            --copper-mark:     rgba(180, 83, 9, 0.18);
+
+            --shadow-soft:     0 1px 2px rgba(28, 18, 0, 0.04),
+                               0 4px 12px rgba(28, 18, 0, 0.06);
+            --shadow-lift:     0 4px 8px rgba(28, 18, 0, 0.06),
+                               0 16px 32px rgba(28, 18, 0, 0.09);
+            --shadow-deep:     0 8px 16px rgba(28, 18, 0, 0.08),
+                               0 32px 64px rgba(28, 18, 0, 0.14);
+            --shadow-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+            --selection-bg:    #b45309;
+            --selection-fg:    #f4f1ea;
+
+            --fontDisplay: "Manrope", system-ui, -apple-system, sans-serif;
+            --fontUI:      "Manrope", system-ui, -apple-system, sans-serif;
+            --fontMono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+            --type-display:  clamp(2.5rem, 6vw, 4.5rem);
+            --type-h2:       clamp(1.75rem, 3.5vw, 2.5rem);
+            --type-h3:       clamp(1.05rem, 1.8vw, 1.25rem);
+            --type-body:     clamp(0.95rem, 1.05vw, 1.05rem);
+            --type-meta:     0.85rem;
+            --type-eyebrow:  0.7rem;
+
+            --tracking-display: -0.035em;
+            --tracking-h2:      -0.025em;
+            --tracking-eyebrow: 0.16em;
+
+            --content-max:     1024px;
+            --content-tight:   780px;
+            --section-pad:     120px;
+            --radius-card:     16px;
+            --radius-card-lg:  20px;
+            --radius-pill:     999px;
+
+            --ease-decel: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-snap:  cubic-bezier(0.32, 0.72, 0, 1);
+
+            --dur-reveal: 600ms;
+            --dur-micro:  200ms;
         }
 
         /* ============ RESET ============ */
         *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            background: var(--paper);
+        }
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--fontUI);
+            font-weight: 400;
+            font-size: var(--type-body);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "ss01" 1, "cv11" 1;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: -200px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(ellipse at center, var(--copper-glow) 0%, transparent 60%);
+        }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3, h4 { margin: 0; font-weight: 600; }
+        p { margin: 0; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        ::selection { background: var(--selection-bg); color: var(--selection-fg); }
+        button { font-family: inherit; }
 
         /* ============ A11Y ============ */
         .skip-link {
             position: absolute; left: -9999px; top: 0; z-index: 100;
-            background: var(--appleBlue); color: #000; font-weight: 500;
-            padding: 10px 16px; border-radius: 0 0 8px 0; font-size: 13px;
+            background: var(--copper); color: var(--paper-glow); font-weight: 600;
+            padding: 14px 20px; border-radius: 0 0 8px 0;
+            font-family: var(--fontMono); font-size: 13px; line-height: 1;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            min-height: 44px; display: inline-flex; align-items: center;
+            box-shadow: var(--shadow-lift);
         }
-        .skip-link:focus { left: 0; outline: 2px solid var(--appleLight); outline-offset: 2px; }
+        .skip-link:focus { left: 0; outline: 2px solid var(--ink); outline-offset: 2px; }
         :focus-visible {
-            outline: 2px solid var(--appleBlue); outline-offset: 3px; border-radius: 4px;
+            outline: 2px solid var(--copper); outline-offset: 3px; border-radius: 4px;
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
@@ -109,496 +202,632 @@
             }
             .fade-in { opacity: 1 !important; transform: none !important; }
         }
-        body {
-            margin: 0;
-            background-color: var(--appleDark);
-            color: var(--appleLight);
-            font-family: var(--fontUI);
-            font-weight: 400;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        a { color: inherit; text-decoration: none; }
-        h1, h2, h3, h4 { letter-spacing: -0.025em; font-weight: 600; margin: 0; }
-        p { margin: 0; }
-        ul { margin: 0; padding: 0; list-style: none; }
-        img, video { max-width: 100%; display: block; }
-        ::selection { background: rgba(41, 151, 255, 0.3); color: var(--appleLight); }
-        button { font-family: inherit; }
 
         /* ============ LAYOUT ============ */
-        .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
-        .section-padding { padding: 120px 0; }
+        .container {
+            max-width: var(--content-max);
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .section-padding {
+            padding: var(--section-pad) 0;
+            position: relative;
+            z-index: 1;
+        }
         @media (max-width: 767px) { .section-padding { padding: 80px 0; } }
 
-        /* ============ NAV ============ */
-        .glass-nav {
+        /* ============ NAV — solid warm paper, no glass ============ */
+        .paper-nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-            background: rgba(0, 0, 0, 0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(244, 241, 234, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--paper-edge);
         }
         .nav-inner {
-            max-width: 1024px; margin: 0 auto; padding: 0 24px;
-            height: 48px; display: flex; align-items: center; justify-content: space-between;
-            font-size: 12px; font-weight: 500;
+            max-width: var(--content-max); margin: 0 auto; padding: 0 24px;
+            height: 56px; display: flex; align-items: center; justify-content: space-between;
         }
         .nav-brand {
-            display: inline-flex; align-items: baseline; gap: 0.45rem;
-            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
-            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
-            color: var(--appleLight); font-weight: 600; background-image: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--fontMono); font-size: var(--type-eyebrow);
+            letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+            color: var(--ink); font-weight: 600;
+            min-height: 44px; padding: 0 4px; margin-left: -4px;
         }
-        .nav-brand-sub { color: var(--appleGray); font-weight: 400; }
+        .nav-brand .brand-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--copper);
+            box-shadow: 0 0 0 3px var(--copper-glow);
+        }
+        .nav-brand-sub { color: var(--ink-faint); font-weight: 400; }
         .desktop-nav {
-            display: flex; gap: 1.5rem; align-items: center; color: var(--appleGray);
-            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
-            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
+            display: flex; gap: 1.5rem; align-items: center;
+            font-family: var(--fontMono); font-size: var(--type-eyebrow);
+            letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
         }
         .desktop-nav a {
-            color: var(--appleGray);
-            background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
-            background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
-            padding: 0.25rem 0; transition: color 0.2s ease;
+            color: var(--ink-dim);
+            padding: 0.25rem 0;
+            transition: color var(--dur-micro) var(--ease-snap);
         }
-        .desktop-nav a:hover { color: var(--appleLight); background-size: 100% 1px; }
-        .desktop-nav a.nav-back { color: var(--appleLight) !important; display: inline-flex; align-items: center; gap: 0.4rem; }
-        .desktop-nav a.nav-back .arrow { font-family: var(--fontMono); opacity: 0.6; }
+        .desktop-nav a:hover { color: var(--copper); }
+        .desktop-nav a.nav-back {
+            color: var(--ink);
+            display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .desktop-nav a.nav-back:hover { color: var(--copper); }
+        .desktop-nav a.nav-back .arrow { color: var(--copper); }
         .mobile-toggle {
-            display: none; background: none; border: none; cursor: pointer; padding: 4px;
-            width: 28px; height: 28px; position: relative;
+            display: none; background: var(--paper-glow); border: 1px solid var(--paper-edge);
+            cursor: pointer; padding: 0; width: 44px; height: 44px; position: relative;
+            border-radius: 10px;
+            transition: border-color var(--dur-micro) var(--ease-snap),
+                        box-shadow var(--dur-micro) var(--ease-snap);
+            box-shadow: var(--shadow-soft);
+        }
+        .mobile-toggle:hover {
+            border-color: var(--copper-dim);
+            box-shadow: var(--shadow-lift);
         }
         .mobile-toggle span {
-            display: block; width: 18px; height: 1.5px; background: var(--appleLight);
-            border-radius: 1px; position: absolute; left: 5px;
-            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, top 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block; width: 18px; height: 1.5px; background: var(--ink);
+            position: absolute; left: 50%; margin-left: -9px;
+            transition: transform 0.28s var(--ease-snap), opacity 0.2s ease, top 0.28s var(--ease-snap);
+            border-radius: 1px;
         }
-        .mobile-toggle span:nth-child(1) { top: 9px; }
-        .mobile-toggle span:nth-child(2) { top: 13px; }
-        .mobile-toggle span:nth-child(3) { top: 17px; }
-        .mobile-toggle[aria-expanded="true"] span:nth-child(1) { top: 13px; transform: rotate(45deg); }
+        .mobile-toggle span:nth-child(1) { top: 16px; }
+        .mobile-toggle span:nth-child(2) { top: 21px; }
+        .mobile-toggle span:nth-child(3) { top: 26px; }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(1) { top: 21px; transform: rotate(45deg); }
         .mobile-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-        .mobile-toggle[aria-expanded="true"] span:nth-child(3) { top: 13px; transform: rotate(-45deg); }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
         @media (max-width: 767px) {
-            .mobile-toggle { display: block; }
+            .mobile-toggle { display: flex; align-items: center; justify-content: center; }
             .desktop-nav { display: none; }
             .desktop-nav.open {
                 display: flex !important;
-                position: fixed; top: 48px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.95);
+                position: fixed; top: 56px; left: 0; right: 0;
+                background: var(--paper-glow);
                 backdrop-filter: blur(20px);
-                flex-direction: column; padding: 24px; gap: 18px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                flex-direction: column; padding: 16px; gap: 4px; align-items: stretch;
+                border-bottom: 1px solid var(--paper-edge);
+                box-shadow: var(--shadow-lift);
                 z-index: 49;
             }
+            .desktop-nav.open a {
+                padding: 14px 16px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                border-radius: 8px;
+            }
+            .desktop-nav.open a:hover { background: var(--copper-faint); }
+        }
+        @media (max-width: 380px) {
+            .nav-brand-sub { display: none; }
         }
 
         /* ============ TYPOGRAPHY ============ */
-        .h-display { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.05; }
-        .h-section { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; }
-        .h-card { font-size: 1.125rem; font-weight: 500; }
-        .text-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--appleGray); line-height: 1.55; font-weight: 400; }
-        .text-body { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
-        .text-meta { font-size: 0.75rem; color: var(--appleGray); }
-        .text-light { color: var(--appleLight); }
-        .text-gray { color: var(--appleGray); }
-        .text-blue { color: var(--appleBlue); }
-        .mono { font-family: var(--fontMono); }
+        .h-display {
+            font-family: var(--fontDisplay);
+            font-size: var(--type-display);
+            font-weight: 700;
+            line-height: 1.02;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+        }
+        .h-section {
+            font-family: var(--fontDisplay);
+            font-size: var(--type-h2);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: var(--tracking-h2);
+            color: var(--ink);
+        }
+        .h-card {
+            font-family: var(--fontDisplay);
+            font-size: var(--type-h3);
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+        .text-lead {
+            font-size: clamp(1.05rem, 1.6vw, 1.225rem);
+            color: var(--ink-dim);
+            line-height: 1.55;
+            font-weight: 400;
+            max-width: 56rem;
+        }
+        .text-body {
+            font-size: 0.925rem;
+            color: var(--ink-dim);
+            line-height: 1.65;
+            font-weight: 400;
+        }
+        .mono {
+            font-family: var(--fontMono);
+            font-feature-settings: "tnum" 1, "lnum" 1;
+        }
 
-        /* ============ LABEL TAG ============ */
+        /* ============ LABEL TAG (tactile pill) ============ */
         .label-tag {
-            display: inline-block; font-size: 10px; text-transform: uppercase;
-            letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px;
-            border: 1px solid var(--appleBorder); color: var(--appleGray);
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: var(--fontMono);
+            font-size: 10px; font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            background: var(--paper-glow);
+            border: 1px solid var(--paper-edge);
+            color: var(--copper);
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
         }
-        .label-tag.shipped { color: var(--appleLight); border-color: rgba(41, 151, 255, 0.4); background: rgba(41, 151, 255, 0.08); }
-        .label-tag.planned { color: var(--appleGray); }
-
-        /* ============ GLOW LINE ============ */
-        .glow-line {
-            height: 1px; max-width: 1024px; margin: 0 auto;
-            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
+        .label-tag .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--copper);
+        }
+        .label-tag.shipped {
+            background: var(--copper-faint);
+            border-color: var(--copper-dim);
+            color: var(--copper);
         }
 
-        /* ============ CARDS ============ */
+        /* ============ HAIRLINE ============ */
+        .hairline {
+            height: 1px;
+            max-width: var(--content-max);
+            margin: 0 auto;
+            background: var(--paper-edge);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============ TACTILE CARDS (the signature) ============ */
         .card {
-            background: var(--appleDarker);
-            border-radius: 18px;
-            border: 1px solid var(--appleBorderSoft);
-            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+            background: var(--paper-glow);
+            border-radius: var(--radius-card);
+            border: 1px solid var(--paper-edge);
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            transition: box-shadow var(--dur-micro) var(--ease-snap),
+                        transform var(--dur-micro) var(--ease-snap),
+                        border-color var(--dur-micro) var(--ease-snap);
         }
         .card:hover {
-            border-color: var(--appleBorderHover);
+            box-shadow: var(--shadow-lift), var(--shadow-inset-top);
+            border-color: var(--paper-deep);
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
-        .card-pad { padding: 32px; }
-        .card-pad-lg { padding: 40px; }
-        .card-soft { background: rgba(29, 29, 31, 0.5); }
+        .card-pad { padding: 28px; }
+        .card-pad-lg { padding: 36px; }
 
         /* ============ ICONS ============ */
         .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
-        .icon-blue { color: var(--appleBlue); }
-        .icon-gray { color: var(--appleGray); }
+        .icon-copper { color: var(--copper); }
+        .icon-md { font-size: 24px; }
         .icon-lg { font-size: 28px; }
-        .icon-md { font-size: 22px; }
-
-        /* ============ METRIC GRADIENT ============ */
-        .metric-value {
-            display: inline-block;
-            background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
 
         /* ============ GRIDS ============ */
-        .grid { display: grid; gap: 24px; }
+        .grid { display: grid; gap: 20px; }
         .grid-2 { grid-template-columns: repeat(2, 1fr); }
         .grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-4 { grid-template-columns: repeat(4, 1fr); }
         @media (max-width: 767px) {
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
         }
 
         /* ============ HERO ============ */
-        .hero { padding: 140px 24px 80px; text-align: center; }
-        @media (max-width: 767px) { .hero { padding: 100px 24px 56px; } }
-        .hero-line2 { color: var(--appleGray); }
-        .hero-sub { max-width: 640px; margin: 24px auto 0; }
-        .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
+        .hero {
+            padding: 140px 24px 80px;
+            text-align: center;
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative; z-index: 1;
+        }
+        @media (max-width: 767px) { .hero { padding: 110px 24px 60px; } }
+        .hero-line2 { color: var(--copper); }
+        .hero-sub {
+            font-size: clamp(1.05rem, 1.6vw, 1.275rem);
+            color: var(--ink-dim);
+            line-height: 1.5;
+            font-weight: 400;
+            max-width: 640px;
+            margin: 28px auto 0;
+        }
+        .hero-meta {
+            font-family: var(--fontMono);
+            font-size: 12px;
+            color: var(--ink-faint);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-top: 32px;
+            font-weight: 500;
+        }
         .hero-credibility {
-            max-width: 680px; margin: 18px auto 0;
-            font-size: 0.9rem; color: var(--appleGray); line-height: 1.6;
+            max-width: 620px;
+            margin: 16px auto 0;
+            font-size: 0.95rem;
+            color: var(--ink-dim);
+            line-height: 1.55;
         }
-        .hero-credibility strong { color: var(--appleLight); font-weight: 500; }
+        .hero-credibility strong { color: var(--ink); font-weight: 600; }
+
+        /* Hero metric cards — tactile, lifted */
         .hero-metrics {
-            display: flex; justify-content: center; gap: 56px; margin-top: 40px; flex-wrap: wrap;
+            display: grid; gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 56px auto 0;
+            max-width: 760px;
         }
-        .hero-metric { text-align: center; }
-        .hero-metric-value { font-size: 2rem; font-weight: 600; color: var(--appleLight); margin-bottom: 4px; }
-        .hero-metric-label { font-size: 12px; color: var(--appleGray); }
-        @media (max-width: 480px) { .hero-metrics { gap: 32px; } }
-        .hero-visual {
-            margin: 56px auto 0; max-width: 440px;
-            border-radius: 22px; overflow: hidden;
-            border: 1px solid var(--appleBorderSoft);
-            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+        @media (max-width: 640px) {
+            .hero-metrics { grid-template-columns: 1fr; gap: 12px; max-width: 320px; }
         }
-        .hero-visual img {
-            display: block; width: 100%; height: auto;
-            aspect-ratio: 3 / 4; object-fit: cover;
+        .hero-metric-card {
+            background: var(--paper-glow);
+            border: 1px solid var(--paper-edge);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            padding: 24px 16px;
+            text-align: center;
+            transition: box-shadow var(--dur-micro) var(--ease-snap);
         }
-        .hero-visual figcaption {
-            font-size: 11px; color: var(--appleGray);
-            padding: 12px 16px; text-align: left;
-            border-top: 1px solid var(--appleBorderSoft);
-            background: rgba(29, 29, 31, 0.6);
-            letter-spacing: 0.04em;
+        .hero-metric-card:hover { box-shadow: var(--shadow-lift), var(--shadow-inset-top); }
+        .hero-metric-value {
+            font-family: var(--fontDisplay);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--copper);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-feature-settings: "tnum" 1, "lnum" 1;
+        }
+        .hero-metric-label {
+            font-family: var(--fontMono);
+            font-size: 10px;
+            color: var(--ink-faint);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-top: 12px;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
         /* ============ SECTION HEAD ============ */
-        .section-head { text-align: center; margin-bottom: 64px; }
-        .section-head .label-tag { margin-bottom: 16px; }
-        .section-head h2 { margin-bottom: 16px; margin-top: 12px; }
+        .section-head { text-align: center; margin-bottom: 56px; }
+        .section-head .label-tag { margin-bottom: 18px; }
+        .section-head h2 { margin-bottom: 18px; margin-top: 0; }
         .section-head p { max-width: 640px; margin: 0 auto; }
 
-        /* ============ TIMELINE (product versions) ============ */
-        .timeline { position: relative; padding-left: 0; }
-        .version-card {
-            background: var(--appleDarker);
-            border-radius: 18px;
-            border: 1px solid var(--appleBorderSoft);
-            padding: 36px;
-            position: relative;
-            transition: border-color 0.4s ease, transform 0.4s ease;
+        /* ============ ARCHITECTURE CARDS ============ */
+        .arch-card {
+            background: var(--paper-glow);
+            border: 1px solid var(--paper-edge);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            display: flex; flex-direction: column; gap: 14px;
+            transition: box-shadow var(--dur-micro) var(--ease-snap),
+                        transform var(--dur-micro) var(--ease-snap);
         }
-        .version-card + .version-card { margin-top: 20px; }
-        .version-card:hover { border-color: var(--appleBorderHover); }
+        .arch-card:hover {
+            box-shadow: var(--shadow-lift), var(--shadow-inset-top);
+            transform: translateY(-2px);
+        }
+        .arch-card .arch-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: var(--copper-faint);
+            border: 1px solid var(--copper-mark);
+            display: inline-flex; align-items: center; justify-content: center;
+            color: var(--copper);
+            box-shadow: var(--shadow-inset-top);
+        }
+        .arch-card .arch-icon .material-symbols-outlined { font-size: 24px; }
+        .arch-card h3 {
+            font-family: var(--fontDisplay);
+            font-size: 1.0625rem; font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.012em;
+        }
+        .arch-card p {
+            font-size: 0.925rem;
+            color: var(--ink-dim);
+            line-height: 1.6;
+        }
+        .arch-card ul {
+            display: flex; flex-direction: column; gap: 8px;
+            font-size: 0.875rem; color: var(--ink-dim);
+            margin-top: 6px;
+        }
+        .arch-card ul li { line-height: 1.55; }
+        .arch-card ul li strong { color: var(--ink); font-weight: 600; }
+
+        /* ============ STACK CHIPS ============ */
+        .stack-strip {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            justify-content: center; margin: 0 auto 48px;
+            max-width: 800px;
+        }
+        .stack-chip {
+            font-family: var(--fontMono);
+            font-size: 11px;
+            color: var(--ink-dim);
+            padding: 7px 14px;
+            background: var(--paper-glow);
+            border: 1px solid var(--paper-edge);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.02em;
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            font-weight: 500;
+        }
+        .stack-chip .chip-dim { color: var(--ink-faint); }
+
+        /* ============ TIMELINE — version cards ============ */
+        .timeline { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+        .version-card {
+            background: var(--paper-glow);
+            border-radius: var(--radius-card-lg);
+            border: 1px solid var(--paper-edge);
+            padding: 36px;
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            transition: box-shadow var(--dur-micro) var(--ease-snap),
+                        transform var(--dur-micro) var(--ease-snap);
+        }
+        .version-card:hover {
+            box-shadow: var(--shadow-lift), var(--shadow-inset-top);
+            transform: translateY(-2px);
+        }
         .version-head {
             display: flex; align-items: baseline; justify-content: space-between;
-            margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
+            margin-bottom: 18px; gap: 16px; flex-wrap: wrap;
         }
         .version-tag {
             display: inline-flex; align-items: center; gap: 10px;
-            font-family: var(--fontMono); font-size: 12px;
-            color: var(--appleBlue); letter-spacing: 0.05em;
+            font-family: var(--fontMono); font-size: 11px; font-weight: 600;
+            color: var(--copper);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
         .version-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--appleBlue); box-shadow: 0 0 12px rgba(41, 151, 255, 0.5);
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--copper);
+            box-shadow: 0 0 0 3px var(--copper-glow);
         }
-        .version-title { font-size: 1.5rem; font-weight: 600; color: var(--appleLight); margin: 0; letter-spacing: -0.02em; }
-        .version-tagline { font-size: 11px; color: var(--appleGray); text-transform: uppercase; letter-spacing: 0.12em; }
-        .version-desc { font-size: 0.95rem; color: var(--appleGray); line-height: 1.65; margin-bottom: 24px; }
-        .version-flow { margin: 8px 0 24px; }
+        .version-title {
+            font-family: var(--fontDisplay);
+            font-size: 1.4rem; font-weight: 700;
+            color: var(--ink);
+            margin: 8px 0 0;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .version-tagline {
+            font-family: var(--fontMono);
+            font-size: 11px;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+        .version-flow { margin: 16px 0 24px; }
         .version-features {
-            display: grid; gap: 12px; grid-template-columns: 1fr;
-            border-top: 1px solid var(--appleBorderSoft); padding-top: 24px;
+            display: grid; gap: 12px;
+            grid-template-columns: 1fr;
+            border-top: 1px solid var(--paper-edge);
+            padding-top: 24px;
         }
-        @media (min-width: 768px) { .version-features { grid-template-columns: repeat(2, 1fr); gap: 12px 32px; } }
+        @media (min-width: 768px) {
+            .version-features { grid-template-columns: repeat(2, 1fr); gap: 14px 32px; }
+        }
         .version-feature {
-            display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--appleGray);
+            display: flex; align-items: flex-start; gap: 12px;
+            font-size: 0.875rem; color: var(--ink-dim);
+            line-height: 1.55;
         }
         .version-feature .material-symbols-outlined {
-            font-size: 18px; color: var(--appleBlue); margin-top: 2px; flex-shrink: 0;
+            font-size: 18px;
+            color: var(--copper);
+            margin-top: 1px;
+            flex-shrink: 0;
         }
-        .version-feature strong { color: var(--appleLight); font-weight: 500; }
-        .version-bridge {
-            margin-top: 18px; padding-top: 18px;
-            border-top: 1px solid var(--appleBorderSoft);
-            font-size: 0.78rem; color: var(--appleGray); line-height: 1.6;
-        }
-        .version-bridge a { color: var(--appleBlue); }
-        .version-bridge a:hover { text-decoration: underline; }
+        .version-feature strong { color: var(--ink); font-weight: 600; }
 
-        /* ============ FLOW DIAGRAM (SVG) ============ */
+        /* ============ FLOW DIAGRAM SVG ============ */
         .flow-svg {
             display: block; width: 100%; height: auto;
             max-width: 100%;
-            background: rgba(29, 29, 31, 0.4);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 14px;
+            background: var(--paper);
+            border: 1px solid var(--paper-edge);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-inset-top);
         }
-        .flow-svg .flow-box-fill { fill: rgba(29, 29, 31, 0.85); }
-        .flow-svg .flow-box-stroke { stroke: rgba(255, 255, 255, 0.18); stroke-width: 1; }
-        .flow-svg .flow-box-active-stroke { stroke: rgba(41, 151, 255, 0.55); stroke-width: 1.25; }
-        .flow-svg .flow-box-active-fill { fill: rgba(41, 151, 255, 0.08); }
-        .flow-svg text { font-family: var(--fontUI); font-size: 12px; fill: var(--appleLight); font-weight: 500; }
-        .flow-svg text.flow-sub { font-size: 10px; fill: var(--appleGray); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
-        .flow-svg .flow-arrow-stroke { stroke: rgba(255, 255, 255, 0.32); stroke-width: 1; fill: none; }
-        .flow-svg .flow-arrow-head { fill: rgba(255, 255, 255, 0.45); }
+        .flow-svg .flow-box-fill { fill: var(--paper-glow); }
+        .flow-svg .flow-box-stroke { stroke: var(--paper-edge); stroke-width: 1; }
+        .flow-svg .flow-box-active-stroke { stroke: var(--copper); stroke-width: 1.5; }
+        .flow-svg .flow-box-active-fill { fill: var(--copper-faint); }
+        .flow-svg text {
+            font-family: var(--fontDisplay);
+            font-size: 12px;
+            fill: var(--ink);
+            font-weight: 600;
+        }
+        .flow-svg text.flow-sub {
+            font-family: var(--fontMono);
+            font-size: 10px;
+            fill: var(--ink-faint);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .flow-svg .flow-arrow-stroke {
+            stroke: var(--copper);
+            stroke-width: 1.25;
+            fill: none;
+        }
+        .flow-svg .flow-arrow-head { fill: var(--copper); }
 
-        /* ============ ARCH STAT STRIP ============ */
-        .stack-strip {
-            display: flex; flex-wrap: wrap; gap: 8px;
-            justify-content: center; margin: 0 auto 40px;
-            max-width: 760px;
+        /* ============ KPI BAR — tactile cells ============ */
+        .kpi-bar {
+            display: grid; gap: 16px;
+            grid-template-columns: 1fr;
+            margin-bottom: 40px;
         }
-        .stack-chip {
-            font-family: var(--fontMono); font-size: 11px;
-            color: var(--appleLight); padding: 6px 12px;
-            background: rgba(29, 29, 31, 0.7);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 100px;
-            letter-spacing: 0.02em;
+        @media (min-width: 768px) { .kpi-bar { grid-template-columns: repeat(3, 1fr); } }
+        .kpi-cell {
+            background: var(--paper-glow);
+            border: 1px solid var(--paper-edge);
+            border-radius: var(--radius-card);
+            padding: 32px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            transition: box-shadow var(--dur-micro) var(--ease-snap);
         }
-        .stack-chip .chip-dim { color: var(--appleGray); }
+        .kpi-cell:hover { box-shadow: var(--shadow-lift), var(--shadow-inset-top); }
+        .kpi-value {
+            font-family: var(--fontDisplay);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--copper);
+            margin-bottom: 10px;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            font-feature-settings: "tnum" 1, "lnum" 1;
+        }
+        .kpi-label {
+            font-family: var(--fontMono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--ink-faint);
+            font-weight: 500;
+            line-height: 1.5;
+        }
 
-        /* ============ ARCH CARDS (deep) ============ */
-        .arch-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
-        @media (min-width: 768px) { .arch-grid { grid-template-columns: repeat(3, 1fr); } }
-        .arch-card {
-            background: var(--appleDarker);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 18px;
-            padding: 32px;
-            display: flex; flex-direction: column; gap: 16px;
-        }
-        .arch-card:hover { border-color: var(--appleBorderHover); }
-        .arch-card .arch-icon { color: var(--appleBlue); font-size: 26px; }
-        .arch-card h3 { font-size: 1.0625rem; font-weight: 500; color: var(--appleLight); }
-        .arch-card p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
-        .arch-card .arch-stat {
-            font-family: var(--fontMono); font-size: 11px; color: var(--appleLight);
-            padding: 6px 10px; background: rgba(41, 151, 255, 0.06);
-            border: 1px solid rgba(41, 151, 255, 0.18); border-radius: 8px;
-            display: inline-block; align-self: flex-start;
-        }
-        .arch-card ul { display: flex; flex-direction: column; gap: 6px; font-size: 0.84rem; color: var(--appleGray); }
-        .arch-card ul li { line-height: 1.55; }
-        .arch-card ul li strong { color: var(--appleLight); font-weight: 500; }
-
-        /* ============ MEDIA GALLERY ============ */
+        /* ============ MEDIA GALLERY — lifted card frames ============ */
         .media-grid {
-            display: grid; gap: 24px;
+            display: grid; gap: 20px;
             grid-template-columns: repeat(2, 1fr);
         }
         @media (max-width: 640px) { .media-grid { grid-template-columns: 1fr; } }
         .media-card {
-            background: var(--appleDarker);
-            border-radius: 18px;
-            border: 1px solid var(--appleBorderSoft);
+            background: var(--paper-glow);
+            border-radius: var(--radius-card-lg);
+            border: 1px solid var(--paper-edge);
             overflow: hidden;
-            transition: border-color 0.4s ease;
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            transition: box-shadow var(--dur-micro) var(--ease-snap),
+                        transform var(--dur-micro) var(--ease-snap);
         }
-        .media-card:hover { border-color: var(--appleBorderHover); }
+        .media-card:hover {
+            box-shadow: var(--shadow-lift), var(--shadow-inset-top);
+            transform: translateY(-2px);
+        }
         .media-frame {
-            position: relative; width: 100%; aspect-ratio: 3 / 4; background: #000;
+            position: relative; width: 100%; aspect-ratio: 3 / 4;
+            background: var(--paper-deep);
             overflow: hidden;
         }
         .media-frame video, .media-frame img {
             width: 100%; height: 100%; object-fit: cover; display: block;
         }
-        .media-caption { padding: 20px 24px 24px; }
+        .media-caption {
+            padding: 18px 22px 22px;
+            border-top: 1px solid var(--paper-edge);
+        }
         .media-caption .label-tag { margin-bottom: 10px; }
-        .media-caption h3 { font-size: 1rem; font-weight: 500; color: var(--appleLight); margin-bottom: 6px; }
-        .media-caption p { font-size: 0.85rem; color: var(--appleGray); line-height: 1.55; }
-        .media-caption .transcript-summary {
-            margin-top: 10px; padding-top: 10px;
-            border-top: 1px solid var(--appleBorderSoft);
-            font-size: 0.78rem; color: var(--appleGray); line-height: 1.55;
-        }
-        .media-caption .transcript-summary strong {
-            color: var(--appleLight); font-weight: 500;
-            font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-            display: block; margin-bottom: 4px;
+        .media-caption h3 {
+            font-family: var(--fontDisplay);
+            font-size: 0.975rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
         }
 
-        /* ============ PIVOT (decision grid) ============ */
+        /* ============ DECISION CARDS (pivot) ============ */
         .decision-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
-        @media (min-width: 768px) { .decision-grid { grid-template-columns: repeat(2, 1fr); } }
-        .decision-card { background: var(--appleDarker); border: 1px solid var(--appleBorderSoft); border-radius: 18px; padding: 32px; }
-        .decision-card:hover { border-color: var(--appleBorderHover); }
-        .decision-card h3 { font-size: 1.125rem; font-weight: 500; color: var(--appleLight); margin-bottom: 12px; }
-        .decision-card p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
-        .decision-callout {
-            margin-top: 24px;
-            background: rgba(29, 29, 31, 0.5);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 18px;
-            padding: 24px 28px;
+        @media (min-width: 768px) { .decision-grid { grid-template-columns: repeat(3, 1fr); } }
+        .decision-card {
+            background: var(--paper-glow);
+            border: 1px solid var(--paper-edge);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            box-shadow: var(--shadow-soft), var(--shadow-inset-top);
+            transition: box-shadow var(--dur-micro) var(--ease-snap),
+                        transform var(--dur-micro) var(--ease-snap);
         }
-        .decision-callout p { font-size: 0.85rem; color: var(--appleGray); line-height: 1.65; }
-        .decision-callout a { color: var(--appleBlue); }
-        .decision-callout a:hover { text-decoration: underline; }
-
-        /* ============ KPI BAR ============ */
-        .kpi-bar {
-            display: grid; gap: 1px;
-            grid-template-columns: 1fr;
-            background: var(--appleBorderSoft);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 16px; overflow: hidden;
+        .decision-card:hover {
+            box-shadow: var(--shadow-lift), var(--shadow-inset-top);
+            transform: translateY(-2px);
         }
-        @media (min-width: 768px) { .kpi-bar { grid-template-columns: repeat(3, 1fr); } }
-        .kpi-cell { background: var(--appleDarker); padding: 28px 16px; text-align: center; }
-        .kpi-value { font-family: var(--fontMono); font-size: 1.5rem; font-weight: 600; color: var(--appleLight); margin-bottom: 6px; }
-        .kpi-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--appleGray); }
+        .decision-card h3 {
+            font-family: var(--fontDisplay);
+            font-size: 1.125rem; font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 12px;
+            letter-spacing: -0.015em;
+        }
+        .decision-card p {
+            font-size: 0.9rem; color: var(--ink-dim);
+            line-height: 1.65;
+        }
 
         /* ============ FADE-IN ============ */
         .fade-in {
-            opacity: 0; transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0; transform: translateY(20px);
+            transition: opacity var(--dur-reveal) var(--ease-decel),
+                        transform var(--dur-reveal) var(--ease-decel);
         }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* ============ INLINE LINK ============ */
-        .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
-        .inline-link:hover { opacity: 0.8; text-decoration: underline; }
-
-        /* ============ PULL QUOTE ============ */
-        .pull-quote {
-            margin-top: 28px;
-            padding: 28px 32px;
-            border-left: 2px solid var(--appleBlue);
-            background: rgba(41, 151, 255, 0.04);
-            border-radius: 0 14px 14px 0;
-        }
-        .pull-quote p {
-            font-size: 1.05rem; line-height: 1.55; color: var(--appleLight);
-            font-weight: 400; letter-spacing: -0.01em;
-        }
-        .pull-quote .pull-attr {
-            margin-top: 10px; font-size: 0.78rem; color: var(--appleGray);
-            letter-spacing: 0.04em;
-        }
-
-        /* ============ NDA NOTE ============ */
-        .nda-note {
-            margin-top: 18px; padding-top: 18px;
-            border-top: 1px solid var(--appleBorderSoft);
-            font-size: 0.78rem; color: var(--appleGray); line-height: 1.55;
-            font-style: italic;
-        }
-
-        /* ============ LESSONS ============ */
-        .lessons-list { display: grid; gap: 14px; grid-template-columns: 1fr; margin-top: 24px; }
-        @media (min-width: 768px) { .lessons-list { grid-template-columns: repeat(3, 1fr); } }
-        .lesson {
-            background: var(--appleDarker);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 16px;
-            padding: 24px 26px;
-        }
-        .lesson .lesson-num {
-            font-family: var(--fontMono); font-size: 11px;
-            color: var(--appleBlue); letter-spacing: 0.08em;
-            margin-bottom: 12px; display: block;
-        }
-        .lesson h4 { font-size: 0.95rem; color: var(--appleLight); font-weight: 500; margin-bottom: 8px; line-height: 1.35; }
-        .lesson p { font-size: 0.83rem; color: var(--appleGray); line-height: 1.6; }
-
         /* ============ FOOTER ============ */
         .site-footer {
-            border-top: 1px solid var(--appleBorder);
-            padding: 2.25rem 1.5rem 2.5rem;
+            border-top: 1px solid var(--paper-edge);
+            padding: 36px 24px 40px;
             font-family: var(--fontMono);
-            font-size: var(--type-meta, 11px);
-            color: var(--appleGray);
+            font-size: var(--type-meta);
+            color: var(--ink-faint);
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            background: var(--paper);
         }
         .footer-inner {
-            max-width: var(--content-max, 1024px);
+            max-width: var(--content-max);
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
-            gap: 1.25rem 2rem;
+            gap: 14px 24px;
             justify-content: space-between;
             align-items: center;
             letter-spacing: 0.04em;
         }
+        .footer-copy { color: var(--ink-dim); }
         .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem 1.5rem;
+            display: flex; flex-wrap: wrap;
+            gap: 4px 6px;
         }
-        .footer-links a { color: var(--appleLight); }
-
-        /* ============ COFOUNDER NOTE (kept for reuse if needed) ============ */
-        .cofounder-note {
-            margin-top: 32px;
-            background: rgba(29, 29, 31, 0.5);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 16px;
-            padding: 28px;
-            display: flex; gap: 18px; align-items: flex-start;
+        .footer-links a {
+            color: var(--ink-dim);
+            padding: 10px 14px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 8px;
+            transition: color var(--dur-micro) var(--ease-snap),
+                        background var(--dur-micro) var(--ease-snap);
         }
-        .cofounder-note .material-symbols-outlined { color: var(--appleBlue); font-size: 24px; flex-shrink: 0; }
-        .cofounder-note p { font-size: 0.875rem; color: var(--appleGray); line-height: 1.65; }
-        .cofounder-note strong { color: var(--appleLight); font-weight: 500; }
-
-        /* ============ PRINT ============ */
-        @media print {
-            :root { color-scheme: light; }
-            body { background: #fff; color: #111; }
-            .glass-nav, footer, .mobile-toggle, video { display: none !important; }
-            .fade-in { opacity: 1 !important; transform: none !important; }
-            .card, .arch-card, .decision-card, .version-card, .lesson, .pull-quote {
-                background: #fff !important; border-color: #ccc !important; color: #111 !important;
-                box-shadow: none !important; break-inside: avoid;
-            }
-            .text-light, h1, h2, h3, h4 { color: #111 !important; }
-            .text-gray, .text-body, .text-lead, p, li { color: #333 !important; }
-            .glow-line { background: #ccc !important; }
-            a { color: #1a55b8 !important; }
-            .hero { padding-top: 24px; }
-            .stack-chip { background: #f4f4f6 !important; color: #222 !important; border-color: #ddd !important; }
-            .arch-card .arch-stat { background: #f4f4f6 !important; color: #222 !important; border-color: #c8d8ee !important; }
+        .footer-links a:hover {
+            color: var(--copper);
+            background: var(--copper-faint);
         }
     </style>
 
     <noscript>
-        <style>
-            .fade-in { opacity: 1 !important; transform: none !important; }
-        </style>
+        <style>.fade-in { opacity: 1 !important; transform: none !important; }</style>
     </noscript>
 </head>
 <body>
@@ -606,9 +835,10 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <!-- ============ NAV ============ -->
-<nav class="glass-nav" aria-label="Primary">
+<nav class="paper-nav" aria-label="Primary">
     <div class="nav-inner">
         <a href="#hero" class="nav-brand">
+            <span class="brand-dot" aria-hidden="true"></span>
             <span>Seller App</span>
             <span class="nav-brand-sub">2020–2024</span>
         </a>
@@ -617,7 +847,6 @@
         </button>
         <div class="desktop-nav" id="mainNav">
             <a href="#problem">Problem</a>
-            <a href="#solution">Solution</a>
             <a href="#architecture">System Design</a>
             <a href="#metrics">Traction</a>
             <a href="#pivot">Pivot</a>
@@ -635,59 +864,58 @@
             Computer Vision for<br>
             <span class="hero-line2">Retail Digitization.</span>
         </h1>
-        <p class="text-lead hero-sub">
-            A camera-first onboarding tool that turned a retailer&rsquo;s shelves into a published storefront.
-        </p>
-        <div class="hero-meta">
-            First Startup
-        </div>
+        <p class="hero-sub">A camera-first onboarding tool that turned a retailer's shelves into a published storefront.</p>
+        <div class="hero-meta">First Startup</div>
         <p class="hero-credibility">
-            Co-founded with <strong>Dr. Eli Osherovich</strong>, Senior Applied Scientist at Amazon
-            (Alexa Shopping / Amazon Go), now leading AI &amp; infrastructure at Google.
-            Bootstrapped with no external capital.
+            Co-founded with <strong>Dr. Eli Osherovich</strong>, Senior Applied Scientist at Amazon (Alexa Shopping / Amazon Go), now leading AI &amp; infrastructure at Google. Bootstrapped with no external capital.
         </p>
+
         <div class="hero-metrics">
-            <div class="hero-metric">
+            <div class="hero-metric-card">
                 <div class="hero-metric-value">~150</div>
-                <div class="hero-metric-label">Products / hour onboarding target</div>
+                <div class="hero-metric-label">Products / hour<br>onboarding target</div>
             </div>
-            <div class="hero-metric">
+            <div class="hero-metric-card">
                 <div class="hero-metric-value">3</div>
-                <div class="hero-metric-label">Computer Vision generations shipped</div>
+                <div class="hero-metric-label">Computer Vision<br>generations shipped</div>
             </div>
-            <div class="hero-metric">
+            <div class="hero-metric-card">
                 <div class="hero-metric-value">60M+</div>
-                <div class="hero-metric-label">Unique SKUs database</div>
+                <div class="hero-metric-label">Unique SKUs<br>database</div>
             </div>
         </div>
-
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
     <!-- ============ PROBLEM ============ -->
     <section id="problem" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">The Problem</span>
+                <span class="label-tag"><span class="dot" aria-hidden="true"></span>The Problem</span>
                 <h2 class="h-section">The Onboarding Bottleneck</h2>
-                <p class="text-lead">Physical retailers need an online presence but lack the technical skills.
-                    Manual product upload is the single largest barrier to eCommerce adoption.</p>
+                <p class="text-lead" style="margin: 0 auto;">Physical retailers need an online presence but lack the technical skills. Manual product upload is the single largest barrier to eCommerce adoption.</p>
             </div>
 
             <div class="grid grid-3">
                 <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">storefront</span>
+                    <div class="arch-icon" style="width: 44px; height: 44px; border-radius: 10px; background: var(--copper-faint); border: 1px solid var(--copper-mark); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+                        <span class="material-symbols-outlined icon-copper" aria-hidden="true" style="font-size: 22px;">storefront</span>
+                    </div>
                     <h3 class="h-card" style="margin-bottom: 8px;">Skill gap</h3>
                     <p class="text-body">Brick-and-mortar retailers lack in-house digital teams to photograph, categorize, and list products.</p>
                 </div>
                 <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">inventory_2</span>
+                    <div class="arch-icon" style="width: 44px; height: 44px; border-radius: 10px; background: var(--copper-faint); border: 1px solid var(--copper-mark); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+                        <span class="material-symbols-outlined icon-copper" aria-hidden="true" style="font-size: 22px;">inventory_2</span>
+                    </div>
                     <h3 class="h-card" style="margin-bottom: 8px;">Manual upload cost</h3>
                     <p class="text-body">~3 minutes per product × 50 products = 2.5 hours per store before a single photograph is taken.</p>
                 </div>
                 <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">alt_route</span>
+                    <div class="arch-icon" style="width: 44px; height: 44px; border-radius: 10px; background: var(--copper-faint); border: 1px solid var(--copper-mark); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+                        <span class="material-symbols-outlined icon-copper" aria-hidden="true" style="font-size: 22px;">alt_route</span>
+                    </div>
                     <h3 class="h-card" style="margin-bottom: 8px;">No frictionless path</h3>
                     <p class="text-body">No existing solution generated a complete product catalog from the camera alone.</p>
                 </div>
@@ -695,40 +923,24 @@
         </div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
-    <!-- ============ THE SOLUTION ============ -->
-    <section id="solution" class="section-padding fade-in">
-        <div class="container">
-            <div class="section-head">
-                <span class="label-tag">The Solution</span>
-                <h2 class="h-section">A camera-first onboarding tool that turned any retailer&rsquo;s shelves into a published storefront with all essential eCommerce features built-in.</h2>
-            </div>
-        </div>
-    </section>
-
-    <div class="glow-line"></div>
-
-    <!-- ============ ARCHITECTURE ============ -->
+    <!-- ============ ARCHITECTURE (Solution merged into intro) ============ -->
     <section id="architecture" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">System Design</span>
+                <span class="label-tag"><span class="dot" aria-hidden="true"></span>System Design</span>
                 <h2 class="h-section">Technical Architecture</h2>
-                <p class="text-lead">A Progressive Web App over a WooCommerce-vendor backend,
-                    with a two-database split and a vision pipeline.</p>
+                <p class="text-lead" style="margin: 0 auto;"><strong style="color: var(--ink); font-weight: 600;">A camera-first onboarding tool that turned any retailer's shelves into a published storefront with all essential eCommerce features built-in.</strong> A Progressive Web App over a WooCommerce-vendor backend, with a two-database split and a vision pipeline.</p>
             </div>
 
-
-
-            <div class="arch-grid">
+            <div class="grid grid-3">
                 <article class="arch-card">
-                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">devices</span>
+                    <div class="arch-icon">
+                        <span class="material-symbols-outlined" aria-hidden="true">devices</span>
+                    </div>
                     <h3>PWA topology</h3>
-                    <p>
-                        Camera, push, and offline
-                        capabilities without an app-store dependency, updates rolled out the moment a seller refreshed.
-                    </p>
+                    <p>Camera, push, and offline capabilities without an app-store dependency, updates rolled out the moment a seller refreshed.</p>
                     <ul>
                         <li><strong>RTL + Hebrew</strong>, Google Auto-Translate for the launch market</li>
                         <li><strong>Push notifications</strong>, react-web-notification (orders, low-stock)</li>
@@ -737,25 +949,24 @@
                 </article>
 
                 <article class="arch-card">
-                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">database</span>
+                    <div class="arch-icon">
+                        <span class="material-symbols-outlined" aria-hidden="true">database</span>
+                    </div>
                     <h3>Two-database model</h3>
-                    <p>
-                        One is shared across vendors, the other is private to each vendor.
-                    </p>
+                    <p>One is shared across vendors, the other is private to each vendor.</p>
                     <ul>
                         <li><strong>Global Product Database</strong>, shared, canonical, retrieval-indexed (60M+ SKUs)</li>
                         <li><strong>Store Product Database</strong>, vendor-scoped inventory, pricing, overrides</li>
                         <li><strong>Integration</strong>, WC Marketplace REST API</li>
                     </ul>
-
                 </article>
 
                 <article class="arch-card">
-                    <span class="material-symbols-outlined arch-icon" aria-hidden="true">visibility</span>
+                    <div class="arch-icon">
+                        <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
+                    </div>
                     <h3>Vision stack</h3>
-                    <p>
-                        The product replaced its Computer Vision front-end three times.
-                    </p>
+                    <p>The product replaced its Computer Vision front-end three times.</p>
                     <ul>
                         <li><strong>V1</strong>, ML Kit on-device barcode scanning + GPD lookup</li>
                         <li><strong>V2</strong>, Vision-AI OCR + foundation-model background removal</li>
@@ -764,22 +975,22 @@
                 </article>
             </div>
 
-            <div class="section-head" style="margin-top:3rem;">
+            <div class="section-head" style="margin-top: 80px; margin-bottom: 32px;">
                 <h2 class="h-section">Three Generations of Vision</h2>
-                <p class="text-lead">Each version removed a layer of friction from the seller&rsquo;s upload workflow.</p>
+                <p class="text-lead" style="margin: 0 auto;">Each version removed a layer of friction from the seller's upload workflow.</p>
             </div>
 
             <div class="timeline">
+
                 <!-- V1 -->
                 <article class="version-card">
                     <div class="version-head">
                         <div>
-                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>VERSION 1.0</div>
-                            <h3 class="version-title" style="margin-top: 8px;">Barcode &rarr; auto-upload</h3>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>Version 1.0</div>
+                            <h3 class="version-title">Barcode &rarr; auto-upload</h3>
                         </div>
                         <span class="version-tagline">Barcode + Database</span>
                     </div>
-
 
                     <div class="version-flow">
                         <svg class="flow-svg" viewBox="0 0 760 96" role="img" aria-label="Version 1 flow: camera scans a barcode, ML Kit reads it, the Global Product Database returns a record, the form auto-fills, and the product publishes to WooCommerce.">
@@ -834,19 +1045,17 @@
                             <div><strong>Target:</strong> store onboard + 30 products in &lt; 1 hour</div>
                         </div>
                     </div>
-
                 </article>
 
                 <!-- V2 -->
                 <article class="version-card">
                     <div class="version-head">
                         <div>
-                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>VERSION 2.0</div>
-                            <h3 class="version-title" style="margin-top: 8px;">Image recognition</h3>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>Version 2.0</div>
+                            <h3 class="version-title">Image recognition</h3>
                         </div>
                         <span class="version-tagline">Image + OCR</span>
                     </div>
-
 
                     <div class="version-flow">
                         <svg class="flow-svg" viewBox="0 0 760 96" role="img" aria-label="Version 2 flow: camera takes one photo, OCR extracts text on the package, the GPD enriches the attributes, background removal cleans up the image, and the result publishes to WooCommerce.">
@@ -913,12 +1122,11 @@
                 <article class="version-card">
                     <div class="version-head">
                         <div>
-                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>VERSION 3.0</div>
-                            <h3 class="version-title" style="margin-top: 8px;">Video + RAG over the GPD</h3>
+                            <div class="version-tag"><span class="version-dot" aria-hidden="true"></span>Version 3.0</div>
+                            <h3 class="version-title">Video + RAG over the GPD</h3>
                         </div>
                         <span class="version-tagline">Video + Retrieval</span>
                     </div>
-
 
                     <div class="version-flow">
                         <svg class="flow-svg" viewBox="0 0 760 96" role="img" aria-label="Version 3 flow: video stream is split into frames, each frame queries a RAG retrieval over the GPD, multiple SKU matches are batched into a draft catalog, and the result publishes to WooCommerce.">
@@ -986,19 +1194,18 @@
         </div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
-    <!-- ============ TRACTION & EXPERIMENTATION ============ -->
+    <!-- ============ TRACTION ============ -->
     <section id="metrics" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">Traction</span>
+                <span class="label-tag"><span class="dot" aria-hidden="true"></span>Traction</span>
                 <h2 class="h-section">Traction &amp; KPIs</h2>
-                <p class="text-lead">Bootstrapped to <strong style="color:var(--appleLight)">$10K MRR</strong>
-                    within 6 months after 3 years of R&amp;D.</p>
+                <p class="text-lead" style="margin: 0 auto;">Bootstrapped to <strong style="color: var(--ink); font-weight: 600;">$10K MRR</strong> within 6 months after 3 years of R&amp;D.</p>
             </div>
 
-            <div class="kpi-bar" style="margin-bottom: 32px;">
+            <div class="kpi-bar">
                 <div class="kpi-cell">
                     <div class="kpi-value">~150</div>
                     <div class="kpi-label">Products / hour onboarding target</div>
@@ -1013,33 +1220,29 @@
                 </div>
             </div>
 
-            <h3 class="h-section" style="margin-bottom:1.5rem;">Started like this:</h3>
+            <h3 class="h-section" style="font-size: 1.5rem; margin: 56px 0 24px;">Started like this:</h3>
             <div class="media-grid">
                 <div class="media-card">
                     <div class="media-frame">
-                        <img src="assets/media/IMG-20220522-WA0025.jpg"
-                             alt="Field testing the Seller App with end-users inside a retail location"
-                             loading="lazy" width="1536" height="2048" decoding="async">
+                        <img src="assets/media/IMG-20220522-WA0025.jpg" alt="Field testing the Seller App with end-users inside a retail location" loading="lazy" width="1536" height="2048" decoding="async">
                     </div>
                     <div class="media-caption">
-                        <span class="label-tag">Field testing · May 2022</span>
+                        <span class="label-tag"><span class="dot" aria-hidden="true"></span>Field testing · May 2022</span>
                         <h3>End-user usability session</h3>
                     </div>
                 </div>
                 <div class="media-card">
                     <div class="media-frame">
-                        <img src="assets/media/IMG-20220522-WA0027.jpg"
-                             alt="Daniel Manzela working with a retailer during in-store Seller App field testing"
-                             loading="lazy" width="1536" height="2048" decoding="async">
+                        <img src="assets/media/IMG-20220522-WA0027.jpg" alt="Daniel Manzela working with a retailer during in-store Seller App field testing" loading="lazy" width="1536" height="2048" decoding="async">
                     </div>
                     <div class="media-caption">
-                        <span class="label-tag">Field testing · May 2022</span>
+                        <span class="label-tag"><span class="dot" aria-hidden="true"></span>Field testing · May 2022</span>
                         <h3>On-floor co-discovery</h3>
                     </div>
                 </div>
             </div>
 
-            <h3 class="h-section" style="margin-top:2.5rem; margin-bottom:1.5rem;">Ended like this:</h3>
+            <h3 class="h-section" style="font-size: 1.5rem; margin: 56px 0 24px;">Ended like this:</h3>
             <div class="media-grid">
                 <div class="media-card">
                     <div class="media-frame">
@@ -1049,7 +1252,7 @@
                         </video>
                     </div>
                     <div class="media-caption">
-                        <span class="label-tag">Captured Session · Barcode Scanner</span>
+                        <span class="label-tag"><span class="dot" aria-hidden="true"></span>Captured Session · Barcode Scanner</span>
                         <h3>Barcode scanning workflow</h3>
                     </div>
                 </div>
@@ -1061,7 +1264,7 @@
                         </video>
                     </div>
                     <div class="media-caption">
-                        <span class="label-tag">Captured Session · Computer Vision</span>
+                        <span class="label-tag"><span class="dot" aria-hidden="true"></span>Captured Session · Computer Vision</span>
                         <h3>Background removal &amp; image normalization</h3>
                     </div>
                 </div>
@@ -1069,76 +1272,70 @@
         </div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
     <!-- ============ PIVOT ============ -->
     <section id="pivot" class="section-padding fade-in">
         <div class="container">
             <div class="section-head">
-                <span class="label-tag">Pivot</span>
+                <span class="label-tag"><span class="dot" aria-hidden="true"></span>Pivot</span>
                 <h2 class="h-section">Why We Pivoted</h2>
-
             </div>
 
             <div class="decision-grid">
                 <div class="decision-card">
                     <h3>Human-in-the-loop</h3>
-                    <p>Retailers and their on-ground employees were not incentivized to perform the setup themselves.
-                        Onboarding stalled.</p>
+                    <p>Retailers and their on-ground employees were not incentivized to perform the setup themselves. Onboarding stalled.</p>
                 </div>
                 <div class="decision-card">
                     <h3>The discovery</h3>
-                    <p>Big-box retailers, operating eCom sites without local visibility, turned out to be the right buyer
-                        for a frictionless, automated, large-scale eCom-per-location setup.</p>
+                    <p>Big-box retailers, operating eCom sites without local visibility, turned out to be the right buyer for a frictionless, automated, large-scale eCom-per-location setup.</p>
                 </div>
-
                 <div class="decision-card">
                     <h3>The outcome</h3>
                     <p>Pivoted from SMB self-service to enterprise frictionless solutions.</p>
                 </div>
             </div>
-
-
         </div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
     <!-- ============ LESSONS ============ -->
     <section id="lessons" class="section-padding fade-in">
         <div class="container">
-            <div class="section-head">
-                <span class="label-tag">Retrospective</span>
-                <h2 class="h-section">What I&rsquo;d Do Differently</h2>
-                <p class="text-lead">Despite building a technologically supreme product engineered by top minds from this field, our iterative feedback and hands-on high-touch approach revealed that brilliant tech isn&rsquo;t enough because &ldquo;human-in-the-loop&rdquo; was the single biggest problem and barrier to adoption.</p>
+            <div class="section-head" style="margin-bottom: 40px;">
+                <span class="label-tag"><span class="dot" aria-hidden="true"></span>Retrospective</span>
+                <h2 class="h-section">What I'd Do Differently</h2>
             </div>
+            <p class="text-lead" style="margin: 0 auto; text-align: center;">Despite building a technologically supreme product engineered by top minds from this field, our iterative feedback and hands-on high-touch approach revealed that brilliant tech isn't enough because "human-in-the-loop" was the single biggest problem and barrier to adoption.</p>
         </div>
     </section>
 
 </main>
 
 <!-- ============ FOOTER ============ -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <p>© 2020–2026 Daniel Manzela · Seller App.</p>
-            <div class="footer-links">
-                <a href="https://manzela.github.io/Manzela/">Profile</a>
-                <a href="https://manzela.github.io/Manzela/junior-years/">Junior Years</a>
-                <a href="https://manzela.github.io/Manzela/data-mining/">Data Mining</a>
-                <a href="https://manzela.github.io/Manzela/tasko-ai/">Tasko AI</a>
-                <a href="https://manzela.github.io/Manzela/elysium/">Elysium</a>
-                <a href="https://manzela.github.io/pipeline-observatory/">Pipeline</a>
-                <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://linkedin.com/in/manzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p class="footer-copy">© 2020–2026 Daniel Manzela · Seller App.</p>
+        <div class="footer-links">
+            <a href="https://manzela.github.io/Manzela/">Profile</a>
+            <a href="https://manzela.github.io/Manzela/junior-years/">Junior Years</a>
+            <a href="https://manzela.github.io/Manzela/data-mining/">Data Mining</a>
+            <a href="https://manzela.github.io/Manzela/tasko-ai/">Tasko AI</a>
+            <a href="https://manzela.github.io/Manzela/elysium/">Elysium</a>
+            <a href="https://manzela.github.io/pipeline-observatory/">Pipeline</a>
+            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/manzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
-    </footer>
+    </div>
+</footer>
 
 <script>
     (function () {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Scroll reveal — skipped entirely for users who prefer reduced motion
+        // Scroll reveal — fires once
         if (!prefersReducedMotion && 'IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1153,18 +1350,26 @@
             document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
         }
 
-        // Mobile nav toggle — aria-expanded kept in sync, drives hamburger→X
+        // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
         const mainNav = document.getElementById('mainNav');
         const setNavOpen = (open) => {
             mainNav.classList.toggle('open', open);
             navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Toggle navigation menu');
         };
         navToggle?.addEventListener('click', () => {
             setNavOpen(!mainNav.classList.contains('open'));
         });
+        // Escape closes mobile nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mainNav?.classList.contains('open')) {
+                setNavOpen(false);
+                navToggle?.focus();
+            }
+        });
 
-        // Smooth scroll + auto-close mobile nav on in-page navigation
+        // Smooth scroll + auto-close mobile nav
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 const href = a.getAttribute('href');

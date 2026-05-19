@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#0a0e0a">
     <meta name="color-scheme" content="dark">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
     <meta name="description" content="A bespoke five-stage web scraping, structuring, and classification pipeline, built from scratch for an Israeli financial services firm, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.">
     <meta name="author" content="Daniel Manzela">
     <link rel="canonical" href="https://manzela.github.io/Manzela/data-mining/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0e0a%22/><text x=%2250%22 y=%2270%22 font-family=%22monospace%22 font-size=%2270%22 fill=%22%237fd97f%22 text-anchor=%22middle%22>&gt;</text></svg>">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
@@ -35,66 +35,156 @@
     <meta name="twitter:image:alt" content="Data Mining &amp; Lead Intelligence, A Custom Pipeline. A case study by Daniel Manzela.">
     <meta name="twitter:creator" content="@danielmanzela">
 
-    <!-- Fonts -->
+    <!-- Fonts: IBM Plex Mono (primary) + IBM Plex Sans (long-prose fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <!-- Schema.org -->
+    <!-- Schema.org: Article + Person + BreadcrumbList (minimal extension) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Data Mining & Lead Intelligence, A Custom Pipeline",
-        "description": "A bespoke five-stage web scraping, structuring, and classification pipeline, built from scratch for an Israeli financial services firm, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.",
-        "url": "https://manzela.github.io/Manzela/data-mining/",
-        "image": "https://manzela.github.io/Manzela/data-mining/assets/og-image.png",
-        "datePublished": "2020-07-01",
-        "dateModified": "2026-05-12",
-        "author": {
-            "@type": "Person",
-            "name": "Daniel Manzela",
-            "url": "https://manzela.github.io/Manzela/",
-            "sameAs": [
-                "https://github.com/Manzela",
-                "https://linkedin.com/in/manzela"
-            ]
-        }
+        "@graph": [
+            {
+                "@type": "Article",
+                "headline": "Data Mining & Lead Intelligence, A Custom Pipeline",
+                "description": "A bespoke five-stage web scraping, structuring, and classification pipeline, built from scratch for an Israeli financial services firm, in a market enterprise data platforms didn't serve. Feb 2019 – Jul 2020.",
+                "url": "https://manzela.github.io/Manzela/data-mining/",
+                "image": "https://manzela.github.io/Manzela/data-mining/assets/og-image.png",
+                "datePublished": "2020-07-01",
+                "dateModified": "2026-05-19",
+                "author": {
+                    "@type": "Person",
+                    "name": "Daniel Manzela",
+                    "url": "https://manzela.github.io/Manzela/",
+                    "sameAs": [
+                        "https://github.com/Manzela",
+                        "https://linkedin.com/in/manzela"
+                    ]
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Daniel Manzela", "item": "https://manzela.github.io/Manzela/" },
+                    { "@type": "ListItem", "position": 2, "name": "Data Mining", "item": "https://manzela.github.io/Manzela/data-mining/" }
+                ]
+            }
+        ]
     }
     </script>
 
     <noscript><style>.fade-in{opacity:1 !important;transform:none !important}</style></noscript>
 
     <style>
-        /* ============ DESIGN TOKENS — Elysium canonical ============ */
+        /* ============ DESIGN TOKENS — Military / Command UI ============ */
         :root {
-            --appleDark: #000000;
-            --appleDarker: #1d1d1f;
-            --appleGray: #86868b;
-            --appleLight: #f5f5f7;
-            --appleBlue: #2997ff;
-            --appleBorder: rgba(255, 255, 255, 0.1);
-            --appleBorderSoft: rgba(255, 255, 255, 0.06);
-            --appleBorderHover: rgba(255, 255, 255, 0.12);
-            --appleSurface: #1d1d1f;
-            --fontUI: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, "Inter", "Helvetica Neue", Arial, sans-serif;
-            --fontMono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", "Menlo", "Consolas", monospace;
+            --ops-black:       #0a0e0a;
+            --ops-elev:        #11171a;
+            --ops-edge:        #1f2a1f;
+            --ops-rule:        #2a3a2a;
+
+            --paper:           #e8f5e8;
+            --paper-dim:       #b8c8b8;
+            --paper-faint:     #7a8a7a;
+
+            --phosphor:        #7fd97f;
+            --phosphor-bright: #a0e6a0;
+            --phosphor-dim:    rgba(127, 217, 127, 0.18);
+            --phosphor-faint:  rgba(127, 217, 127, 0.04);
+            --phosphor-glow:   rgba(127, 217, 127, 0.32);
+
+            --status-decom:    #fb923c;
+
+            --selection-bg:    #7fd97f;
+            --selection-fg:    #0a0e0a;
+
+            --fontMono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            --fontUI:   "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+
+            --type-display:  clamp(2rem, 5.5vw, 3.75rem);
+            --type-h2:       clamp(1.5rem, 3.2vw, 2.2rem);
+            --type-h3:       clamp(1.05rem, 1.8vw, 1.25rem);
+            --type-body:     clamp(0.875rem, 1vw, 0.95rem);
+            --type-meta:     0.75rem;
+            --type-eyebrow:  0.7rem;
+
+            --tracking-display: -0.025em;
+            --tracking-eyebrow: 0.2em;
+            --tracking-meta:    0.12em;
+
+            --section-pad:     100px;
+            --content-max:     1024px;
+            --content-tight:   840px;
+
+            --ease-decel:      cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-snap:       cubic-bezier(0.32, 0.72, 0, 1);
+
+            --dur-reveal:      550ms;
+            --dur-micro:       180ms;
         }
 
         /* ============ RESET ============ */
         *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--ops-black); }
+        body {
+            margin: 0;
+            background: var(--ops-black);
+            color: var(--paper);
+            font-family: var(--fontMono);
+            font-weight: 400;
+            font-size: var(--type-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* CRT scanline overlay — subtle */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 2px,
+                rgba(127, 217, 127, 0.025) 2px,
+                rgba(127, 217, 127, 0.025) 3px
+            );
+            mix-blend-mode: screen;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--dur-micro) var(--ease-snap);
+        }
+        a:hover { color: var(--phosphor-bright); }
+
+        ::selection { background: var(--selection-bg); color: var(--selection-fg); }
+
+        h1, h2, h3, h4 { margin: 0; font-weight: 500; }
+        p { margin: 0; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        button { font-family: inherit; }
 
         /* ============ A11Y ============ */
         .skip-link {
             position: absolute; left: -9999px; top: 0; z-index: 100;
-            background: var(--appleBlue); color: #000; font-weight: 500;
-            padding: 10px 16px; border-radius: 0 0 8px 0; font-size: 13px;
+            background: var(--phosphor); color: var(--ops-black); font-weight: 600;
+            padding: 14px 20px; border-radius: 0 0 4px 0;
+            font-family: var(--fontMono); font-size: 13px; line-height: 1;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            min-height: 44px; display: inline-flex; align-items: center;
         }
-        .skip-link:focus { left: 0; outline: 2px solid var(--appleLight); outline-offset: 2px; }
+        .skip-link:focus { left: 0; outline: 2px solid var(--paper); outline-offset: 2px; }
         :focus-visible {
-            outline: 2px solid var(--appleBlue); outline-offset: 3px; border-radius: 4px;
+            outline: 2px solid var(--phosphor); outline-offset: 3px; border-radius: 2px;
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
@@ -104,184 +194,240 @@
                 transition-duration: 0.001ms !important;
             }
             .fade-in { opacity: 1 !important; transform: none !important; }
+            body::before { display: none; }
         }
-        body {
-            margin: 0;
-            background-color: var(--appleDark);
-            color: var(--appleLight);
-            font-family: var(--fontUI);
-            font-weight: 400;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        a { color: inherit; text-decoration: none; }
-        h1, h2, h3, h4 { letter-spacing: -0.025em; font-weight: 600; margin: 0; }
-        p { margin: 0; }
-        ul { margin: 0; padding: 0; list-style: none; }
-        img, video { max-width: 100%; display: block; }
-        ::selection { background: rgba(41, 151, 255, 0.3); color: var(--appleLight); }
-        button { font-family: inherit; }
 
         /* ============ LAYOUT ============ */
-        .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
-        .container-tight { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-        .section-padding { padding: 140px 0; }
-        @media (max-width: 767px) { .section-padding { padding: 90px 0; } }
+        .container { max-width: var(--content-max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+        .container-tight { max-width: var(--content-tight); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+        .section-padding { padding: var(--section-pad) 0; position: relative; z-index: 2; }
+        @media (max-width: 767px) { .section-padding { padding: 64px 0; } }
 
         /* ============ NAV ============ */
-        .glass-nav {
+        .ops-nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-            background: rgba(0, 0, 0, 0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 14, 10, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--ops-rule);
         }
         .nav-inner {
-            max-width: 1024px; margin: 0 auto; padding: 0 24px;
+            max-width: var(--content-max); margin: 0 auto; padding: 0 24px;
             height: 48px; display: flex; align-items: center; justify-content: space-between;
-            font-size: 12px; font-weight: 500;
         }
         .nav-brand {
-            display: inline-flex; align-items: baseline; gap: 0.45rem;
-            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
-            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
-            color: var(--appleLight); font-weight: 600; background-image: none;
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-family: var(--fontMono); font-size: var(--type-eyebrow);
+            letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+            color: var(--paper); font-weight: 600;
+            min-height: 44px;
+            padding: 0 4px;
+            margin-left: -4px;
         }
-        .nav-brand-sub { color: var(--appleGray); font-weight: 400; }
+        .nav-brand .prompt { color: var(--phosphor); }
+        .nav-brand-sub { color: var(--paper-faint); font-weight: 400; }
         .desktop-nav {
-            display: flex; gap: 1.5rem; align-items: center; color: var(--appleGray);
-            font-family: var(--fontMono); font-size: var(--type-eyebrow, 11px);
-            letter-spacing: var(--tracking-eyebrow, 0.08em); text-transform: uppercase;
+            display: flex; gap: 1.5rem; align-items: center;
+            font-family: var(--fontMono); font-size: var(--type-eyebrow);
+            letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
         }
         .desktop-nav a {
-            color: var(--appleGray);
-            background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
-            background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
-            padding: 0.25rem 0; transition: color 0.2s ease;
+            color: var(--paper-dim);
+            transition: color var(--dur-micro) var(--ease-snap);
+            padding: 0.25rem 0;
         }
-        .desktop-nav a:hover { color: var(--appleLight); background-size: 100% 1px; }
-        .desktop-nav a.nav-back { color: var(--appleLight) !important; display: inline-flex; align-items: center; gap: 0.4rem; }
-        .desktop-nav a.nav-back .arrow { font-family: var(--fontMono); opacity: 0.6; }
+        .desktop-nav a:hover { color: var(--phosphor); }
+        .desktop-nav a.nav-back { color: var(--paper); display: inline-flex; align-items: center; gap: 0.4rem; }
+        .desktop-nav a.nav-back:hover { color: var(--phosphor-bright); }
+        .desktop-nav a.nav-back .arrow { color: var(--phosphor); }
         .nav-right { display: flex; align-items: center; gap: 16px; }
-        .nav-right a.profile-link { color: var(--appleLight); transition: opacity 0.2s ease; }
-        .nav-right a.profile-link:hover { opacity: 0.75; }
         .mobile-toggle {
-            display: none; background: none; border: none; cursor: pointer; padding: 4px;
-            width: 28px; height: 28px; position: relative;
+            display: none; background: none; border: 1px solid var(--ops-rule);
+            cursor: pointer; padding: 0; width: 44px; height: 44px; position: relative;
+            transition: border-color var(--dur-micro) var(--ease-snap);
         }
+        .mobile-toggle:hover { border-color: var(--phosphor); }
         .mobile-toggle span {
-            display: block; width: 18px; height: 1.5px; background: var(--appleLight);
-            border-radius: 1px; position: absolute; left: 5px;
-            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, top 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block; width: 18px; height: 1.5px; background: var(--paper);
+            position: absolute; left: 50%; margin-left: -9px;
+            transition: transform 0.28s var(--ease-snap), opacity 0.2s ease, top 0.28s var(--ease-snap);
         }
-        .mobile-toggle span:nth-child(1) { top: 9px; }
-        .mobile-toggle span:nth-child(2) { top: 13px; }
-        .mobile-toggle span:nth-child(3) { top: 17px; }
-        .mobile-toggle[aria-expanded="true"] span:nth-child(1) { top: 13px; transform: rotate(45deg); }
+        .mobile-toggle span:nth-child(1) { top: 16px; }
+        .mobile-toggle span:nth-child(2) { top: 21px; }
+        .mobile-toggle span:nth-child(3) { top: 26px; }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(1) { top: 21px; transform: rotate(45deg); }
         .mobile-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-        .mobile-toggle[aria-expanded="true"] span:nth-child(3) { top: 13px; transform: rotate(-45deg); }
+        .mobile-toggle[aria-expanded="true"] span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
         @media (max-width: 767px) {
-            .mobile-toggle { display: block; }
+            .mobile-toggle { display: flex; align-items: center; justify-content: center; }
             .desktop-nav { display: none; }
             .desktop-nav.open {
                 display: flex !important;
                 position: fixed; top: 48px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.95);
+                background: rgba(10, 14, 10, 0.97);
                 backdrop-filter: blur(20px);
-                flex-direction: column; padding: 24px; gap: 18px; align-items: flex-start;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                flex-direction: column; padding: 24px; gap: 4px; align-items: stretch;
+                border-bottom: 1px solid var(--ops-rule);
                 z-index: 49;
             }
+            .desktop-nav.open a {
+                padding: 14px 0;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+        @media (max-width: 380px) {
+            .nav-brand-sub { display: none; }
         }
 
-        /* ============ TYPOGRAPHY ============ */
-        .h-display { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.05; }
-        .h-section { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; }
-        .h-card { font-size: 1.125rem; font-weight: 500; }
-        .text-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--appleGray); line-height: 1.55; font-weight: 400; }
-        .text-body { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
-        .text-meta { font-size: 0.75rem; color: var(--appleGray); }
-        .text-light { color: var(--appleLight); }
-        .text-gray { color: var(--appleGray); }
-        .text-blue { color: var(--appleBlue); }
-        .mono { font-family: var(--fontMono); }
+        /* ============ TYPOGRAPHY UTILS ============ */
+        .h-display {
+            font-family: var(--fontMono);
+            font-size: var(--type-display);
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: var(--tracking-display);
+            color: var(--paper);
+        }
+        .h-section {
+            font-family: var(--fontMono);
+            font-size: var(--type-h2);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--paper);
+        }
+        .h-card {
+            font-family: var(--fontMono);
+            font-size: var(--type-h3);
+            font-weight: 500;
+            color: var(--paper);
+        }
+        .text-lead {
+            font-family: var(--fontUI);
+            font-size: clamp(1rem, 1.4vw, 1.15rem);
+            color: var(--paper-dim);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        .text-body {
+            font-family: var(--fontMono);
+            font-size: var(--type-body);
+            color: var(--paper-dim);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+        .text-prose {
+            font-family: var(--fontUI);
+            font-size: 1rem;
+            color: var(--paper-dim);
+            line-height: 1.7;
+            font-weight: 300;
+        }
 
-        /* ============ LABEL TAG ============ */
+        /* ============ OPS-LABEL TAG ============ */
         .label-tag {
-            display: inline-block; font-size: 10px; text-transform: uppercase;
-            letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px;
-            border: 1px solid var(--appleBorder); color: var(--appleGray);
+            display: inline-block;
+            font-family: var(--fontMono);
+            font-size: var(--type-eyebrow);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-eyebrow);
+            padding: 4px 10px;
+            border: 1px solid var(--ops-rule);
+            color: var(--phosphor);
+            background: var(--phosphor-faint);
         }
 
-        /* ============ GLOW LINE ============ */
-        .glow-line {
-            height: 1px; max-width: 1024px; margin: 0 auto;
-            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
-        }
-
-        /* ============ CARDS ============ */
-        .card {
-            background: var(--appleDarker);
-            border-radius: 18px;
-            border: 1px solid var(--appleBorderSoft);
-            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .card:hover {
-            border-color: var(--appleBorderHover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-        .card-pad { padding: 32px; }
-
-        /* ============ ICONS ============ */
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .icon-blue { color: var(--appleBlue); }
-        .icon-md { font-size: 22px; }
-
-        /* ============ GRIDS ============ */
-        .grid { display: grid; gap: 24px; }
-        .grid-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-4 { grid-template-columns: repeat(4, 1fr); }
-        @media (max-width: 767px) {
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        /* ============ HAIRLINE DIVIDER ============ */
+        .hairline {
+            height: 1px;
+            max-width: var(--content-max);
+            margin: 0 auto;
+            background: var(--ops-rule);
+            position: relative;
+            z-index: 2;
         }
 
         /* ============ HERO ============ */
-        .hero { padding: 140px 24px 110px; text-align: center; }
-        @media (max-width: 767px) { .hero { padding: 100px 24px 70px; } }
-        .hero-line2 { color: var(--appleGray); }
-        .hero-sub { max-width: 660px; margin: 24px auto 0; }
-        .hero-meta { color: var(--appleGray); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 28px; }
-
-        /* Hero stat strip — 4 columns */
-        .hero-stats {
-            display: grid; gap: 1px;
-            grid-template-columns: 1fr;
-            background: var(--appleBorderSoft);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 16px; overflow: hidden;
-            margin: 56px auto 0; max-width: 760px;
+        .hero {
+            padding: 130px 24px 90px;
+            max-width: var(--content-tight);
+            margin: 0 auto;
+            position: relative; z-index: 2;
         }
-        @media (min-width: 640px) { .hero-stats { grid-template-columns: 1fr; max-width: 280px; } }
-        .hero-stat { background: var(--appleDarker); padding: 24px 16px; text-align: center; }
-        .hero-stat-value {
+        @media (max-width: 767px) { .hero { padding: 96px 24px 56px; } }
+        .hero-prompt {
             font-family: var(--fontMono);
-            font-size: clamp(1.4rem, 2.6vw, 1.75rem);
-            font-weight: 600; color: var(--appleLight); margin-bottom: 6px;
-            letter-spacing: -0.02em;
+            font-size: var(--type-display);
+            font-weight: 500;
+            color: var(--phosphor);
+            line-height: 1.05;
+            margin-right: 0.4em;
         }
-        .hero-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--appleGray); }
+        .hero-line2 { color: var(--paper-dim); display: block; padding-left: 1.4em; }
+        @media (max-width: 600px) { .hero-line2 { padding-left: 0; } }
+        .hero-sub {
+            max-width: 580px;
+            margin: 24px 0 0;
+        }
+        .hero-meta {
+            margin-top: 28px;
+            font-family: var(--fontMono);
+            font-size: var(--type-meta);
+            color: var(--paper-faint);
+            letter-spacing: var(--tracking-meta);
+            text-transform: uppercase;
+        }
 
         /* ============ SECTION HEAD ============ */
-        .section-head { text-align: center; margin-bottom: 72px; }
-        .section-head .label-tag { margin-bottom: 16px; }
-        .section-head h2 { margin-bottom: 16px; margin-top: 12px; }
-        .section-head p { max-width: 660px; margin: 0 auto; }
+        .section-head { margin-bottom: 64px; }
+        .section-head .label-tag { margin-bottom: 18px; }
+        .section-head h2 { margin-bottom: 16px; }
+        .section-head p { max-width: 660px; }
+
+        /* ============ OPS CARDS ============ */
+        .ops-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+            .ops-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+        .ops-card {
+            background: var(--ops-elev);
+            border: 1px solid var(--ops-edge);
+            padding: 24px 26px;
+            transition: border-color var(--dur-micro) var(--ease-snap);
+            position: relative;
+        }
+        .ops-card:hover { border-color: var(--ops-rule); }
+        .ops-card-num {
+            display: block;
+            font-family: var(--fontMono);
+            font-size: var(--type-eyebrow);
+            font-weight: 500;
+            color: var(--phosphor);
+            letter-spacing: var(--tracking-eyebrow);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .ops-card h3 {
+            font-family: var(--fontMono);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--paper);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .ops-card p {
+            font-family: var(--fontUI);
+            font-size: 0.9rem;
+            color: var(--paper-dim);
+            line-height: 1.65;
+            font-weight: 300;
+        }
 
         /* ============ PIPELINE TIMELINE ============ */
         .pipe {
@@ -292,8 +438,8 @@
         .pipe-stage {
             display: grid;
             grid-template-columns: 80px 1fr;
-            gap: 36px;
-            padding: 32px 0;
+            gap: 32px;
+            padding: 28px 0;
             position: relative;
         }
         .pipe-stage:first-child { padding-top: 0; }
@@ -302,223 +448,146 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             position: relative;
         }
         .pipe-rail::after {
             content: '';
             position: absolute;
             left: 50%;
-            top: 88px;
-            bottom: -32px;
+            top: 86px;
+            bottom: -28px;
             width: 1px;
-            background: linear-gradient(180deg,
-                rgba(41, 151, 255, 0.32) 0%,
-                rgba(41, 151, 255, 0.04) 100%);
+            background: var(--phosphor-dim);
             transform: translateX(-50%);
         }
         .pipe-stage:last-child .pipe-rail::after { display: none; }
         .pipe-num {
             font-family: var(--fontMono);
-            font-size: 10px;
-            color: var(--appleBlue);
-            letter-spacing: 0.18em;
+            font-size: var(--type-eyebrow);
+            color: var(--phosphor);
+            letter-spacing: var(--tracking-eyebrow);
             font-weight: 500;
         }
         .pipe-icon {
             width: 56px; height: 56px;
-            border-radius: 16px;
-            background: rgba(41, 151, 255, 0.08);
-            border: 1px solid rgba(41, 151, 255, 0.22);
+            background: var(--phosphor-faint);
+            border: 1px solid var(--phosphor-dim);
             display: flex; align-items: center; justify-content: center;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
+            transition: box-shadow var(--dur-micro) var(--ease-snap),
+                        border-color var(--dur-micro) var(--ease-snap);
         }
-        .pipe-icon .material-symbols-outlined {
-            color: var(--appleBlue);
-            font-size: 28px;
+        .pipe-stage:hover .pipe-icon {
+            box-shadow: 0 0 0 4px var(--phosphor-faint),
+                        0 0 16px var(--phosphor-glow);
+            border-color: var(--phosphor);
         }
-        .pipe-body { padding-top: 4px; }
+        .pipe-icon-glyph {
+            font-family: var(--fontMono);
+            color: var(--phosphor);
+            font-size: 22px;
+            font-weight: 500;
+        }
+        .pipe-body { padding-top: 8px; }
         .pipe-title {
-            font-size: clamp(1.3rem, 2.2vw, 1.6rem);
-            font-weight: 600;
-            color: var(--appleLight);
-            letter-spacing: -0.02em;
+            font-family: var(--fontMono);
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
+            font-weight: 500;
+            color: var(--paper);
+            letter-spacing: -0.018em;
             margin-bottom: 12px;
         }
         .pipe-desc {
+            font-family: var(--fontUI);
             font-size: 0.95rem;
-            color: var(--appleGray);
-            line-height: 1.65;
-            max-width: 580px;
+            color: var(--paper-dim);
+            line-height: 1.7;
+            max-width: 560px;
+            font-weight: 300;
         }
-        .pipe-desc strong { color: var(--appleLight); font-weight: 500; }
+        .pipe-desc strong { color: var(--paper); font-weight: 500; }
+        .pipe-desc + .pipe-desc { margin-top: 12px; }
 
         @media (max-width: 600px) {
-            .pipe-stage { grid-template-columns: 56px 1fr; gap: 22px; padding: 24px 0; }
-            .pipe-icon { width: 44px; height: 44px; border-radius: 12px; }
-            .pipe-icon .material-symbols-outlined { font-size: 22px; }
-            .pipe-rail::after { top: 74px; bottom: -24px; }
-            .pipe-title { margin-bottom: 10px; }
+            .pipe-stage { grid-template-columns: 52px 1fr; gap: 20px; padding: 22px 0; }
+            .pipe-icon { width: 44px; height: 44px; }
+            .pipe-icon-glyph { font-size: 18px; }
+            .pipe-rail::after { top: 72px; bottom: -22px; }
         }
 
-        /* ============ INSIGHT CALLOUT ============ */
-        .insight {
-            margin: 64px auto 0;
-            max-width: 760px;
-            padding: 36px 40px;
-            background: rgba(29, 29, 31, 0.5);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 18px;
-        }
-        .insight-label {
-            display: inline-block;
-            font-family: var(--fontMono);
-            font-size: 10px;
-            color: var(--appleBlue);
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-        .insight p {
-            font-size: 0.95rem;
-            color: var(--appleGray);
-            line-height: 1.7;
-        }
-        .insight strong {
-            color: var(--appleLight);
-            font-weight: 500;
-        }
-        @media (max-width: 767px) {
-            .insight { margin-top: 44px; padding: 28px 26px; }
-        }
-
-        /* ============ PULLQUOTE ============ */
-        .pullquote {
-            margin: 56px auto 0;
-            max-width: 760px;
-            padding: 36px 44px;
-            border-left: 3px solid var(--appleBlue);
-            background: linear-gradient(90deg, rgba(41, 151, 255, 0.06), rgba(41, 151, 255, 0));
-            border-radius: 0 16px 16px 0;
-        }
-        .pullquote p {
-            font-size: clamp(1.15rem, 2vw, 1.5rem);
-            color: var(--appleLight); line-height: 1.45;
-            font-weight: 500; letter-spacing: -0.018em;
-        }
-        .pullquote em {
-            font-style: normal; color: var(--appleBlue); font-weight: 600;
-        }
-        @media (max-width: 767px) {
-            .pullquote { margin-top: 40px; padding: 26px 24px; }
-        }
-
-        /* ============ TECH STACK STRIP ============ */
-        .tech-strip {
-            display: flex; flex-wrap: wrap; gap: 8px;
-            justify-content: center; align-items: center;
-            margin: 0 auto 56px;
-            max-width: 880px;
-            padding: 24px;
-            background: rgba(29, 29, 31, 0.5);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 16px;
-        }
-        .tech-strip-label {
-            width: 100%; text-align: center;
-            font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em;
-            color: var(--appleGray); margin-bottom: 4px;
-        }
-        .tech-chip {
-            display: inline-flex; align-items: baseline; gap: 8px;
-            padding: 7px 14px;
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 100px;
-            background: rgba(0, 0, 0, 0.3);
-            font-size: 0.78rem; color: var(--appleLight);
-            letter-spacing: -0.005em;
-            white-space: nowrap;
-        }
-        .tech-chip .tech-purpose {
-            color: var(--appleGray); font-size: 0.7rem;
-            font-family: var(--fontMono);
-            padding-left: 8px; border-left: 1px solid var(--appleBorderSoft);
-        }
-
-        /* ============ LESSONS ============ */
-        .lessons {
-            display: flex; flex-direction: column; gap: 14px;
-        }
-        .lesson-item {
-            display: flex; gap: 18px; align-items: flex-start;
-            padding: 24px 28px;
-            background: var(--appleDarker);
-            border: 1px solid var(--appleBorderSoft);
-            border-radius: 14px;
-        }
-        .lesson-num {
-            font-family: var(--fontMono); font-size: 11px;
-            color: var(--appleBlue); letter-spacing: 0.14em;
-            flex-shrink: 0; padding-top: 3px; min-width: 36px;
-        }
-        .lesson-text { font-size: 0.92rem; color: var(--appleGray); line-height: 1.65; }
-        .lesson-text strong { color: var(--appleLight); font-weight: 500; }
-
-        /* ============ OUTCOME STATEMENT ============ */
-        .outcome {
+        /* ============ OUTCOME PANEL ============ */
+        .outcome-panel {
             margin-top: 48px;
-            padding: 40px 44px;
-            background: linear-gradient(135deg, rgba(41, 151, 255, 0.06) 0%, rgba(29, 29, 31, 0.5) 100%);
-            border: 1px solid rgba(41, 151, 255, 0.18);
-            border-radius: 18px;
-            text-align: center;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 26px 32px;
+            background: var(--ops-elev);
+            border: 1px solid var(--phosphor-dim);
+            position: relative;
         }
-        .outcome p.outcome-line {
-            font-size: clamp(1rem, 1.5vw, 1.15rem);
-            color: var(--appleLight); line-height: 1.55; font-weight: 400;
-            max-width: 640px; margin: 0 auto;
+        .outcome-label {
+            display: block;
+            font-family: var(--fontMono);
+            font-size: var(--type-eyebrow);
+            font-weight: 500;
+            color: var(--phosphor);
+            letter-spacing: var(--tracking-eyebrow);
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
-        .outcome .bridge {
-            margin-top: 18px;
-            font-size: 0.85rem; color: var(--appleGray); line-height: 1.65;
-            max-width: 640px; margin-left: auto; margin-right: auto;
+        .outcome-line {
+            font-family: var(--fontUI);
+            font-size: clamp(1rem, 1.4vw, 1.15rem);
+            color: var(--paper);
+            line-height: 1.55;
+            font-weight: 400;
+            margin: 0;
         }
-        .outcome .bridge a { color: var(--appleBlue); }
-        .outcome .bridge a:hover { text-decoration: underline; }
-        @media (max-width: 767px) { .outcome { padding: 28px 24px; } }
+        @media (max-width: 767px) { .outcome-panel { padding: 22px 24px; } }
 
         /* ============ FADE-IN ============ */
         .fade-in {
-            opacity: 0; transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--dur-reveal) var(--ease-decel),
+                        transform var(--dur-reveal) var(--ease-decel);
         }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* ============ FOOTER ============ */
         footer {
-            border-top: 1px solid var(--appleBorderSoft);
-            padding: 48px 24px;
-            margin-top: 32px;
+            border-top: 1px solid var(--ops-rule);
+            padding: 40px 24px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+            background: var(--ops-black);
         }
         .footer-inner {
-            max-width: 1024px; margin: 0 auto;
+            max-width: var(--content-max); margin: 0 auto;
             display: flex; justify-content: space-between; align-items: center;
-            gap: 24px; flex-wrap: wrap;
+            gap: 20px; flex-wrap: wrap;
+            font-family: var(--fontMono);
+            font-size: var(--type-meta);
+            letter-spacing: 0.08em;
+            color: var(--paper-dim);
         }
-        .footer-copy { font-size: 12px; color: var(--appleGray); }
+        .footer-copy { text-transform: uppercase; }
         .footer-links {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--appleGray);
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
         }
-        .footer-links a { transition: color 0.2s ease; }
-        .footer-links a:hover { color: var(--appleLight); }
-
-        /* ============ INLINE LINK ============ */
-        .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
-        .inline-link:hover { opacity: 0.8; text-decoration: underline; }
+        .footer-links a {
+            color: var(--paper-dim);
+            transition: color var(--dur-micro) var(--ease-snap), background var(--dur-micro) var(--ease-snap);
+            padding: 12px 14px;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+        .footer-links a:hover { color: var(--phosphor); background: var(--phosphor-faint); }
     </style>
 </head>
 <body>
@@ -526,9 +595,10 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <!-- ============ NAV ============ -->
-<nav class="glass-nav" aria-label="Primary">
+<nav class="ops-nav" aria-label="Primary">
     <div class="nav-inner">
         <a href="#hero" class="nav-brand">
+            <span class="prompt">&gt;</span>
             <span>Data Mining</span>
             <span class="nav-brand-sub">2019–2020</span>
         </a>
@@ -551,15 +621,13 @@
     <!-- ============ HERO ============ -->
     <section id="hero" class="hero fade-in">
         <h1 class="h-display">
-            From Open Data<br>
+            <span class="hero-prompt" aria-hidden="true">&gt;</span>From Open Data<br>
             <span class="hero-line2">to Acquired Prospects.</span>
         </h1>
-        <p class="text-lead hero-sub"></p>
-        <div class="hero-meta">Eitam Finance, A financial services firm (wealth management focus)</div>
-
+        <div class="hero-meta">Eitam Finance (wealth management focus)</div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
     <!-- ============ PROBLEM ============ -->
     <section id="problem" class="section-padding fade-in">
@@ -572,33 +640,27 @@
                 </p>
             </div>
 
-            <div class="grid grid-3">
-                <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">list_alt</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">Generic Lists, Low Conversion</h3>
-                    <p class="text-body">
-                        Purchased lead lists with no filtering. Cold-calling people who didn&rsquo;t need wealth management.
-                    </p>
-                </div>
-                <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">domain_disabled</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">No Vendor for the Israeli Market</h3>
-                    <p class="text-body">
-                        Enterprise platforms (ZoomInfo, Clearbit, Apollo) were US-focused and didn&rsquo;t index Hebrew-language sources.
-                    </p>
-                </div>
-                <div class="card card-pad">
-                    <span class="material-symbols-outlined icon-md icon-blue" aria-hidden="true" style="margin-bottom: 16px;">explore_off</span>
-                    <h3 class="h-card" style="margin-bottom: 8px;">Geographic Targeting by Hand</h3>
-                    <p class="text-body">
-                        Filtering by income tier, neighborhood, or postal code required a custom layer no off-the-shelf tool offered for this region.
-                    </p>
-                </div>
+            <div class="ops-grid ops-grid-3">
+                <article class="ops-card">
+                    <span class="ops-card-num">OBS. 01</span>
+                    <h3>Generic Lists, Low Conversion</h3>
+                    <p>Purchased lead lists with no filtering. Cold-calling people who didn&rsquo;t need wealth management.</p>
+                </article>
+                <article class="ops-card">
+                    <span class="ops-card-num">OBS. 02</span>
+                    <h3>No Vendor for the Israeli Market</h3>
+                    <p>Enterprise platforms (ZoomInfo, Clearbit, Apollo) were US-focused and didn&rsquo;t index Hebrew-language sources.</p>
+                </article>
+                <article class="ops-card">
+                    <span class="ops-card-num">OBS. 03</span>
+                    <h3>Geographic Targeting by Hand</h3>
+                    <p>Filtering by income tier, neighborhood, or postal code required a custom layer no off-the-shelf tool offered for this region.</p>
+                </article>
             </div>
         </div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
     <!-- ============ THE PIPELINE ============ -->
     <section id="pipeline" class="section-padding fade-in">
@@ -606,18 +668,15 @@
             <div class="section-head">
                 <span class="label-tag">The Solution</span>
                 <h2 class="h-section">Local Leads Generation</h2>
-                <p class="text-lead">
-                    Localized web-scraping of leads from highly targeted city-level web-directories.
-                </p>
+                <p class="text-lead">Localized web-scraping of leads from highly targeted city-level web-directories.</p>
             </div>
 
-            <!-- Vertical pipeline timeline — the new visual -->
             <div class="pipe">
                 <article class="pipe-stage">
                     <div class="pipe-rail">
-                        <div class="pipe-num">01</div>
+                        <div class="pipe-num">[01]</div>
                         <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">cloud_download</span>
+                            <span class="pipe-icon-glyph">↓</span>
                         </div>
                     </div>
                     <div class="pipe-body">
@@ -630,27 +689,23 @@
 
                 <article class="pipe-stage">
                     <div class="pipe-rail">
-                        <div class="pipe-num">02</div>
+                        <div class="pipe-num">[02]</div>
                         <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">my_location</span>
+                            <span class="pipe-icon-glyph">⊕</span>
                         </div>
                     </div>
                     <div class="pipe-body">
                         <h3 class="pipe-title">Data Enrichment &amp; Classification</h3>
-                        <p class="pipe-desc">
-                            Cities classified into income tiers using public demographic signals.
-                        </p>
-                        <p class="pipe-desc" style="margin-top: 12px;">
-                            Records scored against weighted signals (geo-tier, profession, ownership) to produce a <strong>ranked prospect list</strong>.
-                        </p>
+                        <p class="pipe-desc">Cities classified into income tiers using public demographic signals.</p>
+                        <p class="pipe-desc">Records scored against weighted signals (geo-tier, profession, ownership) to produce a <strong>ranked prospect list</strong>.</p>
                     </div>
                 </article>
 
                 <article class="pipe-stage">
                     <div class="pipe-rail">
-                        <div class="pipe-num">03</div>
+                        <div class="pipe-num">[03]</div>
                         <div class="pipe-icon">
-                            <span class="material-symbols-outlined" aria-hidden="true">data_object</span>
+                            <span class="pipe-icon-glyph">▤</span>
                         </div>
                     </div>
                     <div class="pipe-body">
@@ -661,12 +716,10 @@
                     </div>
                 </article>
             </div>
-
-
         </div>
     </section>
 
-    <div class="glow-line"></div>
+    <div class="hairline"></div>
 
     <!-- ============ REFLECTION ============ -->
     <section id="reflection" class="section-padding fade-in">
@@ -676,15 +729,14 @@
                 <h2 class="h-section">What This Project Taught</h2>
             </div>
 
-            <p class="text-lead" style="max-width: 760px; margin: 0 auto;">
+            <p class="text-prose" style="max-width: 760px; margin: 0 auto;">
                 The iterative feedback loop from Eitam Finance team was the critical key to success as they helped with valuable insights into what worked/converted best and what not. Although it was a highly manual orchestration job, I understood how significant it is to automate the process, yet the feedback loop still required manual adjustments and continuous evaluations.
             </p>
 
-            <!-- Outcome statement + bridge -->
-            <div class="outcome">
+            <div class="outcome-panel">
+                <span class="outcome-label">OUTPUT</span>
                 <p class="outcome-line">
-                    The converted prospects represented over ₪50M in new asset-management client
-                    portfolio. Cost: a workstation and one engineer.
+                    The converted prospects represented over ₪50M in new asset-management client portfolio. Cost: a workstation and one engineer.
                 </p>
             </div>
         </div>
@@ -695,16 +747,16 @@
 <!-- ============ FOOTER ============ -->
 <footer>
     <div class="footer-inner">
-        <div class="footer-copy">© 2019–2026 Daniel Manzela · Active Feb 2019 – Jul 2020.</div>
+        <div class="footer-copy">© 2019–2026 DANIEL MANZELA · ACTIVE FEB 2019 – JUL 2020</div>
         <div class="footer-links">
-            <a href="https://manzela.github.io/Manzela/">Profile</a>
-            <a href="https://manzela.github.io/Manzela/junior-years/">Junior Years</a>
-            <a href="https://manzela.github.io/Manzela/tasko-ai/">Tasko AI</a>
-            <a href="https://manzela.github.io/Manzela/seller-app/">Seller App</a>
-            <a href="https://manzela.github.io/Manzela/elysium/">Elysium</a>
-            <a href="https://manzela.github.io/pipeline-observatory/">Pipeline</a>
-            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com/in/manzela" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://manzela.github.io/Manzela/">PROFILE</a>
+            <a href="https://manzela.github.io/Manzela/junior-years/">JUNIOR YEARS</a>
+            <a href="https://manzela.github.io/Manzela/tasko-ai/">TASKO AI</a>
+            <a href="https://manzela.github.io/Manzela/seller-app/">SELLER APP</a>
+            <a href="https://manzela.github.io/Manzela/elysium/">ELYSIUM</a>
+            <a href="https://manzela.github.io/pipeline-observatory/">PIPELINE</a>
+            <a href="https://github.com/Manzela" target="_blank" rel="noopener noreferrer">GITHUB</a>
+            <a href="https://linkedin.com/in/manzela" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
         </div>
     </div>
 </footer>
@@ -713,7 +765,7 @@
     (function () {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Scroll reveal — skipped for users who prefer reduced motion
+        // Scroll reveal — fires once
         if (!prefersReducedMotion && 'IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -728,18 +780,26 @@
             document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
         }
 
-        // Mobile nav toggle — aria-expanded kept in sync
+        // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
         const mainNav = document.getElementById('mainNav');
         const setNavOpen = (open) => {
             mainNav.classList.toggle('open', open);
             navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Toggle navigation menu');
         };
         navToggle?.addEventListener('click', () => {
             setNavOpen(!mainNav.classList.contains('open'));
         });
+        // Escape closes mobile nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mainNav?.classList.contains('open')) {
+                setNavOpen(false);
+                navToggle?.focus();
+            }
+        });
 
-        // Smooth scroll + auto-close mobile nav on in-page navigation
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 const href = a.getAttribute('href');
