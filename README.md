@@ -22,7 +22,7 @@ I design and operate **end-to-end autonomous AI systems** — from zero-to-one a
 
 **Current system in production (TNG Shopper, 2024 → present):**
 - **11 enterprise clients** across **5 countries** (ES · PT · IL · US · MX) — **~10.5M product pages under autonomous management** at **$0.0006 / page**
-- **7-node multi-agent directed acyclic graph** with **~73.5M sub-agent operations per month** · 234 managed websites
+- **7-node multi-agent directed acyclic graph** with **~73.5M agent operations per full run** (weekly executions + daily price-delta runs) · 234 managed websites
 - **Gemma 4 26B-A4B Mixture-of-Experts** on self-hosted vLLM with PagedAttention inference. Multi-Low-Rank-Adaptation research documented in the [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment).
 - **Originality, Relevance, Accuracy, Value** — four-axis multi-model evaluation with fail-closed policy at **68.9% pass rate by design** · Deterministic Evaluation and Monitoring Audit System enforcing every boundary
 
