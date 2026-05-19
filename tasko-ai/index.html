@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#faf7f2">
+    <meta name="color-scheme" content="light">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Tasko.ai">
@@ -12,7 +12,7 @@
     <meta name="description" content="An AI agent that learned to do a human's job. 21,000 task records, 145 procedures, four layers, classify, retrieve, execute, verify, built on WhatsApp before the industry had a name for it. Oct 2020 – Dec 2023.">
     <meta name="author" content="Daniel Manzela">
     <link rel="canonical" href="https://manzela.github.io/Manzela/tasko-ai/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x25C6;</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23faf7f2%22/><path d=%22M20,30 Q20,18 32,18 H68 Q80,18 80,30 V58 Q80,70 68,70 H45 L30,80 V70 Q20,70 20,58 Z%22 fill=%22%231e3a5f%22/></svg>">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
@@ -37,7 +37,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet">
 
     <noscript><style>.fade-in{opacity:1 !important;transform:none !important}</style></noscript>
@@ -45,15 +45,28 @@
     <style>
         /* ============ DESIGN TOKENS — match Elysium canonical reference ============ */
         :root {
-            --appleDark: #000000;
-            --appleDarker: #1d1d1f;
-            --appleGray: #86868b;
-            --appleLight: #f5f5f7;
-            --appleBlue: #2997ff;
-            --appleBorder: rgba(255, 255, 255, 0.1);
-            --appleBorderSoft: rgba(255, 255, 255, 0.06);
-            --appleBorderHover: rgba(255, 255, 255, 0.12);
-            --appleSurface: #1d1d1f;
+            /* TOKENS — Conversational/Editorial · LIGHT · navy + warm paper.
+               Variable names kept (--apple*) to minimize diff with v1; values inverted. */
+            --appleDark: #faf7f2;       /* paper bg (was pure black) */
+            --appleDarker: #ffffff;     /* card surface (was #1d1d1f) */
+            --appleGray: #6f6f6f;       /* secondary ink (was #86868b) */
+            --appleLight: #1a1a1a;      /* primary ink (was light cream) — INVERTED */
+            --appleBlue: #1e3a5f;       /* navy accent (was apple-blue #1e3a5f) */
+            --appleBorder: #e0d9c6;     /* warm border (was rgba white 0.1) */
+            --appleBorderSoft: #ede5d4; /* subtle warm border (was rgba white 0.06) */
+            --appleBorderHover: #c8be9f;/* deeper warm border (was rgba white 0.12) */
+            --appleSurface: #ffffff;    /* white surface (was #1d1d1f) */
+
+            /* Additional tokens for conversational treatment */
+            --bubble-user: #eef0f2;     /* light grey-blue tint for user bubbles */
+            --bubble-user-fg: #1a1a1a;
+            --bubble-system: #1e3a5f;   /* navy for system bubbles */
+            --bubble-system-fg: #faf7f2;
+            --navy-glow: rgba(30, 58, 95, 0.12);
+            --navy-faint: rgba(30, 58, 95, 0.04);
+            --navy-mark: rgba(30, 58, 95, 0.22);
+            --shadow-soft: 0 1px 2px rgba(20, 14, 0, 0.04), 0 4px 12px rgba(20, 14, 0, 0.06);
+            --shadow-lift: 0 4px 8px rgba(20, 14, 0, 0.06), 0 16px 32px rgba(20, 14, 0, 0.09);
         }
 
         /* ============ RESET ============ */
@@ -63,8 +76,11 @@
         /* ============ A11Y ============ */
         .skip-link {
             position: absolute; left: -9999px; top: 0; z-index: 100;
-            background: var(--appleBlue); color: #000; font-weight: 500;
-            padding: 10px 16px; border-radius: 0 0 8px 0; font-size: 13px;
+            background: var(--appleBlue); color: var(--appleDark); font-weight: 600;
+            padding: 14px 20px; border-radius: 0 0 8px 0;
+            font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            min-height: 44px; display: inline-flex; align-items: center;
         }
         .skip-link:focus { left: 0; outline: 2px solid var(--appleLight); outline-offset: 2px; }
         :focus-visible {
@@ -83,7 +99,7 @@
             margin: 0;
             background-color: var(--appleDark);
             color: var(--appleLight);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             font-weight: 400;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
@@ -94,7 +110,7 @@
         p { margin: 0; }
         ul { margin: 0; padding: 0; list-style: none; }
         img, video { max-width: 100%; display: block; }
-        ::selection { background: rgba(41, 151, 255, 0.3); color: var(--appleLight); }
+        ::selection { background: var(--appleBlue); color: var(--appleDark); }
         button { font-family: inherit; }
 
         /* ============ LAYOUT ============ */
@@ -106,30 +122,35 @@
         /* ============ NAV ============ */
         .glass-nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-            background: rgba(0, 0, 0, 0.72);
+            background: rgba(250, 247, 242, 0.92);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid #e0d9c6;
         }
         .nav-inner {
             max-width: 1024px; margin: 0 auto; padding: 0 24px;
             height: 48px; display: flex; align-items: center; justify-content: space-between;
             font-size: 12px; font-weight: 500;
         }
-        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; }
+        .nav-brand { color: var(--appleLight); font-weight: 600; letter-spacing: -0.01em; min-height: 44px; padding: 0 4px; margin-left: -4px; display: inline-flex; align-items: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 1.1rem; }
         .nav-brand .nav-brand-sub { color: var(--appleGray); font-weight: 400; margin-left: 6px; }
         .desktop-nav { display: flex; gap: 28px; color: var(--appleGray); align-items: center; }
         .desktop-nav a { transition: color 0.2s ease; font-size: 11px; }
         .desktop-nav a:hover { color: var(--appleLight); }
         .desktop-nav a.nav-back { color: var(--appleLight); display: inline-flex; align-items: center; gap: 4px; }
-        .desktop-nav a.nav-back .arrow { font-family: 'JetBrains Mono', monospace; opacity: 0.6; }
+        .desktop-nav a.nav-back .arrow { font-family: 'IBM Plex Mono', monospace; opacity: 0.6; }
 
         .mobile-toggle {
-            display: none; background: none; border: none; cursor: pointer; padding: 4px;
+            display: none; background: var(--appleDarker); border: 1px solid var(--appleBorder);
+            cursor: pointer; padding: 0; width: 44px; height: 44px; border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            align-items: center; justify-content: center; flex-direction: column;
         }
+        .mobile-toggle:hover { border-color: var(--appleBorderHover); box-shadow: var(--shadow-lift); }
         .mobile-toggle span {
             display: block; width: 18px; height: 1.5px; background: var(--appleLight);
-            margin: 4px 0; transition: all 0.3s ease; border-radius: 1px;
+            margin: 2px 0; transition: all 0.3s ease; border-radius: 1px;
         }
         @media (max-width: 767px) {
             .mobile-toggle { display: block; }
@@ -137,17 +158,17 @@
             .desktop-nav.open {
                 display: flex !important;
                 position: fixed; top: 48px; left: 0; right: 0;
-                background: rgba(0, 0, 0, 0.95);
+                background: rgba(250, 247, 242, 0.97);
                 backdrop-filter: blur(20px);
                 flex-direction: column; padding: 24px; gap: 18px; align-items: flex-start;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                border-bottom: 1px solid #e0d9c6;
                 z-index: 49;
             }
         }
 
         /* ============ TYPOGRAPHY ============ */
-        .h-display { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.05; }
-        .h-section { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; }
+        .h-display { font-family: 'Newsreader', Georgia, serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 500; line-height: 1.02; letter-spacing: -0.025em; }
+        .h-section { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 500; letter-spacing: -0.02em; }
         .h-card { font-size: 1.125rem; font-weight: 500; }
         .text-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--appleGray); line-height: 1.55; font-weight: 300; }
         .text-body { font-size: 0.875rem; color: var(--appleGray); line-height: 1.6; }
@@ -155,19 +176,24 @@
         .text-light { color: var(--appleLight); }
         .text-gray { color: var(--appleGray); }
         .text-blue { color: var(--appleBlue); }
-        .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+        .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
 
         /* ============ LABEL TAG ============ */
         .label-tag {
-            display: inline-block; font-size: 10px; text-transform: uppercase;
-            letter-spacing: 0.12em; padding: 4px 10px; border-radius: 100px;
-            border: 1px solid var(--appleBorder); color: var(--appleGray);
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px; font-weight: 500; text-transform: uppercase;
+            letter-spacing: 0.16em; padding: 6px 12px; border-radius: 100px;
+            border: 1px solid var(--appleBorder); color: var(--appleBlue);
+            background: var(--navy-faint);
+            box-shadow: var(--shadow-soft);
         }
 
         /* ============ GLOW LINE ============ */
         .glow-line {
             height: 1px; max-width: 1024px; margin: 0 auto;
-            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
+            background: var(--appleBorder);
+            position: relative; z-index: 2;
         }
 
         /* ============ CARDS ============ */
@@ -180,7 +206,7 @@
         .card:hover {
             border-color: var(--appleBorderHover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: var(--shadow-lift);
         }
         .card-pad { padding: 32px; }
 
@@ -232,10 +258,11 @@
         }
         .layer-badge {
             width: 44px; height: 44px; border-radius: 11px;
-            background: rgba(41, 151, 255, 0.1);
-            border: 1px solid rgba(41, 151, 255, 0.25);
+            background: var(--navy-faint);
+            border: 1px solid var(--navy-mark);
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
+            box-shadow: var(--shadow-soft);
         }
         .layer-badge .material-symbols-outlined {
             color: var(--appleBlue); font-size: 20px;
@@ -243,7 +270,7 @@
         .layer-head-text { flex: 1; min-width: 200px; }
         .layer-num {
             display: inline-block;
-            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace; font-size: 10px;
             color: var(--appleBlue); letter-spacing: 0.16em;
             margin-bottom: 6px;
         }
@@ -266,7 +293,7 @@
             display: grid; gap: 16px; grid-template-columns: 1fr;
             margin-top: 28px;
             padding: 22px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--bubble-user);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 14px;
         }
@@ -291,7 +318,7 @@
             .mini-step:first-of-type { border-top: none; padding-top: 4px; }
         }
         .mini-step-num {
-            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace; font-size: 10px;
             color: var(--appleBlue); letter-spacing: 0.1em; margin-bottom: 8px;
         }
         .mini-step-title {
@@ -312,21 +339,21 @@
         .cat-chip {
             display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
             padding: 11px 14px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--bubble-user);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 10px;
             transition: border-color 0.2s ease;
         }
         .cat-chip:hover { border-color: var(--appleBorderHover); }
         .cat-name { font-size: 0.78rem; color: var(--appleLight); font-weight: 500; letter-spacing: -0.005em; }
-        .cat-count { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--appleBlue); letter-spacing: 0.04em; }
+        .cat-count { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--appleBlue); letter-spacing: 0.04em; }
 
         /* PULLQUOTE — for Layer 2 / Layer 4 */
         .pullquote {
             margin: 24px 0 8px;
             padding: 22px 26px;
             border-left: 3px solid var(--appleBlue);
-            background: linear-gradient(90deg, rgba(41, 151, 255, 0.06), rgba(41, 151, 255, 0));
+            background: linear-gradient(90deg, rgba(30, 58, 95, 0.06), rgba(30, 58, 95, 0));
             border-radius: 0 12px 12px 0;
         }
         .pullquote p {
@@ -349,7 +376,7 @@
         @media (min-width: 720px) { .proc-grid { grid-template-columns: repeat(2, 1fr); } }
         .proc-item {
             padding: 18px 22px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--bubble-user);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 12px;
             transition: border-color 0.2s ease;
@@ -373,12 +400,12 @@
         @media (min-width: 720px) { .safety-grid { grid-template-columns: repeat(2, 1fr); } }
         .safety-item {
             padding: 18px 22px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--bubble-user);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 12px;
         }
         .safety-item .safety-tag {
-            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace; font-size: 10px;
             color: var(--appleBlue); letter-spacing: 0.1em;
             margin-bottom: 8px; display: block;
         }
@@ -402,7 +429,7 @@
         .layer-callout strong {
             display: block;
             color: var(--appleLight);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
             font-weight: 500;
             margin-bottom: 8px;
@@ -411,7 +438,7 @@
         /* ============ INFO NOTE ============ */
         .info-note {
             margin-top: 32px;
-            background: rgba(29, 29, 31, 0.5);
+            background: var(--appleDarker);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 16px;
             padding: 28px;
@@ -427,7 +454,7 @@
             justify-content: center; align-items: center;
             margin-top: 32px;
             padding: 24px 24px;
-            background: rgba(29, 29, 31, 0.5);
+            background: var(--appleDarker);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 16px;
         }
@@ -441,25 +468,26 @@
             padding: 7px 14px;
             border: 1px solid var(--appleBorderSoft);
             border-radius: 100px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--bubble-user);
             font-size: 0.78rem; color: var(--appleLight);
             letter-spacing: -0.005em;
             white-space: nowrap;
         }
         .tech-chip .tech-purpose {
             color: var(--appleGray); font-size: 0.7rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             padding-left: 8px; border-left: 1px solid var(--appleBorderSoft);
         }
 
         /* ============ ARCHITECTURE SVG WRAPPER ============ */
         .arch-svg-wrap {
-            background: rgba(29, 29, 31, 0.4);
-            border: 1px solid var(--appleBorderSoft);
+            background: var(--appleDarker);
+            border: 1px solid rgba(30, 58, 95, 0.12);
             border-radius: 20px;
             padding: 32px 24px;
             margin-bottom: 40px;
             overflow-x: auto;
+            box-shadow: var(--shadow-soft);
         }
         @media (min-width: 768px) { .arch-svg-wrap { padding: 40px 32px; } }
         .arch-svg-wrap svg {
@@ -468,19 +496,20 @@
         }
         .arch-svg-wrap a { cursor: pointer; }
         .arch-svg-wrap a > rect { transition: fill 0.25s ease, stroke 0.25s ease; }
-        .arch-svg-wrap a:hover > rect { stroke: rgba(41,151,255,0.55); }
+        .arch-svg-wrap a:hover > rect { stroke: rgba(30, 58, 95, 0.55); }
 
         /* ============ STICKY LAYER STEPPER ============ */
         .layer-stepper {
             position: sticky; top: 56px; z-index: 40;
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
             padding: 8px;
-            background: rgba(0, 0, 0, 0.78);
+            background: rgba(250, 247, 242, 0.92);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid var(--appleBorderSoft);
+            border: 1px solid var(--appleBorder);
             border-radius: 14px;
             margin-bottom: 24px;
+            box-shadow: var(--shadow-soft);
             opacity: 0; transform: translateY(-6px);
             pointer-events: none;
             transition: opacity 0.25s ease, transform 0.25s ease;
@@ -488,23 +517,24 @@
         .layer-stepper.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
         .layer-stepper a {
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 8px 6px;
-            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            padding: 14px 6px;
+            min-height: 44px;
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
             font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
             color: var(--appleGray);
             border: 1px solid transparent; border-radius: 10px;
             text-decoration: none;
             transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
         }
-        .layer-stepper a .step-num { color: var(--appleLight); font-weight: 500; opacity: 0.7; }
+        .layer-stepper a .step-num { color: var(--appleBlue); font-weight: 600; opacity: 0.85; }
         .layer-stepper a:hover { color: var(--appleLight); }
         .layer-stepper a:hover .step-num { opacity: 1; }
         .layer-stepper a.is-active {
-            color: #2997ff;
-            background: rgba(41, 151, 255, 0.08);
-            border-color: rgba(41, 151, 255, 0.22);
+            color: #1e3a5f;
+            background: rgba(30, 58, 95, 0.08);
+            border-color: rgba(30, 58, 95, 0.22);
         }
-        .layer-stepper a.is-active .step-num { color: #2997ff; opacity: 1; }
+        .layer-stepper a.is-active .step-num { color: #1e3a5f; opacity: 1; }
         @media (max-width: 639px) {
             .layer-stepper { top: 52px; }
             .layer-stepper a .step-label { display: none; }
@@ -533,11 +563,11 @@
         }
         .approach-card:hover { border-color: var(--appleBorderHover); }
         .approach-card.is-production {
-            border-color: rgba(41, 151, 255, 0.25);
-            background: linear-gradient(180deg, rgba(41,151,255,0.05), rgba(29,29,31,1) 60%);
+            border-color: rgba(30, 58, 95, 0.25);
+            background: linear-gradient(180deg, rgba(30, 58, 95, 0.05), rgba(255, 255, 255, 1) 60%);
         }
         .approach-tag {
-            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace; font-size: 10px;
             color: var(--appleBlue); letter-spacing: 0.12em;
             margin-bottom: 14px; display: block;
         }
@@ -558,7 +588,7 @@
         }
         .lessons-prelude {
             display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
             color: var(--appleGray);
             margin-bottom: -8px; padding-top: 28px;
@@ -576,10 +606,10 @@
         }
         .lesson-item:first-of-type { border-top: none; }
         .lesson-num {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: clamp(2.5rem, 4.5vw, 3.5rem);
             font-weight: 500;
-            color: rgba(41, 151, 255, 0.4);
+            color: rgba(30, 58, 95, 0.4);
             letter-spacing: -0.04em;
             line-height: 0.95;
             padding-top: 6px;
@@ -608,14 +638,14 @@
         .outcome {
             margin-top: 64px;
             padding: 56px 48px 44px;
-            background: linear-gradient(135deg, rgba(41, 151, 255, 0.07) 0%, rgba(29, 29, 31, 0.5) 100%);
-            border: 1px solid rgba(41, 151, 255, 0.2);
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.07) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border: 1px solid rgba(30, 58, 95, 0.2);
             border-radius: 20px;
             text-align: center;
         }
         .outcome-prelude {
             display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
             color: var(--appleGray);
             margin-bottom: 22px;
@@ -623,7 +653,7 @@
         }
         .outcome-prelude::before, .outcome-prelude::after {
             content: ''; display: inline-block; width: 28px; height: 1px;
-            background: rgba(41, 151, 255, 0.3);
+            background: rgba(30, 58, 95, 0.3);
             vertical-align: middle; margin: 0 14px;
         }
         .outcome p.outcome-line {
@@ -638,7 +668,7 @@
         .outcome .bridge {
             margin-top: 32px;
             padding-top: 26px;
-            border-top: 1px solid rgba(41, 151, 255, 0.12);
+            border-top: 1px solid rgba(30, 58, 95, 0.12);
             font-size: 0.85rem; color: var(--appleGray); line-height: 1.7;
             max-width: 640px; margin-left: auto; margin-right: auto;
         }
@@ -661,7 +691,7 @@
         .site-footer {
             border-top: 1px solid var(--appleBorder);
             padding: 2.25rem 1.5rem 2.5rem;
-            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
             font-size: 11px;
             color: var(--appleGray);
             position: relative;
@@ -677,9 +707,18 @@
         }
         .footer-links {
             display: flex; flex-wrap: wrap;
-            gap: 0.4rem 1.5rem;
+            gap: 4px 6px;
         }
-        .footer-links a { color: var(--appleLight); }
+        .footer-links a {
+            color: var(--appleLight);
+            padding: 10px 14px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 8px;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+        .footer-links a:hover { color: var(--appleBlue); background: var(--navy-faint); }
 
         /* ============ INLINE LINK ============ */
         .inline-link { color: var(--appleBlue); transition: opacity 0.2s ease; }
@@ -691,7 +730,7 @@
             display: grid; grid-template-columns: auto 1fr; gap: 18px;
             align-items: center;
             padding: 18px 22px;
-            background: rgba(29, 29, 31, 0.5);
+            background: var(--appleDarker);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 14px;
         }
@@ -708,33 +747,33 @@
         /* ============ DETAILS / SUMMARY — Apple-style collapsibles for historical context ============ */
         details.context {
             margin-top: 22px;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--bubble-user);
             border: 1px solid var(--appleBorderSoft);
             border-radius: 12px;
             overflow: hidden;
             transition: border-color 0.25s ease;
         }
-        details.context[open] { border-color: rgba(41, 151, 255, 0.22); }
+        details.context[open] { border-color: rgba(30, 58, 95, 0.22); }
         details.context > summary {
             list-style: none;
             cursor: pointer;
             padding: 14px 18px;
             display: flex; align-items: center; justify-content: space-between;
             gap: 12px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
             color: var(--appleGray);
             transition: color 0.2s ease, background 0.2s ease;
         }
         details.context > summary::-webkit-details-marker { display: none; }
-        details.context > summary:hover { color: var(--appleLight); background: rgba(255,255,255,0.02); }
+        details.context > summary:hover { color: var(--appleLight); background: var(--navy-faint); }
         details.context > summary .summary-label { display: flex; align-items: center; gap: 10px; }
         details.context > summary .summary-label::before {
             content: ''; width: 4px; height: 4px; border-radius: 50%;
             background: var(--appleBlue); display: inline-block;
         }
         details.context > summary .chev {
-            font-family: 'JetBrains Mono', monospace; font-size: 14px;
+            font-family: 'IBM Plex Mono', monospace; font-size: 14px;
             color: var(--appleGray); transition: transform 0.3s ease, color 0.2s ease;
             font-weight: 300;
         }
@@ -783,13 +822,13 @@
             transition: background 0.3s ease;
         }
         details.layer-dive[open] .dive-line {
-            background: rgba(41, 151, 255, 0.22);
+            background: rgba(30, 58, 95, 0.22);
         }
         details.layer-dive .dive-label {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -804,16 +843,16 @@
             border-radius: 50%;
             border: 1px solid var(--appleBorderHover);
             color: var(--appleLight);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 13px; font-weight: 400; line-height: 1;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                         background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-            background: rgba(0,0,0,0.2);
+            background: var(--bubble-user);
         }
         details.layer-dive[open] .dive-icon {
             transform: rotate(45deg);
-            background: rgba(41, 151, 255, 0.15);
-            border-color: rgba(41, 151, 255, 0.4);
+            background: rgba(30, 58, 95, 0.15);
+            border-color: rgba(30, 58, 95, 0.4);
             color: var(--appleBlue);
         }
         details.layer-dive > .layer-dive-body {
@@ -856,17 +895,17 @@
             display: inline-flex; align-items: center; gap: 8px;
             margin-top: 10px;
             padding: 5px 11px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
             color: var(--appleLight);
-            background: rgba(41, 151, 255, 0.08);
-            border: 1px solid rgba(41, 151, 255, 0.22);
+            background: rgba(30, 58, 95, 0.08);
+            border: 1px solid rgba(30, 58, 95, 0.22);
             border-radius: 100px;
         }
         .now-called::before {
             content: ''; width: 5px; height: 5px; border-radius: 50%;
             background: var(--appleBlue);
-            box-shadow: 0 0 6px rgba(41, 151, 255, 0.6);
+            box-shadow: 0 0 6px rgba(30, 58, 95, 0.35);
         }
         .now-called .now-called-prefix { color: var(--appleGray); font-weight: 400; }
 
@@ -874,19 +913,21 @@
         .layer-stats {
             display: grid; gap: 1px;
             grid-template-columns: 1fr;
-            background: var(--appleBorderSoft);
-            border: 1px solid var(--appleBorderSoft);
+            background: var(--appleBorder);
+            border: 1px solid var(--appleBorder);
             border-radius: 12px; overflow: hidden;
             margin: 22px 0 4px;
         }
+        /* Auto-fit grid: respects actual stat count (Layer 1 has 3, Layers 2/4 have 4) */
         @media (min-width: 640px) { .layer-stats { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 640px) { .layer-stats:has(.layer-stat:nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); } }
         .layer-stat {
-            background: rgba(0, 0, 0, 0.35);
+            background: var(--appleDarker);
             padding: 16px 12px;
             text-align: center;
         }
         .layer-stat-value {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: clamp(0.95rem, 1.5vw, 1.15rem);
             font-weight: 600; color: var(--appleLight); margin-bottom: 4px;
             letter-spacing: -0.015em;
@@ -912,10 +953,10 @@
         .compare-matrix thead th {
             text-align: left;
             padding: 16px 18px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
             color: var(--appleGray);
-            background: rgba(0, 0, 0, 0.35);
+            background: var(--appleDarker);
             border-bottom: 1px solid var(--appleBorderSoft);
             font-weight: 500;
             vertical-align: bottom;
@@ -933,7 +974,7 @@
             white-space: nowrap;
         }
         .compare-matrix .row-name .row-tag {
-            display: block; font-family: 'JetBrains Mono', monospace;
+            display: block; font-family: 'IBM Plex Mono', monospace;
             font-size: 9px; letter-spacing: 0.14em;
             color: var(--appleBlue); margin-top: 4px; font-weight: 400;
         }
@@ -949,14 +990,14 @@
             display: inline-flex; align-items: center; gap: 6px;
         }
         .compare-matrix .cell-no::before {
-            content: '✗'; color: rgba(134, 134, 139, 0.6); font-size: 0.95rem;
+            content: '✗'; color: var(--appleGray); font-size: 0.95rem;
         }
         .compare-matrix .cell-detail {
             display: block; font-size: 0.74rem; color: var(--appleGray);
             margin-top: 4px; font-weight: 400; line-height: 1.5;
         }
         .compare-matrix .row-production td {
-            background: linear-gradient(90deg, rgba(41,151,255,0.06), rgba(41,151,255,0.01));
+            background: linear-gradient(90deg, rgba(30, 58, 95, 0.06), rgba(30, 58, 95, 0.01));
         }
         .compare-matrix .row-production .row-name { color: var(--appleLight); }
         .compare-matrix .verdict {
@@ -984,7 +1025,7 @@
             .compare-matrix tbody td::before {
                 content: attr(data-col);
                 display: block;
-                font-family: 'JetBrains Mono', monospace;
+                font-family: 'IBM Plex Mono', monospace;
                 font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
                 color: var(--appleGray); margin-bottom: 4px;
             }
@@ -1107,78 +1148,78 @@
                 <svg viewBox="0 0 960 660" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tasko.ai production flow: WhatsApp message in, four layers, two outputs">
                     <defs>
                         <linearGradient id="layerGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="rgba(41,151,255,0.05)" />
-                            <stop offset="100%" stop-color="rgba(29,29,31,0)" />
+                            <stop offset="0%" stop-color="rgba(30, 58, 95, 0.05)" />
+                            <stop offset="100%" stop-color="rgba(250, 247, 242, 0)" />
                         </linearGradient>
                         <filter id="layerGlow" x="-10%" y="-30%" width="120%" height="160%">
-                            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#2997ff" flood-opacity="0.25"/>
+                            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#1e3a5f" flood-opacity="0.12"/>
                         </filter>
                         <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2997ff" />
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e3a5f" />
                         </marker>
                     </defs>
 
                     <!-- Top label -->
-                    <text x="480" y="22" fill="#86868b" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.18em" text-anchor="middle">PRODUCTION FLOW</text>
+                    <text x="480" y="22" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="10" letter-spacing="0.18em" text-anchor="middle">PRODUCTION FLOW</text>
 
                     <!-- INPUT: WhatsApp message -->
-                    <rect x="320" y="44" width="320" height="50" rx="14" fill="rgba(29,29,31,0.9)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                    <text x="480" y="68" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp message in</text>
-                    <text x="480" y="85" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">Hebrew &middot; informal &middot; multimodal references</text>
+                    <rect x="320" y="44" width="320" height="50" rx="14" fill="rgba(255, 255, 255, 0.9)" stroke="rgba(30, 58, 95, 0.18)" stroke-width="1" />
+                    <text x="480" y="68" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp message in</text>
+                    <text x="480" y="85" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="10" text-anchor="middle">Hebrew &middot; informal &middot; multimodal references</text>
 
-                    <line x1="480" y1="94" x2="480" y2="118" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+                    <line x1="480" y1="94" x2="480" y2="118" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
 
                     <!-- LAYER 01 -->
                     <a href="#layer-1" aria-label="Jump to Layer 1: Understanding">
-                        <rect x="60" y="118" width="840" height="80" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
-                        <text x="80" y="146" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 01</text>
-                        <text x="80" y="170" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Understanding</text>
-                        <text x="80" y="188" fill="#86868b" font-family="Inter,sans-serif" font-size="12">Classify the intent &middot; auto-complete &middot; confirm with user</text>
+                        <rect x="60" y="118" width="840" height="80" rx="16" fill="url(#layerGrad)" stroke="rgba(30, 58, 95, 0.18)" stroke-width="1" />
+                        <text x="80" y="146" fill="#1e3a5f" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 01</text>
+                        <text x="80" y="170" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Understanding</text>
+                        <text x="80" y="188" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="12">Classify the intent &middot; auto-complete &middot; confirm with user</text>
                     </a>
 
-                    <line x1="480" y1="198" x2="480" y2="220" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+                    <line x1="480" y1="198" x2="480" y2="220" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
 
                     <!-- LAYER 02 -->
                     <a href="#layer-2" aria-label="Jump to Layer 2: Knowledge">
-                        <rect x="60" y="220" width="840" height="80" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
-                        <text x="80" y="248" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 02</text>
-                        <text x="80" y="272" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Knowledge</text>
-                        <text x="80" y="290" fill="#86868b" font-family="Inter,sans-serif" font-size="12">Retrieve the matching procedure &middot; inject into prompt context</text>
+                        <rect x="60" y="220" width="840" height="80" rx="16" fill="url(#layerGrad)" stroke="rgba(30, 58, 95, 0.18)" stroke-width="1" />
+                        <text x="80" y="248" fill="#1e3a5f" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 02</text>
+                        <text x="80" y="272" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Knowledge</text>
+                        <text x="80" y="290" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="12">Retrieve the matching procedure &middot; inject into prompt context</text>
                     </a>
 
-                    <line x1="480" y1="300" x2="480" y2="322" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+                    <line x1="480" y1="300" x2="480" y2="322" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
 
                     <!-- LAYER 03 -->
                     <a href="#layer-3" aria-label="Jump to Layer 3: Execution">
-                        <rect x="60" y="322" width="840" height="80" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.18)" stroke-width="1" />
-                        <text x="80" y="350" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 03</text>
-                        <text x="80" y="374" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Execution</text>
-                        <text x="80" y="392" fill="#86868b" font-family="Inter,sans-serif" font-size="12">Run the multi-step workflow &middot; call APIs &middot; gather missing info</text>
+                        <rect x="60" y="322" width="840" height="80" rx="16" fill="url(#layerGrad)" stroke="rgba(30, 58, 95, 0.18)" stroke-width="1" />
+                        <text x="80" y="350" fill="#1e3a5f" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 03</text>
+                        <text x="80" y="374" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Execution</text>
+                        <text x="80" y="392" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="12">Run the multi-step workflow &middot; call APIs &middot; gather missing info</text>
                     </a>
 
-                    <line x1="480" y1="402" x2="480" y2="424" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+                    <line x1="480" y1="402" x2="480" y2="424" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
 
                     <!-- LAYER 04 (emphasized) -->
                     <a href="#layer-4" aria-label="Jump to Layer 4: Safety Gate">
-                        <rect x="60" y="424" width="840" height="86" rx="16" fill="url(#layerGrad)" stroke="rgba(41,151,255,0.3)" stroke-width="1.5" filter="url(#layerGlow)" />
-                        <text x="80" y="452" fill="#2997ff" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 04</text>
-                        <text x="80" y="476" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Safety Gate</text>
-                        <text x="80" y="494" fill="#86868b" font-family="Inter,sans-serif" font-size="12">5-minute human override &middot; deterministic fallback if no intervention</text>
+                        <rect x="60" y="424" width="840" height="86" rx="16" fill="url(#layerGrad)" stroke="rgba(30, 58, 95, 0.3)" stroke-width="1.5" filter="url(#layerGlow)" />
+                        <text x="80" y="452" fill="#1e3a5f" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.16em">LAYER 04</text>
+                        <text x="80" y="476" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em">Safety Gate</text>
+                        <text x="80" y="494" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="12">5-minute human override &middot; deterministic fallback if no intervention</text>
                     </a>
 
                     <!-- Y-split arrows to the two outputs -->
-                    <line x1="480" y1="510" x2="480" y2="530" stroke="#2997ff" stroke-width="1.5" opacity="0.7" />
-                    <line x1="480" y1="530" x2="280" y2="556" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
-                    <line x1="480" y1="530" x2="680" y2="556" stroke="#2997ff" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+                    <line x1="480" y1="510" x2="480" y2="530" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" />
+                    <line x1="480" y1="530" x2="280" y2="556" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
+                    <line x1="480" y1="530" x2="680" y2="556" stroke="#1e3a5f" stroke-width="1.5" opacity="0.7" marker-end="url(#arrowhead)" />
 
                     <!-- OUTPUTS -->
-                    <rect x="120" y="564" width="320" height="56" rx="14" fill="rgba(29,29,31,0.9)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                    <text x="280" y="589" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Task created in Monday.com</text>
-                    <text x="280" y="607" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">type &middot; urgency &middot; client &middot; attachments &middot; via API</text>
+                    <rect x="120" y="564" width="320" height="56" rx="14" fill="rgba(255, 255, 255, 0.9)" stroke="rgba(30, 58, 95, 0.18)" stroke-width="1" />
+                    <text x="280" y="589" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="500" text-anchor="middle">Task created in Monday.com</text>
+                    <text x="280" y="607" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="10" text-anchor="middle">type &middot; urgency &middot; client &middot; attachments &middot; via API</text>
 
-                    <rect x="520" y="564" width="320" height="56" rx="14" fill="rgba(29,29,31,0.9)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                    <text x="680" y="589" fill="#f5f5f7" font-family="Inter,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp completion message</text>
-                    <text x="680" y="607" fill="#86868b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">sent through the same client number</text>
+                    <rect x="520" y="564" width="320" height="56" rx="14" fill="rgba(255, 255, 255, 0.9)" stroke="rgba(30, 58, 95, 0.18)" stroke-width="1" />
+                    <text x="680" y="589" fill="#1a1a1a" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="500" text-anchor="middle">WhatsApp completion message</text>
+                    <text x="680" y="607" fill="#6f6f6f" font-family="IBM Plex Sans,sans-serif" font-size="10" text-anchor="middle">sent through the same client number</text>
 
 
                 </svg>
@@ -1531,6 +1572,13 @@
         };
         navToggle?.addEventListener('click', () => {
             setNavOpen(!mainNav.classList.contains('open'));
+        });
+        // Escape closes mobile nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mainNav?.classList.contains('open')) {
+                setNavOpen(false);
+                navToggle?.focus();
+            }
         });
 
         // Smooth scroll + auto-close mobile nav on in-page navigation.

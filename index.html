@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Daniel Manzela — Founding AI Product Builder</title>
   <meta name="description" content="Founding AI Product Builder. Co-founder, CEO and CPO at TNG Shopper — building production multi-agent systems. Open-source author of Antigravity-OS (PyPI: ag-os — orchestration infra that lets a small team ship more product per engineer, safely), agent-dag-pipeline, gemma4-vllm-deployment.">
-  <meta name="theme-color" content="#0066CC">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#b8512a">
+  <meta name="color-scheme" content="light">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
   <link rel="canonical" href="https://manzela.github.io/Manzela/">
   <link rel="me" href="https://linkedin.com/in/manzela">
@@ -49,7 +49,7 @@
       "url": "https://manzela.github.io/Manzela/",
       "name": "Daniel Manzela — Founding AI Product Builder",
       "isPartOf": { "@id": "https://manzela.github.io/#website" },
-      "dateModified": "2026-05-14",
+      "dateModified": "2026-05-19",
       "mainEntity": {
         "@type": "Person",
         "@id": "https://manzela.github.io/Manzela/#person",
@@ -112,36 +112,43 @@
 }
   </script>
 
-  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23000'/><text x='32' y='44' font-family='-apple-system,BlinkMacSystemFont,Helvetica,sans-serif' font-weight='700' font-size='30' fill='%232997ff' text-anchor='middle'>DM</text></svg>" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23f5f0e8'/><text x='32' y='44' font-family='Georgia,serif' font-style='italic' font-weight='600' font-size='30' fill='%23b8512a' text-anchor='middle'>DM</text></svg>" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --appleDark:         #000000;
-      --appleDarker:       #0a0a0c;
-      --appleSurface:      #131316;
-      --appleSurfaceElev:  #1d1d1f;
-      --appleBorder:       rgba(255, 255, 255, 0.08);
-      --appleBorderSoft:   rgba(255, 255, 255, 0.04);
-      --appleBorderHover:  rgba(255, 255, 255, 0.18);
-      --appleLight:        #f5f5f7;
-      --appleGray:         #86868b;
-      --appleGrayDim:      rgba(134, 134, 139, 0.55);
-      --appleBlue:         #2997ff;
-      --appleBlueDim:      rgba(41, 151, 255, 0.32);
-      --appleBlueGlow:     rgba(41, 151, 255, 0.18);
-      --appleSelection:    rgba(41, 151, 255, 0.3);
+      /* Paper surfaces (warm light theme) */
+      --paper:           #f5f0e8;
+      --paper-elev:      #ebe4d4;
+      --paper-deep:      #e3dac4;
+      --paper-edge:      #ddd2bd;
+      --paper-edge-soft: #e8e0cd;
 
-      --statusGreen:       #34d399;
-      --statusRed:         #f87171;
-      --statusAmber:       #fbbf24;
+      /* Ink */
+      --ink:             #0a0a0a;
+      --ink-dim:         #2a2a2a;
+      --ink-faint:       #4a4a4a;
+      --ink-quiet:       #6b6b6b;
+      --ink-mute:        #8a8378;
 
-      --fontUI:   -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-                  "Helvetica Neue", Helvetica, "Segoe UI", system-ui, sans-serif;
-      --fontMono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      /* Single accent — terracotta */
+      --accent:          #b8512a;
+      --accent-bright:   #d96730;
+      --accent-glow:     rgba(184, 81, 42, 0.18);
+      --accent-dim:      rgba(184, 81, 42, 0.32);
+      --accent-faint:    rgba(184, 81, 42, 0.06);
+      --accent-selection: rgba(184, 81, 42, 0.22);
+
+      /* Status — only on current active */
+      --status-active:   #b8512a;
+
+      /* Typography */
+      --fontDisplay: "Fraunces", Georgia, "Times New Roman", serif;
+      --fontUI:      "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --fontMono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
       --type-display:  clamp(2.75rem, 7vw, 5.5rem);
       --type-h2:       clamp(1.85rem, 4vw, 2.85rem);
@@ -150,17 +157,17 @@
       --type-eyebrow:  0.7rem;
       --type-meta:     0.85rem;
 
-      --tracking-display: -0.025em;
-      --tracking-eyebrow: 0.14em;
-      --leading-display:  0.95;
-      --leading-body:     1.55;
+      --tracking-display: -0.03em;
+      --tracking-eyebrow: 0.16em;
+      --leading-display:  0.96;
+      --leading-body:     1.6;
 
       --nav-height:               54px;
       --nav-stuck-offset:         calc(var(--nav-height) + 24px);
       --section-gap:              clamp(4.5rem, 9vw, 9rem);
       --content-max:              74rem;
       --spine-rail-width:         clamp(4rem, 8vw, 9rem);
-      --radius-card:              18px;
+      --radius-card:              4px;
       --radius-pill:              999px;
 
       --ease-decel: cubic-bezier(0.16, 1, 0.3, 1);
@@ -177,15 +184,15 @@
     *, *::before, *::after { box-sizing: border-box; }
 
     html {
-      background: var(--appleDark);
+      background: var(--paper);
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
     }
 
     body {
       margin: 0;
-      background: var(--appleDark);
-      color: var(--appleLight);
+      background: var(--paper);
+      color: var(--ink);
       font-family: var(--fontUI);
       font-size: var(--type-body);
       line-height: var(--leading-body);
@@ -195,36 +202,36 @@
       overflow-x: hidden;
     }
 
+    /* Subtle paper grain — minimal atmosphere */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 1;
-      background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 3px 3px;
-      mix-blend-mode: overlay;
-      opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.7;
+      mix-blend-mode: multiply;
     }
 
-    ::selection { background: var(--appleSelection); color: var(--appleLight); }
+    ::selection { background: var(--accent-selection); color: var(--ink); }
 
     a {
       color: inherit;
       text-decoration: none;
-      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      background-image: linear-gradient(var(--accent), var(--accent));
       background-size: 0% 1px;
       background-position: 0 100%;
       background-repeat: no-repeat;
       transition: background-size var(--dur-micro) var(--ease-snap),
                   color var(--dur-micro) var(--ease-snap);
     }
-    a:hover { background-size: 100% 1px; }
-    a.subtle { color: var(--appleGray); }
-    a.subtle:hover { color: var(--appleLight); }
+    a:hover { background-size: 100% 1px; color: var(--ink); }
+    a.subtle { color: var(--ink-faint); }
+    a.subtle:hover { color: var(--ink); }
 
     :focus-visible {
-      outline: 2px solid var(--appleBlue);
+      outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
     }
@@ -234,8 +241,8 @@
       position: absolute;
       top: -100px;
       left: 1rem;
-      background: var(--appleBlue);
-      color: var(--appleDark);
+      background: var(--accent);
+      color: var(--paper);
       padding: 0.75rem 1rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
@@ -248,64 +255,98 @@
     .skip-link:focus { top: 0.5rem; }
 
     .mono { font-family: var(--fontMono); font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1; }
+    .serif { font-family: var(--fontDisplay); }
+    .italic { font-style: italic; }
+
     .eyebrow {
       font-family: var(--fontMono);
       font-size: var(--type-eyebrow);
       letter-spacing: var(--tracking-eyebrow);
       text-transform: uppercase;
-      color: var(--appleGray);
+      color: var(--ink-quiet);
       margin: 0 0 1.25rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.7rem;
+      font-weight: 500;
     }
     .eyebrow::before {
-      content: "";
-      width: 2rem;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.45;
+      content: "—";
+      color: var(--ink-mute);
+      font-weight: 500;
+    }
+    .eyebrow .sep {
+      width: 3px;
+      height: 3px;
+      background: var(--ink-mute);
+      border-radius: 50%;
       flex-shrink: 0;
     }
+
+    /* Magazine masthead — VOL/ISSUE editorial signature */
+    .masthead {
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 0.85rem 0;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--paper-edge);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.4rem;
+      align-items: baseline;
+      font-weight: 500;
+      margin-bottom: 4rem;
+    }
+    .masthead strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .masthead .accent { color: var(--accent); }
+
     h1, h2, h3, h4 { margin: 0; }
     h2 {
-      font-family: var(--fontUI);
+      font-family: var(--fontDisplay);
       font-size: var(--type-h2);
       line-height: 1.05;
       letter-spacing: var(--tracking-display);
-      font-weight: 600;
-      color: var(--appleLight);
+      font-weight: 500;
+      color: var(--ink);
     }
     h3 {
       font-family: var(--fontUI);
       font-size: var(--type-h3);
-      line-height: 1.2;
+      line-height: 1.25;
       letter-spacing: -0.015em;
       font-weight: 600;
-      color: var(--appleLight);
+      color: var(--ink);
     }
     p { margin: 0 0 1rem; max-width: 56rem; }
     ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; }
     blockquote { margin: 0; padding: 0; }
+
     hr.section-divider {
       border: 0;
       height: 1px;
       max-width: var(--content-max);
       margin: 0 auto;
-      background: linear-gradient(to right, transparent, var(--appleBorder), transparent);
+      background: var(--paper-edge);
     }
 
-    .glass-nav {
+    /* Nav — solid paper, no glass (light theme doesn't need glass) */
+    .paper-nav {
       position: fixed;
       inset: 0 0 auto 0;
       height: var(--nav-height);
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid var(--appleBorder);
+      background: rgba(245, 240, 232, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--paper-edge);
       z-index: 100;
     }
-    .glass-nav-inner {
+    .paper-nav-inner {
       max-width: var(--content-max);
       height: 100%;
       margin: 0 auto;
@@ -318,12 +359,13 @@
     .nav-brand {
       display: inline-flex;
       align-items: center;
-      font-family: var(--fontUI);
-      font-size: 0.95rem;
-      letter-spacing: -0.01em;
-      color: var(--appleLight);
+      font-family: var(--fontDisplay);
+      font-size: 1.1rem;
+      letter-spacing: -0.015em;
+      color: var(--ink);
       background-image: none;
       font-weight: 600;
+      font-style: italic;
     }
     .nav-list {
       display: flex;
@@ -337,34 +379,36 @@
       font-size: var(--type-eyebrow);
       letter-spacing: var(--tracking-eyebrow);
       text-transform: uppercase;
-      color: var(--appleGray);
-      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      color: var(--ink-faint);
+      background-image: linear-gradient(var(--accent), var(--accent));
       background-size: 0% 1px;
       padding: 0.25rem 0;
+      font-weight: 500;
     }
     .nav-list a:hover, .nav-list a[aria-current="page"] {
-      color: var(--appleLight);
+      color: var(--ink);
       background-size: 100% 1px;
     }
     .nav-toggle {
       display: none;
       background: transparent;
-      border: 1px solid var(--appleBorder);
+      border: 1px solid var(--ink);
       width: 36px;
       height: 36px;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
       padding: 0;
       align-items: center;
       justify-content: center;
-      transition: border-color var(--dur-micro) var(--ease-snap);
+      transition: border-color var(--dur-micro) var(--ease-snap),
+                  background var(--dur-micro) var(--ease-snap);
     }
-    .nav-toggle:hover { border-color: var(--appleBorderHover); }
+    .nav-toggle:hover { background: var(--accent-faint); }
     .nav-toggle-bar {
       display: block;
       width: 16px;
       height: 1.5px;
-      background: var(--appleLight);
+      background: var(--ink);
       position: relative;
     }
     .nav-toggle-bar::before, .nav-toggle-bar::after {
@@ -373,7 +417,7 @@
       left: 0;
       width: 16px;
       height: 1.5px;
-      background: var(--appleLight);
+      background: var(--ink);
       transition: transform var(--dur-micro) var(--ease-snap);
     }
     .nav-toggle-bar::before { top: -5px; }
@@ -405,23 +449,52 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .hero { padding-top: 1rem; padding-bottom: var(--section-gap); }
+    .hero { padding-top: 1rem; padding-bottom: var(--section-gap); position: relative; isolation: isolate; }
+
+    /* Gwern-style hand-drawn monogram — substitutes for portrait, signals craft */
+    .hero-monogram {
+      position: absolute;
+      top: -1.5rem;
+      right: 0;
+      z-index: -1;
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(10rem, 22vw, 18rem);
+      line-height: 0.88;
+      color: var(--accent);
+      opacity: 0.12;
+      user-select: none;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+    }
+    @media (max-width: 720px) {
+      .hero-monogram { top: -0.5rem; right: -0.5rem; font-size: clamp(8rem, 38vw, 14rem); }
+    }
+
     .hero-h1 {
-      font-family: var(--fontUI);
+      font-family: var(--fontDisplay);
       font-size: var(--type-display);
       line-height: var(--leading-display);
       letter-spacing: var(--tracking-display);
-      font-weight: 600;
-      color: var(--appleLight);
+      font-weight: 500;
+      color: var(--ink);
       margin: 0 0 1.75rem;
       max-width: 22ch;
     }
     .hero-sub {
       font-size: var(--type-h3);
-      line-height: 1.4;
-      color: var(--appleGray);
+      line-height: 1.45;
+      color: var(--ink-faint);
       max-width: 50rem;
       margin: 0 0 2.5rem;
+      font-weight: 300;
+    }
+    .hero-italic-deck {
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-quiet);
     }
     .hero-meta {
       display: flex;
@@ -430,20 +503,46 @@
       gap: 0.5rem 1.4rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       margin: 0 0 1rem;
+      font-weight: 400;
     }
     .hero-meta strong {
-      color: var(--appleLight);
+      color: var(--ink);
       font-weight: 500;
     }
     .hero-meta-sep {
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: currentColor;
-      opacity: 0.4;
+      background: var(--ink-mute);
+      opacity: 0.6;
     }
+    /* Single press pull-quote — third-party validation as the closing hero beat */
+    .press-pull {
+      margin: 2rem 0 0;
+      padding: 1rem 0 0 1.25rem;
+      border-left: 2px solid var(--accent);
+      max-width: 32rem;
+    }
+    .press-pull-quote {
+      margin: 0;
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 500;
+      font-size: var(--type-h3);
+      line-height: 1.35;
+      color: var(--ink);
+      letter-spacing: -0.012em;
+    }
+    .press-pull-source {
+      margin-top: 0.45rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+
     .hero-live {
       display: flex;
       flex-wrap: wrap;
@@ -451,30 +550,30 @@
       gap: 0.6rem 1.5rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       padding-top: 1.25rem;
       margin-top: 1.5rem;
-      border-top: 1px solid var(--appleBorder);
+      border-top: 1px solid var(--paper-edge);
     }
     .hero-live a {
-      color: var(--appleBlue);
-      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      color: var(--ink);
+      background-image: linear-gradient(var(--accent), var(--accent));
     }
-    .hero-live a:hover { color: var(--appleBlue); }
-    .hero-live time { color: var(--appleLight); }
+    .hero-live a:hover { color: var(--accent); }
+    .hero-live time { color: var(--ink); }
 
     .status-dot {
       display: inline-block;
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--statusGreen);
+      background: var(--status-active);
       flex-shrink: 0;
       animation: status-pulse var(--dur-pulse) var(--ease-pulse) infinite;
     }
     @keyframes status-pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
-      50%      { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+      50%      { box-shadow: 0 0 0 8px transparent; }
     }
 
     .now-metric {
@@ -486,18 +585,27 @@
     }
     .now-metric-value {
       display: block;
-      font-family: var(--fontMono);
-      font-weight: 700;
+      font-family: var(--fontDisplay);
+      font-weight: 600;
       font-size: clamp(3.5rem, 11vw, 7.5rem);
       line-height: 1;
       letter-spacing: -0.045em;
       font-feature-settings: "tnum" 1, "lnum" 1;
-      color: var(--appleLight);
+      color: var(--ink);
     }
     .now-metric-label {
-      font-family: var(--fontUI);
+      font-family: var(--fontDisplay);
+      font-style: italic;
       font-size: var(--type-h3);
-      color: var(--appleGray);
+      color: var(--ink-quiet);
+      font-weight: 400;
+    }
+    .now-metric-context {
+      margin: 0.75rem 0 0;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
     }
     .now-satellites {
       list-style: none;
@@ -508,16 +616,16 @@
       gap: 0.4rem 1.6rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleLight);
+      color: var(--ink);
     }
     .now-satellites li::before {
       content: "—";
-      color: var(--appleGray);
+      color: var(--ink-mute);
       margin-right: 0.5rem;
     }
     .now-prose {
       max-width: 56rem;
-      color: var(--appleLight);
+      color: var(--ink);
       margin-bottom: 2rem;
     }
     .now-handoffs {
@@ -525,21 +633,24 @@
       flex-wrap: wrap;
       gap: 1rem 2rem;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--appleBorder);
+      border-top: 1px solid var(--paper-edge);
     }
     .now-handoffs a {
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
     }
-    .now-handoffs a:hover { color: var(--appleLight); }
+    .now-handoffs a:hover { color: var(--ink); }
 
     .arc-lede {
       max-width: 50rem;
-      color: var(--appleGray);
+      color: var(--ink-faint);
       margin-bottom: 3.5rem;
       font-size: var(--type-h3);
       line-height: 1.4;
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 400;
     }
     .spine {
       list-style: none;
@@ -550,21 +661,7 @@
       gap: 0;
       position: relative;
     }
-    .spine::before {
-      content: "";
-      position: absolute;
-      top: 1.5rem;
-      bottom: 1.5rem;
-      left: calc(var(--spine-rail-width) - 1px);
-      width: 1px;
-      background: linear-gradient(
-        to bottom,
-        transparent 0,
-        var(--appleBorder) 4rem,
-        var(--appleBorder) calc(100% - 4rem),
-        transparent 100%
-      );
-    }
+    .spine::before { content: none; }
     .spine-item { display: contents; }
     .spine-rail {
       position: relative;
@@ -573,66 +670,85 @@
     }
     .spine-year {
       display: inline-block;
-      font-family: var(--fontMono);
-      font-weight: 700;
-      font-size: clamp(1.65rem, 4.5vw, 3.25rem);
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.1rem, 2vw, 1.55rem);
       line-height: 1;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.015em;
       font-feature-settings: "tnum" 1, "lnum" 1;
-      color: var(--appleGray);
-      position: sticky;
-      top: var(--nav-stuck-offset);
+      color: var(--ink-quiet);
       transition: color var(--dur-micro) var(--ease-snap);
     }
-    .spine-item[data-current="true"] .spine-year { color: var(--appleLight); }
+    .spine-article-num {
+      display: block;
+      font-family: var(--fontMono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.45rem;
+    }
+    .spine-item[data-current="true"] .spine-year { color: var(--ink); }
+    .spine-item[data-current="true"] .spine-article-num { color: var(--accent); }
     .spine-dot {
-      position: absolute;
-      right: -7px;
-      top: calc(3rem + 0.45em);
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: var(--appleSurface);
-      border: 1px solid var(--appleBorderHover);
-      box-shadow: 0 0 0 4px var(--appleDark);
+      display: none;
     }
     .spine-item[data-current="true"] .spine-dot {
-      background: var(--appleBlue);
-      border-color: var(--appleBlue);
+      display: inline-block;
+      position: relative;
+      right: auto;
+      top: auto;
+      margin-left: 0.5rem;
+      vertical-align: 0.05em;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 1px solid var(--ink-mute);
+      box-shadow: 0 0 0 3px var(--paper);
+    }
+    .spine-item[data-current="true"] .spine-dot {
+      background: var(--accent);
+      border-color: var(--accent);
       animation: spine-pulse var(--dur-pulse) var(--ease-pulse) infinite;
     }
     @keyframes spine-pulse {
-      0%, 100% { box-shadow: 0 0 0 4px var(--appleDark), 0 0 0 6px var(--appleBlueGlow); }
-      50%      { box-shadow: 0 0 0 4px var(--appleDark), 0 0 0 14px transparent; }
+      0%, 100% { box-shadow: 0 0 0 4px var(--paper), 0 0 0 6px var(--accent-glow); }
+      50%      { box-shadow: 0 0 0 4px var(--paper), 0 0 0 14px transparent; }
     }
     .spine-card {
-      background: var(--appleSurface);
-      border: 1px solid var(--appleBorder);
+      background: var(--paper-elev);
+      border: 1px solid var(--paper-edge);
       border-radius: var(--radius-card);
       padding: clamp(1.5rem, 3vw, 2.5rem);
       margin: 1.5rem 0 2rem 1.75rem;
-      transition: border-color var(--dur-micro) var(--ease-snap),
-                  transform var(--dur-micro) var(--ease-snap);
+      transition: border-color var(--dur-micro) var(--ease-snap);
     }
-    .spine-card:hover { border-color: var(--appleBorderHover); }
+    .spine-card:hover { border-color: var(--ink-mute); }
     .spine-item[data-current="true"] .spine-card {
-      box-shadow: inset 0 0 0 1px var(--appleBlueDim);
+      box-shadow: inset 0 0 0 1px var(--accent-dim);
       background: linear-gradient(
         to bottom right,
-        rgba(41, 151, 255, 0.025),
-        var(--appleSurface) 60%
+        var(--accent-faint),
+        var(--paper-elev) 60%
       );
     }
     .spine-card-header { margin-bottom: 1.25rem; }
     .spine-card-title {
+      font-family: var(--fontDisplay);
+      font-weight: 600;
       font-size: var(--type-h3);
       margin-bottom: 0.4rem;
+      letter-spacing: -0.015em;
     }
     .spine-card-subtitle {
-      font-family: var(--fontUI);
+      font-family: var(--fontDisplay);
+      font-style: italic;
       font-size: var(--type-body);
       line-height: 1.5;
-      color: var(--appleLight);
+      color: var(--ink-dim);
       margin: 0.5rem 0 0.85rem;
       max-width: 50rem;
       font-weight: 400;
@@ -640,21 +756,23 @@
     .spine-card-meta {
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem 0.7rem;
     }
-    .spine-card-meta time { color: var(--appleLight); }
+    .spine-card-meta time { color: var(--ink); font-weight: 500; }
     .spine-card-quote {
       margin: 1.25rem 0 1.5rem;
       padding-left: 1rem;
-      border-left: 2px solid var(--appleBlue);
+      border-left: 2px solid var(--ink-mute);
+      font-family: var(--fontDisplay);
+      font-style: italic;
       font-size: clamp(1.1rem, 1.7vw, 1.35rem);
       line-height: 1.4;
       font-weight: 500;
-      letter-spacing: -0.012em;
-      color: var(--appleLight);
+      letter-spacing: -0.01em;
+      color: var(--ink);
     }
     .spine-card-numerics {
       list-style: none;
@@ -665,7 +783,7 @@
       gap: 0.5rem 1.5rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleLight);
+      color: var(--ink);
     }
     .spine-card-numerics li {
       position: relative;
@@ -678,12 +796,12 @@
       top: 0.55em;
       width: 4px;
       height: 4px;
-      background: var(--appleGray);
+      background: var(--ink-mute);
       border-radius: 50%;
     }
     .spine-card-lesson, .spine-card-bridge {
       margin: 0.75rem 0;
-      color: var(--appleLight);
+      color: var(--ink);
       max-width: 56rem;
     }
     .spine-card-lesson .label, .spine-card-bridge .label {
@@ -692,8 +810,8 @@
       font-size: var(--type-eyebrow);
       letter-spacing: var(--tracking-eyebrow);
       text-transform: uppercase;
-      color: var(--appleGray);
-      font-weight: 500;
+      color: var(--ink-quiet);
+      font-weight: 600;
       margin-right: 0.6rem;
       vertical-align: 0.05em;
     }
@@ -704,11 +822,116 @@
       margin-top: 1.25rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleBlue);
-      background-image: linear-gradient(var(--appleBlue), var(--appleBlue));
+      color: var(--ink-faint);
+      background-image: linear-gradient(var(--accent), var(--accent));
       background-size: 0% 1px;
+      font-weight: 500;
     }
-    .spine-card-cta:hover { background-size: 100% 1px; color: var(--appleBlue); }
+    .spine-card-cta:hover { background-size: 100% 1px; color: var(--accent); }
+
+    /* ============ CHAPTERS — Built section (story-flow refactor) ============ */
+    .chapters {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 50rem;
+      counter-reset: chapter;
+    }
+    .chapter {
+      padding: 2.5rem 0 2.75rem;
+      border-top: 1px solid var(--paper-edge);
+      position: relative;
+      counter-increment: chapter;
+    }
+    .chapter:first-child { border-top: 1px solid var(--ink); }
+    .chapter:last-child { border-bottom: 1px solid var(--paper-edge); }
+    .chapter-head {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      align-items: baseline;
+      gap: 0.4rem 1.25rem;
+      margin-bottom: 1.4rem;
+    }
+    .chapter-num {
+      font-family: var(--fontMono);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--ink-mute);
+      font-feature-settings: "tnum" 1, "lnum" 1;
+      transition: color var(--dur-micro) var(--ease-snap);
+    }
+    .chapter:hover .chapter-num { color: var(--ink); }
+    .chapter-title-block { display: flex; flex-direction: column; gap: 0.35rem; }
+    .chapter-name {
+      font-family: var(--fontDisplay);
+      font-weight: 600;
+      font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .chapter-status {
+      margin: 0;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .chapter[data-current="true"] .status-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 var(--accent-glow);
+      animation: status-pulse var(--dur-pulse) var(--ease-pulse) infinite;
+    }
+    .chapter:not([data-current="true"]) .status-pulse { display: none; }
+    .chapter-body {
+      font-family: var(--fontDisplay);
+      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+      line-height: 1.55;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 1.4rem;
+      max-width: 44rem;
+      padding-left: 4.25rem;
+    }
+    .chapter-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink-faint);
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      letter-spacing: 0.04em;
+      margin-left: 4.25rem;
+      padding-bottom: 1px;
+      transition: color var(--dur-micro) var(--ease-snap),
+                  background-size var(--dur-micro) var(--ease-snap),
+                  transform var(--dur-micro) var(--ease-snap);
+    }
+    .chapter-cta:hover {
+      color: var(--accent);
+      background-size: 100% 1px;
+    }
+    .chapter-cta span { transition: transform var(--dur-micro) var(--ease-snap); }
+    .chapter-cta:hover span { transform: translateX(3px); }
+    @media (max-width: 720px) {
+      .chapter-head { grid-template-columns: 2.4rem 1fr; gap: 0.4rem 1rem; }
+      .chapter-body, .chapter-cta { padding-left: 0; margin-left: 0; }
+    }
 
     .proved-list {
       list-style: none;
@@ -719,10 +942,10 @@
     .proved-list > li {
       counter-increment: proved;
       padding: 1.75rem 0 1.75rem 4rem;
-      border-top: 1px solid var(--appleBorder);
+      border-top: 1px solid var(--paper-edge);
       position: relative;
     }
-    .proved-list > li:last-child { border-bottom: 1px solid var(--appleBorder); }
+    .proved-list > li:last-child { border-bottom: 1px solid var(--paper-edge); }
     .proved-list > li::before {
       content: counter(proved, decimal-leading-zero);
       position: absolute;
@@ -731,15 +954,22 @@
       font-family: var(--fontMono);
       font-size: var(--type-meta);
       letter-spacing: var(--tracking-eyebrow);
-      color: var(--appleGray);
+      color: var(--accent);
+      font-weight: 600;
       font-feature-settings: "tnum" 1, "lnum" 1;
     }
-    .proved-list h3 { margin-bottom: 0.4rem; font-size: 1.25rem; }
-    .proved-list p { margin: 0 0 0.4rem; }
+    .proved-list h3 {
+      font-family: var(--fontDisplay);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      font-size: 1.35rem;
+      letter-spacing: -0.012em;
+    }
+    .proved-list p { margin: 0 0 0.4rem; color: var(--ink); }
     .proved-source {
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       margin-top: 0.3rem !important;
     }
 
@@ -756,11 +986,12 @@
       font-size: var(--type-eyebrow);
       letter-spacing: var(--tracking-eyebrow);
       text-transform: uppercase;
-      color: var(--appleGray);
+      color: var(--ink-quiet);
+      font-weight: 600;
     }
     .stack-list dd {
       margin: 0;
-      color: var(--appleLight);
+      color: var(--ink);
       line-height: 1.55;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
@@ -769,15 +1000,16 @@
     .social-proof {
       margin-top: 2.5rem;
       padding: 1.75rem 0 0;
-      border-top: 1px solid var(--appleBorder);
+      border-top: 1px solid var(--paper-edge);
     }
     .social-proof-eyebrow {
       font-family: var(--fontMono);
       font-size: var(--type-eyebrow);
       letter-spacing: var(--tracking-eyebrow);
       text-transform: uppercase;
-      color: var(--appleGray);
+      color: var(--ink-quiet);
       margin: 0 0 1.5rem;
+      font-weight: 500;
     }
     .social-proof-grid {
       display: grid;
@@ -793,31 +1025,104 @@
       align-items: flex-start;
       gap: 0.6rem;
       padding: 1rem;
-      border: 1px solid var(--appleBorderSoft);
-      border-radius: 12px;
-      background: var(--appleSurface);
+      border: 1px solid var(--paper-edge);
+      border-radius: var(--radius-card);
+      background: var(--paper-elev);
       transition: border-color var(--dur-micro) var(--ease-snap);
       min-height: 100%;
     }
-    .social-proof-item:hover { border-color: var(--appleBorderHover); }
+    .social-proof-item:hover { border-color: var(--ink-mute); }
     .social-proof-item img {
       max-height: 56px;
       width: auto;
       max-width: 100%;
       object-fit: contain;
       filter: saturate(0.95);
+      mix-blend-mode: multiply;
     }
     .social-proof-item .sp-label {
       font-family: var(--fontMono);
       font-size: 0.7rem;
       letter-spacing: 0.05em;
-      color: var(--appleLight);
+      color: var(--ink);
       line-height: 1.35;
+      font-weight: 500;
     }
     .social-proof-item .sp-source {
       font-family: var(--fontMono);
       font-size: 0.65rem;
-      color: var(--appleGray);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+    .social-proof-item .sp-status {
+      font-family: var(--fontMono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.18rem 0.45rem;
+      border-radius: 2px;
+      margin-top: 0.3rem;
+      align-self: flex-start;
+    }
+    .social-proof-item .sp-status-active {
+      color: var(--accent);
+      background: var(--accent-faint);
+    }
+    .social-proof-item .sp-status-pending {
+      color: var(--ink);
+      background: var(--paper-deep);
+    }
+    .social-proof-item .sp-status-expired {
+      color: var(--ink-quiet);
+      background: var(--paper-edge-soft);
+      text-decoration: line-through;
+    }
+
+    /* Speaking / guest-lecture card */
+    .speaking-block {
+      margin-top: 2.25rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--paper-edge);
+    }
+    .speaking-block .social-proof-eyebrow { margin-bottom: 1rem; }
+    .speaking-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--paper-elev);
+      border: 1px solid var(--paper-edge);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-card);
+      max-width: 36rem;
+      background-image: none;
+      transition: border-color var(--dur-micro) var(--ease-snap),
+                  transform var(--dur-micro) var(--ease-snap);
+    }
+    .speaking-card:hover {
+      border-color: var(--ink-mute);
+      border-left-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .speaking-card-title {
+      font-family: var(--fontDisplay);
+      font-weight: 600;
+      font-size: var(--type-h3);
+      color: var(--ink);
+      letter-spacing: -0.012em;
+    }
+    .speaking-card-meta {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+    .speaking-card-cta {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink);
+      margin-top: 0.35rem;
       letter-spacing: 0.04em;
     }
     .social-proof-links {
@@ -826,12 +1131,12 @@
       gap: 0.5rem 1.75rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       margin: 0;
       padding: 0;
       list-style: none;
     }
-    .social-proof-links a { color: var(--appleLight); }
+    .social-proof-links a { color: var(--ink); }
 
     .parallel-list {
       list-style: none;
@@ -841,73 +1146,184 @@
       gap: 1rem;
     }
     .parallel-list > li {
-      background: var(--appleSurface);
-      border: 1px solid var(--appleBorder);
+      background: var(--paper-elev);
+      border: 1px solid var(--paper-edge);
       border-radius: var(--radius-card);
       padding: 1.5rem 1.75rem;
       transition: border-color var(--dur-micro) var(--ease-snap);
     }
-    .parallel-list > li:hover { border-color: var(--appleBorderHover); }
+    .parallel-list > li:hover { border-color: var(--ink-mute); }
     .parallel-list h3 {
       margin: 0 0 0.5rem;
+      font-family: var(--fontDisplay);
+      font-weight: 600;
       font-size: var(--type-h3);
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
       gap: 0.6rem;
+      letter-spacing: -0.015em;
     }
     .parallel-list h3 .badge {
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
-      font-weight: 400;
+      color: var(--ink-quiet);
+      font-weight: 500;
       letter-spacing: 0;
       text-transform: none;
     }
-    .parallel-list p { margin: 0; color: var(--appleGray); max-width: 60rem; }
+    .parallel-list p { margin: 0; color: var(--ink-faint); max-width: 60rem; }
 
+    .code-subhead {
+      margin: 2.5rem 0 1rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--ink-quiet);
+      font-weight: 600;
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+    }
+    .code-subhead-note {
+      color: var(--ink-mute);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      font-style: italic;
+    }
+    .contributions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0;
+    }
+    .contributions-list > li {
+      border-bottom: 1px solid var(--paper-edge-soft);
+    }
+    .contributions-list > li:first-child { border-top: 1px solid var(--paper-edge); }
+    .contributions-list > li:last-child { border-bottom: 1px solid var(--paper-edge); }
+    .contributions-list > li > a {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.4rem 1.5rem;
+      padding: 0.95rem 0;
+      background-image: none;
+      transition: padding var(--dur-micro) var(--ease-snap),
+                  background var(--dur-micro) var(--ease-snap);
+    }
+    .contributions-list > li > a:hover {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      background: var(--accent-faint);
+    }
+    .contrib-repo {
+      font-family: var(--fontDisplay);
+      font-weight: 500;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .contrib-ref {
+      font-family: var(--fontMono);
+      font-size: var(--type-meta);
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+    .contrib-and-more {
+      padding: 0.95rem 0;
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-faint);
+    }
+    .contrib-and-more a { color: var(--ink); font-style: italic; }
+
+    .writing-earlier-label {
+      margin: 2.25rem 0 0.75rem;
+      font-family: var(--fontMono);
+      font-size: var(--type-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--ink-quiet);
+      font-weight: 500;
+    }
     .writing-list { list-style: none; padding: 0; margin: 0; }
     .writing-list li {
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--appleBorderSoft);
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--paper-edge-soft);
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
       justify-content: space-between;
       gap: 0.5rem 1.5rem;
     }
-    .writing-list li:last-child { border-bottom: 1px solid var(--appleBorder); }
-    .writing-list li:first-child { border-top: 1px solid var(--appleBorder); }
-    .writing-list .w-title { color: var(--appleLight); font-size: var(--type-body); }
+    .writing-list li:last-child { border-bottom: 1px solid var(--paper-edge); }
+    .writing-list li:first-child { border-top: 1px solid var(--paper-edge); }
+    .writing-list .w-title {
+      color: var(--ink);
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
     .writing-list .w-meta {
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       letter-spacing: 0.04em;
     }
 
+    .contact-warmth {
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--type-h3);
+      line-height: 1.45;
+      color: var(--ink-dim);
+      max-width: 44rem;
+    }
     .contact-line {
+      font-family: var(--fontDisplay);
       font-size: clamp(1.05rem, 1.4vw, 1.25rem);
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem 1.25rem;
       align-items: baseline;
+      font-style: italic;
+      font-weight: 400;
     }
-    .contact-line a { color: var(--appleLight); }
-    .contact-sep { color: var(--appleGray); }
+    .contact-line a { color: var(--ink); font-style: italic; }
+    .contact-sep { color: var(--ink-mute); }
 
     .site-footer {
-      border-top: 1px solid var(--appleBorder);
+      border-top: 1px solid var(--ink);
       padding: 2.5rem 1.5rem;
       font-family: var(--fontMono);
       font-size: var(--type-meta);
-      color: var(--appleGray);
+      color: var(--ink-faint);
       text-align: center;
       letter-spacing: 0.04em;
       position: relative;
       z-index: 2;
+      background: var(--paper);
     }
     .site-footer p { margin: 0; max-width: none; }
+    .site-footer .footer-flourish {
+      font-family: var(--fontDisplay);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.06em;
+      margin: 0 0 0.65rem;
+      text-transform: none;
+    }
 
     @media (max-width: 880px) {
       .nav-list {
@@ -918,16 +1334,16 @@
         width: 100vw;
         height: calc(100vh - var(--nav-height));
         height: calc(100dvh - var(--nav-height));
-        background: var(--appleDark);
-        backdrop-filter: saturate(180%) blur(28px);
-        -webkit-backdrop-filter: saturate(180%) blur(28px);
+        background: var(--paper);
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
         flex-direction: column;
         align-items: flex-start;
         gap: 0;
         padding: 1.5rem;
         transform: translateX(100%);
         transition: transform var(--dur-micro) var(--ease-snap);
-        border-left: 1px solid var(--appleBorder);
+        border-left: 1px solid var(--paper-edge);
         z-index: 99;
         overflow-y: auto;
       }
@@ -937,11 +1353,12 @@
         padding: 1rem 0;
         font-size: 0.85rem;
         width: 100%;
-        border-bottom: 1px solid var(--appleBorderSoft);
+        border-bottom: 1px solid var(--paper-edge-soft);
       }
       .nav-toggle { display: inline-flex; }
       .stack-list { grid-template-columns: 1fr; gap: 0.4rem 0; }
       .stack-list dt { margin-top: 1.25rem; }
+      .masthead { font-size: 0.6rem; gap: 0.3rem 1rem; }
     }
 
     @media (max-width: 720px) {
@@ -956,7 +1373,7 @@
       .spine-dot {
         right: auto;
         left: -0.8rem;
-        top: 0.65rem;
+        top: 1.5rem;
       }
       .spine-card { margin: 0.5rem 0 2.5rem 1.6rem; padding: 1.25rem; }
       .proved-list > li { padding-left: 3rem; }
@@ -973,12 +1390,12 @@
       .reveal { opacity: 1; transform: none; }
       .spine-year { position: static; }
       .spine-item[data-current="true"] .spine-dot {
-        box-shadow: 0 0 0 4px var(--appleDark), 0 0 0 7px var(--appleBlueGlow);
+        box-shadow: 0 0 0 4px var(--paper), 0 0 0 7px var(--accent-glow);
         animation: none;
       }
       .status-dot {
         animation: none;
-        box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.2);
+        box-shadow: 0 0 0 4px var(--accent-glow);
       }
     }
   </style>
@@ -996,17 +1413,18 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav class="glass-nav" aria-label="Primary">
-    <div class="glass-nav-inner">
+  <nav class="paper-nav" aria-label="Primary">
+    <div class="paper-nav-inner">
       <a href="#hero" class="nav-brand">Daniel Manzela</a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList" aria-label="Open menu">
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
       <ul class="nav-list" id="navList">
         <li><a href="#now">In production</a></li>
-        <li><a href="#arc">The arc</a></li>
-        <li><a href="#proved">What it proved</a></li>
-        <li><a href="#stack">Stack &amp; credentials</a></li>
+        <li><a href="#arc">Built</a></li>
+        <li><a href="#proved">Per project</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#parallel">Code</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -1015,21 +1433,22 @@
   <main id="main" tabindex="-1">
 
     <header id="hero" class="section hero">
-      <p class="eyebrow reveal" style="transition-delay: 0ms;">Builder of Autonomous AI Systems · 2016 → Now</p>
+      <span class="hero-monogram" aria-hidden="true">M</span>
       <h1 class="hero-h1 reveal" style="transition-delay: 80ms;">
-        AI systems<br>
-        that run themselves.
+        Freedom is no longer a dream.<br>
+        It&rsquo;s an engineering problem.
       </h1>
       <p class="hero-sub reveal" style="transition-delay: 200ms;">
-        Ten years, six systems shipped. Today: a pipeline serving 11 enterprise clients across 5 countries — every step has a safety check before the AI runs.
+        We&rsquo;ve spent millennia trading our hours for survival. AI ends that trade. I&rsquo;m building the systems that make it real.
       </p>
-      <div class="hero-meta reveal" role="group" aria-label="Career timeframe and current role" style="transition-delay: 320ms;">
-        <span><strong>Active</strong> 2016 → 2026</span>
-        <span class="hero-meta-sep" aria-hidden="true"></span>
+      <div class="hero-meta reveal" role="group" aria-label="Current role" style="transition-delay: 320ms;">
         <span><strong>TNG Shopper</strong> · current</span>
-        <span class="hero-meta-sep" aria-hidden="true"></span>
-        <span>5 prior shipped systems</span>
       </div>
+
+      <figure class="press-pull reveal" style="transition-delay: 440ms;">
+        <blockquote class="press-pull-quote">&ldquo;Top 100 Retail-Tech 2025.&rdquo;</blockquote>
+        <figcaption class="press-pull-source">RetailTech &middot; 2025</figcaption>
+      </figure>
     </header>
 
     <hr class="section-divider">
@@ -1039,19 +1458,19 @@
       <h2 id="now-heading" class="reveal">What's running right now</h2>
 
       <figure class="now-metric reveal" style="margin-block-start: 2.5rem;">
-        <output class="now-metric-value mono" id="nowCounter" aria-label="Approximately 10.5 million product pages under autonomous management">~10.5M</output>
+        <output class="now-metric-value" id="nowCounter" aria-label="Approximately 10.5 million product pages under autonomous management">~10.5M</output>
         <figcaption class="now-metric-label">product pages under autonomous management</figcaption>
+        <p class="now-metric-context">From 0 to ~10.5M in 18 months. Running live, today.</p>
       </figure>
 
-      <ul class="now-satellites reveal" aria-label="Production scale">
-        <li>11 clients</li>
+      <ul class="now-satellites reveal" aria-label="Current scale">
         <li>5 countries (ES · PT · IL · US · MX)</li>
         <li>234 websites</li>
         <li>$0.0006 / page</li>
       </ul>
 
       <p class="now-prose reveal">
-        I lead the autonomous content pipeline at <strong>TNG Shopper</strong> — seven steps, each one a safety check before the AI runs. The model is Google's Gemma 4 (a 26-billion-parameter Mixture-of-Experts model), self-hosted on our own infrastructure. Every full run does about 73.5 million sub-tasks. Outputs are scored on four things — Originality, Relevance, Accuracy, Value — and only 68.9% pass. The rest get rejected.
+        I lead the autonomous content pipeline at <strong>TNG Shopper</strong> — seven steps, each gated before the model executes. The model is Google's Gemma 4 (a 26-billion-parameter Mixture-of-Experts model), self-hosted on our own infrastructure. Every full run does about 73.5 million sub-tasks.
       </p>
 
       <nav class="now-handoffs reveal" aria-label="Pipeline observatory">
@@ -1064,213 +1483,109 @@
     <hr class="section-divider">
 
     <section id="arc" class="section" aria-labelledby="arc-heading">
-      <p class="eyebrow">The work · 2016 → 2026</p>
-      <h2 id="arc-heading">Six projects. The pattern: how to unblock human-dependencies.</h2>
-      <p class="arc-lede">Each one taught me something I still use today. The earliest taught the reps; the rest compounded.</p>
+      <p class="eyebrow">The work</p>
+      <h2 id="arc-heading">Six projects.</h2>
+      <p class="arc-lede">Started picking up work at fourteen — warehouse, manufacturing, construction. Ten years and six projects later, the same pattern: how to remove the bottleneck a human used to be.</p>
 
-      <ol class="spine" role="list">
+      <ol class="chapters" role="list">
 
-        <li id="pipeline" class="spine-item" data-year="2024" data-current="true">
-          <div class="spine-rail">
-            <span class="spine-year mono" aria-hidden="true">2024</span>
-            <span class="spine-dot" aria-hidden="true"></span>
-          </div>
-          <article class="spine-card reveal">
-            <header class="spine-card-header">
-              <h3 class="spine-card-title">Pipeline / TNG Shopper</h3>
-              <p class="spine-card-subtitle">Autonomous content pipeline serving 11 retailers across 5 countries — running today.</p>
-              <p class="spine-card-meta">
-                <time datetime="2024">2024 — present</time>
-                <span aria-hidden="true">·</span>
-                <span>Production · Live observatory</span>
+        <li id="pipeline" class="chapter reveal" data-current="true">
+          <header class="chapter-head">
+            <span class="chapter-num" aria-hidden="true">01</span>
+            <div class="chapter-title-block">
+              <h3 class="chapter-name">Pipeline</h3>
+              <p class="chapter-status">
+                <span class="status-pulse" aria-hidden="true"></span>
+                Live &middot; 2024 &rarr; today
               </p>
-            </header>
-            <blockquote class="spine-card-quote">
-              The synthesis. A seven-node directed acyclic graph, deterministic gates first, fail-closed by default.
-            </blockquote>
-            <ul class="spine-card-numerics" aria-label="Production scale">
-              <li>~10.5M product detail pages / cycle</li>
-              <li>~73.5M agent operations / run</li>
-              <li>68.9% pass rate · Originality, Relevance, Accuracy, Value</li>
-              <li>$0.0006 / product detail page</li>
-              <li>Gemma 4 26B-A4B Mixture-of-Experts on self-hosted vLLM</li>
-            </ul>
-            <p class="spine-card-lesson">
-              <span class="label">Lesson</span>The five-stage filter, the four-layer agent, the fail-closed governance — same architecture, finally fused.
-            </p>
-            <nav class="now-handoffs" aria-label="Pipeline observatory" style="margin-top: 1.5rem; padding-top: 1.25rem;">
-              <a href="https://manzela.github.io/pipeline-observatory/">→&nbsp;Live observatory</a>
-              <a href="https://manzela.github.io/pipeline-observatory/#dag">→&nbsp;Architecture</a>
-              <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">→&nbsp;Case studies</a>
-            </nav>
-          </article>
+            </div>
+          </header>
+          <p class="chapter-body">
+            The autonomous content layer at TNG Shopper, the retail-tech platform behind 234 sites across 5 countries. Seven gated steps, ~10.5M product pages per cycle, running today. The synthesis &mdash; ten years of filters, agents, and gates finally fused into one system.
+          </p>
+          <a class="chapter-cta" href="https://manzela.github.io/pipeline-observatory/">
+            Live observatory <span aria-hidden="true">&rarr;</span>
+          </a>
         </li>
 
-        <li id="elysium" class="spine-item" data-year="2024">
-          <div class="spine-rail">
-            <span class="spine-year mono" aria-hidden="true">2024</span>
-            <span class="spine-dot" aria-hidden="true"></span>
-          </div>
-          <article class="spine-card reveal">
-            <header class="spine-card-header">
-              <h3 class="spine-card-title">Elysium</h3>
-              <p class="spine-card-subtitle">Physical-context AI platform for retail demand prediction — 13 brands signed before pause.</p>
-              <p class="spine-card-meta">
-                <time datetime="2024">2024 — 2025</time>
-                <span aria-hidden="true">·</span>
-                <span>Physical-Context AI for Retail · Paused-pending-Pipeline</span>
-              </p>
-            </header>
-            <blockquote class="spine-card-quote">
-              A platform fusing search intent, geo-coordinates, and foot-traffic data into store-level demand signals — eleven specialized agents, fifteen patent claims.
-            </blockquote>
-            <ul class="spine-card-numerics" aria-label="Validation scale">
-              <li>13 brands validated</li>
-              <li>15,600+ store locations</li>
-              <li>15 patent claims (3 independent + 12 dependent)</li>
-              <li>11 specialized agents</li>
-            </ul>
-            <p class="spine-card-lesson">
-              <span class="label">Lesson</span>The right product can be the wrong order of operations. Pause is a routing decision, not a failure mode.
-            </p>
-            <p class="spine-card-bridge">
-              <span class="label">Bridge</span>Sequenced behind a prerequisite layer: the Pipeline ships first; Elysium re-activates downstream once it's operating across enough tenants to feed it.
-            </p>
-            <a class="spine-card-cta" href="elysium/">Read the case study&nbsp;→</a>
-          </article>
+        <li id="elysium" class="chapter reveal">
+          <header class="chapter-head">
+            <span class="chapter-num" aria-hidden="true">02</span>
+            <div class="chapter-title-block">
+              <h3 class="chapter-name">Elysium</h3>
+              <p class="chapter-status">Paused on purpose &middot; 2024 &rarr; 25</p>
+            </div>
+          </header>
+          <p class="chapter-body">
+            Physical-context AI for retail &mdash; store cameras, shelf state, foot-traffic, fused into store-level demand. 13 brands signed. 15 patents filed. I paused Elysium because the data layer underneath wasn&rsquo;t ready. Pipeline is that layer. Elysium re-activates when Pipeline reaches scale.
+          </p>
+          <a class="chapter-cta" href="elysium/">
+            Read the case study <span aria-hidden="true">&rarr;</span>
+          </a>
         </li>
 
-        <li id="tasko-ai" class="spine-item" data-year="2020">
-          <div class="spine-rail">
-            <span class="spine-year mono" aria-hidden="true">2020</span>
-            <span class="spine-dot" aria-hidden="true"></span>
-          </div>
-          <article class="spine-card reveal">
-            <header class="spine-card-header">
-              <h3 class="spine-card-title">Tasko AI</h3>
-              <p class="spine-card-subtitle">AI assistant on WhatsApp that handled real-world errands for paying clients.</p>
-              <p class="spine-card-meta">
-                <time datetime="2020-10">Oct 2020 — Dec 2023</time>
-                <span aria-hidden="true">·</span>
-                <span>Hasherut · Production agentic system</span>
-              </p>
-            </header>
-            <blockquote class="spine-card-quote">
-              From 21 million WhatsApp messages, 1,561 unique intents — classified, routed, executed, and verified across four production layers.
-            </blockquote>
-            <ul class="spine-card-numerics" aria-label="Training scale">
-              <li>21,102 labeled tasks</li>
-              <li>153 unique clients</li>
-              <li>1,561 intent patterns</li>
-              <li>4-layer Classify / Retrieve / Execute / Verify</li>
-            </ul>
-            <p class="spine-card-lesson">
-              <span class="label">Lesson</span>The four-layer pattern is what every modern agent framework now calls "agentic with tool use." It shipped in production in 2020.
-            </p>
-            <p class="spine-card-bridge">
-              <span class="label">Bridge</span>After Tasko AI wound down, the next retail-AI investment moved to physical-context intelligence: <a href="#elysium">Elysium</a>.
-            </p>
-            <a class="spine-card-cta" href="tasko-ai/">Read the case study&nbsp;→</a>
-          </article>
+        <li id="tasko-ai" class="chapter reveal">
+          <header class="chapter-head">
+            <span class="chapter-num" aria-hidden="true">03</span>
+            <div class="chapter-title-block">
+              <h3 class="chapter-name">Tasko AI</h3>
+              <p class="chapter-status">Production &middot; 2020 &rarr; 23</p>
+            </div>
+          </header>
+          <p class="chapter-body">
+            I shipped an AI assistant on WhatsApp for an Israeli services company. 21 million customer messages, distilled into 1,561 intents. A 4-layer agent in production &mdash; classify, retrieve, execute, verify &mdash; three years before the industry coined &ldquo;agentic.&rdquo; Then real-time relevance-filtering hit its ceiling. That&rsquo;s the bottleneck no model size solves.
+          </p>
+          <a class="chapter-cta" href="tasko-ai/">
+            Read the case study <span aria-hidden="true">&rarr;</span>
+          </a>
         </li>
 
-        <li id="seller-app" class="spine-item" data-year="2020">
-          <div class="spine-rail">
-            <span class="spine-year mono" aria-hidden="true">2020</span>
-            <span class="spine-dot" aria-hidden="true"></span>
-          </div>
-          <article class="spine-card reveal">
-            <header class="spine-card-header">
-              <h3 class="spine-card-title">Seller App</h3>
-              <p class="spine-card-subtitle">Camera-first onboarding tool that turned retail stockrooms into online storefronts.</p>
-              <p class="spine-card-meta">
-                <time datetime="2020-01">Jan 2020 — Apr 2024</time>
-                <span aria-hidden="true">·</span>
-                <span>Co-founded with Dr. Eli Osherovich · Bootstrapped 4 yrs</span>
-              </p>
-            </header>
-            <blockquote class="spine-card-quote">
-              Three computer-vision generations — barcode, then image, then video — against a canonical catalog of 60 million Stock-Keeping Units. Bootstrapped four years.
-            </blockquote>
-            <ul class="spine-card-numerics" aria-label="Product scale">
-              <li>3 computer-vision generations: Barcode → Image → Video + Retrieval-Augmented Generation</li>
-              <li>60M+ canonical Stock-Keeping Units</li>
-              <li>$10K Monthly Recurring Revenue plateau</li>
-            </ul>
-            <p class="spine-card-lesson">
-              <span class="label">Lesson</span>Vision-language pivot is when I learned that Product-Market Fit without unit economics is a research project, not a company.
-            </p>
-            <p class="spine-card-bridge">
-              <span class="label">Bridge</span>Nine months in, a third concurrent track started — an AI assistant on WhatsApp: <a href="#tasko-ai">Tasko AI</a>.
-            </p>
-            <a class="spine-card-cta" href="seller-app/">Read the case study&nbsp;→</a>
-          </article>
+        <li id="seller-app" class="chapter reveal">
+          <header class="chapter-head">
+            <span class="chapter-num" aria-hidden="true">04</span>
+            <div class="chapter-title-block">
+              <h3 class="chapter-name">Seller App</h3>
+              <p class="chapter-status">Bootstrapped 4 years &middot; 2020 &rarr; 24</p>
+            </div>
+          </header>
+          <p class="chapter-body">
+            Camera-first onboarding for retail. Three computer-vision generations &mdash; barcode, image, video + RAG &mdash; against a 60M-SKU canonical catalog. Bootstrapped to $10K MRR before pivoting. Co-founded with Dr.&nbsp;Eli Osherovich (ex-Amazon Alexa Shopping, now Google AI). The tech was supreme; adoption hit the wall. The most expensive lesson in this whole arc: incentives, not algorithms.
+          </p>
+          <a class="chapter-cta" href="seller-app/">
+            Read the case study <span aria-hidden="true">&rarr;</span>
+          </a>
         </li>
 
-        <li id="data-mining" class="spine-item" data-year="2019">
-          <div class="spine-rail">
-            <span class="spine-year mono" aria-hidden="true">2019</span>
-            <span class="spine-dot" aria-hidden="true"></span>
-          </div>
-          <article class="spine-card reveal">
-            <header class="spine-card-header">
-              <h3 class="spine-card-title">Data Mining</h3>
-              <p class="spine-card-subtitle">Automated lead-finding pipeline for an Israeli wealth-management firm.</p>
-              <p class="spine-card-meta">
-                <time datetime="2019-02">Feb 2019 — Jul 2020</time>
-                <span aria-hidden="true">·</span>
-                <span>Israeli Financial Services Firm · Solo</span>
-              </p>
-            </header>
-            <blockquote class="spine-card-quote">
-              A pipeline is a series of filters, not a series of steps.
-            </blockquote>
-            <ul class="spine-card-numerics" aria-label="Production scale">
-              <li>17 mo in production</li>
-              <li>₪50M+ in new Assets Under Management</li>
-              <li>5-stage manually orchestrated pipeline</li>
-            </ul>
-            <p class="spine-card-lesson">
-              <span class="label">Lesson</span>The five-stage filter is the architectural primitive everything later compounds. Frame any system as a chain of deterministic filters before adding probabilistic compute.
-            </p>
-            <p class="spine-card-bridge">
-              <span class="label">Bridge</span>Eleven months in, a parallel co-founded venture began — a camera-first retail computer-vision tool: <a href="#seller-app">Seller App</a>.
-            </p>
-            <a class="spine-card-cta" href="data-mining/">Read the case study&nbsp;→</a>
-          </article>
+        <li id="data-mining" class="chapter reveal">
+          <header class="chapter-head">
+            <span class="chapter-num" aria-hidden="true">05</span>
+            <div class="chapter-title-block">
+              <h3 class="chapter-name">Data Mining</h3>
+              <p class="chapter-status">Sole engineer &middot; 2019 &rarr; 20</p>
+            </div>
+          </header>
+          <p class="chapter-body">
+            A five-stage manual pipeline for an Israeli wealth-management firm &mdash; scoring high-net-worth prospects an early ML model couldn&rsquo;t rank cleanly. 17 months in production. &#8362;50M+ (~$13.5M) in new assets under management, converted because the client was in the loop every iteration. The feedback loop did the work the model couldn&rsquo;t.
+          </p>
+          <a class="chapter-cta" href="data-mining/">
+            Read the case study <span aria-hidden="true">&rarr;</span>
+          </a>
         </li>
 
-        <li id="junior-years" class="spine-item" data-year="2016">
-          <div class="spine-rail">
-            <span class="spine-year mono" aria-hidden="true">2016</span>
-            <span class="spine-dot" aria-hidden="true"></span>
-          </div>
-          <article class="spine-card reveal">
-            <header class="spine-card-header">
-              <h3 class="spine-card-title">Junior Years</h3>
-              <p class="spine-card-subtitle">Three years of gigs for startups and small companies — web development, inventory imports, spreadsheet automation, market research.</p>
-              <p class="spine-card-meta">
-                <time datetime="2016-09">Sept 2016 — 2019</time>
-                <span aria-hidden="true">·</span>
-                <span>3 startups, 2 low-techs, side-projects · Solo</span>
-              </p>
-            </header>
-            <blockquote class="spine-card-quote">
-              Three years of gig work nobody else wanted — the data-transformation reps that every later pipeline compounded on.
-            </blockquote>
-            <ul class="spine-card-numerics" aria-label="Project breadth">
-              <li>6 categories of work</li>
-              <li>3 startups, 2 low-techs, side-projects</li>
-              <li>ETL by hand · ERP → website</li>
-            </ul>
-            <p class="spine-card-lesson">
-              <span class="label">Lesson</span>Doing data transformation, normalization, enrichment, and formatting by hand for three years builds the reflex that makes every later pipeline feel like the same job at scale.
-            </p>
-            <p class="spine-card-bridge">
-              <span class="label">Bridge</span>The same <em>extract → normalize → enrich → format</em> pattern, scaled up: <a href="#data-mining">Data Mining</a>.
-            </p>
-            <a class="spine-card-cta" href="junior-years/">Read the case study&nbsp;→</a>
-          </article>
+        <li id="junior-years" class="chapter reveal">
+          <header class="chapter-head">
+            <span class="chapter-num" aria-hidden="true">06</span>
+            <div class="chapter-title-block">
+              <h3 class="chapter-name">Junior Years</h3>
+              <p class="chapter-status">Warehouse to web &middot; 2013 &rarr; 19</p>
+            </div>
+          </header>
+          <p class="chapter-body">
+            Then came web dev, ETL by hand, VBA macros &mdash; whatever small companies needed done. Trading hours-for-money has a hard ceiling. The arc since has been one project: turn finite labor into infinitely-scaling leverage. That&rsquo;s still the END GOAL.
+          </p>
+          <a class="chapter-cta" href="junior-years/">
+            See the early reps <span aria-hidden="true">&rarr;</span>
+          </a>
         </li>
 
       </ol>
@@ -1279,28 +1594,38 @@
     <hr class="section-divider">
 
     <section id="proved" class="section" aria-labelledby="proved-heading">
-      <p class="eyebrow">What it proved · Four claims</p>
-      <h2 id="proved-heading">What ten years taught me</h2>
+      <p class="eyebrow">Per project · One lesson each</p>
+      <h2 id="proved-heading">What each project taught me</h2>
       <ol class="proved-list" role="list" style="margin-top: 2.5rem;">
         <li>
-          <h3>Build the boring parts first.</h3>
-          <p>Frame the system as a chain of safety checks before adding any AI. Saves cost. Prevents disasters.</p>
-          <p class="proved-source">Source: <a href="junior-years/">Junior Years (2016)</a> → <a href="data-mining/">Data Mining (2019)</a>.</p>
+          <h3>Pipeline &mdash; ten years of architectures, finally fused.</h3>
+          <p>The filter, the agent, the gate &mdash; one system, not three lessons.</p>
+          <p class="proved-source">Source: <a href="https://manzela.github.io/pipeline-observatory/">Pipeline (2024 &mdash; present)</a>.</p>
         </li>
         <li>
-          <h3>I shipped "agentic AI" in 2020 — before the industry had a name for it.</h3>
-          <p>Classify, Retrieve, Execute, Verify — running on AWS Lambda + a fine-tuned OpenAI model for 153 paying clients on WhatsApp.</p>
-          <p class="proved-source">Source: <a href="tasko-ai/">Tasko AI (2020 — 23)</a>.</p>
+          <h3>Elysium &mdash; the right product can be the wrong order of operations.</h3>
+          <p>13 brands signed. 15 patent claims filed. Pause is a routing decision, not a failure.</p>
+          <p class="proved-source">Source: <a href="elysium/">Elysium (2024 &mdash; 25, paused on purpose)</a>.</p>
         </li>
         <li>
-          <h3>A great product can be the wrong order of operations.</h3>
-          <p>13 brands wanted it. 15 patent claims filed. Pausing was the right call — the underlying system needed to ship first.</p>
-          <p class="proved-source">Source: <a href="elysium/">Elysium (2024 — 25)</a>.</p>
+          <h3>Tasko AI &mdash; context-curation is the bottleneck no model size solves.</h3>
+          <p>Three years of pruning irrelevant chat taught me that dynamic, real-time relevance filtering is the missing primitive.</p>
+          <p class="proved-source">Source: <a href="tasko-ai/">Tasko AI (2020 &mdash; 23)</a>.</p>
         </li>
         <li>
-          <h3>Always check before the AI runs.</h3>
-          <p>Every step has a deterministic safety gate. The AI activates only if the gate passes. 80% deterministic, 20% AI.</p>
-          <p class="proved-source">Source: <a href="https://manzela.github.io/pipeline-observatory/">Pipeline (2024 — present)</a>.</p>
+          <h3>Seller App &mdash; adoption is an incentive problem, not a tech problem.</h3>
+          <p>The most elegant computer-vision pipeline still fails if the human you depend on to point the camera has no incentive to point it.</p>
+          <p class="proved-source">Source: <a href="seller-app/">Seller App (2020 &mdash; 24)</a>.</p>
+        </li>
+        <li>
+          <h3>Data Mining &mdash; automation without a customer in the loop is just faster guessing.</h3>
+          <p>&#8362;50M+ AUM converted precisely because the client was in the loop every iteration. The feedback loop did the work the model couldn&rsquo;t.</p>
+          <p class="proved-source">Source: <a href="data-mining/">Data Mining (2019 &mdash; 20)</a>.</p>
+        </li>
+        <li>
+          <h3>Junior Years &mdash; trading hours-for-money has a hard ceiling.</h3>
+          <p>The arc since has been one project &mdash; turn finite labor into infinitely-scaling leverage. That&rsquo;s still the END GOAL.</p>
+          <p class="proved-source">Source: <a href="junior-years/">Junior Years (2013 &mdash; 19)</a>.</p>
         </li>
       </ol>
     </section>
@@ -1308,16 +1633,31 @@
     <hr class="section-divider">
 
     <section id="stack" class="section" aria-labelledby="stack-heading">
-      <p class="eyebrow">Stack · Production system</p>
-      <h2 id="stack-heading">What I run, where</h2>
+      <p class="eyebrow">Stack · Across ten years</p>
+      <h2 id="stack-heading">Where I&rsquo;m fluent</h2>
+      <p class="arc-lede" style="margin-bottom: 2.5rem;">Generalist by training, agnostic by preference. Below is the cross-section of what I&rsquo;ve actually shipped, organized by surface.</p>
 
-      <dl class="stack-list" style="margin-top: 2.5rem;">
-        <dt>Inference & serving</dt>
-        <dd>Vertex AI · self-hosted Gemma 4 26B-A4B Mixture-of-Experts on vLLM 0.17.2rc1 · PagedAttention · Google Cloud Storage FUSE · NVIDIA A100 80GB</dd>
-        <dt>Orchestration & data</dt>
-        <dd>Google Agent Development Kit · Python · FastAPI · Pydantic · Jinja2 · BigQuery · Google Cloud Storage · Firestore · Redis · Cloud Functions</dd>
-        <dt>Observability & governance</dt>
-        <dd>Langfuse · OpenTelemetry · Model Context Protocol · Deterministic Evaluation and Monitoring Audit System for fail-closed safety · Four-axis evaluation across Originality, Relevance, Accuracy, Value · Direct Preference Optimization via Reinforcement Learning from AI Feedback</dd>
+      <dl class="stack-list">
+        <dt>AI / ML production</dt>
+        <dd>Gemma 4 26B-A4B MoE · PaLM 2 Bison · Gemini · OpenAI fine-tuning (Babbage &rarr; Davinci &rarr; GPT-3.5) · vLLM · PagedAttention · NVIDIA A100 80GB · Google ADK · Vertex AI Agent Builder · 4-layer Classify / Retrieve / Execute / Verify · DPO via RLAIF · grammar-constrained decoding</dd>
+
+        <dt>Cloud &amp; infrastructure</dt>
+        <dd>Google Cloud (Vertex AI, BigQuery, GCS, GCS FUSE, Firestore, Cloud Functions, Looker Studio) · AWS Lambda · Modal serverless · Redis · VPC Service Controls · zero-trust IAM · k-anonymity (&ge;10)</dd>
+
+        <dt>Backend engineering</dt>
+        <dd>Python · FastAPI · Pydantic · Jinja2 · custom REST integrations (Monday.com, WC Marketplace, OpenAI, BrightData) · serverless functions</dd>
+
+        <dt>Web, frontend &amp; commerce</dt>
+        <dd>WordPress multisite (Sage 10) · Shopify · WooCommerce · HTML / CSS / JavaScript · Progressive Web Apps · Hebrew &amp; RTL · Schema.org / JSON-LD / SpeakableSpecification · llms.txt &amp; AI-bot-aware robots.txt · Mixpanel · GA4</dd>
+
+        <dt>Computer vision &amp; geospatial</dt>
+        <dd>Google ML Kit on-device barcode · zxing-cpp-emscripten · Google Vision AI OCR · foundation-model background removal · frame-by-frame video product recognition · RAG over 60M+ SKU canonical catalog · Uber&rsquo;s H3 hexagonal geospatial indexing</dd>
+
+        <dt>Data, ETL &amp; web intelligence</dt>
+        <dd>Custom web scrapers + BrightData residential proxies · ERP &rarr; website ETL by hand · WhatsApp text-export &rarr; labeled corpus (21M messages &rarr; 1,561 intents) · Custom VBA macros (normalization, enrichment, dedup) · UPC / EAN canonical SKU database (60M+) · weighted-signal demographic scoring</dd>
+
+        <dt>Observability, governance &amp; safety</dt>
+        <dd>Langfuse · OpenTelemetry · Model Context Protocol (MCP) · Open Policy Agent-style policy-as-code · deterministic gates · fail-closed governance · ORAV evaluation (Originality, Relevance, Accuracy, Value) · z-score statistical trigger gating · 5-minute human-in-the-loop override window</dd>
       </dl>
 
       <section class="social-proof" aria-labelledby="social-proof-heading">
@@ -1327,27 +1667,41 @@
             <img src="assets/top100-retailtech.png" alt="Top 100 2025 Retail Startup — RetailTech" loading="lazy" decoding="async">
             <span class="sp-label">Top 100 2025 Retail Startup</span>
             <span class="sp-source">RetailTech</span>
+            <span class="sp-status sp-status-active">2025 &middot; current</span>
           </li>
           <li class="social-proof-item">
             <img src="assets/cert-genai-leader.png" alt="Generative AI Leader certification" loading="lazy" decoding="async">
             <span class="sp-label">Generative AI Leader</span>
             <span class="sp-source">Google Cloud</span>
-          </li>
-          <li class="social-proof-item">
-            <img src="assets/cert-cloud-architect.png" alt="Professional Cloud Architect certification" loading="lazy" decoding="async">
-            <span class="sp-label">Professional Cloud Architect</span>
-            <span class="sp-source">Google Cloud</span>
+            <span class="sp-status sp-status-active">Active</span>
           </li>
           <li class="social-proof-item">
             <img src="assets/cert-ml-engineer.png" alt="Professional Machine Learning Engineer certification" loading="lazy" decoding="async">
             <span class="sp-label">Pro ML Engineer</span>
             <span class="sp-source">Google Cloud</span>
+            <span class="sp-status sp-status-pending">Active June 2026</span>
+          </li>
+          <li class="social-proof-item">
+            <img src="assets/cert-cloud-architect.png" alt="Professional Cloud Architect certification" loading="lazy" decoding="async">
+            <span class="sp-label">Professional Cloud Architect</span>
+            <span class="sp-source">Google Cloud</span>
+            <span class="sp-status sp-status-expired">Expired</span>
           </li>
         </ul>
+
+        <div class="speaking-block">
+          <p class="social-proof-eyebrow">Speaking &middot; Guest lectures</p>
+          <a class="speaking-card" href="https://www.linkedin.com/posts/manzela_retailtech-commercialrealestate-datadrivendecisions-activity-7332458476985651200-Yg-l" target="_blank" rel="noopener">
+            <span class="speaking-card-title">Physical-Context AI for Retail</span>
+            <span class="speaking-card-meta">Guest lecture &middot; Bar-Ilan University &middot; May 2025</span>
+            <span class="speaking-card-cta">View talk on LinkedIn &rarr;</span>
+          </a>
+        </div>
+
         <ul class="social-proof-links">
-          <li><a href="https://partner.skills.google/public_profiles/69fa3af8-3032-4a04-a818-f7277009c3a9">→&nbsp;32 Google Cloud credentials</a></li>
-          <li><a href="assets/retailtech-2025-report.pdf">→&nbsp;RetailTech 2025 report</a></li>
-          <li><a href="assets/cert-product-experts.pdf">→&nbsp;Product Experts certificate</a></li>
+          <li><a href="https://partner.skills.google/public_profiles/69fa3af8-3032-4a04-a818-f7277009c3a9">&rarr;&nbsp;32 Google Cloud credentials</a></li>
+          <li><a href="assets/retailtech-2025-report.pdf">&rarr;&nbsp;RetailTech 2025 report</a></li>
+          <li><a href="assets/cert-product-experts.pdf">&rarr;&nbsp;Product Experts certificate</a></li>
         </ul>
       </section>
     </section>
@@ -1355,23 +1709,67 @@
     <hr class="section-divider">
 
     <section id="parallel" class="section" aria-labelledby="parallel-heading">
-      <p class="eyebrow">Parallel track · Open-source distillations</p>
+      <p class="eyebrow">Code &middot; Personal projects + OSS</p>
       <h2 id="parallel-heading">Code you can read</h2>
-      <ul class="parallel-list" style="margin-top: 2.5rem;">
+
+      <p class="code-subhead">Personal projects</p>
+      <ul class="parallel-list">
         <li>
-          <h3><a href="https://github.com/Manzela/agent-dag-pipeline">agent-dag-pipeline</a></h3>
-          <p>Open-source distillation of the seven-node directed acyclic graph. Google Agent Development Kit + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + Direct Preference Optimization data flywheel.</p>
+          <h3>
+            <a href="https://manzela.github.io/Antigravity-OS/">Antigravity-OS</a>
+            <span class="badge mono">pip install ag-os</span>
+          </h3>
+          <p>Open-source governance kernel for autonomous NHITL AI systems. Open Policy Agent-style policy-as-code, Model Context Protocol server, cost guard, &ldquo;Dreaming Module&rdquo; self-improvement loop.</p>
+        </li>
+        <li>
+          <h3><a href="https://github.com/Manzela/AutonomousAgent">Autonomous Agent</a></h3>
+          <p>Autonomous 24/7 MoE agents orchestration that gets better over time with RL. The agent that runs itself, learns from its own runs, and never sleeps.</p>
         </li>
         <li>
           <h3>
-            <a href="https://github.com/Manzela/Antigravity-OS">Antigravity-OS</a>
-            <span class="badge mono">pip install ag-os</span>
+            <a href="https://github.com/Manzela/Atelier">Atelier</a>
+            <span class="badge mono">Google hackathon</span>
           </h3>
-          <p>Governance kernel for AI agents. Open Policy Agent-style policy-as-code, Model Context Protocol server, cost guard, "Dreaming Module" self-improvement loop.</p>
+          <p>Autonomous Design Agent &mdash; MoDE (Mixture of Design Experts) agents orchestration. Built for a Google Challenge Hackathon; same RL-improvement loop, different vertical.</p>
+        </li>
+        <li>
+          <h3><a href="https://github.com/Manzela/agent-dag-pipeline">agent-dag-pipeline</a></h3>
+          <p>Open-source distillation of the 7-node DAG behind the TNG Shopper pipeline. Google ADK + Vertex AI + ORAV evaluation + DPO data flywheel.</p>
         </li>
         <li>
           <h3><a href="https://github.com/Manzela/gemma4-vllm-deployment">gemma4-vllm-deployment</a></h3>
-          <p>Forensic runbook of 20 deployment failure modes for Gemma 4 26B-A4B Mixture-of-Experts on Vertex AI + vLLM.</p>
+          <p>Forensic runbook of 20 deployment failure modes for Gemma 4 MoE on Vertex AI + vLLM. The doc I wish I&rsquo;d had.</p>
+        </li>
+      </ul>
+
+      <p class="code-subhead" style="margin-top: 3rem;">Open-source contributions <span class="code-subhead-note">most-recent</span></p>
+      <ul class="contributions-list">
+        <li>
+          <a href="https://github.com/anthropics/claude-code/issues/59401" target="_blank" rel="noopener">
+            <span class="contrib-repo">anthropics / claude-code</span>
+            <span class="contrib-ref">issue #59401</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/Agent-Field/agentfield/pull/573#issuecomment-4442862697" target="_blank" rel="noopener">
+            <span class="contrib-repo">Agent-Field / agentfield</span>
+            <span class="contrib-ref">PR #573 &middot; review comment</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/NousResearch/hermes-agent/issues/26383" target="_blank" rel="noopener">
+            <span class="contrib-repo">NousResearch / hermes-agent</span>
+            <span class="contrib-ref">issue #26383</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/NousResearch/hermes-agent/issues/26382" target="_blank" rel="noopener">
+            <span class="contrib-repo">NousResearch / hermes-agent</span>
+            <span class="contrib-ref">issue #26382</span>
+          </a>
+        </li>
+        <li class="contrib-and-more">
+          <span>And more &mdash; see <a href="https://github.com/Manzela" target="_blank" rel="noopener">github.com/Manzela</a> for the full ledger.</span>
         </li>
       </ul>
     </section>
@@ -1379,7 +1777,7 @@
     <hr class="section-divider">
 
     <section id="writing" class="section" aria-labelledby="writing-heading">
-      <p class="eyebrow">Writing · Archive</p>
+      <p class="eyebrow">Recent issues · Essays</p>
       <h2 id="writing-heading">Recent essays</h2>
       <ul class="writing-list" style="margin-top: 2rem;">
         <li>
@@ -1390,6 +1788,9 @@
           <span class="w-title"><a href="https://medium.com/@manzela/epiphany-7d7c9f4dd857">Epiphany</a></span>
           <span class="w-meta">Medium · Nov 2025</span>
         </li>
+      </ul>
+      <p class="writing-earlier-label">Earlier writing</p>
+      <ul class="writing-list">
         <li>
           <span class="w-title"><a href="https://medium.com/@manzela/the-marco-economy-of-hybrid-retail-ad51a977cba0">The Marco Economy of Hybrid Retail</a></span>
           <span class="w-meta">Medium · Nov 2022</span>
@@ -1400,8 +1801,11 @@
     <hr class="section-divider">
 
     <section id="contact" class="section section-narrow" aria-labelledby="contact-heading">
-      <p class="eyebrow">Contact</p>
-      <h2 id="contact-heading">Reach out</h2>
+      <p class="eyebrow">Contact · Sign-off</p>
+      <h2 id="contact-heading">Get in touch</h2>
+      <p class="contact-warmth" style="margin-top: 1.25rem;">
+        Currently building TNG Shopper full-time. Open to: advisory, the occasional consult on multi-agent systems, and a good conversation. I read every message.
+      </p>
       <p class="contact-line" style="margin-top: 1.5rem;">
         <a href="mailto:danielq1603@gmail.com">danielq1603@gmail.com</a>
         <span class="contact-sep" aria-hidden="true">·</span>
@@ -1414,6 +1818,7 @@
   </main>
 
   <footer class="site-footer">
+    <p class="footer-flourish">— <em>Tel Aviv &amp; the wire</em> —</p>
     <p>Daniel Manzela · Building AI since 2016 · <a href="#hero" class="subtle">Back to top&nbsp;↑</a></p>
   </footer>
 
