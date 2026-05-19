@@ -451,7 +451,6 @@
 
     .hero { padding-top: 1rem; padding-bottom: var(--section-gap); position: relative; isolation: isolate; }
 
-    /* Gwern-style hand-drawn monogram — substitutes for portrait, signals craft */
     .hero-monogram {
       position: absolute;
       top: -1.5rem;
@@ -923,7 +922,7 @@
                   transform var(--dur-micro) var(--ease-snap);
     }
     .chapter-cta:hover {
-      color: var(--accent);
+      color: var(--ink);
       background-size: 100% 1px;
     }
     .chapter-cta span { transition: transform var(--dur-micro) var(--ease-snap); }
@@ -954,7 +953,7 @@
       font-family: var(--fontMono);
       font-size: var(--type-meta);
       letter-spacing: var(--tracking-eyebrow);
-      color: var(--accent);
+      color: var(--ink-quiet);
       font-weight: 600;
       font-feature-settings: "tnum" 1, "lnum" 1;
     }
@@ -1066,8 +1065,8 @@
       align-self: flex-start;
     }
     .social-proof-item .sp-status-active {
-      color: var(--accent);
-      background: var(--accent-faint);
+      color: var(--ink-dim);
+      background: var(--paper-deep);
     }
     .social-proof-item .sp-status-pending {
       color: var(--ink);
@@ -1093,7 +1092,7 @@
       padding: 1.25rem 1.5rem;
       background: var(--paper-elev);
       border: 1px solid var(--paper-edge);
-      border-left: 3px solid var(--accent);
+      border-left: 3px solid var(--ink-mute);
       border-radius: var(--radius-card);
       max-width: 36rem;
       background-image: none;
@@ -1102,7 +1101,7 @@
     }
     .speaking-card:hover {
       border-color: var(--ink-mute);
-      border-left-color: var(--accent);
+      border-left-color: var(--ink-mute);
       transform: translateY(-1px);
     }
     .speaking-card-title {
@@ -1421,7 +1420,7 @@
       </button>
       <ul class="nav-list" id="navList">
         <li><a href="#now">In production</a></li>
-        <li><a href="#arc">Built</a></li>
+        <li><a href="#arc">The work</a></li>
         <li><a href="#proved">Per project</a></li>
         <li><a href="#stack">Stack</a></li>
         <li><a href="#parallel">Code</a></li>
@@ -1485,7 +1484,7 @@
     <section id="arc" class="section" aria-labelledby="arc-heading">
       <p class="eyebrow">The work</p>
       <h2 id="arc-heading">Six projects.</h2>
-      <p class="arc-lede">Started picking up work at fourteen — warehouse, manufacturing, construction. Ten years and six projects later, the same pattern: how to remove the bottleneck a human used to be.</p>
+      <p class="arc-lede">Started at fourteen — warehouses, factories, construction sites. Six projects, one question: how do you build a system that does the work instead of you?</p>
 
       <ol class="chapters" role="list">
 
@@ -1501,7 +1500,7 @@
             </div>
           </header>
           <p class="chapter-body">
-            The autonomous content layer at TNG Shopper, the retail-tech platform behind 234 sites across 5 countries. Seven gated steps, ~10.5M product pages per cycle, running today. The synthesis &mdash; ten years of filters, agents, and gates finally fused into one system.
+            I built an autonomous content pipeline that helps multi-location retail brands automatically generate SEO-optimized product pages without human involvement. By combining deterministic rules with a highly efficient AI (Mixture-of-Experts) that learns from its own mistakes, the system reliably produces millions of localized web pages a month at a fraction of a cent per page.
           </p>
           <a class="chapter-cta" href="https://manzela.github.io/pipeline-observatory/">
             Live observatory <span aria-hidden="true">&rarr;</span>
@@ -1517,7 +1516,7 @@
             </div>
           </header>
           <p class="chapter-body">
-            Physical-context AI for retail &mdash; store cameras, shelf state, foot-traffic, fused into store-level demand. 13 brands signed. 15 patents filed. I paused Elysium because the data layer underneath wasn&rsquo;t ready. Pipeline is that layer. Elysium re-activates when Pipeline reaches scale.
+            I built an AI chat inference that helps retail stores understand local customer searches, location data, and engagement. 13 major brands have confirmed they need this technology. We paused Elysium, because it needs a large amount of data to make accurate predictions. Right now, TNG Pipeline is doing the heavy lifting to collect that data. Once we have enough, we will turn Elysium back on.
           </p>
           <a class="chapter-cta" href="elysium/">
             Read the case study <span aria-hidden="true">&rarr;</span>
@@ -1533,7 +1532,7 @@
             </div>
           </header>
           <p class="chapter-body">
-            I shipped an AI assistant on WhatsApp for an Israeli services company. 21 million customer messages, distilled into 1,561 intents. A 4-layer agent in production &mdash; classify, retrieve, execute, verify &mdash; three years before the industry coined &ldquo;agentic.&rdquo; Then real-time relevance-filtering hit its ceiling. That&rsquo;s the bottleneck no model size solves.
+            I built a WhatsApp AI assistant for an Israeli services company, trained on 21 million customer messages. We had an advanced AI completing complex tasks years before it became a tech trend, but the iterative feedback loop still required manual adjustments and continuous evaluations. I realized how significant it is to fully automate this process. To perfectly replicate human execution, the AI requires automated reinforcement learning that dynamically adjusts context, memory, and personalized preferences for every unique user and task combination.
           </p>
           <a class="chapter-cta" href="tasko-ai/">
             Read the case study <span aria-hidden="true">&rarr;</span>
@@ -1549,7 +1548,7 @@
             </div>
           </header>
           <p class="chapter-body">
-            Camera-first onboarding for retail. Three computer-vision generations &mdash; barcode, image, video + RAG &mdash; against a 60M-SKU canonical catalog. Bootstrapped to $10K MRR before pivoting. Co-founded with Dr.&nbsp;Eli Osherovich (ex-Amazon Alexa Shopping, now Google AI). The tech was supreme; adoption hit the wall. The most expensive lesson in this whole arc: incentives, not algorithms.
+            I built an AI-powered app that lets physical retailers instantly turn their store shelves into an online shop using just their phone&rsquo;s camera. Instead of manually typing out product details, users simply point their camera to scan items, and the app automatically builds and publishes a digital catalog.
           </p>
           <a class="chapter-cta" href="seller-app/">
             Read the case study <span aria-hidden="true">&rarr;</span>
@@ -1565,7 +1564,7 @@
             </div>
           </header>
           <p class="chapter-body">
-            A five-stage manual pipeline for an Israeli wealth-management firm &mdash; scoring high-net-worth prospects an early ML model couldn&rsquo;t rank cleanly. 17 months in production. &#8362;50M+ (~$13.5M) in new assets under management, converted because the client was in the loop every iteration. The feedback loop did the work the model couldn&rsquo;t.
+            I built a custom data-mining pipeline for an Israeli wealth management firm to generate highly targeted sales leads, as existing tools like ZoomInfo didn&rsquo;t work for the local market. By extracting data from local websites, enriching and ranking prospects based on wealth and geography, I delivered leads that generated over &#8362;50M in new client portfolios for Eitam Finance (the Wealth Management firm).
           </p>
           <a class="chapter-cta" href="data-mining/">
             Read the case study <span aria-hidden="true">&rarr;</span>
@@ -1581,7 +1580,7 @@
             </div>
           </header>
           <p class="chapter-body">
-            Then came web dev, ETL by hand, VBA macros &mdash; whatever small companies needed done. Trading hours-for-money has a hard ceiling. The arc since has been one project: turn finite labor into infinitely-scaling leverage. That&rsquo;s still the END GOAL.
+            I started working at age 14, spending years in physically demanding jobs like construction, factory manufacturing, and warehousing. While working as a personal assistant, I began teaching myself web development and digital automation to solve problems for clients. Those early years of exhausting manual labor taught me a critical lesson: trading time for money isn&rsquo;t scalable, which fueled my lifelong drive to build software that infinitely scales my impact.
           </p>
           <a class="chapter-cta" href="junior-years/">
             See the early reps <span aria-hidden="true">&rarr;</span>
