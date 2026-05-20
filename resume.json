@@ -1,0 +1,273 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Daniel Manzela",
+    "label": "Founding AI Product Builder",
+    "image": "https://manzela.github.io/Manzela/assets/social-card.png",
+    "email": "danielq1603@gmail.com",
+    "url": "https://manzela.github.io/Manzela/resume/",
+    "summary": "Founding AI Product Builder. 6 years of production AI, 9 years of\nfull-stack engineering. Co-founded TNG Shopper in 2024 — building\nand leading the production multi-agent system that powers an AI\ncontent + AI-Search visibility platform for multi-location brands.\nAuthor of Antigravity-OS, an open-source orchestration infra that\nlets a small team ship more product per engineer, safely (PyPI: ag-os).",
+    "location": {
+      "countryCode": "IL",
+      "region": "Open to relocation"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "https://linkedin.com/in/manzela",
+        "username": "manzela"
+      },
+      {
+        "network": "GitHub",
+        "url": "https://github.com/Manzela",
+        "username": "Manzela"
+      },
+      {
+        "network": "PyPI",
+        "url": "https://pypi.org/project/ag-os/",
+        "username": "ag-os"
+      },
+      {
+        "network": "YouTube",
+        "url": "https://youtu.be/czZsPbylC1M"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "TNG Shopper",
+      "position": "Co-founder CEO/CPO + Lead Product Engineer",
+      "url": "https://manzela.github.io/pipeline-observatory/",
+      "startDate": "2024-01",
+      "summary": "Built and led a 7-node multi-agent content pipeline serving 11 enterprise retailers across 5 countries, processing ~10.5M product detail pages per month at $0.0006/page with 68.9% O-R-A-V deterministic pass rate.",
+      "highlights": [
+        "Raised $500K from top-tier angels; $223K Booked / $1.53M Contracted ARR",
+        "Top-100 retail-tech startups 2025",
+        "74% of commits over 18 months as 1 of 2 engineers on the production pipeline",
+        "Sole engineer on the front-end platform (ideation → production in <1 month, demo: youtu.be/czZsPbylC1M)",
+        "Led WP-multisite team of 3 across 234 managed websites",
+        "Within TNG: Elysium research product (11 specialized agents, 15 patent claims, 13 enterprise brands across 15,600+ store locations)"
+      ]
+    },
+    {
+      "name": "Tasko AI",
+      "position": "AI Product Engineer",
+      "url": "https://manzela.github.io/Manzela/tasko-ai/",
+      "startDate": "2020-10",
+      "endDate": "2023-12",
+      "summary": "WhatsApp-native AI errand assistant for paying clients — production agentic system before the term agentic entered industry use. Trained from 21M+ real WhatsApp messages and 9 years of conversation history.",
+      "highlights": [
+        "1,561 unique action-verb intents recognized",
+        "21,102 ML-labeled tasks across 153 unique paying clients",
+        "Four-layer pipeline: Classify → Retrieve → Execute → Verify"
+      ]
+    },
+    {
+      "name": "Seller App",
+      "position": "Co-founder CEO / Product Leader",
+      "url": "https://manzela.github.io/Manzela/seller-app/",
+      "startDate": "2020-01",
+      "endDate": "2024-04",
+      "summary": "Bootstrapped 4 years with Dr. Eli Osherovich. Camera-first retail-onboarding tool: 3 CV generations (Barcode → Image → Video + RAG over 60M+ canonical SKU catalog) → $10K MRR.",
+      "highlights": [
+        "60M+ canonical SKUs indexed",
+        "$10K MRR from SMB customers",
+        "3 computer-vision generations across 4 years"
+      ]
+    },
+    {
+      "name": "Israeli Financial Services Firm (wealth-management focus)",
+      "position": "Solo Data-Mining Engineer",
+      "url": "https://manzela.github.io/Manzela/data-mining/",
+      "startDate": "2019-02",
+      "endDate": "2020-07",
+      "summary": "5-stage scraping / structuring / classification pipeline for an Israeli wealth-management firm.",
+      "highlights": [
+        "₪50M+ in new Assets Under Management generated"
+      ]
+    },
+    {
+      "name": "Solo Contractor (3 startups + 2 low-techs)",
+      "position": "Solo Contractor",
+      "url": "https://manzela.github.io/Manzela/junior-years/",
+      "startDate": "2016-09",
+      "endDate": "2019-12",
+      "summary": "3 startups + 2 low-techs across high school + military. Web dev, offline-to-online inventory imports, spreadsheet automation, market research.",
+      "highlights": [
+        "3 years of seasonal freelance across 5 clients"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "keywords": [
+        "Python",
+        "TypeScript",
+        "PHP 8.1+"
+      ]
+    },
+    {
+      "name": "AI Frameworks & Models",
+      "keywords": [
+        "Google ADK",
+        "Vertex AI",
+        "Gemini 3.1 Flash-Lite",
+        "Gemma 4 26B-A4B-it MoE",
+        "vLLM",
+        "LoRA",
+        "DPO",
+        "RLAIF",
+        "MCP (Model Context Protocol)",
+        "Constitutional AI",
+        "Multi-agent orchestration"
+      ]
+    },
+    {
+      "name": "Production AI Infra",
+      "keywords": [
+        "Modal serverless",
+        "Pydantic",
+        "asyncio",
+        "Langfuse",
+        "OpenTelemetry",
+        "Redis",
+        "OPA",
+        "GCP (Cloud Run, BigQuery, Firestore)"
+      ]
+    },
+    {
+      "name": "AI-Search-Aware Web",
+      "keywords": [
+        "WordPress multisite (Sage 10)",
+        "Cloudflare CDN",
+        "JSON-LD / Schema.org",
+        "SpeakableSpecification",
+        "llms.txt",
+        "IndexNow",
+        "AI-bot-aware robots.txt"
+      ]
+    },
+    {
+      "name": "Computer Vision",
+      "keywords": [
+        "Barcode pipelines",
+        "Image pipelines",
+        "Video pipelines",
+        "RAG over canonical SKU catalogs"
+      ]
+    },
+    {
+      "name": "Methodology",
+      "keywords": [
+        "O-R-A-V deterministic gating",
+        "fail-closed safety",
+        "Constitutional Rules (Antigravity-OS)",
+        "evaluator-optimizer loops",
+        "DPO data flywheel"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Top-100 retail-tech startups 2025",
+      "date": "2025-12",
+      "awarder": "Industry / TNG Shopper / etc."
+    },
+    {
+      "title": "$500K raised from top-tier angels (TNG Shopper)",
+      "date": "2025-12",
+      "awarder": "Industry / TNG Shopper / etc."
+    },
+    {
+      "title": "$1.53M Contracted ARR pipeline (TNG Shopper)",
+      "date": "2025-12",
+      "awarder": "Industry / TNG Shopper / etc."
+    },
+    {
+      "title": "60M+ canonical SKUs indexed (Seller App)",
+      "date": "2025-12",
+      "awarder": "Industry / TNG Shopper / etc."
+    },
+    {
+      "title": "₪50M+ Assets Under Management generated (Israeli Financial Services Firm)",
+      "date": "2025-12",
+      "awarder": "Industry / TNG Shopper / etc."
+    },
+    {
+      "title": "21M+ WhatsApp messages processed; 1,561 unique action-verb intents (Tasko AI)",
+      "date": "2025-12",
+      "awarder": "Industry / TNG Shopper / etc."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Google Cloud — Generative AI Leader",
+      "issuer": "Google Cloud",
+      "date": "active"
+    },
+    {
+      "name": "Google Cloud — Professional Machine Learning Engineer",
+      "issuer": "Google Cloud",
+      "date": "2026-06-01"
+    },
+    {
+      "name": "Product Experts",
+      "issuer": "",
+      "date": "active"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Antigravity-OS",
+      "url": "https://pypi.org/project/ag-os/",
+      "description": "Open-source governance kernel for AI agents (PyPI: ag-os). 9-rule Constitution (Rules 00-08), Cost Guard, Flight Recorder, MCP server, Dreaming Module. MIT-licensed.",
+      "keywords": [
+        "MCP",
+        "Constitutional AI",
+        "Governance",
+        "Python"
+      ]
+    },
+    {
+      "name": "agent-dag-pipeline",
+      "url": "https://github.com/Manzela/agent-dag-pipeline",
+      "description": "7-node multi-agent DAG with Google ADK + Vertex AI, O-R-A-V evaluation, RLAIF / DPO data flywheel.",
+      "keywords": [
+        "Google ADK",
+        "Vertex AI",
+        "DAG",
+        "DPO"
+      ]
+    },
+    {
+      "name": "gemma4-vllm-deployment",
+      "url": "https://github.com/Manzela/gemma4-vllm-deployment",
+      "description": "Forensic runbook of 20 distinct failure modes deploying Gemma 4 26B-A4B-it MoE on Vertex AI / vLLM.",
+      "keywords": [
+        "Gemma 4",
+        "vLLM",
+        "MoE",
+        "Vertex AI"
+      ]
+    },
+    {
+      "name": "WP-Multisite",
+      "url": "https://github.com/Manzela/WP-Multisite",
+      "description": "Sanitised public blueprint of the production WordPress multisite SEO/AEO infrastructure (Sage 10 + sunrise.php + JSON-LD schema generator + llms.txt + AI-bot-aware robots.txt).",
+      "keywords": [
+        "WordPress",
+        "Sage 10",
+        "JSON-LD",
+        "llms.txt",
+        "AEO"
+      ]
+    }
+  ],
+  "meta": {
+    "canonical": "https://manzela.github.io/Manzela/resume/",
+    "version": "v1.0.0",
+    "lastModified": "2026-05-14",
+    "theme": "elegant"
+  }
+}
