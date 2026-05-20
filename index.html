@@ -451,25 +451,6 @@
 
     .hero { padding-top: 1rem; padding-bottom: var(--section-gap); position: relative; isolation: isolate; }
 
-    .hero-monogram {
-      position: absolute;
-      top: -1.5rem;
-      right: 0;
-      z-index: -1;
-      font-family: var(--fontDisplay);
-      font-style: italic;
-      font-weight: 600;
-      font-size: clamp(10rem, 22vw, 18rem);
-      line-height: 0.88;
-      color: var(--accent);
-      opacity: 0.12;
-      user-select: none;
-      pointer-events: none;
-      letter-spacing: -0.04em;
-    }
-    @media (max-width: 720px) {
-      .hero-monogram { top: -0.5rem; right: -0.5rem; font-size: clamp(8rem, 38vw, 14rem); }
-    }
 
     .hero-h1 {
       font-family: var(--fontDisplay);
@@ -1432,7 +1413,6 @@
   <main id="main" tabindex="-1">
 
     <header id="hero" class="section hero">
-      <span class="hero-monogram" aria-hidden="true">M</span>
       <h1 class="hero-h1 reveal" style="transition-delay: 80ms;">
         Freedom is no longer a dream.<br>
         It&rsquo;s an engineering problem.
