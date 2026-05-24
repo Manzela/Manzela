@@ -4,7 +4,7 @@
 
 **Founding AI Product Builder**
 
-*Co-founder, CEO and CPO at TNG Shopper.*
+*Co-founder, CEO and CPO · TNG Shopper*
 
 <br>
 
@@ -18,15 +18,12 @@
 
 ### What I Build
 
-I design and operate **end-to-end autonomous AI systems** — from zero-to-one architecture through production. My work sits at the intersection of multi-agent orchestration, fail-closed safety, and LLM evaluation. The systems I build run with **zero human oversight** at enterprise scale.
+End-to-end autonomous AI systems — from zero-to-one architecture through production. My focus: multi-agent orchestration, fail-closed safety, and multi-model LLM evaluation.
 
-**Current system in production (TNG Shopper, 2024 → present):**
-- **11 enterprise clients** across **5 countries** (ES · PT · IL · US · MX) — **~10.5M product pages under autonomous management** at **$0.0006 / page**
-- **7-node multi-agent directed acyclic graph** with **~73.5M agent operations per full run** (weekly executions + daily price-delta runs) · 234 managed websites
-- **Gemma 4 26B-A4B Mixture-of-Experts** on self-hosted vLLM with PagedAttention inference. Multi-Low-Rank-Adaptation research documented in the [forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment).
-- **Originality, Relevance, Accuracy, Value** — four-axis multi-model evaluation with fail-closed policy at **68.9% pass rate by design** · Deterministic Evaluation and Monitoring Audit System enforcing every boundary
-
-**Ten years to get here.** Six projects. The pattern: how to unblock human-dependencies. See the [profile time-spine →](https://manzela.github.io/Manzela/#arc).
+**In production at TNG Shopper (2024 → present):**
+- 7-node multi-agent DAG · ~10.5M product pages under autonomous management · ~73.5M agent operations per full run · $0.0006 / page · 11 enterprise clients across 5 countries (ES · PT · IL · US · MX)
+- Gemma 4 26B-A4B Mixture-of-Experts on self-hosted vLLM with PagedAttention · Multi-LoRA adaptation ([forensic runbook](https://github.com/Manzela/gemma4-vllm-deployment))
+- Four-axis multi-model evaluation (Originality · Relevance · Accuracy · Value) with fail-closed policy at 68.9% pass rate by design · Deterministic gates enforce every node boundary
 
 ---
 
@@ -67,15 +64,15 @@ graph LR
 ```
 
 <details>
-<summary><b>Node Anatomy — Each node contains multiple sub-agents</b></summary>
+<summary><b>Node anatomy — each node contains multiple sub-agents</b></summary>
 
-Every directed-acyclic-graph node is a bounded ecosystem, not a single LLM call:
+Every DAG node is a bounded ecosystem, not a single LLM call:
 
 | Layer | Role | Example |
 |---|---|---|
 | **Deterministic Gate** | Schema validation, type coercion, regex | Pydantic, Python AST |
 | **Probabilistic Agent** | Semantic extraction, classification | Gemini Vision, SLM |
-| **Autonomy Layer** | Originality-Relevance-Accuracy-Value scoring, confidence thresholds | Multi-model consensus |
+| **Autonomy Layer** | O-R-A-V scoring, confidence thresholds | Multi-model consensus |
 | **Memory** | Long-term state, prompt cache mutation | Redis LTM, Firestore |
 
 The deterministic gate always fires first. The LLM is invoked **only if the gate passes**.
@@ -84,64 +81,18 @@ The deterministic gate always fires first. The LLM is invoked **only if the gate
 
 ---
 
-### Technical Focus
+### Open Source
 
-<div align="center">
-
-**AI & ML**
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Gemma](https://img.shields.io/badge/Gemma_4-8E75B2?style=flat-square&logo=google&logoColor=white)
-![Gemini](https://img.shields.io/badge/Gemini-4285F4?style=flat-square&logo=google&logoColor=white)
-![vLLM](https://img.shields.io/badge/vLLM-000000?style=flat-square)
-![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square)
-
-**Infrastructure & MLOps**
-
-![GCP](https://img.shields.io/badge/Google_Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
-![Vertex AI](https://img.shields.io/badge/Vertex_AI-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
-![BigQuery](https://img.shields.io/badge/BigQuery-669DF6?style=flat-square&logo=google-cloud&logoColor=white)
-![Firestore](https://img.shields.io/badge/Firestore-FFCA28?style=flat-square&logo=firebase&logoColor=black)
-
-**Evaluation & Safety**
-
-![Multi-Agent](https://img.shields.io/badge/Multi--Agent_DAGs-000?style=flat-square)
-![vLLM](https://img.shields.io/badge/vLLM_PagedAttention-000?style=flat-square)
-![Fail-Closed](https://img.shields.io/badge/Fail--Closed_Safety-000?style=flat-square)
-![RLHF](https://img.shields.io/badge/Closed--Loop_RL-000?style=flat-square)
-
-</div>
-
----
-
-### Featured Work
-
-#### The Arc — six case studies, in chronological order
-
-| Year | Project | What it proved |
-|---|---|---|
-| 2016 | [**Asset**](https://manzela.github.io/Manzela/asset/) <sub>(Sept 2016 — 2019)</sub> | Three years of solo contractor work for new-stage startups: web setups, ERP→web ETL by hand, spreadsheet automation, business plans. *The data-transformation reps every later pipeline compounded on.* |
-| 2019 | [**Data Mining**](https://manzela.github.io/Manzela/data-mining/) <sub>(Feb 2019 — Jul 2020)</sub> | Five-stage manually-orchestrated pipeline for an Israeli financial-services firm. ₪50M+ in new Assets Under Management. *A pipeline is a series of filters, not a series of steps.* |
-| 2020 | [**Seller App**](https://manzela.github.io/Manzela/seller-app/) <sub>(Jan 2020 — Apr 2024)</sub> | Computer vision for retail digitization. 3 computer-vision generations · 60M+ canonical Stock-Keeping Units · $10K Monthly Recurring Revenue plateau. The architectural origin of retrieval-grounded computer vision. |
-| 2020 | [**Tasko AI**](https://manzela.github.io/Manzela/tasko-ai/) <sub>(Oct 2020 — Dec 2023)</sub> | Production agentic system before the term existed. 21,102 labeled tasks · 153 clients · 1,561 intent patterns · 4-layer Classify / Retrieve / Execute / Verify. |
-| 2024 | [**Elysium**](https://manzela.github.io/Manzela/elysium/) <sub>(2024 — 2025, paused-pending-Pipeline)</sub> | Physical-Context AI for Retail. 13 brands validated · 15,600+ store locations · 15 patent claims (3 independent + 12 dependent). |
-| 2024 | [**Pipeline Observatory**](https://manzela.github.io/pipeline-observatory/) <sub>(2024 — present)</sub> | The synthesis. Seven-node directed acyclic graph, deterministic gates first, fail-closed by default. 10.5M product detail pages / month · 73.5M ops / month · $0.0006 / page · 68.9% pass rate across Originality, Relevance, Accuracy, Value. |
-
-#### Open-source distillations (parallel track)
-
-| Repository | Description |
+| Repository | |
 |---|---|
-| [**agent-dag-pipeline**](https://github.com/Manzela/agent-dag-pipeline) | Open-source distillation of the seven-node directed acyclic graph. Google Agent Development Kit + Vertex AI + four-axis Originality-Relevance-Accuracy-Value evaluation + Direct Preference Optimization data flywheel. |
-| [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) <sub>· `pip install ag-os`</sub> | Orchestration infra that lets a small team ship more product per engineer, safely. Built at TNG (2-engineer dev team) to streamline the SDLC by reducing human-dependencies in the dev loop: AI dev assistants run inside a 9-rule constitutional policy-as-code, with Cost Guard, Flight Recorder for replay, Self-Healing CI, Dreaming Module for offline agent self-improvement, drop-in MCP server. |
-| [**gemma4-vllm-deployment**](https://github.com/Manzela/gemma4-vllm-deployment) | Forensic runbook documenting 20 failure modes across 30+ deployment versions of Gemma 4 Mixture-of-Experts on Vertex AI with vLLM. The community reference for production Mixture-of-Experts serving. |
-| [**pipeline-observatory**](https://github.com/Manzela/pipeline-observatory) | Source of the live observability site at [manzela.github.io/pipeline-observatory](https://manzela.github.io/pipeline-observatory/). Architecture visualization — Mixture-of-Experts sparse routing, causal directed-acyclic-graph tracing, live execution telemetry. |
-| [**WP-Multisite**](https://github.com/Manzela/WP-Multisite) | A WordPress multisite for retailer sites, written from scratch to be natively understood by AI search bots (ChatGPT, Claude, Perplexity, Google AI Overview). Explicit AI-bot ALLOW contracts (OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Applebot, Amazonbot, DuckAssistBot), `llms.txt` indexing surface, JSON-LD with `SpeakableSpecification` for voice. Sanitised from the TNG production stack (Sage 10 + custom `sunrise.php` + 1,056-LOC schema generator). |
+| [**agent-dag-pipeline**](https://github.com/Manzela/agent-dag-pipeline) | 7-node autonomous agent DAG · Google ADK + Vertex AI · O-R-A-V evaluation · DPO data flywheel |
+| [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) &nbsp;`pip install ag-os` | AI dev governance kernel · 9-rule constitutional policy-as-code · Cost Guard · Self-Healing CI · Dreaming Module |
+| [**gemma4-vllm-deployment**](https://github.com/Manzela/gemma4-vllm-deployment) | Forensic runbook · 20 failure modes · Gemma 4 MoE on Vertex AI + vLLM |
+| [**pipeline-observatory**](https://github.com/Manzela/pipeline-observatory) | Live architecture visualization · MoE sparse routing · causal DAG tracing · execution telemetry |
+| [**Atelier**](https://github.com/Manzela/Atelier) | Autonomous design agent · Google for Startups AI Agents Challenge 2026 |
 
 ---
 
 <div align="center">
-<sub><a href="mailto:danielq1603@gmail.com">danielq1603@gmail.com</a></sub>
+<sub><a href="mailto:manzela@tngshopper.com">manzela@tngshopper.com</a></sub>
 </div>
-
