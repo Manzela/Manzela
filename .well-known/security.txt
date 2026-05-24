@@ -1,4 +1,0 @@
-Contact: mailto:danielq1603@gmail.com
-Expires: 2027-05-19T00:55:22.770878Z
-Preferred-Languages: en
-Canonical: https://manzela.github.io/.well-known/security.txt
