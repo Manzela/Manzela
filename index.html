@@ -165,7 +165,7 @@
       --nav-height:               54px;
       --nav-stuck-offset:         calc(var(--nav-height) + 24px);
       --section-gap:              clamp(4.5rem, 9vw, 9rem);
-      --content-max:              74rem;
+      --content-max:              62rem;
       --spine-rail-width:         clamp(4rem, 8vw, 9rem);
       --radius-card:              4px;
       --radius-pill:              999px;
@@ -392,16 +392,16 @@
     .nav-toggle {
       display: none;
       background: transparent;
-      border: 1px solid var(--ink);
-      width: 36px;
-      height: 36px;
+      border: 0;
+      width: 40px;
+      height: 40px;
       border-radius: 4px;
       cursor: pointer;
       padding: 0;
+      margin-right: -8px;
       align-items: center;
       justify-content: center;
-      transition: border-color var(--dur-micro) var(--ease-snap),
-                  background var(--dur-micro) var(--ease-snap);
+      transition: background var(--dur-micro) var(--ease-snap);
     }
     .nav-toggle:hover { background: var(--accent-faint); }
     .nav-toggle-bar {
@@ -440,14 +440,10 @@
     }
     .section-narrow { max-width: 60rem; }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity var(--dur-reveal-card) var(--ease-decel),
-                  transform var(--dur-reveal-card) var(--ease-decel);
-      will-change: opacity, transform;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Entrance reveal removed — content renders immediately: no flash on load,
+       no blank gaps on fast scroll, fully crawlable. Live-status pulses kept. */
+    .reveal { opacity: 1; transform: none; }
+    .reveal.visible { opacity: 1; transform: none; }
 
     .hero { padding-top: 1rem; padding-bottom: var(--section-gap); position: relative; isolation: isolate; }
 
@@ -917,6 +913,7 @@
       list-style: none;
       padding: 0;
       margin: 0;
+      max-width: 50rem;
       counter-reset: proved;
     }
     .proved-list > li {
@@ -1003,15 +1000,10 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.6rem;
-      padding: 1rem;
-      border: 1px solid var(--paper-edge);
-      border-radius: var(--radius-card);
-      background: var(--paper-elev);
-      transition: border-color var(--dur-micro) var(--ease-snap);
-      min-height: 100%;
+      gap: 0.55rem;
+      padding: 0.25rem 0;
+      background: transparent;
     }
-    .social-proof-item:hover { border-color: var(--ink-mute); }
     .social-proof-item img {
       max-height: 56px;
       width: auto;
@@ -1458,35 +1450,29 @@
           <header class="chapter-head">
             <span class="chapter-num" aria-hidden="true">01</span>
             <div class="chapter-title-block">
-              <h3 class="chapter-name">Autonomous Agent</h3>
-              <p class="chapter-status">
-                <span class="status-pulse" aria-hidden="true"></span>
-                Active &middot; 2025 &rarr; today
-              </p>
+              <h3 class="chapter-name">Atelier</h3>
+              <p class="chapter-status">Experimental &middot; Google for Startups AI Agents Challenge 2026</p>
             </div>
           </header>
           <p class="chapter-body">
-            Autonomous 24/7 MoE agents orchestration that gets better over time with RL. The agent that runs itself, learns from its own runs, and never sleeps.
+            An autonomous design agent that converges instead of one-shotting. On Google ADK and Vertex AI (Gemini), it generates a UI candidate, rejects it against fail-closed accessibility and design-token gates, scores it across several axes, then fixes and retries until it clears a quality threshold. A per-user token budget &mdash; hard cap, circuit breaker, fail-loud &mdash; keeps cost bounded. Each run logs scored trajectories toward a Vertex tuning job; the full retrain-and-promote loop isn&rsquo;t closed yet. Experimental, with a live demo up.
           </p>
-          <a class="chapter-cta" href="https://github.com/Manzela/AutonomousAgent">
-            View on GitHub <span aria-hidden="true">&rarr;</span>
+          <a class="chapter-cta" href="https://atelier.autonomous-agent.dev">
+            See it running <span aria-hidden="true">&rarr;</span>
           </a>
         </li>
         <li class="chapter reveal">
           <header class="chapter-head">
             <span class="chapter-num" aria-hidden="true">02</span>
             <div class="chapter-title-block">
-              <h3 class="chapter-name">Atelier</h3>
-              <p class="chapter-status">
-                <span class="status-pulse" aria-hidden="true"></span>
-                Google hackathon &middot; 2025
-              </p>
+              <h3 class="chapter-name">Autonomous Agent</h3>
+              <p class="chapter-status">Experimental &middot; Phase 1 (local)</p>
             </div>
           </header>
           <p class="chapter-body">
-            Autonomous Design Agent &mdash; MoDE (Mixture of Design Experts) agents orchestration. Built for a Google Challenge Hackathon; same RL-improvement loop, different vertical. 100% GCP Vertex (Gemini Enterprise Agent Platform) Infrastructure.
+            A production-hardening layer around Nous Research&rsquo;s Hermes agent &mdash; the operability scaffolding a long-running, tool-using agent needs to run safely: inline secret-scrubbing on the model proxy, a codified failure-mode taxonomy with handlers, a budget watchdog, 24-hour-silence escalation, a network-isolated tool sandbox, and one-command halt-and-snapshot. Models route to Vertex AI through a LiteLLM proxy. The self-improving control plane &mdash; model routing and RL self-training &mdash; is designed and partly built, not yet wired; Phase 1 runs locally today.
           </p>
-          <a class="chapter-cta" href="https://github.com/Manzela/Atelier">
+          <a class="chapter-cta" href="https://github.com/Manzela/AutonomousAgent">
             View on GitHub <span aria-hidden="true">&rarr;</span>
           </a>
         </li>
@@ -1711,12 +1697,6 @@
             <span class="sp-source">Google Cloud</span>
             <span class="sp-status sp-status-pending">Active June 2026</span>
           </li>
-          <li class="social-proof-item">
-            <img src="assets/cert-cloud-architect.png" alt="Professional Cloud Architect certification" loading="lazy" decoding="async">
-            <span class="sp-label">Professional Cloud Architect</span>
-            <span class="sp-source">Google Cloud</span>
-            <span class="sp-status sp-status-expired">Expired</span>
-          </li>
         </ul>
         <p class="social-proof-eyebrow" id="social-proof-heading">Verifiable credentials</p>
 
@@ -1753,14 +1733,7 @@
         </li>
         <li>
           <h3><a href="https://github.com/Manzela/AutonomousAgent">Autonomous Agent</a></h3>
-          <p>Autonomous 24/7 MoE agents orchestration that gets better over time with RL. The agent that runs itself, learns from its own runs, and never sleeps.</p>
-        </li>
-        <li>
-          <h3>
-            <a href="https://github.com/Manzela/Atelier">Atelier</a>
-            <span class="badge mono">Google hackathon</span>
-          </h3>
-          <p>Autonomous Design Agent &mdash; MoDE (Mixture of Design Experts) agents orchestration. Built for a Google Challenge Hackathon; same RL-improvement loop, different vertical. 100% GCP Vertex (Gemini Enterprise Agent Platform) Infrastructure.</p>
+          <p>An operability layer around Nous Research&rsquo;s Hermes agent: inline secret-scrubbing on the model proxy, a failure-mode taxonomy with handlers, a budget watchdog, 24h-silence escalation, a network-isolated sandbox, and halt-and-snapshot. Routes to Vertex AI via LiteLLM. The self-improving control plane is designed and partly built, not yet wired.</p>
         </li>
         <li>
           <h3><a href="https://github.com/Manzela/agent-dag-pipeline">agent-dag-pipeline</a></h3>
@@ -1790,12 +1763,6 @@
           <a href="https://github.com/NousResearch/hermes-agent/issues/26383" target="_blank" rel="noopener">
             <span class="contrib-repo">NousResearch / hermes-agent</span>
             <span class="contrib-ref">issue #26383</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/NousResearch/hermes-agent/issues/26382" target="_blank" rel="noopener">
-            <span class="contrib-repo">NousResearch / hermes-agent</span>
-            <span class="contrib-ref">issue #26382</span>
           </a>
         </li>
         <li class="contrib-and-more">
@@ -1901,38 +1868,9 @@
         });
       }
 
-      var counter = document.getElementById('nowCounter');
-      if (counter) {
-        var TARGET = 10500000;
-        var FORMAT = function (v) { return '~' + (v / 1000000).toFixed(1) + 'M'; };
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-          counter.textContent = FORMAT(TARGET);
-        } else {
-          var rect = counter.getBoundingClientRect();
-          var alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (alreadyVisible) {
-            counter.textContent = FORMAT(TARGET);
-          } else {
-            counter.textContent = '~0.0M';
-            var ctrObs = new IntersectionObserver(function (entries) {
-              entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                var start = performance.now();
-                var dur = 1400;
-                function step(now) {
-                  var t = Math.min(1, (now - start) / dur);
-                  var eased = 1 - Math.pow(1 - t, 3);
-                  counter.textContent = FORMAT(Math.round(TARGET * eased));
-                  if (t < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-                ctrObs.unobserve(entry.target);
-              });
-            }, { threshold: 0.45 });
-            ctrObs.observe(counter);
-          }
-        }
-      }
+      // Metric is static (~10.5M in the HTML). The count-up was removed so the headline
+      // number is always present — for fast scrollers, crawlers, and reduced-motion —
+      // instead of showing ~0.0M until scrolled into view.
 
       document.querySelectorAll('a[href^="#"]').forEach(function (a) {
         a.addEventListener('click', function () {
