@@ -478,7 +478,11 @@ def main() -> int:
         if writing is None:
             failures.append("writing (Medium RSS) fetch failed — keeping last list")
         if not fetch_gcp_credential_count():
-            failures.append("gcp credential count scrape failed — keeping last-known badge")
+            # Known-fragile, best-effort scrape (the page is JS-rendered more
+            # often than not). The badge freezes at its conservative last-known
+            # value and links to the ground-truth profile, so this warns
+            # without failing the nightly run.
+            print("::warning::gcp credential count scrape failed — keeping last-known badge")
 
     # ---- render assets
     write_if_changed(PROFILE / "kpi.svg", render_kpi_svg(metrics, stamp, stale_since))
