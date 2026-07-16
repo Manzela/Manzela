@@ -1,0 +1,35 @@
+# PR ship-gate for the profile README: validates templates, marker pairs,
+# generated SVGs, and the sanitizer contract on every pull request that
+# touches the README or the profile machinery. Read-only; no cron, so the
+# 60-day auto-disable does not apply.
+#
+# The human half of the gate (not automatable): render the branch README and
+# inspect it in the four-way theme matrix — OS light/dark × forced GitHub
+# light/dark — plus Firefox and Safari (SMIL portability), and confirm
+# profile/kpi.svg reads as a complete masthead with animation stopped.
+
+name: profile-preview
+
+on:
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'profile/**'
+      - '.github/workflows/**'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate README, markers, SVGs, sanitizer contract
+        run: python profile/build_profile.py --check

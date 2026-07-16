@@ -1,0 +1,48 @@
+{
+  "note": "Pinned source repos and derivation specs for the weekly claims ledger (verify_claims.py). Each claim is re-derived from a fresh shallow clone; a claim that cannot be reproduced keeps its last verified value and is stamped stale.",
+  "owner": "Manzela",
+  "claims": [
+    {
+      "id": "atelier_tests",
+      "repo": "Atelier",
+      "kind": "test_count",
+      "label": "Test functions"
+    },
+    {
+      "id": "autonomousagent_tests",
+      "repo": "AutonomousAgent",
+      "kind": "test_count",
+      "label": "Test functions"
+    },
+    {
+      "id": "agos_tests",
+      "repo": "Antigravity-OS",
+      "kind": "test_count",
+      "label": "Test functions"
+    },
+    {
+      "id": "agdag_tests",
+      "repo": "agent-dag-pipeline",
+      "kind": "test_count",
+      "label": "Test functions"
+    },
+    {
+      "id": "orav_thresholds",
+      "repo": "agent-dag-pipeline",
+      "kind": "orav_thresholds",
+      "label": "O·R·A·V gate thresholds"
+    },
+    {
+      "id": "agos_rules",
+      "repo": "Antigravity-OS",
+      "kind": "rule_count",
+      "label": "Constitution rules"
+    },
+    {
+      "id": "gemma4_failure_modes",
+      "repo": "gemma4-vllm-deployment",
+      "kind": "runbook_sections",
+      "label": "Documented failure modes, forensic runbook"
+    }
+  ]
+}
