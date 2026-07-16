@@ -87,8 +87,8 @@ Selected engineering. Every claim maps to committed code — clone and verify, o
 **Recent releases**
 <!--START_SECTION:releases-->
 - [Atelier — v0.2.0-alpha](https://github.com/Manzela/Atelier/releases/tag/v0.2.0-alpha) · 2026-05
-- [Antigravity-OS — v1.4.0](https://github.com/Manzela/Antigravity-OS/releases) · 2026-06
-- [ag-os 1.2.0 on PyPI](https://pypi.org/project/ag-os/) · 2026-05
+- [AutonomousAgent — phase1.0.1-accepted](https://github.com/Manzela/AutonomousAgent/releases/tag/phase1.0.1-accepted) · 2026-05
+- [Antigravity-OS — v1.2.0: Dreaming Module — Self-Improvement for Any LLM](https://github.com/Manzela/Antigravity-OS/releases/tag/v1.2.0) · 2026-05
 <!--END_SECTION:releases-->
 
 </td><td valign="top" width="50%">
@@ -97,7 +97,8 @@ Selected engineering. Every claim maps to committed code — clone and verify, o
 <!--START_SECTION:writing-->
 - [The Physical-Context Flywheel](https://medium.com/kairi-ai/the-physical-context-flywheel-4964b6e45115) · Nov 2025
 - [Epiphany](https://medium.com/@manzela/epiphany-7d7c9f4dd857) · Nov 2025
-- [The Marco Economy of Hybrid Retail](https://medium.com/@manzela/the-marco-economy-of-hybrid-retail-ad51a977cba0) · Nov 2022
+- [Generative Engine Optimization (GEO): Strategic Implementation and Advanced Tactics](https://medium.com/@manzela/generative-engine-optimization-geo-strategic-implementation-and-advanced-tactics-f112e4dbbd3b) · Jun 2025
+- [From SEO to GEO: Navigating the New Landscape of Search](https://medium.com/@manzela/from-seo-to-geo-navigating-the-new-landscape-of-search-f30f15f8ccb4) · Jun 2025
 <!--END_SECTION:writing-->
 
 </td></tr></table>

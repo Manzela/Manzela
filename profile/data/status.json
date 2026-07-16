@@ -1,8 +1,8 @@
 {
   "tng": {
-    "state": "unverified",
+    "state": "operational",
     "consecutive_404s": 0,
-    "last_ok": null,
+    "last_ok": "2026-07-16",
     "url": "https://tngshopper.com",
     "last_checked": "2026-07-16"
   },
@@ -14,9 +14,9 @@
     "last_checked": "2026-07-16"
   },
   "agdag": {
-    "state": "unverified",
+    "state": "operational",
     "consecutive_404s": 0,
-    "last_ok": null,
+    "last_ok": "2026-07-16",
     "url": "https://manzela.github.io/pipeline-observatory/",
     "last_checked": "2026-07-16"
   },
