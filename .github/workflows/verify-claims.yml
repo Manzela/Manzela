@@ -20,9 +20,11 @@ on:
 permissions:
   contents: write
 
+# Shared group with profile-refresh.yml: both workflows auto-commit to the
+# same ref, so they must run serially or one loses the push race.
 concurrency:
-  group: verify-claims
-  cancel-in-progress: true
+  group: profile-automation
+  cancel-in-progress: false
 
 jobs:
   audit:

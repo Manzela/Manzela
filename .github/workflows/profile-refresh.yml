@@ -22,9 +22,11 @@ on:
 permissions:
   contents: write
 
+# Shared group with verify-claims.yml: both workflows auto-commit to the same
+# ref, so they must run serially or one loses the push race. Queue, not cancel.
 concurrency:
-  group: profile-refresh
-  cancel-in-progress: true
+  group: profile-automation
+  cancel-in-progress: false
 
 jobs:
   refresh:
