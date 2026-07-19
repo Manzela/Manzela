@@ -1,6 +1,6 @@
 # Hi, I'm Daniel
 
-I build autonomous multi-agent AI systems — the kind that run with **no human in the loop** — so most of my work is really about making that safe: deterministic gates in front of probabilistic agents, fail-closed pipelines, self-improvement that has to pass an eval to ship. Mostly Python, with PHP and TypeScript where the product needs them. Tel Aviv.
+I build autonomous multi-agent AI systems — the kind that run with **no human in the loop** — so most of my work is really about making that safe: deterministic gates in front of probabilistic agents, fail-closed pipelines, self-improvement that has to pass an eval to ship. Mostly Python, with TypeScript where the product needs it. Tel Aviv.
 
 **Now** — [Atelier](https://github.com/Manzela/Atelier), an autonomous zero-shot design agent for the Google for Startups AI Agents Challenge 2026, and the open-source agent stack underneath it.
 
@@ -31,7 +31,7 @@ The production deployment of this stack is [TNG Shopper](https://tngshopper.com)
 
 ### Activity
 
-<img src="profile/activity.svg" width="840" alt="Weekly public contribution totals over the trailing 12 months, drawn nightly from the GitHub GraphQL API. Line and area chart with the annual total set in Fraunces numerals; weeks with zero contributions are marked as faint baseline dots.">
+<img src="profile/activity.svg" width="840" alt="Weekly totals of my authored commits across public repositories over the trailing 12 months, drawn nightly from the GitHub GraphQL API. Line and area chart with the annual total set in Fraunces numerals; weeks with zero commits are marked as faint baseline dots.">
 
 <img src="profile/languages.svg" width="840" alt="Language composition across public non-fork repositories by bytes of code, as classified by linguist: horizontal bars ordered by share, percentages in Fraunces numerals. The profile repo itself is excluded, as declared in the chart footer.">
 

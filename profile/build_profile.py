@@ -8,10 +8,10 @@ visible "stale" marker, and the process exits nonzero so the workflow-failure
 email becomes the alert channel. Nothing is ever fabricated.
 
 Outputs (all inside README.md and profile/ — never anywhere else):
-  profile/activity.svg    weekly contribution totals, trailing 12 months
+  profile/activity.svg    weekly authored-commit totals, trailing 12 months
   profile/languages.svg   language composition across public repos, by bytes
   profile/rhythm.svg      own commits by day x hour, author-local time
-  profile/data/{contributions,languages,rhythm}.json   committed data caches
+  profile/data/{commits,languages}.json   committed data caches
   README.md marker sections: stamp   (claims is owned by verify_claims.py)
 
 Modes:
@@ -118,36 +118,6 @@ def rewrite_section(text: str, name: str, content: str) -> str:
 # ------------------------------------------------------------------ fetches
 
 
-def fetch_contributions() -> bool:
-    """Daily contribution calendar (public contributions), trailing year."""
-    data = graphql(
-        'query { user(login: "%s") { contributionsCollection {'
-        " contributionCalendar { totalContributions"
-        " weeks { contributionDays { date contributionCount } } } } } }" % OWNER
-    )
-    try:
-        cal = data["user"]["contributionsCollection"]["contributionCalendar"]
-        days = [
-            {"date": d["date"], "count": d["contributionCount"]}
-            for w in cal["weeks"]
-            for d in w["contributionDays"]
-        ]
-        if not days:
-            return False
-    except (KeyError, TypeError):
-        return False
-    save_json(
-        PROFILE / "data" / "contributions.json",
-        {
-            "as_of": now_utc().strftime("%Y-%m-%d"),
-            "source": "github-graphql contributionsCollection (public contributions)",
-            "total": cal["totalContributions"],
-            "days": days,
-        },
-    )
-    return True
-
-
 def _public_repo_names(lang_data: dict | None) -> list[str]:
     if lang_data and lang_data.get("repos"):
         return lang_data["repos"]
@@ -201,8 +171,15 @@ def fetch_languages() -> bool:
     return True
 
 
-def fetch_rhythm() -> bool:
-    """Own commits bucketed day-of-week x hour in author-local time.
+def fetch_commits() -> bool:
+    """Own authored commits across public repos: daily counts for the
+    activity chart AND a day-of-week x hour grid for the rhythm chart, from
+    one pass over the same commit stream — consistent by construction.
+
+    Deliberately NOT contributionsCollection: under the Actions installation
+    token that calendar can come back all-zero (observed in production),
+    which would silently zero the chart. Commit history is the honest,
+    token-reliable source.
 
     authoredDate is a GitTimestamp (offset-preserving), so the printed wall
     time IS author-local — no timezone conversion, no DST smearing.
@@ -215,14 +192,17 @@ def fetch_rhythm() -> bool:
     repos = _public_repo_names(load_json(PROFILE / "data" / "languages.json"))
     if not repos:
         return False
-    since = (now_utc() - timedelta(days=RHYTHM_WINDOW_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    since_dt = now_utc() - timedelta(days=RHYTHM_WINDOW_DAYS)
+    since = since_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     grid = [[0] * 24 for _ in range(7)]  # Mon..Sun x 0..23
+    daily: dict[str, int] = {}
 
     def ingest(nodes) -> None:
         for n in nodes:
             # e.g. 2026-07-15T14:23:11+03:00 — parse the wall-clock portion
             dt = datetime.fromisoformat(n["authoredDate"])
             grid[dt.isoweekday() - 1][dt.hour] += 1
+            daily[dt.date().isoformat()] = daily.get(dt.date().isoformat(), 0) + 1
 
     for i in range(0, len(repos), 10):
         chunk = repos[i : i + 10]
@@ -263,13 +243,21 @@ def fetch_rhythm() -> bool:
                 more = history["pageInfo"]["hasNextPage"]
                 pages += 1
     if not any(any(row) for row in grid):
-        return False
+        return False  # an all-zero result for an active account is an API artifact
+    start = since_dt.date()
+    days = [
+        {"date": (start + timedelta(days=i)).isoformat(),
+         "count": daily.get((start + timedelta(days=i)).isoformat(), 0)}
+        for i in range(RHYTHM_WINDOW_DAYS + 1)
+    ]
     save_json(
-        PROFILE / "data" / "rhythm.json",
+        PROFILE / "data" / "commits.json",
         {
             "as_of": now_utc().strftime("%Y-%m-%d"),
             "source": "github-graphql commit history, author-filtered, author-local time",
             "window_days": RHYTHM_WINDOW_DAYS,
+            "total": sum(d["count"] for d in days),
+            "days": days,
             "grid": grid,
         },
     )
@@ -331,10 +319,10 @@ def header(width: int, title: str) -> str:
     )
 
 
-def render_activity_svg(contrib: dict, stale_since: str | None) -> str:
+def render_activity_svg(commits: dict, stale_since: str | None) -> str:
     glyphs = _glyphs()
     width, height = 840, 200
-    days = contrib["days"]
+    days = commits["days"]
     # aggregate into weeks starting Monday
     weekly: dict[str, int] = {}
     for d in days:
@@ -343,7 +331,7 @@ def render_activity_svg(contrib: dict, stale_since: str | None) -> str:
         weekly[wk] = weekly.get(wk, 0) + d["count"]
     weeks = sorted(weekly)[-52:]
     values = [weekly[w] for w in weeks]
-    total = contrib.get("total", sum(values))
+    total = commits.get("total", sum(values))
 
     x0, x1, y0, y1 = 24, 816, 58, 158
     peak = max(values) or 1
@@ -377,11 +365,11 @@ def render_activity_svg(contrib: dict, stale_since: str | None) -> str:
         if stale_since
         else ""
     )
-    label = "CONTRIBUTIONS — TRAILING 12 MONTHS · PUBLIC ONLY"
+    label = "COMMITS — TRAILING 12 MONTHS · PUBLIC REPOSITORIES · AUTHORED BY ME"
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" '
-        f'aria-label="{total} public contributions in the trailing twelve months">'
+        f'aria-label="{total} authored commits across public repositories in the trailing twelve months">'
         + svg_style()
         + header(width, label)
         + total_run
@@ -519,12 +507,11 @@ def validate(readme_text: str) -> list[str]:
 
 
 def render_all(stale: dict[str, str | None]) -> None:
-    contrib = load_json(PROFILE / "data" / "contributions.json")
+    commits = load_json(PROFILE / "data" / "commits.json")
     langs = load_json(PROFILE / "data" / "languages.json")
-    rhythm = load_json(PROFILE / "data" / "rhythm.json")
-    write_if_changed(PROFILE / "activity.svg", render_activity_svg(contrib, stale.get("contributions")))
+    write_if_changed(PROFILE / "activity.svg", render_activity_svg(commits, stale.get("commits")))
     write_if_changed(PROFILE / "languages.svg", render_languages_svg(langs, stale.get("languages")))
-    write_if_changed(PROFILE / "rhythm.svg", render_rhythm_svg(rhythm, stale.get("rhythm")))
+    write_if_changed(PROFILE / "rhythm.svg", render_rhythm_svg(commits, stale.get("commits")))
 
 
 # --------------------------------------------------------------------- main
@@ -538,9 +525,9 @@ def main() -> int:
         # Dry-run: prove the committed data renders (glyph coverage included —
         # a missing Fraunces character must fail the PR gate, not the nightly)
         for svg_text in (
-            render_activity_svg(load_json(PROFILE / "data" / "contributions.json"), None),
+            render_activity_svg(load_json(PROFILE / "data" / "commits.json"), None),
             render_languages_svg(load_json(PROFILE / "data" / "languages.json"), None),
-            render_rhythm_svg(load_json(PROFILE / "data" / "rhythm.json"), None),
+            render_rhythm_svg(load_json(PROFILE / "data" / "commits.json"), None),
         ):
             ET.fromstring(svg_text)
         problems = validate(README.read_text(encoding="utf-8"))
@@ -554,9 +541,8 @@ def main() -> int:
     stale: dict[str, str | None] = {}
     if not offline:
         for name, fetch in (
-            ("contributions", fetch_contributions),
-            ("languages", fetch_languages),
-            ("rhythm", fetch_rhythm),
+            ("languages", fetch_languages),  # first: commits reuses its repo list
+            ("commits", fetch_commits),
         ):
             if not fetch():
                 cached = load_json(PROFILE / "data" / f"{name}.json") or {}
