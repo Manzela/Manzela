@@ -60,6 +60,8 @@ jobs:
         with:
           commit_message: 'chore(profile): weekly claims audit'
           file_pattern: 'README.md profile/**'
+          # Bot-authored so audit commits never inflate the activity chart.
+          commit_author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
 
       - name: Surface unreproducible claims as a failure
         if: steps.derive.outputs.degraded == '1'

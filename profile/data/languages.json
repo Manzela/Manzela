@@ -1,0 +1,1 @@
+{"as_of": "2026-07-19", "source": "seed-local-scan (first nightly replaces with linguist bytes via API)", "langs": [{"lang": "Python", "bytes": 6080556}, {"lang": "PHP", "bytes": 1017464}, {"lang": "TypeScript", "bytes": 647737}, {"lang": "HTML", "bytes": 258843}, {"lang": "Shell", "bytes": 155468}, {"lang": "JavaScript", "bytes": 113790}, {"lang": "CSS", "bytes": 18208}]}

@@ -70,6 +70,10 @@ jobs:
         with:
           commit_message: 'chore(profile): nightly refresh'
           file_pattern: 'README.md profile/**'
+          # Author as the bot, never the owner: the activity chart draws the
+          # owner's contributions, and a chart counting its own rebuild
+          # commits would destroy the page's premise.
+          commit_author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
 
       - name: Link audit
         if: github.ref == 'refs/heads/main'
