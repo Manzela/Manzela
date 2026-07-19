@@ -1,0 +1,13 @@
+{
+  "as_of": "2026-07-16",
+  "source": "seed",
+  "note": "Canonical business-metrics feed for the profile README. The nightly build first tries the pipeline-observatory published export (see REMOTE_METRICS_URL in build_profile.py); until that endpoint ships, this committed file is the source of truth and is hand-maintained. Every render carries a visible audit stamp.",
+  "kpis": [
+    { "id": "pages", "value": "10.5M", "label": "product pages under", "sublabel": "autonomous management" },
+    { "id": "footprint", "value": "234", "label": "websites · 11 enterprise", "sublabel": "clients · 5 countries" },
+    { "id": "unit_cost", "value": "$0.0006", "label": "marginal cost", "sublabel": "per page" },
+    { "id": "quality", "value": "68.9%", "label": "quality-gate pass rate", "sublabel": "(fail-closed by design)" }
+  ],
+  "tng_metric": "10.5M pages · 234 sites · 11 enterprise clients · 5 countries",
+  "agdag_metric": "~33,000 production LLM calls across 4 model generations"
+}

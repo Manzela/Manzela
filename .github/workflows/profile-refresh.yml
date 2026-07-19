@@ -1,0 +1,96 @@
+# Nightly self-maintenance for the profile README.
+#
+# Fail-closed contract: on any fetch failure the build keeps the last
+# committed value, renders a visible stale marker, and exits nonzero AFTER
+# everything that succeeded is committed — the default workflow-failure
+# email is the alert channel. GITHUB_TOKEN pushes cannot re-trigger
+# workflows, so the auto-commit is loop-proof by construction, and the
+# near-daily commits keep the repo active so scheduled workflows never hit
+# GitHub's 60-day auto-disable.
+
+name: profile-refresh
+
+on:
+  schedule:
+    - cron: '43 4 * * *'   # nightly, off-peak, odd minute (cron drifts at :00)
+  workflow_dispatch:
+  push:
+    paths:
+      - 'profile/**'
+      - '.github/workflows/profile-refresh.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: write   # for the keepalive `gh workflow enable` step only
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild profile (fail-closed)
+        id: build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python profile/build_profile.py
+          code=$?
+          set -e
+          if [ "$code" -ge 2 ]; then exit "$code"; fi   # invalid output: never commit
+          echo "degraded=$code" >> "$GITHUB_OUTPUT"     # 1 = stale values held
+
+      - name: Validate rendered output
+        run: python profile/build_profile.py --check
+
+      - name: Guard — nothing outside README.md and profile/ may change
+        run: |
+          unexpected=$(git status --porcelain | awk '{print $NF}' | grep -vE '^(README\.md|profile/)' || true)
+          if [ -n "$unexpected" ]; then
+            echo "::error::unexpected changes outside README.md/profile/: $unexpected"
+            exit 1
+          fi
+
+      - name: Commit refreshed profile
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(profile): nightly refresh'
+          file_pattern: 'README.md profile/**'
+
+      - name: Link audit
+        if: github.ref == 'refs/heads/main'
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-retries 3
+            --accept '200..=299,401,403,429,999'
+            --exclude 'linkedin\.com'
+            README.md
+          fail: true
+
+      - name: Keep scheduled workflows enabled (belt and braces)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        continue-on-error: true
+        run: |
+          gh workflow enable profile-refresh.yml --repo "$GITHUB_REPOSITORY"
+          gh workflow enable verify-claims.yml --repo "$GITHUB_REPOSITORY"
+
+      - name: Surface degraded fetches as a failure
+        if: steps.build.outputs.degraded == '1'
+        run: |
+          echo "::error::one or more sources were unreachable — stale values held (see build warnings)"
+          exit 1

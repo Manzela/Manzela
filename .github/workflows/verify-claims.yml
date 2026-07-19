@@ -1,0 +1,66 @@
+# Weekly claims ledger: re-derives every load-bearing figure on the profile
+# from a fresh shallow clone of its source repo and rewrites the Auditor's
+# notes table. A claim that cannot be reproduced keeps its last verified
+# value and is stamped "⚠ stale" — the job then fails (after committing) so
+# the workflow-failure email fires. Kept alive past GitHub's 60-day cron
+# auto-disable by profile-refresh's near-daily commits.
+
+name: verify-claims
+
+on:
+  schedule:
+    - cron: '7 3 * * 1'   # weekly, Monday, odd minute
+  workflow_dispatch:
+  push:
+    paths:
+      - 'profile/verify_claims.py'
+      - 'profile/data/sources.json'
+      - '.github/workflows/verify-claims.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-claims
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Re-derive all claims from fresh clones
+        id: derive
+        run: |
+          set +e
+          python profile/verify_claims.py
+          code=$?
+          set -e
+          if [ "$code" -ge 2 ]; then exit "$code"; fi   # broken markers: never commit
+          echo "degraded=$code" >> "$GITHUB_OUTPUT"
+
+      - name: Guard — nothing outside README.md and profile/ may change
+        run: |
+          unexpected=$(git status --porcelain | awk '{print $NF}' | grep -vE '^(README\.md|profile/)' || true)
+          if [ -n "$unexpected" ]; then
+            echo "::error::unexpected changes outside README.md/profile/: $unexpected"
+            exit 1
+          fi
+
+      - name: Commit refreshed ledger
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(profile): weekly claims audit'
+          file_pattern: 'README.md profile/**'
+
+      - name: Surface unreproducible claims as a failure
+        if: steps.derive.outputs.degraded == '1'
+        run: |
+          echo "::error::one or more claims could not be re-derived — held stale (see warnings)"
+          exit 1
