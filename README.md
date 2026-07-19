@@ -152,16 +152,16 @@ languages   python · go · node.js · typescript · react
 <!--START_SECTION:claims-->
 | Claim | Value | Derived by | Verified |
 |---|---:|---|---|
-| Test functions ([Atelier](https://github.com/Manzela/Atelier)) | 1,315 in 120 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-16 |
-| Test functions ([AutonomousAgent](https://github.com/Manzela/AutonomousAgent)) | 2,011 in 198 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-16 |
-| Test functions ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 133 in 9 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-16 |
-| Test functions ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 61 in 4 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-16 |
-| O·R·A·V gate thresholds ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 0.6 / 0.7 / 0.8 / 0.6 | constants in `agent_dag/config.py`, fresh clone | 2026-07-16 |
-| Constitution rules ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 9 | count of `templates/rules/*.md` on fresh clone | 2026-07-16 |
-| Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-07-16 |
+| Test functions ([Atelier](https://github.com/Manzela/Atelier)) | 1,315 in 120 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-19 |
+| Test functions ([AutonomousAgent](https://github.com/Manzela/AutonomousAgent)) | 2,011 in 198 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-19 |
+| Test functions ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 133 in 9 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-19 |
+| Test functions ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 61 in 4 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-19 |
+| O·R·A·V gate thresholds ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 0.6 / 0.7 / 0.8 / 0.6 | constants in `agent_dag/config.py`, fresh clone | 2026-07-19 |
+| Constitution rules ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 9 | count of `templates/rules/*.md` on fresh clone | 2026-07-19 |
+| Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-07-19 |
 <!--END_SECTION:claims-->
 
-**Also in the lab** — [AutonomousAgent](https://github.com/Manzela/AutonomousAgent): production-hardened self-improving agent running 24/7 on GCP — 5-tier sandboxing, OpenTelemetry tracing, fail-closed failure matrix, MoE-routed RL self-training · [Shopify-plugin-CGen](https://github.com/Manzela/Shopify-plugin-CGen): audit-first AEO/GEO page engine for multi-location Shopify brands (pre-production)
+**Also in the lab** — [AutonomousAgent](https://github.com/Manzela/AutonomousAgent): production-hardened self-improving agent running 24/7 on GCP — 5-tier sandboxing, OpenTelemetry tracing, fail-closed failure matrix, MoE-routed RL self-training
 
 **Before TNG Shopper** — CTO & AI Product Engineer at Tasko AI: a WhatsApp-native assistant for 153 paying clients resolving 1,561 distinct user intents, pre-trained on 21M+ messages · a camera-first retail onboarding tool (0 → $10K MRR, 3 computer-vision pipelines, 60M+ SKU catalog) · a 6-stage lead-qualification pipeline that drove $17M+ in new assets under management
 
