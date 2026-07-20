@@ -37,7 +37,7 @@ The production deployment of this stack is [TNG Shopper](https://tngshopper.com)
 
 <img src="profile/rhythm.svg" width="840" alt="Work rhythm: my own commits bucketed by day of week and hour of day in author-local time, aggregated across public repositories. Punch-card grid; zero-commit cells are rendered as faint marks so quiet hours read as measured rests.">
 
-<sub>Rendered nightly from my own GitHub data by [build_profile.py](profile/build_profile.py) — no third-party stat cards. On any fetch failure yesterday's chart is kept and stamped stale; nothing is invented. Last render: <!--START_SECTION:stamp-->2026-07-19<!--END_SECTION:stamp--></sub>
+<sub>Rendered nightly from my own GitHub data by [build_profile.py](profile/build_profile.py) — no third-party stat cards. On any fetch failure yesterday's chart is kept and stamped stale; nothing is invented. Last render: <!--START_SECTION:stamp-->2026-07-20<!--END_SECTION:stamp--></sub>
 
 ---
 
