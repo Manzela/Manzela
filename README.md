@@ -49,12 +49,12 @@ Also: named inventor on 15 patent claims in physical-context AI · occasional gu
 <!--START_SECTION:claims-->
 | Claim | Value | Derived by | Verified |
 |---|---:|---|---|
-| Test functions ([Atelier](https://github.com/Manzela/Atelier)) | 1,315 in 120 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-19 |
-| Test functions ([AutonomousAgent](https://github.com/Manzela/AutonomousAgent)) | 2,011 in 198 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-19 |
-| O·R·A·V gate thresholds ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 0.6 / 0.7 / 0.8 / 0.6 | constants in `agent_dag/config.py`, fresh clone | 2026-07-19 |
-| Constitution rules ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 9 | count of `templates/rules/*.md` on fresh clone | 2026-07-19 |
-| Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-07-19 |
-| JSON-LD schema generator, lines ([WP-Multisite](https://github.com/Manzela/WP-Multisite)) | 1,057 | `wc -l` on `SchemaServiceProvider.php`, fresh clone | 2026-07-19 |
+| Test functions ([Atelier](https://github.com/Manzela/Atelier)) | 1,315 in 120 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-20 |
+| Test functions ([AutonomousAgent](https://github.com/Manzela/AutonomousAgent)) | 2,011 in 198 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-07-20 |
+| O·R·A·V gate thresholds ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 0.6 / 0.7 / 0.8 / 0.6 | constants in `agent_dag/config.py`, fresh clone | 2026-07-20 |
+| Constitution rules ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 9 | count of `templates/rules/*.md` on fresh clone | 2026-07-20 |
+| Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-07-20 |
+| JSON-LD schema generator, lines ([WP-Multisite](https://github.com/Manzela/WP-Multisite)) | 1,057 | `wc -l` on `SchemaServiceProvider.php`, fresh clone | 2026-07-20 |
 <!--END_SECTION:claims-->
 
 </details>

@@ -51,7 +51,7 @@
       "repo": "Manzela/WP-Multisite",
       "value": "1,057",
       "derived_by": "`wc -l` on `SchemaServiceProvider.php`, fresh clone",
-      "verified_at": "2026-07-19",
+      "verified_at": "2026-07-20",
       "stale": false
     }
   ]
