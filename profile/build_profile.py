@@ -1,41 +1,40 @@
 #!/usr/bin/env python3
 """Nightly self-maintenance for the profile README (github.com/Manzela).
 
-Regenerates every dynamic surface of README.md from live sources, fail-closed:
-on any fetch failure the last committed value is kept, the audit stamp flips to
-a visible "stale" marker, and the process exits nonzero so the workflow-failure
-email becomes the alert channel. Nothing is ever fabricated or silently
-re-stamped.
+Renders three charts from Daniel's real GitHub data — no third-party stat
+cards — and rewrites the marker sections in README.md, fail-closed: on any
+fetch failure the last committed data is kept, the render stamp flips to a
+visible "stale" marker, and the process exits nonzero so the workflow-failure
+email becomes the alert channel. Nothing is ever fabricated.
 
 Outputs (all inside README.md and profile/ — never anywhere else):
-  profile/kpi.svg                  hero: KPI numerals in outlined Fraunces italic
-  profile/status/{tng,atelier,agdag,agos}.svg   3-state production status dots
-  profile/data/status.json         probe state machine (consecutive failures)
-  profile/data/gcp-credentials.json  shields.io endpoint payload (credential count)
-  README.md marker sections:       stamp, tng_metric, agdag_metric, releases,
-                                   writing, certs
+  profile/activity.svg    weekly authored-commit totals, trailing 12 months
+  profile/languages.svg   language composition across public repos, by bytes
+  profile/rhythm.svg      own commits by day x hour, author-local time
+  profile/data/{commits,languages}.json   committed data caches
+  README.md marker sections: stamp   (claims is owned by verify_claims.py)
 
 Modes:
   (default)   full network run — used by .github/workflows/profile-refresh.yml
   --offline   no network: re-render everything from committed data only
-  --check     no network, no writes: validate templates, markers, SVGs and the
-              sanitizer contract — used by the PR preview gate
+  --check     no network, no writes: validate markers, renders, glyph
+              coverage and the sanitizer contract — the PR-gate mode
 
-Stdlib only. No PAT: GITHUB_TOKEN (the built-in Actions token) is optional and
-only used for the GraphQL releases query.
+Stdlib only. GraphQL uses the built-in Actions GITHUB_TOKEN and always
+queries user(login: OWNER), never viewer — GITHUB_TOKEN is an installation
+token and viewer would silently return the wrong identity.
 """
 
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
-import ssl
 import sys
-import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -43,43 +42,20 @@ PROFILE = ROOT / "profile"
 README = ROOT / "README.md"
 
 OWNER = "Manzela"
-MEDIUM_FEED = "https://medium.com/feed/@manzela"
-GCP_PROFILE_URL = (
-    "https://partner.skills.google/public_profiles/"
-    "69fa3af8-3032-4a04-a818-f7277009c3a9"
-)
-# Future source of truth: a machine-readable export published by the
-# pipeline-observatory site. 404s harmlessly until it ships; the committed
-# profile/data/metrics.json seed is used instead.
-REMOTE_METRICS_URL = "https://manzela.github.io/pipeline-observatory/data/metrics.json"
-
-# Probe targets for the production-status dots (README section 02).
-SYSTEMS = {
-    "tng": "https://tngshopper.com",
-    "atelier": "https://atelier.autonomous-agent.dev",
-    "agdag": "https://manzela.github.io/pipeline-observatory/",
-    "agos": "https://pypi.org/pypi/ag-os/json",
-}
-# Consecutive hard-404 probes before a dot is demoted to "archived".
-ARCHIVE_AFTER_404S = 7
-
+# The profile repo itself is excluded from the language aggregation: it
+# carries the GitHub Pages portfolio (~73KB of hand-written HTML) which would
+# skew the chart. The exclusion is declared in the chart footer.
+LANG_EXCLUDE_REPOS = {"Manzela"}
+LANG_EXCLUDE_LANGS = {"YAML", "Markdown", "Jupyter Notebook"}
+RHYTHM_WINDOW_DAYS = 365
 USER_AGENT = "Manzela-profile-refresh (github.com/Manzela/Manzela)"
 
-# Markup that must never appear in README.md — GitHub's sanitizer strips these
-# silently, which would degrade the page without anyone noticing.
+MARKER_SECTIONS = ("stamp", "claims")
+SVG_OUTPUTS = ("activity.svg", "languages.svg", "rhythm.svg")
+
 SANITIZER_FORBIDDEN = re.compile(
     r"<script|<style|<center|<iframe|\sstyle\s*=\s*[\"']|\sclass\s*=\s*[\"']",
     re.IGNORECASE,
-)
-MARKER_SECTIONS = (
-    "stamp",
-    "kpi_text",
-    "tng_metric",
-    "agdag_metric",
-    "releases",
-    "writing",
-    "certs",
-    "claims",
 )
 
 # ---------------------------------------------------------------- utilities
@@ -89,12 +65,14 @@ def now_utc() -> datetime:
     return datetime.now(timezone.utc)
 
 
-def load_json(path: Path):
+def load_json(path: Path, default=None):
+    if not path.exists():
+        return default
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def save_json(path: Path, data) -> None:
-    write_if_changed(path, json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    write_if_changed(path, json.dumps(data, ensure_ascii=False) + "\n")
 
 
 def write_if_changed(path: Path, content: str) -> bool:
@@ -106,134 +84,10 @@ def write_if_changed(path: Path, content: str) -> bool:
     return True
 
 
-def http_get(url: str, timeout: int = 20, retries: int = 2, headers: dict | None = None):
-    """GET with retries. Returns (status_code, body_bytes) or (None, None)."""
-    hdrs = {"User-Agent": USER_AGENT}
-    if headers:
-        hdrs.update(headers)
-    last_status = None
-    for _ in range(retries + 1):
-        req = urllib.request.Request(url, headers=hdrs)
-        try:
-            with urllib.request.urlopen(
-                req, timeout=timeout, context=ssl.create_default_context()
-            ) as resp:
-                return resp.status, resp.read()
-        except urllib.error.HTTPError as exc:
-            last_status = exc.code
-        except Exception:
-            last_status = None
-    return last_status, None
-
-
-def rewrite_section(text: str, name: str, content: str) -> str:
-    """Replace the body between <!--START_SECTION:name--> ... <!--END_SECTION:name-->."""
-    pattern = re.compile(
-        rf"(<!--START_SECTION:{name}-->)(.*?)(<!--END_SECTION:{name}-->)", re.DOTALL
-    )
-    if not pattern.search(text):
-        raise RuntimeError(f"marker pair missing for section '{name}'")
-    return pattern.sub(lambda m: m.group(1) + content + m.group(3), text)
-
-
-# ------------------------------------------------------------------ fetches
-
-
-def fetch_metrics(offline: bool) -> tuple[dict, bool]:
-    """Metrics contract: prefer the observatory export, else the committed seed.
-
-    Returns (metrics, fresh). fresh=False only means the remote export was
-    unreachable AND had previously been the source — a seed-sourced file is
-    considered fresh by definition (it is the current source of truth).
-    """
-    seed = load_json(PROFILE / "data" / "metrics.json")
-    if offline:
-        return seed, True
-    status, body = http_get(REMOTE_METRICS_URL)
-    if status == 200 and body:
-        try:
-            remote = json.loads(body)
-            if isinstance(remote.get("kpis"), list) and len(remote["kpis"]) >= 4:
-                remote["source"] = REMOTE_METRICS_URL
-                remote["as_of"] = now_utc().strftime("%Y-%m-%d")
-                save_json(PROFILE / "data" / "metrics.json", remote)
-                return remote, True
-        except (ValueError, KeyError):
-            pass  # malformed remote → fall through to committed seed
-    if seed.get("source") == "seed":
-        return seed, True  # remote endpoint hasn't shipped yet; seed is canonical
-    return seed, False  # remote WAS the source and is now unreachable → stale
-
-
-def probe_systems(offline: bool) -> dict:
-    """3-state probe machine: operational / unverified / archived.
-
-    Failures render a neutral hollow dot, never red (Cloud Run cold starts
-    cause false alarms). Persistent hard 404s demote to archived so a retired
-    endpoint never shows a live dot.
-    """
-    state_path = PROFILE / "data" / "status.json"
-    state = load_json(state_path) if state_path.exists() else {}
-    today = now_utc().strftime("%Y-%m-%d")
-    for sys_id, url in SYSTEMS.items():
-        entry = state.setdefault(
-            sys_id, {"state": "unverified", "consecutive_404s": 0, "last_ok": None}
-        )
-        entry["url"] = url
-        entry["last_checked"] = today
-        if offline:
-            continue
-        status, _ = http_get(url, timeout=25, retries=2)
-        if status is not None and 200 <= status < 400:
-            entry.update(state="operational", consecutive_404s=0, last_ok=today)
-        elif status in (404, 410):
-            entry["consecutive_404s"] += 1
-            if entry["consecutive_404s"] >= ARCHIVE_AFTER_404S:
-                entry["state"] = "archived"
-            elif entry["state"] == "operational":
-                entry["state"] = "unverified"
-        else:
-            # Timeouts / 5xx / transient: demote operational → unverified only.
-            entry["consecutive_404s"] = 0
-            if entry["state"] == "operational":
-                entry["state"] = "unverified"
-    save_json(state_path, state)
-    return state
-
-
-def fetch_releases() -> list[str] | None:
-    """Latest releases across all public repos via one GraphQL call."""
+def graphql(query: str) -> dict | None:
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if not token:
         return None
-    query = """
-    query { user(login: "%s") {
-      repositories(first: 50, privacy: PUBLIC, isFork: false,
-                   orderBy: {field: PUSHED_AT, direction: DESC}) {
-        nodes { name url
-          releases(first: 1, orderBy: {field: CREATED_AT, direction: DESC}) {
-            nodes { name tagName createdAt url isDraft } } } } } }
-    """ % OWNER
-    status, body = _graphql_post(query, token)
-    if status != 200 or not body:
-        return None
-    try:
-        nodes = json.loads(body)["data"]["user"]["repositories"]["nodes"]
-    except (ValueError, KeyError, TypeError):
-        return None
-    releases = []
-    for repo in nodes:
-        for rel in repo.get("releases", {}).get("nodes", []):
-            if rel.get("isDraft"):
-                continue
-            title = rel.get("name") or rel.get("tagName") or "release"
-            month = (rel.get("createdAt") or "")[:7]
-            releases.append((rel.get("createdAt") or "", f"- [{repo['name']} — {title}]({rel['url']}) · {month}"))
-    releases.sort(reverse=True)
-    return [line for _, line in releases[:5]] or None
-
-
-def _graphql_post(query: str, token: str):
     req = urllib.request.Request(
         "https://api.github.com/graphql",
         data=json.dumps({"query": query}).encode(),
@@ -245,54 +99,168 @@ def _graphql_post(query: str, token: str):
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return resp.status, resp.read()
+        with urllib.request.urlopen(req, timeout=45) as resp:
+            payload = json.loads(resp.read())
     except Exception:
-        return None, None
+        return None
+    return payload.get("data")
 
 
-def fetch_writing() -> list[str] | None:
-    """Latest essays from the Medium RSS feed."""
-    status, body = http_get(MEDIUM_FEED)
-    if status != 200 or not body:
-        return None
-    try:
-        root = ET.fromstring(body)
-    except ET.ParseError:
-        return None
-    lines = []
-    for item in root.iter("item"):
-        title = (item.findtext("title") or "").strip()
-        link = (item.findtext("link") or "").split("?")[0].strip()
-        pub = (item.findtext("pubDate") or "").strip()
+def rewrite_section(text: str, name: str, content: str) -> str:
+    pattern = re.compile(
+        rf"(<!--START_SECTION:{name}-->)(.*?)(<!--END_SECTION:{name}-->)", re.DOTALL
+    )
+    if not pattern.search(text):
+        raise RuntimeError(f"marker pair missing for section '{name}'")
+    return pattern.sub(lambda m: m.group(1) + content + m.group(3), text)
+
+
+# ------------------------------------------------------------------ fetches
+
+
+def _public_repo_names(lang_data: dict | None) -> list[str]:
+    if lang_data and lang_data.get("repos"):
+        return lang_data["repos"]
+    return []
+
+
+def fetch_languages() -> bool:
+    """Linguist byte counts aggregated across public, non-fork, owned repos."""
+    agg: dict[str, int] = {}
+    repos: list[str] = []
+    cursor = "null"
+    for _ in range(5):  # cursor loop; 100/page covers everything today
+        data = graphql(
+            'query { user(login: "%s") { repositories(first: 100, privacy: PUBLIC,'
+            " isFork: false, ownerAffiliations: [OWNER], after: %s) {"
+            " pageInfo { hasNextPage endCursor }"
+            " nodes { name languages(first: 10, orderBy: {field: SIZE, direction: DESC})"
+            " { edges { size node { name } } } } } } }" % (OWNER, cursor)
+        )
         try:
-            month = datetime.strptime(pub[:16], "%a, %d %b %Y").strftime("%b %Y")
-        except ValueError:
-            month = ""
-        if title and link:
-            lines.append(f"- [{title}]({link})" + (f" · {month}" if month else ""))
-        if len(lines) >= 4:
+            conn = data["user"]["repositories"]
+        except (KeyError, TypeError):
+            return False
+        for node in conn["nodes"]:
+            repos.append(node["name"])
+            if node["name"] in LANG_EXCLUDE_REPOS:
+                continue
+            for edge in node.get("languages", {}).get("edges", []):
+                lang = edge["node"]["name"]
+                if lang in LANG_EXCLUDE_LANGS:
+                    continue
+                agg[lang] = agg.get(lang, 0) + edge["size"]
+        if not conn["pageInfo"]["hasNextPage"]:
             break
-    return lines or None
+        cursor = json.dumps(conn["pageInfo"]["endCursor"])
+    if not agg:
+        return False
+    langs = sorted(
+        ({"lang": k, "bytes": v} for k, v in agg.items()),
+        key=lambda x: -x["bytes"],
+    )
+    save_json(
+        PROFILE / "data" / "languages.json",
+        {
+            "as_of": now_utc().strftime("%Y-%m-%d"),
+            "source": "github-graphql linguist bytes, public non-fork owned repos",
+            "repos": repos,
+            "langs": langs,
+        },
+    )
+    return True
 
 
-def fetch_gcp_credential_count() -> bool:
-    """Refresh the shields.io endpoint payload from the public skills profile.
+def fetch_commits() -> bool:
+    """Own authored commits across public repos: daily counts for the
+    activity chart AND a day-of-week x hour grid for the rhythm chart, from
+    one pass over the same commit stream — consistent by construction.
 
-    HTML-fragile by nature: on any doubt the last-known payload is kept
-    (the badge freezes conservatively and still links to the ground truth).
+    Deliberately NOT contributionsCollection: under the Actions installation
+    token that calendar can come back all-zero (observed in production),
+    which would silently zero the chart. Commit history is the honest,
+    token-reliable source.
+
+    authoredDate is a GitTimestamp (offset-preserving), so the printed wall
+    time IS author-local — no timezone conversion, no DST smearing.
     """
-    payload_path = PROFILE / "data" / "gcp-credentials.json"
-    status, body = http_get(GCP_PROFILE_URL, timeout=25)
-    if status != 200 or not body:
+    data = graphql('query { user(login: "%s") { id } }' % OWNER)
+    try:
+        node_id = data["user"]["id"]
+    except (KeyError, TypeError):
         return False
-    text = body.decode("utf-8", errors="ignore")
-    counts = [int(m) for m in re.findall(r"(\d{1,3})\s+(?:skill\s+badges?|credentials?|badges?)", text, re.I)]
-    if not counts:
+    repos = _public_repo_names(load_json(PROFILE / "data" / "languages.json"))
+    if not repos:
         return False
-    payload = load_json(payload_path)
-    payload["message"] = f"{max(counts)} credentials"
-    save_json(payload_path, payload)
+    since_dt = now_utc() - timedelta(days=RHYTHM_WINDOW_DAYS)
+    since = since_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    grid = [[0] * 24 for _ in range(7)]  # Mon..Sun x 0..23
+    daily: dict[str, int] = {}
+
+    def ingest(nodes) -> None:
+        for n in nodes:
+            # e.g. 2026-07-15T14:23:11+03:00 — parse the wall-clock portion
+            dt = datetime.fromisoformat(n["authoredDate"])
+            grid[dt.isoweekday() - 1][dt.hour] += 1
+            daily[dt.date().isoformat()] = daily.get(dt.date().isoformat(), 0) + 1
+
+    for i in range(0, len(repos), 10):
+        chunk = repos[i : i + 10]
+        aliases = " ".join(
+            f'r{j}: repository(owner: "{OWNER}", name: "{name}") {{'
+            f" defaultBranchRef {{ target {{ ... on Commit {{"
+            f' history(since: "{since}", author: {{id: "{node_id}"}}, first: 100) {{'
+            f" pageInfo {{ hasNextPage endCursor }} nodes {{ authoredDate }} }} }} }} }} }}"
+            for j, name in enumerate(chunk)
+        )
+        data = graphql("query { " + aliases + " }")
+        if data is None:
+            return False
+        for j, name in enumerate(chunk):
+            ref = (data.get(f"r{j}") or {}).get("defaultBranchRef")
+            if not ref:
+                continue
+            history = ref["target"]["history"]
+            ingest(history["nodes"])
+            # per-repo pagination for history beyond the first page
+            cursor = history["pageInfo"]["endCursor"]
+            more = history["pageInfo"]["hasNextPage"]
+            pages = 0
+            while more and pages < 9:
+                page = graphql(
+                    f'query {{ repository(owner: "{OWNER}", name: "{name}") {{'
+                    f" defaultBranchRef {{ target {{ ... on Commit {{"
+                    f' history(since: "{since}", author: {{id: "{node_id}"}},'
+                    f' first: 100, after: "{cursor}") {{'
+                    f" pageInfo {{ hasNextPage endCursor }} nodes {{ authoredDate }} }} }} }} }} }} }}"
+                )
+                try:
+                    history = page["repository"]["defaultBranchRef"]["target"]["history"]
+                except (KeyError, TypeError):
+                    return False
+                ingest(history["nodes"])
+                cursor = history["pageInfo"]["endCursor"]
+                more = history["pageInfo"]["hasNextPage"]
+                pages += 1
+    if not any(any(row) for row in grid):
+        return False  # an all-zero result for an active account is an API artifact
+    start = since_dt.date()
+    days = [
+        {"date": (start + timedelta(days=i)).isoformat(),
+         "count": daily.get((start + timedelta(days=i)).isoformat(), 0)}
+        for i in range(RHYTHM_WINDOW_DAYS + 1)
+    ]
+    save_json(
+        PROFILE / "data" / "commits.json",
+        {
+            "as_of": now_utc().strftime("%Y-%m-%d"),
+            "source": "github-graphql commit history, author-filtered, author-local time",
+            "window_days": RHYTHM_WINDOW_DAYS,
+            "total": sum(d["count"] for d in days),
+            "days": days,
+            "grid": grid,
+        },
+    )
     return True
 
 
@@ -309,17 +277,16 @@ def svg_style() -> str:
         "<style>"
         f".ink{{fill:{LIGHT['ink']}}}.dim{{fill:{LIGHT['dim']}}}"
         f".acc{{fill:{LIGHT['acc']}}}.edge{{stroke:{LIGHT['edge']}}}"
-        f".sdim{{stroke:{LIGHT['dim']}}}"
+        f".sdim{{stroke:{LIGHT['dim']}}}.sacc{{stroke:{LIGHT['acc']}}}"
         "@media(prefers-color-scheme:dark){"
         f".ink{{fill:{DARK['ink']}}}.dim{{fill:{DARK['dim']}}}"
         f".acc{{fill:{DARK['acc']}}}.edge{{stroke:{DARK['edge']}}}"
-        f".sdim{{stroke:{DARK['dim']}}}"
+        f".sdim{{stroke:{DARK['dim']}}}.sacc{{stroke:{DARK['acc']}}}"
         "}</style>"
     )
 
 
 def glyph_run(text: str, glyphs: dict, size: float, x: float, baseline: float, cls: str = "ink") -> tuple[str, float]:
-    """Compose a string from pre-outlined glyph paths. Returns (svg, width)."""
     upem = glyphs["unitsPerEm"]
     scale = size / upem
     parts, cursor = [], x
@@ -340,81 +307,177 @@ def text_width(text: str, glyphs: dict, size: float) -> float:
     return sum(glyphs["glyphs"][ch]["adv"] for ch in text) * size / upem
 
 
-def render_kpi_svg(metrics: dict, stamp: str, stale_since: str | None) -> str:
-    glyphs = load_json(PROFILE / "glyphs" / "fraunces-glyphs.json")
-    kpis = metrics["kpis"][:4]
-    width, height = 840, 190
-    col_w = width / len(kpis)
-    # Uniform numeral size across columns, capped, fitted to the widest value.
-    size = min(
-        58.0,
-        min((col_w - 26) / (text_width(k["value"], glyphs, 1.0) or 1) for k in kpis),
+def _glyphs() -> dict:
+    return load_json(PROFILE / "glyphs" / "fraunces-glyphs.json")
+
+
+def header(width: int, title: str) -> str:
+    return (
+        f'<text x="24" y="25" font-family="{SANS}" font-size="10" '
+        f'letter-spacing="2.5" class="dim">{title}</text>'
+        f'<line class="edge" x1="24" y1="38" x2="{width - 24}" y2="38" stroke-width="1"/>'
     )
-    body = [
+
+
+def render_activity_svg(commits: dict, stale_since: str | None) -> str:
+    glyphs = _glyphs()
+    width, height = 840, 200
+    days = commits["days"]
+    # aggregate into weeks starting Monday
+    weekly: dict[str, int] = {}
+    for d in days:
+        day = date.fromisoformat(d["date"])
+        wk = (day - timedelta(days=day.isoweekday() - 1)).isoformat()
+        weekly[wk] = weekly.get(wk, 0) + d["count"]
+    weeks = sorted(weekly)[-52:]
+    values = [weekly[w] for w in weeks]
+    total = commits.get("total", sum(values))
+
+    x0, x1, y0, y1 = 24, 816, 58, 158
+    peak = max(values) or 1
+    step = (x1 - x0) / max(len(values) - 1, 1)
+
+    def yfor(v: int) -> float:  # sqrt scale keeps burst weeks from flattening the rest
+        return y1 - (math.sqrt(v) / math.sqrt(peak)) * (y1 - y0)
+
+    pts = [(x0 + i * step, yfor(v)) for i, v in enumerate(values)]
+    line = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+    area = f"M{x0},{y1} L" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) + f" L{x1:.1f},{y1} Z"
+    zero_dots = "".join(
+        f'<circle class="dim" fill-opacity=".35" cx="{x0 + i * step:.1f}" cy="{y1}" r="1.4"/>'
+        for i, v in enumerate(values)
+        if v == 0
+    )
+    month_ticks = []
+    for i, w in enumerate(weeks):
+        d = date.fromisoformat(w)
+        if d.day <= 7:  # first week of a month
+            month_ticks.append(
+                f'<text x="{x0 + i * step:.0f}" y="176" font-family="{SANS}" '
+                f'font-size="9" class="dim">{d.strftime("%b").upper()}</text>'
+            )
+    total_str = f"{total:,}"
+    tw = text_width(total_str, glyphs, 40)
+    total_run, _ = glyph_run(total_str, glyphs, 40, width - 24 - tw, 30)
+    stale = (
+        f'<text x="{width / 2:.0f}" y="196" text-anchor="middle" font-family="{MONO}" '
+        f'font-size="9" class="acc">⚠ DATA STALE SINCE {stale_since}</text>'
+        if stale_since
+        else ""
+    )
+    label = "COMMITS — TRAILING 12 MONTHS · PUBLIC REPOSITORIES · AUTHORED BY ME"
+    return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}" role="img" aria-label="Production KPIs">',
-        svg_style(),
-        # header: pulsing LIVE dot + rubric, right-aligned brand
-        '<circle class="acc" cx="28" cy="21" r="4">'
-        '<animate attributeName="opacity" values="1;.25;1" dur="2.4s" repeatCount="indefinite"/>'
-        "</circle>",
-        f'<text x="40" y="25" font-family="{SANS}" font-size="10" letter-spacing="2.5" class="dim">'
-        "IN PRODUCTION — AUTONOMOUS CONTENT OPERATIONS</text>",
-        f'<text x="{width - 24}" y="25" text-anchor="end" font-family="{SANS}" '
-        'font-size="10" letter-spacing="2.5" class="acc">TNG SHOPPER</text>',
-        f'<line class="edge" x1="24" y1="38" x2="{width - 24}" y2="38" stroke-width="1"/>',
-    ]
-    baseline, label_y, sublabel_y = 106.0, 134.0, 150.0
-    for i, kpi in enumerate(kpis):
-        center = col_w * i + col_w / 2
-        w = text_width(kpi["value"], glyphs, size)
-        run, _ = glyph_run(kpi["value"], glyphs, size, center - w / 2, baseline)
-        body.append(run)
-        body.append(
-            f'<text x="{center:.0f}" y="{label_y:.0f}" text-anchor="middle" '
-            f'font-family="{SANS}" font-size="11.5" class="dim">{kpi["label"]}</text>'
-        )
-        if kpi.get("sublabel"):
-            body.append(
-                f'<text x="{center:.0f}" y="{sublabel_y:.0f}" text-anchor="middle" '
-                f'font-family="{SANS}" font-size="11.5" class="dim">{kpi["sublabel"]}</text>'
-            )
-        if i:
-            body.append(
-                f'<line class="edge" x1="{col_w * i:.0f}" y1="56" x2="{col_w * i:.0f}" '
-                'y2="146" stroke-width="1"/>'
-            )
-    footer = f"LAST SYNC {stamp} · RE-RENDERED NIGHTLY · FIGURES HELD STALE, NEVER INVENTED, ON FETCH FAILURE"
-    if stale_since:
-        body.append(
-            f'<text x="{width / 2:.0f}" y="176" text-anchor="middle" font-family="{MONO}" '
-            f'font-size="9.5" class="acc">⚠ METRICS STALE SINCE {stale_since} · {footer}</text>'
-        )
-    else:
-        body.append(
-            f'<text x="{width / 2:.0f}" y="176" text-anchor="middle" font-family="{MONO}" '
-            f'font-size="9.5" class="dim">{footer}</text>'
-        )
-    body.append("</svg>")
-    return "".join(body) + "\n"
-
-
-def render_dot_svg(state: str) -> str:
-    head = (
-        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" '
-        f'viewBox="0 0 20 20" role="img" aria-label="{state}">{svg_style()}'
+        f'viewBox="0 0 {width} {height}" role="img" '
+        f'aria-label="{total} authored commits across public repositories in the trailing twelve months">'
+        + svg_style()
+        + header(width, label)
+        + total_run
+        + f'<path class="acc" fill-opacity=".10" d="{area}"/>'
+        + f'<path fill="none" class="sacc" stroke-width="1.8" stroke-linejoin="round" d="{line}"/>'
+        + f'<line class="edge" x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}" stroke-width="1"/>'
+        + zero_dots
+        + "".join(month_ticks)
+        + stale
+        + "</svg>\n"
     )
-    if state == "operational":
-        core = (
-            '<circle class="acc" cx="10" cy="10" r="5">'
-            '<animate attributeName="opacity" values="1;.35;1" dur="2.4s" repeatCount="indefinite"/>'
-            "</circle>"
+
+
+def render_languages_svg(langdata: dict, stale_since: str | None) -> str:
+    width = 840
+    langs = [l for l in langdata["langs"] if l["lang"] not in LANG_EXCLUDE_LANGS]
+    top = langs[:5]
+    other = sum(l["bytes"] for l in langs[5:])
+    rows = [(l["lang"], l["bytes"]) for l in top] + ([("Other", other)] if other else [])
+    total = sum(b for _, b in rows) or 1
+    height = 58 + len(rows) * 26 + 30
+    opacities = [1.0, 0.80, 0.62, 0.46, 0.32, 0.20]
+    widest = rows[0][1] or 1
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="Language composition by bytes: '
+        + ", ".join(f"{n} {b * 100 / total:.1f} percent" for n, b in rows)
+        + '">',
+        svg_style(),
+        header(width, "LANGUAGES — PUBLIC REPOSITORIES · BY BYTES OF CODE"),
+    ]
+    y = 58
+    max_bar = 560.0
+    for i, (name, b) in enumerate(rows):
+        bar = max((b / widest) * max_bar, 3.0)
+        pct = f"{b * 100 / total:.1f}%"
+        parts.append(
+            f'<text x="140" y="{y + 9:.0f}" text-anchor="end" font-family="{SANS}" '
+            f'font-size="11.5" class="ink">{name}</text>'
         )
-    elif state == "archived":
-        core = '<circle class="dim" cx="10" cy="10" r="5"/>'
-    else:  # unverified
-        core = '<circle fill="none" class="sdim" cx="10" cy="10" r="4.5" stroke-width="1.6"/>'
-    return head + core + "</svg>\n"
+        # square at the baseline end, rounded only at the data end
+        r = 4
+        parts.append(
+            f'<path class="acc" fill-opacity="{opacities[i]}" '
+            f'd="M150,{y} h{bar - r:.1f} a{r},{r} 0 0 1 {r},{r} v{10 - 2 * r} '
+            f'a{r},{r} 0 0 1 -{r},{r} h-{bar - r:.1f} Z"/>'
+        )
+        # sans, not Fraunces: the italic flat-top '3' misreads as '5' at this size
+        parts.append(
+            f'<text x="{150 + bar + 12:.1f}" y="{y + 9:.0f}" font-family="{SANS}" '
+            f'font-size="11.5" class="ink">{pct}</text>'
+        )
+        y += 26
+    footer = "LINGUIST BYTES · EXCL. THIS PROFILE REPO (HAND-WRITTEN PORTFOLIO HTML)"
+    if stale_since:
+        footer = f"⚠ DATA STALE SINCE {stale_since} · " + footer
+    parts.append(
+        f'<text x="24" y="{height - 10}" font-family="{MONO}" font-size="9" '
+        f'class="{"acc" if stale_since else "dim"}">{footer}</text>'
+    )
+    parts.append("</svg>")
+    return "".join(parts) + "\n"
+
+
+def render_rhythm_svg(rhythm: dict, stale_since: str | None) -> str:
+    width, height = 840, 220
+    grid = rhythm["grid"]
+    values = sorted(v for row in grid for v in row if v > 0)
+    def opacity(v: int) -> float:
+        if v == 0:
+            return 0.06
+        idx = min(4, int(5 * values.index(v) / len(values))) if values else 0
+        return [0.20, 0.40, 0.62, 0.82, 1.0][idx]
+    cell_w, cell_h, pitch_x, pitch_y = 24, 14, 27, 18
+    gx, gy = 88, 56
+    days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+    total = sum(sum(row) for row in grid)
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img" '
+        f'aria-label="Work rhythm: {total} commits bucketed by day of week and hour of day in author-local time">',
+        svg_style(),
+        header(width, "WORK RHYTHM — MY COMMITS BY DAY × HOUR · AUTHOR-LOCAL TIME"),
+    ]
+    for r, row in enumerate(grid):
+        parts.append(
+            f'<text x="{gx - 12}" y="{gy + r * pitch_y + cell_h - 3}" text-anchor="end" '
+            f'font-family="{SANS}" font-size="9" class="dim">{days[r]}</text>'
+        )
+        for c, v in enumerate(row):
+            parts.append(
+                f'<rect class="acc" fill-opacity="{opacity(v):.2f}" x="{gx + c * pitch_x}" '
+                f'y="{gy + r * pitch_y}" width="{cell_w}" height="{cell_h}" rx="3"/>'
+            )
+    for h in (0, 6, 12, 18):
+        parts.append(
+            f'<text x="{gx + h * pitch_x}" y="{gy + 7 * pitch_y + 12}" '
+            f'font-family="{SANS}" font-size="9" class="dim">{h:02d}</text>'
+        )
+    footer = f"TRAILING {rhythm.get('window_days', 365)} DAYS · AUTHORED COMMITS ONLY · DEFAULT BRANCHES"
+    if stale_since:
+        footer = f"⚠ DATA STALE SINCE {stale_since} · " + footer
+    parts.append(
+        f'<text x="{width - 24}" y="{height - 8}" text-anchor="end" font-family="{MONO}" '
+        f'font-size="9" class="{"acc" if stale_since else "dim"}">{footer}</text>'
+    )
+    parts.append("</svg>")
+    return "".join(parts) + "\n"
 
 
 # -------------------------------------------------------------- validation
@@ -422,21 +485,33 @@ def render_dot_svg(state: str) -> str:
 
 def validate(readme_text: str) -> list[str]:
     problems = []
+    found = set(re.findall(r"<!--START_SECTION:([a-z_]+)-->", readme_text))
+    if found != set(MARKER_SECTIONS):
+        problems.append(f"marker sections mismatch: found {sorted(found)}, expected {sorted(MARKER_SECTIONS)}")
     for name in MARKER_SECTIONS:
-        if f"<!--START_SECTION:{name}-->" not in readme_text or f"<!--END_SECTION:{name}-->" not in readme_text:
-            problems.append(f"marker pair missing: {name}")
+        if f"<!--END_SECTION:{name}-->" not in readme_text:
+            problems.append(f"end marker missing: {name}")
     hit = SANITIZER_FORBIDDEN.search(readme_text)
     if hit:
         problems.append(f"sanitizer-stripped markup in README: {hit.group(0)!r}")
-    for svg in [PROFILE / "kpi.svg", *sorted((PROFILE / "status").glob("*.svg"))]:
-        if not svg.exists():
-            problems.append(f"missing generated asset: {svg.relative_to(ROOT)}")
+    for svg in SVG_OUTPUTS:
+        path = PROFILE / svg
+        if not path.exists():
+            problems.append(f"missing generated asset: profile/{svg}")
             continue
         try:
-            ET.fromstring(svg.read_text(encoding="utf-8"))
+            ET.fromstring(path.read_text(encoding="utf-8"))
         except ET.ParseError as exc:
-            problems.append(f"malformed SVG {svg.name}: {exc}")
+            problems.append(f"malformed SVG {svg}: {exc}")
     return problems
+
+
+def render_all(stale: dict[str, str | None]) -> None:
+    commits = load_json(PROFILE / "data" / "commits.json")
+    langs = load_json(PROFILE / "data" / "languages.json")
+    write_if_changed(PROFILE / "activity.svg", render_activity_svg(commits, stale.get("commits")))
+    write_if_changed(PROFILE / "languages.svg", render_languages_svg(langs, stale.get("languages")))
+    write_if_changed(PROFILE / "rhythm.svg", render_rhythm_svg(commits, stale.get("commits")))
 
 
 # --------------------------------------------------------------------- main
@@ -445,93 +520,51 @@ def validate(readme_text: str) -> list[str]:
 def main() -> int:
     check = "--check" in sys.argv
     offline = check or "--offline" in sys.argv
-    failures: list[str] = []
 
     if check:
-        # Dry-run: validate committed state + that templates render from seeds.
-        metrics = load_json(PROFILE / "data" / "metrics.json")
-        render_kpi_svg(metrics, "0000-00-00 00:00 UTC", None)  # raises on template break
-        for state in ("operational", "unverified", "archived"):
-            ET.fromstring(render_dot_svg(state))
+        # Dry-run: prove the committed data renders (glyph coverage included —
+        # a missing Fraunces character must fail the PR gate, not the nightly)
+        for svg_text in (
+            render_activity_svg(load_json(PROFILE / "data" / "commits.json"), None),
+            render_languages_svg(load_json(PROFILE / "data" / "languages.json"), None),
+            render_rhythm_svg(load_json(PROFILE / "data" / "commits.json"), None),
+        ):
+            ET.fromstring(svg_text)
         problems = validate(README.read_text(encoding="utf-8"))
         for p in problems:
             print(f"::error::{p}")
         print("check:", "FAILED" if problems else "ok")
         return 2 if problems else 0
 
-    stamp = now_utc().strftime("%Y-%m-%d %H:%M UTC")
     today = now_utc().strftime("%Y-%m-%d")
-
-    metrics, metrics_fresh = fetch_metrics(offline)
-    if not metrics_fresh:
-        failures.append("metrics export unreachable — keeping last committed figures")
-    stale_since = None if metrics_fresh else metrics.get("as_of", today)
-
-    status = probe_systems(offline)
-
-    releases = writing = None
+    failures: list[str] = []
+    stale: dict[str, str | None] = {}
     if not offline:
-        releases = fetch_releases()
-        if releases is None:
-            failures.append("releases (GitHub GraphQL) fetch failed — keeping last list")
-        writing = fetch_writing()
-        if writing is None:
-            failures.append("writing (Medium RSS) fetch failed — keeping last list")
-        if not fetch_gcp_credential_count():
-            # Known-fragile, best-effort scrape (the page is JS-rendered more
-            # often than not). The badge freezes at its conservative last-known
-            # value and links to the ground-truth profile, so this warns
-            # without failing the nightly run.
-            print("::warning::gcp credential count scrape failed — keeping last-known badge")
+        for name, fetch in (
+            ("languages", fetch_languages),  # first: commits reuses its repo list
+            ("commits", fetch_commits),
+        ):
+            if not fetch():
+                cached = load_json(PROFILE / "data" / f"{name}.json") or {}
+                stale[name] = cached.get("as_of", today)
+                failures.append(f"{name} fetch failed — keeping committed data")
 
-    # ---- render assets
-    write_if_changed(PROFILE / "kpi.svg", render_kpi_svg(metrics, stamp, stale_since))
-    for sys_id in SYSTEMS:
-        write_if_changed(
-            PROFILE / "status" / f"{sys_id}.svg",
-            render_dot_svg(status[sys_id]["state"]),
-        )
-
-    # ---- rewrite README marker sections
-    certs = load_json(PROFILE / "data" / "certs.json")
-    cert_bits = []
-    for c in certs["certs"]:
-        when = f" ({datetime.strptime(c['issued'], '%Y-%m').strftime('%b %Y')})" if c.get("issued") else " (active)"
-        cert_bits.append(f"{c['issuer']} **{c['name']}**{when}")
-    certs_line = (
-        " · ".join(cert_bits)
-        + " · **32** Google Cloud credentials"
-        + "".join(f" · {r}" for r in certs.get("recognition", []))
-    )
-
-    kpi_text = " · ".join(
-        f"**{k['value']}** {k['label']}" + (f" {k['sublabel']}" if k.get("sublabel") else "")
-        for k in metrics["kpis"][:4]
-    )
+    render_all(stale)
 
     text = README.read_text(encoding="utf-8")
-    stamp_note = f"⚠ stale since {stale_since}" if stale_since else today
-    text = rewrite_section(text, "stamp", stamp_note)
-    text = rewrite_section(text, "kpi_text", kpi_text)
-    text = rewrite_section(text, "tng_metric", metrics.get("tng_metric", ""))
-    text = rewrite_section(text, "agdag_metric", metrics.get("agdag_metric", ""))
-    text = rewrite_section(text, "certs", "\n" + certs_line + "\n")
-    if releases:
-        text = rewrite_section(text, "releases", "\n" + "\n".join(releases) + "\n")
-    if writing:
-        text = rewrite_section(text, "writing", "\n" + "\n".join(writing) + "\n")
+    stamp = f"⚠ degraded — see chart footers · {today}" if failures else today
+    text = rewrite_section(text, "stamp", stamp)
 
     problems = validate(text)
     if problems:
         for p in problems:
             print(f"::error::{p}")
         return 2  # never commit an invalid README
-
     write_if_changed(README, text)
 
     for f in failures:
         print(f"::warning::{f}")
-    print("refresh:", "degraded (stale values held)" if failures else "ok")
+    print("refresh:", "degraded (stale data held)" if failures else "ok")
     return 1 if failures else 0
 
 

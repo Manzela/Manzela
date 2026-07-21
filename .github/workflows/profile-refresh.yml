@@ -66,10 +66,26 @@ jobs:
           fi
 
       - name: Commit refreshed profile
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore(profile): nightly refresh'
-          file_pattern: 'README.md profile/**'
+        # Manual commit with a rebase-retry push: the shared concurrency
+        # group is best-effort under same-instant run creation, and a lost
+        # push race must integrate-and-retry, not fail the run. Authored as
+        # the bot, never the owner — the activity chart draws the owner's
+        # commits, and counting its own rebuilds would destroy the premise.
+        run: |
+          git add README.md profile/
+          if git diff --cached --quiet; then
+            echo "no changes to commit"
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'chore(profile): nightly refresh'
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          echo "::error::push failed after 3 integrate-and-retry attempts"
+          exit 1
 
       - name: Link audit
         if: github.ref == 'refs/heads/main'

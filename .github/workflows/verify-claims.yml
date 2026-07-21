@@ -56,10 +56,23 @@ jobs:
           fi
 
       - name: Commit refreshed ledger
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore(profile): weekly claims audit'
-          file_pattern: 'README.md profile/**'
+        # Manual commit with a rebase-retry push (see profile-refresh.yml);
+        # bot-authored so audit commits never inflate the activity chart.
+        run: |
+          git add README.md profile/
+          if git diff --cached --quiet; then
+            echo "no changes to commit"
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'chore(profile): weekly claims audit'
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          echo "::error::push failed after 3 integrate-and-retry attempts"
+          exit 1
 
       - name: Surface unreproducible claims as a failure
         if: steps.derive.outputs.degraded == '1'

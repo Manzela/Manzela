@@ -55,6 +55,14 @@ def clone(owner: str, repo: str, dest: Path) -> Path | None:
 TEST_RE = re.compile(r"^\s*(async\s+)?def test_", re.MULTILINE)
 
 
+def derive_file_lines(repo_dir: Path, claim: dict):
+    path = repo_dir / claim["path"]
+    n = len(path.read_text(encoding="utf-8", errors="ignore").splitlines())
+    if n == 0:
+        raise RuntimeError(f"{claim['path']} is empty or missing")
+    return f"{n:,}", f"`wc -l` on `{Path(claim['path']).name}`, fresh clone"
+
+
 def derive_test_count(repo_dir: Path):
     total, files = 0, 0
     for py in repo_dir.rglob("*.py"):
@@ -101,6 +109,7 @@ DERIVATIONS = {
     "orav_thresholds": derive_orav_thresholds,
     "rule_count": derive_rule_count,
     "runbook_sections": derive_runbook_sections,
+    "file_lines": derive_file_lines,
 }
 
 
@@ -129,7 +138,8 @@ def main() -> int:
             try:
                 if repo_dir is None:
                     raise RuntimeError(f"clone of {repo} failed")
-                value, derived_by = DERIVATIONS[claim["kind"]](repo_dir)
+                fn = DERIVATIONS[claim["kind"]]
+                value, derived_by = fn(repo_dir, claim) if claim["kind"] == "file_lines" else fn(repo_dir)
                 entry.update(value=value, derived_by=derived_by, verified_at=today(), stale=False)
             except Exception as exc:
                 prev = previous.get(claim["id"])

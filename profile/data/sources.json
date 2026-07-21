@@ -15,18 +15,6 @@
       "label": "Test functions"
     },
     {
-      "id": "agos_tests",
-      "repo": "Antigravity-OS",
-      "kind": "test_count",
-      "label": "Test functions"
-    },
-    {
-      "id": "agdag_tests",
-      "repo": "agent-dag-pipeline",
-      "kind": "test_count",
-      "label": "Test functions"
-    },
-    {
       "id": "orav_thresholds",
       "repo": "agent-dag-pipeline",
       "kind": "orav_thresholds",
@@ -43,6 +31,13 @@
       "repo": "gemma4-vllm-deployment",
       "kind": "runbook_sections",
       "label": "Documented failure modes, forensic runbook"
+    },
+    {
+      "id": "wp_jsonld_lines",
+      "repo": "WP-Multisite",
+      "kind": "file_lines",
+      "path": "wp-content/themes/network-theme/app/Providers/SchemaServiceProvider.php",
+      "label": "JSON-LD schema generator, lines"
     }
   ]
 }
