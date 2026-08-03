@@ -6,7 +6,7 @@
       "repo": "Manzela/Atelier",
       "value": "1,315 in 120 files",
       "derived_by": "`grep -rcE '^\\s*(async )?def test_' --include='*.py'` on fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     },
     {
@@ -15,7 +15,7 @@
       "repo": "Manzela/AutonomousAgent",
       "value": "2,011 in 198 files",
       "derived_by": "`grep -rcE '^\\s*(async )?def test_' --include='*.py'` on fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     },
     {
@@ -24,7 +24,7 @@
       "repo": "Manzela/Antigravity-OS",
       "value": "133 in 9 files",
       "derived_by": "`grep -rcE '^\\s*(async )?def test_' --include='*.py'` on fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     },
     {
@@ -33,7 +33,7 @@
       "repo": "Manzela/agent-dag-pipeline",
       "value": "61 in 4 files",
       "derived_by": "`grep -rcE '^\\s*(async )?def test_' --include='*.py'` on fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     },
     {
@@ -42,7 +42,7 @@
       "repo": "Manzela/agent-dag-pipeline",
       "value": "0.6 / 0.7 / 0.8 / 0.6",
       "derived_by": "constants in `agent_dag/config.py`, fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     },
     {
@@ -51,7 +51,7 @@
       "repo": "Manzela/Antigravity-OS",
       "value": "9",
       "derived_by": "count of `templates/rules/*.md` on fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     },
     {
@@ -60,7 +60,7 @@
       "repo": "Manzela/gemma4-vllm-deployment",
       "value": "19",
       "derived_by": "numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone",
-      "verified_at": "2026-07-27",
+      "verified_at": "2026-08-03",
       "stale": false
     }
   ]
