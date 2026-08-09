@@ -2,29 +2,29 @@
   "tng": {
     "state": "operational",
     "consecutive_404s": 0,
-    "last_ok": "2026-08-08",
+    "last_ok": "2026-08-09",
     "url": "https://tngshopper.com",
-    "last_checked": "2026-08-08"
+    "last_checked": "2026-08-09"
   },
   "atelier": {
     "state": "unverified",
     "consecutive_404s": 0,
     "last_ok": null,
     "url": "https://atelier.autonomous-agent.dev",
-    "last_checked": "2026-08-08"
+    "last_checked": "2026-08-09"
   },
   "agdag": {
     "state": "operational",
     "consecutive_404s": 0,
-    "last_ok": "2026-08-08",
+    "last_ok": "2026-08-09",
     "url": "https://manzela.github.io/pipeline-observatory/",
-    "last_checked": "2026-08-08"
+    "last_checked": "2026-08-09"
   },
   "agos": {
     "state": "operational",
     "consecutive_404s": 0,
-    "last_ok": "2026-08-08",
+    "last_ok": "2026-08-09",
     "url": "https://pypi.org/pypi/ag-os/json",
-    "last_checked": "2026-08-08"
+    "last_checked": "2026-08-09"
   }
 }

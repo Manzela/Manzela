@@ -26,7 +26,7 @@ Autonomous multi-agent AI systems in production, at enterprise scale — no huma
 
 <!--START_SECTION:kpi_text-->**10.5M** product pages under autonomous management · **234** websites · 11 enterprise clients · 5 countries · **$0.0006** marginal cost per page · **68.9%** quality-gate pass rate (fail-closed by design)<!--END_SECTION:kpi_text-->
 
-<sub>figures re-rendered nightly from <a href="https://manzela.github.io/pipeline-observatory/">production telemetry</a> · per-client evidence: <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">Google Search Console case studies</a> · last audit: <!--START_SECTION:stamp-->2026-08-08<!--END_SECTION:stamp--></sub>
+<sub>figures re-rendered nightly from <a href="https://manzela.github.io/pipeline-observatory/">production telemetry</a> · per-client evidence: <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">Google Search Console case studies</a> · last audit: <!--START_SECTION:stamp-->2026-08-09<!--END_SECTION:stamp--></sub>
 
 </div>
 
