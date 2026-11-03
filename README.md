@@ -26,7 +26,7 @@ Autonomous multi-agent AI systems in production, at enterprise scale — no huma
 
 <!--START_SECTION:kpi_text-->**10.5M** product pages under autonomous management · **234** websites · 11 enterprise clients · 5 countries · **$0.0006** marginal cost per page · **68.9%** quality-gate pass rate (fail-closed by design)<!--END_SECTION:kpi_text-->
 
-<sub>figures re-rendered nightly from <a href="https://manzela.github.io/pipeline-observatory/">production telemetry</a> · per-client evidence: <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">Google Search Console case studies</a> · last audit: <!--START_SECTION:stamp-->2026-11-02<!--END_SECTION:stamp--></sub>
+<sub>figures re-rendered nightly from <a href="https://manzela.github.io/pipeline-observatory/">production telemetry</a> · per-client evidence: <a href="https://manzela.github.io/pipeline-observatory/case-studies.html">Google Search Console case studies</a> · last audit: <!--START_SECTION:stamp-->2026-11-03<!--END_SECTION:stamp--></sub>
 
 </div>
 
@@ -94,10 +94,10 @@ Selected engineering. Every claim maps to committed code — clone and verify, o
 
 **Recent writing**
 <!--START_SECTION:writing-->
+- [A Playbook for Anti-Drifting in Autonomous Agent Workforce Workflows](https://medium.com/@manzela/a-playbook-for-anti-drifting-in-autonomous-agent-workforce-workflows-072e50bae70d) · Nov 2026
 - [The Physical-Context Flywheel](https://medium.com/kairi-ai/the-physical-context-flywheel-4964b6e45115) · Nov 2025
 - [Epiphany](https://medium.com/@manzela/epiphany-7d7c9f4dd857) · Nov 2025
 - [Generative Engine Optimization (GEO): Strategic Implementation and Advanced Tactics](https://medium.com/@manzela/generative-engine-optimization-geo-strategic-implementation-and-advanced-tactics-f112e4dbbd3b) · Jun 2025
-- [From SEO to GEO: Navigating the New Landscape of Search](https://medium.com/@manzela/from-seo-to-geo-navigating-the-new-landscape-of-search-f30f15f8ccb4) · Jun 2025
 <!--END_SECTION:writing-->
 
 </td></tr></table>
