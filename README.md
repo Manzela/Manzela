@@ -2,9 +2,9 @@
 
 # Daniel Manzela
 
-**Founder & CEO, [TNG Shopper](https://tngshopper.com) · Senior AI Product Manager**
+**Builder of governed multi-agent systems**
 
-Autonomous multi-agent AI systems in production, at enterprise scale — no humans in the loop.
+Fail-closed pipelines, specialist bots, and live observability.
 
 [![TNG Shopper](https://img.shields.io/badge/TNG%20Shopper-company-b8512a?style=flat)](https://tngshopper.com)
 [![Portfolio](https://img.shields.io/badge/Portfolio-manzela.github.io-4a4a4a?style=flat)](https://manzela.github.io/Manzela/)
@@ -32,12 +32,13 @@ Autonomous multi-agent AI systems in production, at enterprise scale — no huma
 
 ---
 
-## 02 — Systems in production
+## 02 — Systems
 
-| | System | Scale, verified | Live proof |
+| | System | Scale / status | Proof |
 |---|---|---|---|
+| <img src="profile/status/tng.svg" width="10" alt="status"> | **Workforce Observability** | Live dashboard for Envoy–Acquisition agent runs | [workforce-observability.vercel.app](https://workforce-observability.vercel.app/) · [Repo](https://github.com/Manzela/workforce-observability) |
 | <img src="profile/status/tng.svg" width="10" alt="status"> | **TNG Shopper** — autonomous content pipeline: 7-node gated DAG, self-hosted Gemma 4 26B MoE on vLLM | <!--START_SECTION:tng_metric-->10.5M pages · 234 sites · 11 enterprise clients · 5 countries<!--END_SECTION:tng_metric--> | [Pipeline Observatory](https://manzela.github.io/pipeline-observatory/) · [GSC evidence](https://manzela.github.io/pipeline-observatory/case-studies.html) |
-| <img src="profile/status/atelier.svg" width="10" alt="status"> | **Atelier** — autonomous design agent, Google for Startups AI Agents Challenge 2026 | Deterministic gates before any LLM judge · multi-judge consensus · DPO self-improvement flywheel | [atelier.autonomous-agent.dev](https://atelier.autonomous-agent.dev) · [Repo](https://github.com/Manzela/Atelier) |
+| <img src="profile/status/atelier.svg" width="10" alt="status"> | **Atelier** — autonomous design agent, Google for Startups AI Agents Challenge 2026 | Experimental. Deterministic gates before any LLM judge · multi-judge consensus · DPO self-improvement flywheel | [atelier.autonomous-agent.dev](https://atelier.autonomous-agent.dev) · [Repo](https://github.com/Manzela/Atelier) |
 | <img src="profile/status/agdag.svg" width="10" alt="status"> | **agent-dag-pipeline** — the open-source fail-closed agent DAG behind the pipeline | <!--START_SECTION:agdag_metric-->~33,000 production LLM calls across 4 model generations<!--END_SECTION:agdag_metric--> | [Live telemetry](https://manzela.github.io/pipeline-observatory/) · [Video](https://youtu.be/czZsPbylC1M) |
 | <img src="profile/status/agos.svg" width="10" alt="status"> | **ag-os** — governance kernel for AI agents (`pip install ag-os`) | <a href="https://pypi.org/project/ag-os/"><img src="https://img.shields.io/pypi/v/ag-os?style=flat&color=b8512a&label=PyPI" alt="PyPI version"></a> <a href="https://pypi.org/project/ag-os/"><img src="https://static.pepy.tech/badge/ag-os/month" alt="downloads per month"></a> | [PyPI](https://pypi.org/project/ag-os/) · [Repo](https://github.com/Manzela/Antigravity-OS) |
 
@@ -51,6 +52,7 @@ Selected engineering. Every claim maps to committed code — clone and verify, o
 
 | Repository | One verified outcome | Signal |
 |---|---|---|
+| [**workforce-observability**](https://github.com/Manzela/workforce-observability) | Live dashboard that reads the agent run log and surfaces schema integrity, drift, and hard gates | [Live](https://workforce-observability.vercel.app/) |
 | [**Atelier**](https://github.com/Manzela/Atelier) | Deterministic gates always precede probabilistic agents; hermetic, offline `make verify`; per-axis provenance on 5 rubric judges | Google AI Agents Challenge 2026 |
 | [**agent-dag-pipeline**](https://github.com/Manzela/agent-dag-pipeline) | Fail-closed 7-node DAG: O·R·A·V multi-model evaluation, immutable failure records, DPO + LoRA self-improvement flywheel | <img src="https://img.shields.io/github/license/Manzela/agent-dag-pipeline?style=flat&color=4a4a4a" alt="license"> |
 | [**Antigravity-OS**](https://github.com/Manzela/Antigravity-OS) | Zero-LLM governance kernel: policy-as-code constitution, solvency gate, flight recorder, full audit trail | <img src="https://img.shields.io/pypi/v/ag-os?style=flat&color=b8512a&label=ag-os" alt="PyPI version"> |
@@ -119,7 +121,7 @@ Named inventor on **15 patent claims** in physical-context AI — an 11-agent sy
 
 ## 07 — Contact
 
-Building [TNG Shopper](https://tngshopper.com) full-time. Talking to **enterprise retail teams, partners, and investors** about autonomous content operations.
+Building specialist-bot systems and the observability that keeps them honest.
 
 **[danielq1603@gmail.com](mailto:danielq1603@gmail.com)** · [LinkedIn](https://linkedin.com/in/manzela) — I read every message.
 
@@ -128,7 +130,7 @@ Building [TNG Shopper](https://tngshopper.com) full-time. Talking to **enterpris
 ---
 
 <details>
-<summary><b>Appendix — stack, auditor's notes &amp; the longer story</b></summary>
+<summary><b>Appendix — stack, auditor's notes & the longer story</b></summary>
 
 <br>
 
@@ -160,7 +162,7 @@ languages   python · go · node.js · typescript · react
 | Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-11-02 |
 <!--END_SECTION:claims-->
 
-**Also in the lab** — [AutonomousAgent](https://github.com/Manzela/AutonomousAgent): production-hardened self-improving agent running 24/7 on GCP — 5-tier sandboxing, OpenTelemetry tracing, fail-closed failure matrix, MoE-routed RL self-training
+**Also in the lab** — [AutonomousAgent](https://github.com/Manzela/AutonomousAgent): Phase 1 local wrapper around Hermes. Control plane designed, not fully wired.
 
 **Before TNG Shopper** — CTO & AI Product Engineer at Tasko AI: a WhatsApp-native assistant for 153 paying clients resolving 1,561 distinct user intents, pre-trained on 21M+ messages · a camera-first retail onboarding tool (0 → $10K MRR, 3 computer-vision pipelines, 60M+ SKU catalog) · a 6-stage lead-qualification pipeline that drove $17M+ in new assets under management
 
@@ -170,4 +172,4 @@ languages   python · go · node.js · typescript · react
 
 </details>
 
-<div align="center"><sub>Tel Aviv &amp; the wire</sub></div>
+<div align="center"><sub>Tel Aviv & the wire</sub></div>
