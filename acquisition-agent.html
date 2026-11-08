@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acquisition Agent</title>
+<style>
+  :root {
+    --bg: #0f0e0d;
+    --fg: #ece6da;
+    --muted: #9a917f;
+    --accent: #d96730;
+    --line: #2a2622;
+    --card: #1a1714;
+    --ok: #4a7c59;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 96px; }
+  h1 { font-size: 2.4rem; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .sub { color: var(--muted); margin-bottom: 48px; font-size: 1.1rem; max-width: 680px; }
+  h2 { font-size: 1.35rem; margin: 56px 0 20px; font-weight: 500; letter-spacing: -0.01em; }
+  p { margin-bottom: 16px; }
+
+  .hero-split {
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: start;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 32px; margin-bottom: 56px;
+  }
+  @media (max-width: 700px) { .hero-split { grid-template-columns: 1fr; } }
+  .hero-split h3 { font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; }
+  .quote-visual {
+    background: #161412; border: 1px solid var(--line); border-radius: 8px;
+    padding: 20px 22px; font-size: 0.95rem;
+  }
+  .quote-visual .q { font-style: italic; margin-bottom: 8px; }
+  .quote-visual .who { font-size: 0.8rem; color: var(--muted); }
+
+  .moments {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 8px 0 48px;
+  }
+  @media (max-width: 600px) { .moments { grid-template-columns: 1fr; } }
+  .moment {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 20px 22px; transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .moment:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .moment .date { font-size: 0.75rem; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+  .moment .q { font-size: 0.98rem; margin-bottom: 8px; }
+  .moment .context { font-size: 0.85rem; color: var(--muted); }
+
+  .outcome-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 8px 0 48px;
+  }
+  @media (max-width: 600px) { .outcome-grid { grid-template-columns: 1fr; } }
+  .outcome-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 20px 22px; transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .outcome-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .outcome-card strong { display: block; margin-bottom: 6px; font-size: 1rem; }
+  .outcome-card span { color: var(--muted); font-size: 0.92rem; }
+
+  .accounting {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 28px 32px; margin: 8px 0 48px;
+  }
+  .accounting h3 { font-size: 1rem; margin-bottom: 18px; }
+  .bar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; font-size: 0.92rem; }
+  .bar-label { width: 160px; color: var(--muted); }
+  .bar { flex: 1; height: 10px; background: #2a2622; border-radius: 5px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--accent); border-radius: 5px; }
+  .bar-fill.ok { background: var(--ok); }
+  .bar-fill.warn { background: #c9a227; }
+  .bar-num { width: 40px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+  .accounting-note { margin-top: 16px; font-size: 0.85rem; color: var(--muted); }
+
+  .flow-visual {
+    display: flex; align-items: stretch; justify-content: space-between; gap: 6px;
+    margin: 8px 0 48px; flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 14px; text-align: center; flex: 1; min-width: 110px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .flow-step:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .flow-step .num { font-size: 0.75rem; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
+  .flow-step strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+  .flow-step .sub { font-size: 0.8rem; color: var(--muted); }
+  .flow-arrow { color: var(--muted); align-self: center; font-size: 1.2rem; }
+
+  .roles {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 8px 0 48px;
+  }
+  @media (max-width: 600px) { .roles { grid-template-columns: 1fr; } }
+  .role {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 20px 22px; transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .role:hover { border-color: #3a342e; transform: translateY(-2px); }
+  .role .who { font-size: 0.8rem; color: var(--accent); margin-bottom: 6px; font-weight: 500; }
+  .role h3 { font-size: 1rem; margin-bottom: 6px; }
+  .role p { margin: 0; font-size: 0.92rem; }
+
+  .edge {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 28px 32px; margin: 8px 0 48px;
+  }
+  .edge-visual {
+    display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .edge-item {
+    flex: 1; min-width: 140px; text-align: center; padding: 16px;
+    background: #161412; border-radius: 8px; border: 1px solid var(--line);
+  }
+  .edge-item strong { display: block; margin-bottom: 4px; }
+  .edge-item span { font-size: 0.85rem; color: var(--muted); }
+
+  .limit {
+    background: #1c1916; border-left: 3px solid var(--accent);
+    padding: 20px 24px; margin: 8px 0 48px; font-size: 0.95rem;
+  }
+
+  a { color: var(--accent); text-decoration: none; transition: color 0.15s ease; }
+  a:hover { text-decoration: underline; color: #e07840; }
+  .footer { margin-top: 64px; color: var(--muted); font-size: 0.85rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-split, .moment, .outcome-card, .accounting, .flow-step, .role, .edge, .limit {
+    animation: fadeUp 0.5s ease both;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Acquisition Agent</h1>
+<p class="sub">This system was built so Jonathan could cover more ground on value-add open-air retail without the usual research friction. The file he reviews is already checked, and nothing reaches him until he has said yes.</p>
+
+<div class="hero-split">
+  <div>
+    <h3>What changed for him</h3>
+    <p>Before this system existed, county research meant incomplete records, mixed data sources, and spreadsheets that still needed manual cleanup. Jonathan spent time checking rows instead of deciding which properties were worth pursuing. The system now runs the research in the background, keeps a clear trail on every property, and only surfaces what has passed the checks. He can see the status of a run without asking, and provisional items stay out of the delivery until someone reviews them.</p>
+  </div>
+  <div class="quote-visual">
+    <div class="q">“You are single handedly going to change the trajectory of my success.”</div>
+    <div class="who">Jonathan · September 3</div>
+    <div class="q" style="margin-top: 16px;">“definitely changed my life - quit my job for a reason.”</div>
+    <div class="who">Jonathan · September 26</div>
+  </div>
+</div>
+
+<h2>Moments that showed the value</h2>
+<p>These are not polished testimonials. They are Jonathan’s reactions while the system was still being built and tested.</p>
+<div class="moments">
+  <div class="moment">
+    <div class="date">August 15–16</div>
+    <div class="q">“Amazing” · “Wowwwww / Insane” · “Wow sooooo much better”</div>
+    <div class="context">After the first corridor targeting and the revised Seminole Excel. He noted that the properties being pulled were already inside the criteria.</div>
+  </div>
+  <div class="moment">
+    <div class="date">August 18</div>
+    <div class="q">“the excel file it’s been generating is exactly what I’m looking for”</div>
+    <div class="context">He compared it to his old manual sheets and preferred the AI version because it kept more of the useful information.</div>
+  </div>
+  <div class="moment">
+    <div class="date">August 21–26</div>
+    <div class="q">“Wow…. Insane” · “You’re a legend”</div>
+    <div class="context">When the agent started emailing completed county reports and could learn from his replies.</div>
+  </div>
+  <div class="moment">
+    <div class="date">September 1</div>
+    <div class="q">“So beautiful to see my little guy do the things I taught him”</div>
+    <div class="context">Envoy running the Hillsborough report the way he had shown it to do the work.</div>
+  </div>
+  <div class="moment">
+    <div class="date">September 26</div>
+    <div class="q">“impeccable / Unmeasurable” value · “That’s my envoy”</div>
+    <div class="context">He called the tool incredible and noted that he had quit his job because of the shift it enabled.</div>
+  </div>
+  <div class="moment">
+    <div class="date">October 10</div>
+    <div class="q">Competitive edge he hesitated to share</div>
+    <div class="context">It let him cover a larger footprint with less effort. He treated the capability as something to protect rather than give away.</div>
+  </div>
+</div>
+
+<h2>What he actually receives</h2>
+<div class="outcome-grid">
+  <div class="outcome-card">
+    <strong>A county Excel ready for review</strong>
+    <span>Owners and key checks are already done. Properties that fail or need more look stay out until someone reviews them.</span>
+  </div>
+  <div class="outcome-card">
+    <strong>Status without asking</strong>
+    <span>He can see what is done, what is provisional, and what is still running without chasing updates.</span>
+  </div>
+  <div class="outcome-card">
+    <strong>No invented contacts</strong>
+    <span>It never invents phone numbers or emails, and it never reaches out to owners.</span>
+  </div>
+  <div class="outcome-card">
+    <strong>Explicit approval before delivery</strong>
+    <span>Envoy confirms the ask with him. The file does not leave until that yes is there.</span>
+  </div>
+</div>
+
+<h2>How the work stays clean</h2>
+<div class="accounting">
+  <h3>Bartow example · 749 centers tracked</h3>
+  <div class="bar-row">
+    <span class="bar-label">Provisional exclusions</span>
+    <div class="bar"><div class="bar-fill warn" style="width: 77%"></div></div>
+    <span class="bar-num">576</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Still in review</span>
+    <div class="bar"><div class="bar-fill" style="width: 13%"></div></div>
+    <span class="bar-num">99</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Next screen</span>
+    <div class="bar"><div class="bar-fill ok" style="width: 10%"></div></div>
+    <span class="bar-num">74</span>
+  </div>
+  <p class="accounting-note">All 749 still show qualified: false and drop_applied: false. Provisional stays provisional until a reviewer acts. Nothing is silently dropped.</p>
+</div>
+
+<h2>How a request moves</h2>
+<div class="flow-visual">
+  <div class="flow-step"><div class="num">01</div><strong>Ask</strong><div class="sub">Jonathan or Envoy</div></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><div class="num">02</div><strong>Research</strong><div class="sub">Acquisition Agent</div></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><div class="num">03</div><strong>Checks</strong><div class="sub">Records · traffic · size</div></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><div class="num">04</div><strong>Review</strong><div class="sub">Provisional stays out</div></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><div class="num">05</div><strong>File</strong><div class="sub">Only after yes</div></div>
+</div>
+<p>Envoy confirms the request before the Acquisition Agent begins. The research runs against county records, traffic, and size criteria. Anything that fails or is still provisional stays out of the final file. The file only moves to Jonathan after he has said yes.</p>
+
+<h2>Who does what</h2>
+<div class="roles">
+  <div class="role">
+    <div class="who">Executor</div>
+    <h3>Acquisition Agent</h3>
+    <p>Runs the county research. Tracks every property. Keeps provisional items separate from ready ones so nothing is mixed into the delivery by accident.</p>
+  </div>
+  <div class="role">
+    <div class="who">Only channel to Jonathan</div>
+    <h3>Envoy</h3>
+    <p>Confirms every request in plain language before anything moves. Filters noise so Jonathan only sees what matters and never receives an unvetted list.</p>
+  </div>
+  <div class="role">
+    <div class="who">Watch</div>
+    <h3>Workforce Monitor</h3>
+    <p>Watches the shared log. Alerts only when something is actually missing or stuck, rather than on every small pause.</p>
+  </div>
+  <div class="role">
+    <div class="who">Decides</div>
+    <h3>Jonathan</h3>
+    <p>Approves or rejects. Sees provisional items separately from ready ones. Never receives an unvetted list.</p>
+  </div>
+</div>
+
+<h2>Why it is hard to copy</h2>
+<div class="edge">
+  <p>The edge is not a smarter model. It is persistent specialist agents plus a shared trail that cannot be silently rewritten, plus hard stops before any file leaves. Provisional exclusions stay provisional until reviewed. Sequence numbers and phase closes show exactly what was done and what remains. The approval is explicit and in the loop rather than an afterthought.</p>
+  <div class="edge-visual">
+    <div class="edge-item"><strong>Persistent agents</strong><span>Specialists that keep state across runs</span></div>
+    <div class="edge-item"><strong>Non-rewritable trail</strong><span>Sequence numbers and phase closes</span></div>
+    <div class="edge-item"><strong>Hard stops</strong><span>Nothing leaves without an explicit yes</span></div>
+  </div>
+  <p style="margin-top: 20px; margin-bottom: 0;">A one-off script or generic research tool does not keep that accounting across runs. The contracts, the log, and the handoff rules are already in place and reused. Jonathan treated the capability as a competitive edge he was not ready to share.</p>
+</div>
+
+<div class="limit">
+  Accuracy of the final recommendations is not yet measured. No completed county Excel has been delivered under the current gates. The system is operational on active county work, and delivery only happens after approval.
+</div>
+
+<h2>Where to look</h2>
+<p>
+  <a href="https://github.com/Manzela/acquisition-workforce">acquisition-workforce</a> holds the contracts, schemas, and playbooks that keep the work consistent.<br>
+  <a href="https://workforce-observability.vercel.app/">Workforce Observability</a> is the live view of the run log.
+</p>
+
+<div class="footer">
+  November 2026. Built for Jonathan’s acquisition work. The reactions above are from the development and testing conversations. Status and limits are from the live agents and the shared log.
+</div>
+
+</div>
+</body>
+</html>
