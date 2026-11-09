@@ -156,12 +156,12 @@ languages   python · go · node.js · typescript · react
 | Claim | Value | Derived by | Verified |
 |---|---:|---|---|
 | Test functions ([Atelier](https://github.com/Manzela/Atelier)) | 1,315 in 120 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | ⚠ stale since 2026-08-10 |
-| Test functions ([AutonomousAgent](https://github.com/Manzela/AutonomousAgent)) | 2,011 in 198 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-11-02 |
-| Test functions ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 133 in 9 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-11-02 |
-| Test functions ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 61 in 4 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-11-02 |
-| O·R·A·V gate thresholds ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 0.6 / 0.7 / 0.8 / 0.6 | constants in `agent_dag/config.py`, fresh clone | 2026-11-02 |
-| Constitution rules ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 9 | count of `templates/rules/*.md` on fresh clone | 2026-11-02 |
-| Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-11-02 |
+| Test functions ([AutonomousAgent](https://github.com/Manzela/AutonomousAgent)) | 2,011 in 198 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-11-09 |
+| Test functions ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 133 in 9 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-11-09 |
+| Test functions ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 61 in 4 files | `grep -rcE '^\s*(async )?def test_' --include='*.py'` on fresh clone | 2026-11-09 |
+| O·R·A·V gate thresholds ([agent-dag-pipeline](https://github.com/Manzela/agent-dag-pipeline)) | 0.6 / 0.7 / 0.8 / 0.6 | constants in `agent_dag/config.py`, fresh clone | 2026-11-09 |
+| Constitution rules ([Antigravity-OS](https://github.com/Manzela/Antigravity-OS)) | 9 | count of `templates/rules/*.md` on fresh clone | 2026-11-09 |
+| Documented failure modes, forensic runbook ([gemma4-vllm-deployment](https://github.com/Manzela/gemma4-vllm-deployment)) | 19 | numbered `###` sections in `docs/FORENSIC_RUNBOOK.md`, fresh clone | 2026-11-09 |
 <!--END_SECTION:claims-->
 
 **Also in the lab** — [AutonomousAgent](https://github.com/Manzela/AutonomousAgent): Phase 1 local wrapper around Hermes. Control plane designed, not fully wired.
